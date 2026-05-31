@@ -295,8 +295,8 @@ export function ToolEngine({ tool }: ToolEngineProps) {
           )}
 
           {/* Actions */}
-          <div className="flex items-center justify-center gap-4 pt-4 border-t border-border">
-            <Button variant="outline" size="lg" onClick={() => {
+          <div className="flex flex-col-reverse md:flex-row items-stretch md:items-center justify-center gap-3 md:gap-4 pt-6 border-t border-border">
+            <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => {
               setFile(null);
               setResult(null);
             }}>
@@ -306,8 +306,9 @@ export function ToolEngine({ tool }: ToolEngineProps) {
               <a 
                 href={result.url} 
                 download={`singulariti_${file.name.replace(/\.[^/.]+$/, "")}.${tool.options?.to ? tool.options.to.split('/')[1] : (result.type ? result.type.split('/')[1] : file.name.split('.').pop())}`}
+                className="w-full md:w-auto"
               >
-                <Button variant="primary" size="lg" leftIcon={<Download className="w-5 h-5" />}>
+                <Button variant="primary" size="lg" className="w-full" leftIcon={<Download className="w-5 h-5" />}>
                   Download {tool.engine === 'compression' ? 'Compressed' : 'Converted'} Image
                 </Button>
               </a>
