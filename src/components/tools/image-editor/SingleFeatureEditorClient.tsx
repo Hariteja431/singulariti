@@ -220,37 +220,32 @@ export function SingleFeatureEditorClient({ tool }: Props) {
   }, [settings, logoImg, activeTool]);
 
   const handleReset = () => {
-    if (originalImageUrlRef.current) {
-      const img = new Image();
-      img.onload = () => {
-        activeImageRef.current = img;
-        const initialWidth = img.naturalWidth;
-        const initialHeight = img.naturalHeight;
-        setImageState(prev => ({
-          ...prev,
-          width: initialWidth,
-          height: initialHeight
-        }));
-        
-        setSettings(initDefaultSettingsWithImageDims(initialWidth, initialHeight));
-        
-        const initialCrop = centerCrop(
-          makeAspectCrop(
-            { unit: '%', width: 90 },
-            initialWidth / initialHeight,
-            initialWidth,
-            initialHeight
-          ),
+    if (activeImageRef.current) {
+      const initialWidth = activeImageRef.current.naturalWidth;
+      const initialHeight = activeImageRef.current.naturalHeight;
+      setImageState(prev => ({
+        ...prev,
+        width: initialWidth,
+        height: initialHeight
+      }));
+      
+      setSettings(initDefaultSettingsWithImageDims(initialWidth, initialHeight));
+      
+      const initialCrop = centerCrop(
+        makeAspectCrop(
+          { unit: '%', width: 90 },
+          initialWidth / initialHeight,
           initialWidth,
           initialHeight
-        );
-        setCrop(initialCrop);
-        setCompletedCrop(initialCrop);
-        
-        setLogoFile(null);
-        setLogoImg(null);
-      };
-      img.src = originalImageUrlRef.current;
+        ),
+        initialWidth,
+        initialHeight
+      );
+      setCrop(initialCrop);
+      setCompletedCrop(initialCrop);
+      
+      setLogoFile(null);
+      setLogoImg(null);
     }
   };
 
@@ -268,7 +263,9 @@ export function SingleFeatureEditorClient({ tool }: Props) {
   };
 
   const handleDownload = async (params: DownloadParams) => {
-    if (!canvasRef.current || !activeImageRef.current) return;
+    if (!activeImageRef.current) return;
+    if (activeTool !== 'crop' && !canvasRef.current) return;
+
     setIsProcessing(true);
     try {
       if (activeTool === 'crop' && completedCrop && cropImgRef.current) {
