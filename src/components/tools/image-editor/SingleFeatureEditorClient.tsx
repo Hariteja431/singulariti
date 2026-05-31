@@ -222,7 +222,6 @@ export function SingleFeatureEditorClient({ tool }: Props) {
   const handleReset = () => {
     if (originalImageUrlRef.current) {
       const img = new Image();
-      img.src = originalImageUrlRef.current;
       img.onload = () => {
         activeImageRef.current = img;
         const initialWidth = img.naturalWidth;
@@ -251,6 +250,7 @@ export function SingleFeatureEditorClient({ tool }: Props) {
         setLogoFile(null);
         setLogoImg(null);
       };
+      img.src = originalImageUrlRef.current;
     }
   };
 
@@ -280,10 +280,19 @@ export function SingleFeatureEditorClient({ tool }: Props) {
         const scaleX = img.naturalWidth / cropImgRef.current.width;
         const scaleY = img.naturalHeight / cropImgRef.current.height;
 
-        const srcX = completedCrop.x * scaleX;
-        const srcY = completedCrop.y * scaleY;
-        const srcW = completedCrop.width * scaleX;
-        const srcH = completedCrop.height * scaleY;
+        const pixelCrop = completedCrop.unit === '%'
+          ? {
+              x: (completedCrop.x / 100) * cropImgRef.current.width,
+              y: (completedCrop.y / 100) * cropImgRef.current.height,
+              width: (completedCrop.width / 100) * cropImgRef.current.width,
+              height: (completedCrop.height / 100) * cropImgRef.current.height,
+            }
+          : completedCrop;
+
+        const srcX = pixelCrop.x * scaleX;
+        const srcY = pixelCrop.y * scaleY;
+        const srcW = pixelCrop.width * scaleX;
+        const srcH = pixelCrop.height * scaleY;
 
         offscreenCanvas.width = Math.max(1, srcW);
         offscreenCanvas.height = Math.max(1, srcH);
