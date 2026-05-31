@@ -20,6 +20,7 @@ export function EditingEngine({ tool }: EditingEngineProps) {
   // Ref for the hidden original image used for processing
   const imgRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const cropImgRef = useRef<HTMLImageElement>(null);
   
   const [isProcessing, setIsProcessing] = useState(false);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
@@ -141,9 +142,11 @@ export function EditingEngine({ tool }: EditingEngineProps) {
         finalH = Math.abs(img.naturalWidth * Math.sin(rad)) + Math.abs(img.naturalHeight * Math.cos(rad));
       }
 
-      if (tool.id === 'image-cropper' && completedCrop) {
-         finalW = completedCrop.width;
-         finalH = completedCrop.height;
+      if (tool.id === 'image-cropper' && completedCrop && cropImgRef.current) {
+         const scaleX = img.naturalWidth / cropImgRef.current.width;
+         const scaleY = img.naturalHeight / cropImgRef.current.height;
+         finalW = completedCrop.width * scaleX;
+         finalH = completedCrop.height * scaleY;
       }
 
       canvas.width = finalW;
@@ -184,12 +187,14 @@ export function EditingEngine({ tool }: EditingEngineProps) {
         
         // Draw back scaled up
         ctx.drawImage(tempCanvas, -img.naturalWidth / 2, -img.naturalHeight / 2, img.naturalWidth, img.naturalHeight);
-      } else if (tool.id === 'image-cropper' && completedCrop) {
+      } else if (tool.id === 'image-cropper' && completedCrop && cropImgRef.current) {
+        const scaleX = img.naturalWidth / cropImgRef.current.width;
+        const scaleY = img.naturalHeight / cropImgRef.current.height;
         ctx.translate(-finalW/2, -finalH/2);
         ctx.drawImage(
           img,
-          completedCrop.x, completedCrop.y, completedCrop.width, completedCrop.height,
-          0, 0, completedCrop.width, completedCrop.height
+          completedCrop.x * scaleX, completedCrop.y * scaleY, completedCrop.width * scaleX, completedCrop.height * scaleY,
+          0, 0, finalW, finalH
         );
       } else {
         // Normal draw
@@ -372,7 +377,7 @@ export function EditingEngine({ tool }: EditingEngineProps) {
                 {imageLoaded && tool.id === 'image-cropper' ? (
                   <ReactCrop crop={crop} onChange={c => setCrop(c)} onComplete={c => setCompletedCrop(c)}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={originalUrl!} alt="Crop target" className="max-h-[60vh] object-contain" />
+                    <img ref={cropImgRef} src={originalUrl!} alt="Crop target" className="max-h-[60vh] object-contain" />
                   </ReactCrop>
                 ) : (
                   <canvas ref={canvasRef} className="max-w-full max-h-[60vh] object-contain shadow-sm" />

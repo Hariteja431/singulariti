@@ -80,6 +80,20 @@ export default async function ToolPage(props: { params: Promise<{ collection: st
           </article>
         </section>
 
+        {/* Schema Markup */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": tool.name,
+              "description": tool.seoDescription,
+              "applicationCategory": "MultimediaApplication",
+              "operatingSystem": "Any"
+            })
+          }}
+        />
       </main>
       <Footer />
     </>
@@ -115,5 +129,8 @@ export async function generateMetadata(props: { params: Promise<{ collection: st
   return {
     title: tool.seoTitle,
     description: tool.seoDescription,
+    alternates: {
+      canonical: `https://singulariti.app/image/${collection?.id}/${tool.id}`,
+    }
   };
 }

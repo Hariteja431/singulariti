@@ -16,6 +16,7 @@ export function DeveloperEngine({ tool }: DeveloperEngineProps) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -34,6 +35,7 @@ export function DeveloperEngine({ tool }: DeveloperEngineProps) {
   const processFileToBase64 = (selectedFile: File) => {
     setFile(selectedFile);
     setError(null);
+    setIsProcessing(true);
     
     const url = URL.createObjectURL(selectedFile);
     setImagePreview(url);
@@ -41,9 +43,11 @@ export function DeveloperEngine({ tool }: DeveloperEngineProps) {
     const reader = new FileReader();
     reader.onloadend = () => {
       setBase64String(reader.result as string);
+      setIsProcessing(false);
     };
     reader.onerror = () => {
       setError("Failed to read file.");
+      setIsProcessing(false);
     };
     reader.readAsDataURL(selectedFile);
   };
@@ -51,20 +55,27 @@ export function DeveloperEngine({ tool }: DeveloperEngineProps) {
   const processBase64ToImage = (val: string) => {
     setBase64String(val);
     setError(null);
+    setIsProcessing(true);
     
-    if (!val.trim()) {
-      setImagePreview(null);
-      return;
-    }
+    // Defer parsing to allow React to paint the loading state
+    setTimeout(() => {
+      if (!val.trim()) {
+        setImagePreview(null);
+        setIsProcessing(false);
+        return;
+      }
 
-    // Basic validation for base64 data URI
-    if (!val.startsWith('data:image/')) {
-      setError("Invalid Base64 format. It must start with 'data:image/...'");
-      setImagePreview(null);
-      return;
-    }
+      // Basic validation for base64 data URI
+      if (!val.startsWith('data:image/')) {
+        setError("Invalid Base64 format. It must start with 'data:image/...'");
+        setImagePreview(null);
+        setIsProcessing(false);
+        return;
+      }
 
-    setImagePreview(val);
+      setImagePreview(val);
+      setIsProcessing(false);
+    }, 50);
   };
 
   const handleDownload = () => {
@@ -138,7 +149,12 @@ export function DeveloperEngine({ tool }: DeveloperEngineProps) {
                 </div>
 
                 <div className="relative rounded-lg border border-border bg-background overflow-hidden min-h-[300px] flex items-center justify-center">
-                  {imagePreview ? (
+                  {isProcessing ? (
+                    <div className="flex flex-col items-center gap-3 text-primary">
+                       <div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+                       <span className="text-sm font-medium">Encoding...</span>
+                    </div>
+                  ) : imagePreview ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={imagePreview} alt="Preview" className="max-w-full max-h-[400px] object-contain shadow-sm" />
                   ) : (
@@ -186,7 +202,12 @@ export function DeveloperEngine({ tool }: DeveloperEngineProps) {
               <h3 className="font-display font-bold flex items-center text-ink mb-4"><ImageIcon className="w-5 h-5 mr-2" /> Decoded Preview</h3>
               
               <div className="flex-1 relative rounded-lg border border-border bg-background overflow-hidden min-h-[400px] flex flex-col items-center justify-center">
-                {imagePreview ? (
+                {isProcessing ? (
+                  <div className="flex flex-col items-center gap-3 text-primary p-12">
+                     <div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+                     <span className="text-sm font-medium">Decoding...</span>
+                  </div>
+                ) : imagePreview ? (
                   <>
                     <div className="p-4 flex-1 flex items-center justify-center w-full">
                       {/* eslint-disable-next-line @next/next/no-img-element */}

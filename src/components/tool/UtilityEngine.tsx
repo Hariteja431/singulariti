@@ -4,9 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ToolRegistryItem } from '../../registry/types';
 import { Dropzone } from '../ui/Dropzone';
 import { Button } from '../ui/Button';
-import { Info, Maximize, FileCode2, Droplet, Palette as PaletteIcon, Copy, CheckCircle2 } from 'lucide-react';
-// @ts-ignore
-import { getPalette } from 'colorthief';
+import { Info, Maximize, FileCode2, Droplet, Palette as PaletteIcon, Copy, CheckCircle2, MousePointer2 } from 'lucide-react';
 
 interface UtilityEngineProps {
   tool: ToolRegistryItem;
@@ -21,6 +19,7 @@ export function UtilityEngine({ tool }: UtilityEngineProps) {
   const [realFormat, setRealFormat] = useState<{hex: string, mime: string} | null>(null);
   
   const [pickedColor, setPickedColor] = useState<{hex: string, rgb: string} | null>(null);
+  const [hoverColor, setHoverColor] = useState<{hex: string, rgb: string} | null>(null);
   const [palette, setPalette] = useState<{hex: string, rgb: string}[]>(([]));
   
   const [copied, setCopied] = useState<string | null>(null);
@@ -77,21 +76,38 @@ export function UtilityEngine({ tool }: UtilityEngineProps) {
 
     if (tool.id === 'image-color-palette-extractor') {
       try {
-        // @ts-ignore
-        const colors = await getPalette(img, 6);
-        if (colors) {
-          const formatPalette = colors.map((c: any) => {
-          const rgb = `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
-          const hex = '#' + c.map((x: number) => {
-            const hexStr = x.toString(16);
-            return hexStr.length === 1 ? '0' + hexStr : hexStr;
-          }).join('');
+        const tempCanvas = document.createElement('canvas');
+        const tempCtx = tempCanvas.getContext('2d');
+        if (tempCtx) {
+          tempCanvas.width = 100;
+          tempCanvas.height = 100;
+          tempCtx.drawImage(img, 0, 0, 100, 100);
+          const data = tempCtx.getImageData(0, 0, 100, 100).data;
+          
+          const colorMap = new Map<string, {count: number, r: number, g: number, b: number}>();
+          for (let i = 0; i < data.length; i += 4) {
+            if (data[i+3] < 128) continue; // ignore transparent
+            const r = data[i], g = data[i+1], b = data[i+2];
+            // Quantize colors to bin them together
+            const qR = Math.round(r / 32) * 32;
+            const qG = Math.round(g / 32) * 32;
+            const qB = Math.round(b / 32) * 32;
+            const key = `${qR},${qG},${qB}`;
+            
+            if (!colorMap.has(key)) colorMap.set(key, { count: 1, r, g, b });
+            else colorMap.get(key)!.count++;
+          }
+          
+          const sorted = Array.from(colorMap.values()).sort((a, b) => b.count - a.count).slice(0, 6);
+          const formatPalette = sorted.map(c => {
+            const rgb = `rgb(${c.r}, ${c.g}, ${c.b})`;
+            const hex = '#' + [c.r, c.g, c.b].map(x => x.toString(16).padStart(2, '0')).join('');
             return { hex, rgb };
           });
           setPalette(formatPalette);
         }
       } catch (err) {
-        console.error("ColorThief failed (likely due to cross-origin or SVG)", err);
+        console.error("Extraction failed", err);
       }
     }
 
@@ -109,15 +125,12 @@ export function UtilityEngine({ tool }: UtilityEngineProps) {
     }
   };
 
-  const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    if (tool.id !== 'color-picker-from-image') return;
-    
+  const getCanvasColor = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) return null;
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    if (!ctx) return null;
 
-    // Get true pixel coordinates relative to the scaled canvas display
     const rect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
@@ -126,17 +139,23 @@ export function UtilityEngine({ tool }: UtilityEngineProps) {
     const y = (e.clientY - rect.top) * scaleY;
 
     const pixel = ctx.getImageData(x, y, 1, 1).data;
-    const r = pixel[0];
-    const g = pixel[1];
-    const b = pixel[2];
-    // Ignore alpha for basic hex
+    const r = pixel[0], g = pixel[1], b = pixel[2];
     const rgb = `rgb(${r}, ${g}, ${b})`;
-    const hex = '#' + [r, g, b].map(x => {
-      const hexStr = x.toString(16);
-      return hexStr.length === 1 ? '0' + hexStr : hexStr;
-    }).join('');
+    const hex = '#' + [r, g, b].map(val => val.toString(16).padStart(2, '0')).join('');
+    
+    return { rgb, hex };
+  };
 
-    setPickedColor({ rgb, hex });
+  const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (tool.id !== 'color-picker-from-image') return;
+    const color = getCanvasColor(e);
+    if (color) setPickedColor(color);
+  };
+
+  const handleCanvasMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (tool.id !== 'color-picker-from-image') return;
+    const color = getCanvasColor(e);
+    if (color) setHoverColor(color);
   };
 
   const formatSize = (bytes: number) => {
@@ -146,9 +165,9 @@ export function UtilityEngine({ tool }: UtilityEngineProps) {
   };
 
   const InfoCard = ({ label, value }: { label: string, value: React.ReactNode }) => (
-    <div className="bg-background border border-border p-4 rounded-lg flex flex-col items-center text-center justify-center">
-      <span className="text-[12px] font-medium text-slate uppercase tracking-wider mb-1">{label}</span>
-      <span className="text-lg font-mono text-ink font-bold">{value}</span>
+    <div className="bg-background border border-border p-4 rounded-lg flex flex-col items-center text-center justify-center min-w-0">
+      <span className="text-[12px] font-medium text-slate uppercase tracking-wider mb-1 flex-shrink-0">{label}</span>
+      <span className="text-lg font-mono text-ink font-bold w-full truncate">{value}</span>
     </div>
   );
 
@@ -185,7 +204,7 @@ export function UtilityEngine({ tool }: UtilityEngineProps) {
               {tool.id === 'image-metadata-viewer' && (
                 <div className="space-y-4">
                   <h3 className="font-display font-bold flex items-center text-ink"><Info className="w-5 h-5 mr-2" /> File Metadata</h3>
-                  <InfoCard label="File Name" value={<span className="text-sm truncate w-full px-2 block" title={file.name}>{file.name}</span>} />
+                  <InfoCard label="File Name" value={<span title={file.name}>{file.name}</span>} />
                   <InfoCard label="File Size" value={formatSize(file.size)} />
                   <InfoCard label="MIME Type" value={file.type || 'Unknown'} />
                   <InfoCard label="Last Modified" value={<span className="text-sm">{new Date(file.lastModified).toLocaleString()}</span>} />
@@ -216,39 +235,41 @@ export function UtilityEngine({ tool }: UtilityEngineProps) {
                   <h3 className="font-display font-bold flex items-center text-ink"><Droplet className="w-5 h-5 mr-2" /> Color Picker</h3>
                   <p className="text-[13px] text-slate mb-4">Click anywhere on the image preview to extract the exact pixel color.</p>
                   
-                  {pickedColor ? (
+                  {pickedColor || hoverColor ? (
                     <div className="space-y-3">
-                      <div className="w-full h-24 rounded-lg border border-border shadow-inner" style={{ backgroundColor: pickedColor.hex }}></div>
+                      <div className="w-full h-24 rounded-lg border border-border shadow-inner transition-colors flex items-end p-2" style={{ backgroundColor: hoverColor ? hoverColor.hex : pickedColor ? pickedColor.hex : 'transparent' }}>
+                         {hoverColor && <span className="bg-ink/60 text-background text-[11px] px-2 py-1 rounded backdrop-blur-sm shadow-sm flex items-center"><MousePointer2 className="w-3 h-3 mr-1" /> {hoverColor.hex.toUpperCase()}</span>}
+                      </div>
                       
                       <div className="flex gap-2">
-                        <div className="flex-1 border border-border rounded-md px-3 py-2 bg-background">
+                        <div className="flex-1 border border-border rounded-md px-3 py-2 bg-background overflow-hidden">
                           <span className="block text-[11px] text-slate font-medium mb-1">HEX</span>
-                          <span className="font-mono text-sm text-ink">{pickedColor.hex.toUpperCase()}</span>
+                          <span className="font-mono text-sm text-ink truncate block">{(pickedColor?.hex || hoverColor?.hex || '').toUpperCase()}</span>
                         </div>
                         <button 
-                          onClick={() => copyToClipboard(pickedColor.hex)}
-                          className="px-3 bg-surface border border-border rounded-md hover:bg-slate/5 transition-colors flex items-center justify-center text-slate"
+                          onClick={() => copyToClipboard(pickedColor?.hex || hoverColor?.hex || '')}
+                          className="px-3 bg-surface border border-border rounded-md hover:bg-slate/5 transition-colors flex items-center justify-center text-slate shrink-0"
                         >
-                          {copied === pickedColor.hex ? <CheckCircle2 className="w-4 h-4 text-primary" /> : <Copy className="w-4 h-4" />}
+                          {copied === (pickedColor?.hex || hoverColor?.hex) ? <CheckCircle2 className="w-4 h-4 text-primary" /> : <Copy className="w-4 h-4" />}
                         </button>
                       </div>
 
                       <div className="flex gap-2">
-                        <div className="flex-1 border border-border rounded-md px-3 py-2 bg-background">
+                        <div className="flex-1 border border-border rounded-md px-3 py-2 bg-background overflow-hidden">
                           <span className="block text-[11px] text-slate font-medium mb-1">RGB</span>
-                          <span className="font-mono text-sm text-ink">{pickedColor.rgb}</span>
+                          <span className="font-mono text-sm text-ink truncate block">{pickedColor?.rgb || hoverColor?.rgb}</span>
                         </div>
                         <button 
-                          onClick={() => copyToClipboard(pickedColor.rgb)}
-                          className="px-3 bg-surface border border-border rounded-md hover:bg-slate/5 transition-colors flex items-center justify-center text-slate"
+                          onClick={() => copyToClipboard(pickedColor?.rgb || hoverColor?.rgb || '')}
+                          className="px-3 bg-surface border border-border rounded-md hover:bg-slate/5 transition-colors flex items-center justify-center text-slate shrink-0"
                         >
-                          {copied === pickedColor.rgb ? <CheckCircle2 className="w-4 h-4 text-primary" /> : <Copy className="w-4 h-4" />}
+                          {copied === (pickedColor?.rgb || hoverColor?.rgb) ? <CheckCircle2 className="w-4 h-4 text-primary" /> : <Copy className="w-4 h-4" />}
                         </button>
                       </div>
                     </div>
                   ) : (
                     <div className="w-full h-24 rounded-lg border-2 border-dashed border-border flex items-center justify-center text-slate text-sm bg-background">
-                      No color picked yet
+                      Hover to pick color
                     </div>
                   )}
                 </div>
@@ -294,6 +315,8 @@ export function UtilityEngine({ tool }: UtilityEngineProps) {
                       ref={canvasRef} 
                       className="max-w-full max-h-[60vh] object-contain cursor-crosshair shadow-sm"
                       onClick={handleCanvasClick}
+                      onMouseMove={handleCanvasMove}
+                      onMouseLeave={() => setHoverColor(null)}
                     />
                     <img 
                       ref={imgRef}
