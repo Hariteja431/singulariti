@@ -4,7 +4,18 @@ import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ToolEngine } from '@/components/tool/ToolEngine';
+import { EditingEngine } from '@/components/tool/EditingEngine';
+import { UtilityEngine } from '@/components/tool/UtilityEngine';
+import { DeveloperEngine } from '@/components/tool/DeveloperEngine';
 import { getToolByPath, getCategoryById } from '@/registry';
+
+const EngineMap: Record<string, React.ElementType> = {
+  compression: ToolEngine,
+  conversion: ToolEngine,
+  editing: EditingEngine,
+  utility: UtilityEngine,
+  developer: DeveloperEngine
+};
 
 export default async function ToolPage(props: { params: Promise<{ collection: string; tool: string }> }) {
   const params = await props.params;
@@ -46,7 +57,7 @@ export default async function ToolPage(props: { params: Promise<{ collection: st
 
         {/* Engine UI */}
         <section className="container mx-auto px-4">
-          <ToolEngine tool={tool} />
+          {React.createElement(EngineMap[tool.engine] || ToolEngine, { tool })}
         </section>
 
         {/* SEO / Content Section */}

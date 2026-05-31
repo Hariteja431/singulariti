@@ -1,4 +1,4 @@
-export type EngineType = 'compression' | 'conversion';
+export type EngineType = 'compression' | 'conversion' | 'editing' | 'utility' | 'developer';
 
 export interface ToolRegistryItem {
   id: string;

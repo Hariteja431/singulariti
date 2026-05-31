@@ -6,6 +6,7 @@ import { useCompression } from '../../hooks/useCompression';
 import { useConversion } from '../../hooks/useConversion';
 import { ToolRegistryItem } from '../../registry/types';
 import { Button } from '../ui/Button';
+import { Dropzone } from '../ui/Dropzone';
 
 interface ToolEngineProps {
   tool: ToolRegistryItem;
@@ -120,36 +121,10 @@ export function ToolEngine({ tool }: ToolEngineProps) {
   return (
     <div className="w-full max-w-5xl mx-auto my-12">
       {!file ? (
-        <div 
-          className={`border-2 border-dashed rounded-xl p-12 text-center transition-all ${
-            dragOver ? 'border-primary bg-primary/5 scale-[1.02]' : 'border-border bg-surface hover:border-slate'
-          }`}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-          onClick={() => fileInputRef.current?.click()}
-        >
-          <input 
-            type="file" 
-            className="hidden" 
-            ref={fileInputRef} 
-            onChange={handleFileSelect} 
-            accept="image/*" 
-          />
-          <div className="w-20 h-20 mx-auto bg-background rounded-full flex items-center justify-center text-primary mb-6">
-            <UploadCloud className="w-10 h-10" />
-          </div>
-          <h3 className="font-display font-bold text-2xl text-ink mb-2">Drop {tool.engine === 'compression' ? 'image' : 'file'} here</h3>
-          <p className="text-slate font-sans mb-8">or click to browse your device</p>
-          <Button variant="primary" size="lg" className="w-full max-w-xs cursor-pointer">
-            Choose File
-          </Button>
-          <div className="mt-6 flex items-center justify-center gap-4 text-[13px] font-sans text-slate">
-            <span className="flex items-center"><span className="w-2 h-2 rounded-full bg-primary mr-2"></span>Browser-based</span>
-            <span className="flex items-center"><span className="w-2 h-2 rounded-full bg-primary mr-2"></span>No upload</span>
-            <span className="flex items-center"><span className="w-2 h-2 rounded-full bg-primary mr-2"></span>Secure</span>
-          </div>
-        </div>
+        <Dropzone 
+          onFileSelect={processFile} 
+          title={`Drop ${tool.engine === 'compression' ? 'image' : 'file'} here`}
+        />
       ) : (
         <div className="bg-surface border border-border rounded-xl p-6 md:p-8 shadow-sm">
           {/* Header */}

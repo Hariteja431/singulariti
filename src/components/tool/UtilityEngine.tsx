@@ -1,0 +1,325 @@
+"use client";
+
+import React, { useState, useRef, useEffect } from 'react';
+import { ToolRegistryItem } from '../../registry/types';
+import { Dropzone } from '../ui/Dropzone';
+import { Button } from '../ui/Button';
+import { Info, Maximize, FileCode2, Droplet, Palette as PaletteIcon, Copy, CheckCircle2 } from 'lucide-react';
+// @ts-ignore
+import { getPalette } from 'colorthief';
+
+interface UtilityEngineProps {
+  tool: ToolRegistryItem;
+}
+
+export function UtilityEngine({ tool }: UtilityEngineProps) {
+  const [file, setFile] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  
+  // States for different tools
+  const [dimensions, setDimensions] = useState<{w: number, h: number, ratio: string} | null>(null);
+  const [realFormat, setRealFormat] = useState<{hex: string, mime: string} | null>(null);
+  
+  const [pickedColor, setPickedColor] = useState<{hex: string, rgb: string} | null>(null);
+  const [palette, setPalette] = useState<{hex: string, rgb: string}[]>(([]));
+  
+  const [copied, setCopied] = useState<string | null>(null);
+  
+  const imgRef = useRef<HTMLImageElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    return () => {
+      if (imageUrl) URL.revokeObjectURL(imageUrl);
+    };
+  }, [imageUrl]);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(text);
+    setTimeout(() => setCopied(null), 2000);
+  };
+
+  const processFile = async (selectedFile: File) => {
+    setFile(selectedFile);
+    if (imageUrl) URL.revokeObjectURL(imageUrl);
+    
+    const url = URL.createObjectURL(selectedFile);
+    setImageUrl(url);
+
+    // If format detector, read magic numbers
+    if (tool.id === 'image-format-detector') {
+      const buffer = await selectedFile.slice(0, 4).arrayBuffer();
+      const arr = new Uint8Array(buffer);
+      const hex = Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+      
+      let mime = 'Unknown';
+      if (hex.startsWith('FFD8FF')) mime = 'image/jpeg';
+      else if (hex.startsWith('89504E47')) mime = 'image/png';
+      else if (hex.startsWith('47494638')) mime = 'image/gif';
+      else if (hex.startsWith('52494646')) mime = 'image/webp (RIFF header)';
+      else if (hex.startsWith('49492A00') || hex.startsWith('4D4D002A')) mime = 'image/tiff';
+      else if (hex.startsWith('00000100')) mime = 'image/x-icon';
+      
+      setRealFormat({ hex, mime });
+    }
+  };
+
+  const onImageLoad = async (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    const w = img.naturalWidth;
+    const h = img.naturalHeight;
+    
+    // Calculate simplified aspect ratio
+    const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b);
+    const divisor = gcd(w, h);
+    setDimensions({ w, h, ratio: `${w/divisor}:${h/divisor}` });
+
+    if (tool.id === 'image-color-palette-extractor') {
+      try {
+        // @ts-ignore
+        const colors = await getPalette(img, 6);
+        if (colors) {
+          const formatPalette = colors.map((c: any) => {
+          const rgb = `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
+          const hex = '#' + c.map((x: number) => {
+            const hexStr = x.toString(16);
+            return hexStr.length === 1 ? '0' + hexStr : hexStr;
+          }).join('');
+            return { hex, rgb };
+          });
+          setPalette(formatPalette);
+        }
+      } catch (err) {
+        console.error("ColorThief failed (likely due to cross-origin or SVG)", err);
+      }
+    }
+
+    if (tool.id === 'color-picker-from-image') {
+      // Draw to canvas for picking
+      const canvas = canvasRef.current;
+      if (canvas && img) {
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0);
+        }
+      }
+    }
+  };
+
+  const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (tool.id !== 'color-picker-from-image') return;
+    
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Get true pixel coordinates relative to the scaled canvas display
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    
+    const x = (e.clientX - rect.left) * scaleX;
+    const y = (e.clientY - rect.top) * scaleY;
+
+    const pixel = ctx.getImageData(x, y, 1, 1).data;
+    const r = pixel[0];
+    const g = pixel[1];
+    const b = pixel[2];
+    // Ignore alpha for basic hex
+    const rgb = `rgb(${r}, ${g}, ${b})`;
+    const hex = '#' + [r, g, b].map(x => {
+      const hexStr = x.toString(16);
+      return hexStr.length === 1 ? '0' + hexStr : hexStr;
+    }).join('');
+
+    setPickedColor({ rgb, hex });
+  };
+
+  const formatSize = (bytes: number) => {
+    if (bytes < 1024) return bytes + ' B';
+    else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    else return (bytes / 1048576).toFixed(2) + ' MB';
+  };
+
+  const InfoCard = ({ label, value }: { label: string, value: React.ReactNode }) => (
+    <div className="bg-background border border-border p-4 rounded-lg flex flex-col items-center text-center justify-center">
+      <span className="text-[12px] font-medium text-slate uppercase tracking-wider mb-1">{label}</span>
+      <span className="text-lg font-mono text-ink font-bold">{value}</span>
+    </div>
+  );
+
+  return (
+    <div className="w-full max-w-5xl mx-auto my-12">
+      {!file ? (
+        <Dropzone 
+          onFileSelect={processFile} 
+          title="Drop image to analyze"
+        />
+      ) : (
+        <div className="bg-surface border border-border rounded-xl p-6 md:p-8 shadow-sm">
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-border">
+            <div>
+              <p className="font-sans text-[13px] text-slate mb-1">Analyzing file</p>
+              <h4 className="font-display font-bold text-lg text-ink truncate max-w-md">{file.name}</h4>
+            </div>
+            <div className="flex items-center gap-3">
+              <Button variant="outline" size="sm" onClick={() => {
+                setFile(null);
+                setPickedColor(null);
+                setPalette([]);
+              }}>
+                Start Over
+              </Button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Left: Tools / Results */}
+            <div className="lg:col-span-1 space-y-6">
+              
+              {tool.id === 'image-metadata-viewer' && (
+                <div className="space-y-4">
+                  <h3 className="font-display font-bold flex items-center text-ink"><Info className="w-5 h-5 mr-2" /> File Metadata</h3>
+                  <InfoCard label="File Name" value={<span className="text-sm truncate w-full px-2 block" title={file.name}>{file.name}</span>} />
+                  <InfoCard label="File Size" value={formatSize(file.size)} />
+                  <InfoCard label="MIME Type" value={file.type || 'Unknown'} />
+                  <InfoCard label="Last Modified" value={<span className="text-sm">{new Date(file.lastModified).toLocaleString()}</span>} />
+                </div>
+              )}
+
+              {tool.id === 'image-dimension-checker' && dimensions && (
+                <div className="space-y-4">
+                  <h3 className="font-display font-bold flex items-center text-ink"><Maximize className="w-5 h-5 mr-2" /> Dimensions</h3>
+                  <InfoCard label="Width" value={`${dimensions.w} px`} />
+                  <InfoCard label="Height" value={`${dimensions.h} px`} />
+                  <InfoCard label="Aspect Ratio" value={dimensions.ratio} />
+                </div>
+              )}
+
+              {tool.id === 'image-format-detector' && realFormat && (
+                <div className="space-y-4">
+                  <h3 className="font-display font-bold flex items-center text-ink"><FileCode2 className="w-5 h-5 mr-2" /> Format Analysis</h3>
+                  <p className="text-[13px] text-slate mb-4">We read the magic numbers (file signature) at the start of the file to determine its true format, ignoring the extension.</p>
+                  <InfoCard label="Extension" value={file.name.split('.').pop()?.toUpperCase() || 'NONE'} />
+                  <InfoCard label="True Format" value={<span className={realFormat.mime !== 'Unknown' ? 'text-primary' : 'text-amber-500'}>{realFormat.mime}</span>} />
+                  <InfoCard label="Hex Signature" value={realFormat.hex} />
+                </div>
+              )}
+
+              {tool.id === 'color-picker-from-image' && (
+                <div className="space-y-4">
+                  <h3 className="font-display font-bold flex items-center text-ink"><Droplet className="w-5 h-5 mr-2" /> Color Picker</h3>
+                  <p className="text-[13px] text-slate mb-4">Click anywhere on the image preview to extract the exact pixel color.</p>
+                  
+                  {pickedColor ? (
+                    <div className="space-y-3">
+                      <div className="w-full h-24 rounded-lg border border-border shadow-inner" style={{ backgroundColor: pickedColor.hex }}></div>
+                      
+                      <div className="flex gap-2">
+                        <div className="flex-1 border border-border rounded-md px-3 py-2 bg-background">
+                          <span className="block text-[11px] text-slate font-medium mb-1">HEX</span>
+                          <span className="font-mono text-sm text-ink">{pickedColor.hex.toUpperCase()}</span>
+                        </div>
+                        <button 
+                          onClick={() => copyToClipboard(pickedColor.hex)}
+                          className="px-3 bg-surface border border-border rounded-md hover:bg-slate/5 transition-colors flex items-center justify-center text-slate"
+                        >
+                          {copied === pickedColor.hex ? <CheckCircle2 className="w-4 h-4 text-primary" /> : <Copy className="w-4 h-4" />}
+                        </button>
+                      </div>
+
+                      <div className="flex gap-2">
+                        <div className="flex-1 border border-border rounded-md px-3 py-2 bg-background">
+                          <span className="block text-[11px] text-slate font-medium mb-1">RGB</span>
+                          <span className="font-mono text-sm text-ink">{pickedColor.rgb}</span>
+                        </div>
+                        <button 
+                          onClick={() => copyToClipboard(pickedColor.rgb)}
+                          className="px-3 bg-surface border border-border rounded-md hover:bg-slate/5 transition-colors flex items-center justify-center text-slate"
+                        >
+                          {copied === pickedColor.rgb ? <CheckCircle2 className="w-4 h-4 text-primary" /> : <Copy className="w-4 h-4" />}
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="w-full h-24 rounded-lg border-2 border-dashed border-border flex items-center justify-center text-slate text-sm bg-background">
+                      No color picked yet
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {tool.id === 'image-color-palette-extractor' && (
+                <div className="space-y-4">
+                  <h3 className="font-display font-bold flex items-center text-ink"><PaletteIcon className="w-5 h-5 mr-2" /> Extracted Palette</h3>
+                  {palette.length > 0 ? (
+                    <div className="grid grid-cols-1 gap-2">
+                      {palette.map((color, i) => (
+                        <div key={i} className="flex items-center gap-3 p-2 border border-border rounded-lg bg-background">
+                          <div className="w-10 h-10 rounded-md shadow-sm" style={{ backgroundColor: color.hex }}></div>
+                          <div className="flex-1">
+                            <span className="block font-mono text-[13px] font-bold text-ink">{color.hex.toUpperCase()}</span>
+                            <span className="block font-mono text-[11px] text-slate">{color.rgb}</span>
+                          </div>
+                          <button 
+                            onClick={() => copyToClipboard(color.hex)}
+                            className="p-2 hover:bg-slate/5 rounded-md transition-colors text-slate"
+                            title="Copy HEX"
+                          >
+                            {copied === color.hex ? <CheckCircle2 className="w-4 h-4 text-primary" /> : <Copy className="w-4 h-4" />}
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-sm text-slate">Extracting palette...</div>
+                  )}
+                </div>
+              )}
+
+            </div>
+
+            {/* Right: Preview */}
+            <div className="lg:col-span-2">
+              <div className="relative rounded-lg border border-border bg-background overflow-hidden min-h-[400px] flex items-center justify-center">
+                
+                {imageUrl && tool.id === 'color-picker-from-image' ? (
+                  <>
+                    <canvas 
+                      ref={canvasRef} 
+                      className="max-w-full max-h-[60vh] object-contain cursor-crosshair shadow-sm"
+                      onClick={handleCanvasClick}
+                    />
+                    <img 
+                      ref={imgRef}
+                      src={imageUrl} 
+                      alt="Original hidden" 
+                      className="hidden" 
+                      onLoad={onImageLoad}
+                      crossOrigin="anonymous" 
+                    />
+                  </>
+                ) : imageUrl ? (
+                  <img 
+                    ref={imgRef}
+                    src={imageUrl} 
+                    alt="Preview" 
+                    className="max-w-full max-h-[60vh] object-contain shadow-sm" 
+                    onLoad={onImageLoad}
+                    crossOrigin="anonymous" 
+                  />
+                ) : null}
+
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
