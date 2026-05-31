@@ -20,8 +20,26 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Singulariti | One Place. Every Tool.",
-  description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals.",
+  metadataBase: new URL("https://singulariti.app"),
+  title: {
+    default: "Singulariti | One Place. Every Tool.",
+    template: "%s | Singulariti",
+  },
+  description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals. Zero uploads, absolute privacy.",
+  keywords: ["pdf tools", "image editing", "qr code generator", "online tools", "browser-based tools", "privacy-first tools"],
+  openGraph: {
+    title: "Singulariti | One Place. Every Tool.",
+    description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals.",
+    url: "https://singulariti.app",
+    siteName: "Singulariti",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Singulariti | One Place. Every Tool.",
+    description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals.",
+  },
 };
 
 export default function RootLayout({
