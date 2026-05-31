@@ -37,6 +37,15 @@ const DEFAULT_SETTINGS: EditorSettings = {
   colorToBw: { mode: 'custom', contrast: 0 }
 };
 
+const initDefaultSettingsWithImageDims = (width: number, height: number): EditorSettings => {
+  const s = JSON.parse(JSON.stringify(DEFAULT_SETTINGS)) as EditorSettings;
+  s.resize.width = width;
+  s.resize.height = height;
+  s.upscaler.width = width;
+  s.upscaler.height = height;
+  return s;
+};
+
 interface Props {
   tool: ToolRegistryItem;
 }
@@ -167,7 +176,7 @@ export function SingleFeatureEditorClient({ tool }: Props) {
       });
 
       activeImageRef.current = img;
-      setSettings(JSON.parse(JSON.stringify(DEFAULT_SETTINGS)));
+      setSettings(initDefaultSettingsWithImageDims(initialWidth, initialHeight));
 
       const initialCrop = centerCrop(
         makeAspectCrop(
@@ -180,6 +189,7 @@ export function SingleFeatureEditorClient({ tool }: Props) {
         initialHeight
       );
       setCrop(initialCrop);
+      setCompletedCrop(initialCrop);
     };
     img.onerror = () => {
       setError('Failed to load image. The file may be corrupted.');
@@ -215,12 +225,29 @@ export function SingleFeatureEditorClient({ tool }: Props) {
       img.src = originalImageUrlRef.current;
       img.onload = () => {
         activeImageRef.current = img;
+        const initialWidth = img.naturalWidth;
+        const initialHeight = img.naturalHeight;
         setImageState(prev => ({
           ...prev,
-          width: img.naturalWidth,
-          height: img.naturalHeight
+          width: initialWidth,
+          height: initialHeight
         }));
-        setSettings(JSON.parse(JSON.stringify(DEFAULT_SETTINGS)));
+        
+        setSettings(initDefaultSettingsWithImageDims(initialWidth, initialHeight));
+        
+        const initialCrop = centerCrop(
+          makeAspectCrop(
+            { unit: '%', width: 90 },
+            initialWidth / initialHeight,
+            initialWidth,
+            initialHeight
+          ),
+          initialWidth,
+          initialHeight
+        );
+        setCrop(initialCrop);
+        setCompletedCrop(initialCrop);
+        
         setLogoFile(null);
         setLogoImg(null);
       };
@@ -363,95 +390,89 @@ export function SingleFeatureEditorClient({ tool }: Props) {
           subtitle="Supports JPG, JPEG, PNG, or WEBP formats up to 15MB"
         />
       ) : (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 max-w-4xl mx-auto">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-            
-            {/* Left Column: Preview Viewport */}
-            <div className="lg:col-span-8 flex flex-col justify-center items-center bg-surface border border-border rounded-xl p-4 min-h-[450px]">
-              {activeTool === 'crop' ? (
-                <div className="relative rounded-xl border border-border bg-background/50 overflow-hidden min-h-[400px] flex items-center justify-center p-4 w-full select-none">
-                  <div 
-                    className="absolute inset-0 opacity-10 pointer-events-none" 
-                    style={{
-                      backgroundImage: `linear-gradient(45deg, var(--color-border) 25%, transparent 25%), 
-                                        linear-gradient(-45deg, var(--color-border) 25%, transparent 25%), 
-                                        linear-gradient(45deg, transparent 75%, var(--color-border) 75%), 
-                                        linear-gradient(-45deg, transparent 75%, var(--color-border) 75%)`,
-                      backgroundSize: '20px 20px',
-                      backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px'
-                    }}
-                  />
-                  <div className="max-w-full max-h-[58vh] flex justify-center items-center z-0">
-                    <ReactCrop crop={crop} onChange={c => setCrop(c)} onComplete={c => setCompletedCrop(c)}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img 
-                        ref={cropImgRef} 
-                        src={imageState.url!} 
-                        alt="Crop bounding viewport" 
-                        className="max-w-full max-h-[55vh] object-contain shadow-xs rounded-lg border border-border bg-white" 
-                      />
-                    </ReactCrop>
-                  </div>
-                </div>
-              ) : (
-                <EditorCanvas 
-                  canvasRef={canvasRef} 
-                  isLoading={canvasLoading || isProcessing} 
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-                  onMouseLeave={handleMouseUp}
+          {/* Top: Preview Viewport */}
+          <div className="flex flex-col justify-center items-center bg-surface border border-border rounded-xl p-4 min-h-[450px]">
+            {activeTool === 'crop' ? (
+              <div className="relative rounded-xl border border-border bg-background/50 overflow-hidden min-h-[400px] flex items-center justify-center p-4 w-full select-none">
+                <div 
+                  className="absolute inset-0 opacity-10 pointer-events-none" 
+                  style={{
+                    backgroundImage: `linear-gradient(45deg, var(--color-border) 25%, transparent 25%), 
+                                      linear-gradient(-45deg, var(--color-border) 25%, transparent 25%), 
+                                      linear-gradient(45deg, transparent 75%, var(--color-border) 75%), 
+                                      linear-gradient(-45deg, transparent 75%, var(--color-border) 75%)`,
+                    backgroundSize: '20px 20px',
+                    backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px'
+                  }}
                 />
-              )}
-              
-              {/* Privacy Message */}
-              <p className="text-[10px] font-sans text-slate text-center mt-3">
-                🔒 Your image is edited locally in your browser. Nothing is uploaded to any server.
-              </p>
-            </div>
+                <div className="max-w-full max-h-[58vh] flex justify-center items-center z-0">
+                  <ReactCrop crop={crop} onChange={c => setCrop(c)} onComplete={c => setCompletedCrop(c)}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img 
+                      ref={cropImgRef} 
+                      src={imageState.url!} 
+                      alt="Crop bounding viewport" 
+                      className="max-w-full max-h-[55vh] object-contain shadow-xs rounded-lg border border-border bg-white" 
+                    />
+                  </ReactCrop>
+                </div>
+              </div>
+            ) : (
+              <EditorCanvas 
+                canvasRef={canvasRef} 
+                isLoading={canvasLoading || isProcessing} 
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+              />
+            )}
+            
+            {/* Privacy Message */}
+            <p className="text-[10px] font-sans text-slate text-center mt-3">
+              🔒 Your image is edited locally in your browser. Nothing is uploaded to any server.
+            </p>
+          </div>
 
-            {/* Right Column: Settings Panel & Download */}
-            <div className="lg:col-span-4 flex flex-col gap-4">
-              <div className="bg-surface border border-border rounded-xl p-4 flex flex-col gap-4 flex-1">
-                
-                <div className="flex justify-between items-center pb-3 border-b border-border">
-                  <h3 className="font-display font-bold text-ink">{tool.name}</h3>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" onClick={handleReset} title="Reset adjustments">
-                      <RotateCcw className="w-4 h-4" />
-                    </Button>
-                    <Button variant="outline" size="sm" onClick={handleClear} title="Load different image">
-                      <ImageIcon className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="flex-1 overflow-y-auto max-h-[50vh] pr-2 custom-scrollbar">
-                  <EditorSettingsPanel
-                    activeTool={activeTool}
-                    settings={settings}
-                    onChangeSettings={(s) => setSettings(s)}
-                    originalWidth={imageState.width}
-                    originalHeight={imageState.height}
-                    logoFile={logoFile}
-                    onLogoUpload={handleLogoUpload}
-                    onLogoRemove={handleLogoRemove}
-                    logoError={logoError}
-                    setLogoError={setLogoError}
-                  />
-                </div>
-                
-                <div className="mt-auto pt-4 border-t border-border">
-                  <DownloadImageButton
-                    defaultFileName={`edited_${imageState.file.name}`}
-                    onDownload={handleDownload}
-                    isProcessing={isProcessing}
-                  />
-                </div>
+          {/* Bottom: Settings Panel & Download */}
+          <div className="bg-surface border border-border rounded-xl p-6 flex flex-col gap-4">
+            
+            <div className="flex justify-between items-center pb-4 border-b border-border">
+              <h3 className="font-display font-bold text-ink text-xl">{tool.name}</h3>
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm" onClick={handleReset} title="Reset adjustments">
+                  <RotateCcw className="w-4 h-4 mr-1.5" /> Reset
+                </Button>
+                <Button variant="outline" size="sm" onClick={handleClear} title="Load different image">
+                  <ImageIcon className="w-4 h-4 mr-1.5" /> New Image
+                </Button>
               </div>
             </div>
 
+            <div className="mb-2">
+              <EditorSettingsPanel
+                activeTool={activeTool}
+                settings={settings}
+                onChangeSettings={(s) => setSettings(s)}
+                originalWidth={imageState.width}
+                originalHeight={imageState.height}
+                logoFile={logoFile}
+                onLogoUpload={handleLogoUpload}
+                onLogoRemove={handleLogoRemove}
+                logoError={logoError}
+                setLogoError={setLogoError}
+              />
+            </div>
+            
+            <div className="pt-4 border-t border-border">
+              <DownloadImageButton
+                defaultFileName={`edited_${imageState.file.name}`}
+                onDownload={handleDownload}
+                isProcessing={isProcessing}
+              />
+            </div>
           </div>
         </div>
       )}

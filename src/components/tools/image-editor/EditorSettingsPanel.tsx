@@ -76,7 +76,7 @@ export function EditorSettingsPanel({
         </h4>
       </div>
 
-      <div className="space-y-5 overflow-y-auto max-h-[50vh] pr-1">
+      <div className="space-y-5">
         
         {/* 1. UPSCALER */}
         {activeTool === 'upscaler' && (
@@ -1024,7 +1024,7 @@ export function EditorSettingsPanel({
                   className="text-[11px]"
                   onClick={() => updateSettings('flip', { horizontal: !settings.flip.horizontal })}
                 >
-                  Flip Horiz
+                  Flip Horizontal
                 </Button>
                 <Button 
                   variant={settings.flip.vertical ? "primary" : "outline"} 
@@ -1032,7 +1032,7 @@ export function EditorSettingsPanel({
                   className="text-[11px]"
                   onClick={() => updateSettings('flip', { vertical: !settings.flip.vertical })}
                 >
-                  Flip Vert
+                  Flip Vertical
                 </Button>
               </div>
             </div>
