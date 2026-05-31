@@ -47,7 +47,8 @@ export async function renderImageWithSettings(
   canvas: HTMLCanvasElement,
   settings: EditorSettings,
   logoImg?: HTMLImageElement | null,
-  isFullResolution: boolean = false
+  isFullResolution: boolean = false,
+  activeTool?: string
 ): Promise<void> {
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
@@ -57,29 +58,38 @@ export async function renderImageWithSettings(
   let trueH = originalImg.naturalHeight;
 
   const resize = settings.resize;
-  if (resize && resize.width > 0 && resize.height > 0) {
+  
+  if (activeTool === 'upscaler' && settings.upscaler) {
+    const up = settings.upscaler;
+    if (up.scale !== 'custom') {
+      const factor = up.scale === '2x' ? 2 : up.scale === '3x' ? 3 : up.scale === '4x' ? 4 : 1;
+      trueW = originalImg.naturalWidth * factor;
+      trueH = originalImg.naturalHeight * factor;
+    } else {
+      trueW = up.width || originalImg.naturalWidth;
+      trueH = up.height || originalImg.naturalHeight;
+    }
+  } else if (resize && resize.width > 0 && resize.height > 0) {
     trueW = resize.width;
     trueH = resize.height;
-  } else {
+  } else if (settings.upscaler) {
     const up = settings.upscaler;
-    if (up) {
-      if (up.scale !== 'custom') {
-        const factor = up.scale === '2x' ? 2 : up.scale === '3x' ? 3 : up.scale === '4x' ? 4 : 1;
-        trueW = originalImg.naturalWidth * factor;
-        trueH = originalImg.naturalHeight * factor;
-      } else {
-        trueW = up.width || originalImg.naturalWidth;
-        trueH = up.height || originalImg.naturalHeight;
-      }
+    if (up.scale !== 'custom') {
+      const factor = up.scale === '2x' ? 2 : up.scale === '3x' ? 3 : up.scale === '4x' ? 4 : 1;
+      trueW = originalImg.naturalWidth * factor;
+      trueH = originalImg.naturalHeight * factor;
+    } else {
+      trueW = up.width || originalImg.naturalWidth;
+      trueH = up.height || originalImg.naturalHeight;
     }
   }
 
   let targetW = trueW;
   let targetH = trueH;
 
-  // Capping preview canvas dimensions for smooth real-time rendering
+  // Capping preview canvas dimensions for smooth real-time rendering and filter visibility
   if (!isFullResolution) {
-    const MAX_PREVIEW_SIZE = 1200;
+    const MAX_PREVIEW_SIZE = 800;
     if (targetW > MAX_PREVIEW_SIZE || targetH > MAX_PREVIEW_SIZE) {
       const ratio = targetW / targetH;
       if (targetW > targetH) {
@@ -155,6 +165,22 @@ export async function renderImageWithSettings(
   const colBw = settings.colorToBw;
   if (colBw.mode !== 'custom' || colBw.contrast !== 0) {
     imgData = colorToBw(imgData, colBw.mode, colBw.contrast);
+  }
+
+  // E. Gamma Correction
+  if (settings.colorAdjust?.gamma !== undefined && settings.colorAdjust.gamma !== 1.0) {
+    const gamma = settings.colorAdjust.gamma;
+    const invGamma = 1 / gamma;
+    const data = imgData.data;
+    const lut = new Uint8Array(256);
+    for (let i = 0; i < 256; i++) {
+      lut[i] = Math.min(255, Math.max(0, Math.pow(i / 255, invGamma) * 255));
+    }
+    for (let i = 0; i < data.length; i += 4) {
+      data[i] = lut[data[i]];
+      data[i+1] = lut[data[i+1]];
+      data[i+2] = lut[data[i+2]];
+    }
   }
 
   ctx.putImageData(imgData, 0, 0);

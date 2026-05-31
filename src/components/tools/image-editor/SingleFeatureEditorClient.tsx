@@ -207,7 +207,9 @@ export function SingleFeatureEditorClient({ tool }: Props) {
           activeImageRef.current!,
           canvasRef.current!,
           settings,
-          logoImg
+          logoImg,
+          false,
+          activeTool
         );
       } catch (err) {
         console.error('Render error:', err);
@@ -312,7 +314,8 @@ export function SingleFeatureEditorClient({ tool }: Props) {
         offscreenCanvas,
         settings,
         logoImg,
-        true // isFullResolution = true
+        true, // isFullResolution = true
+        activeTool
       );
 
       await downloadCanvasAsImage(offscreenCanvas, {

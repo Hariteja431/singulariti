@@ -658,32 +658,30 @@ export function EditorSettingsPanel({
                 </select>
               </div>
 
-              {settings.text.position === 'custom' && (
-                <div className="grid grid-cols-2 gap-4 animate-in slide-in-from-top-2 duration-200">
-                  <div className="space-y-1">
-                    <span className="block text-[10px] text-slate font-bold uppercase">X Pos ({settings.text.posX}%)</span>
-                    <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      value={settings.text.posX}
-                      onChange={(e) => updateSettings('text', { posX: Number(e.target.value) })}
-                      className="w-full accent-primary"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <span className="block text-[10px] text-slate font-bold uppercase">Y Pos ({settings.text.posY}%)</span>
-                    <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      value={settings.text.posY}
-                      onChange={(e) => updateSettings('text', { posY: Number(e.target.value) })}
-                      className="w-full accent-primary"
-                    />
-                  </div>
+              <div className="grid grid-cols-2 gap-4 animate-in slide-in-from-top-2 duration-200">
+                <div className="space-y-1">
+                  <span className="block text-[10px] text-slate font-bold uppercase">X Pos ({settings.text.posX}%)</span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={settings.text.posX}
+                    onChange={(e) => updateSettings('text', { posX: Number(e.target.value), position: 'custom' })}
+                    className="w-full accent-primary"
+                  />
                 </div>
-              )}
+                <div className="space-y-1">
+                  <span className="block text-[10px] text-slate font-bold uppercase">Y Pos ({settings.text.posY}%)</span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={settings.text.posY}
+                    onChange={(e) => updateSettings('text', { posY: Number(e.target.value), position: 'custom' })}
+                    className="w-full accent-primary"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -806,32 +804,30 @@ export function EditorSettingsPanel({
                   </select>
                 </div>
 
-                {settings.logo.position === 'custom' && (
-                  <div className="grid grid-cols-2 gap-4 animate-in slide-in-from-top-2 duration-200">
-                    <div className="space-y-1">
-                      <span className="block text-[10px] text-slate font-bold uppercase">X Pos ({settings.logo.posX}%)</span>
-                      <input
-                        type="range"
-                        min="0"
-                        max="100"
-                        value={settings.logo.posX}
-                        onChange={(e) => updateSettings('logo', { posX: Number(e.target.value) })}
-                        className="w-full accent-primary"
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <span className="block text-[10px] text-slate font-bold uppercase">Y Pos ({settings.logo.posY}%)</span>
-                      <input
-                        type="range"
-                        min="0"
-                        max="100"
-                        value={settings.logo.posY}
-                        onChange={(e) => updateSettings('logo', { posY: Number(e.target.value) })}
-                        className="w-full accent-primary"
-                      />
-                    </div>
+                <div className="grid grid-cols-2 gap-4 animate-in slide-in-from-top-2 duration-200">
+                  <div className="space-y-1">
+                    <span className="block text-[10px] text-slate font-bold uppercase">X Pos ({settings.logo.posX}%)</span>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={settings.logo.posX}
+                      onChange={(e) => updateSettings('logo', { posX: Number(e.target.value), position: 'custom' })}
+                      className="w-full accent-primary"
+                    />
                   </div>
-                )}
+                  <div className="space-y-1">
+                    <span className="block text-[10px] text-slate font-bold uppercase">Y Pos ({settings.logo.posY}%)</span>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={settings.logo.posY}
+                      onChange={(e) => updateSettings('logo', { posY: Number(e.target.value), position: 'custom' })}
+                      className="w-full accent-primary"
+                    />
+                  </div>
+                </div>
               </div>
             )}
           </div>
