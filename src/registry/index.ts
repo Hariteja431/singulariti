@@ -164,74 +164,13 @@ export const registry: EcosystemRegistry = {
           path: '/image/editing',
           tools: [
             {
-              id: 'image-resizer',
-              name: 'Image Resizer',
-              description: 'Resize images to exact pixel dimensions. Free, secure, no upload to server.',
-              seoTitle: 'Image Resizer — Resize Images Online Free | singulariti.in',
-              seoDescription: 'Resize images online for free. Set custom width and height while maintaining aspect ratio.',
+              id: 'image-editor-tools',
+              name: 'Edit Image',
+              description: 'Crop, resize, rotate, flip, adjust colors, upscale, denoise, and add watermarks or text overlays locally in your browser.',
+              seoTitle: 'Edit Image Online — Free Image Editor | Singularity',
+              seoDescription: 'Edit, crop, resize, rotate, flip, enhance, adjust, watermark, and transform images directly in your browser without uploading to any server.',
               engine: 'editing',
-              path: '/image/editing/image-resizer',
-              options: { action: 'resize' }
-            },
-            {
-              id: 'image-cropper',
-              name: 'Image Cropper',
-              description: 'Crop images easily. Free, secure, no upload to server.',
-              seoTitle: 'Image Cropper — Crop Images Online Free | singulariti.in',
-              seoDescription: 'Crop images online for free. Adjust bounding box to cut out unwanted parts of an image.',
-              engine: 'editing',
-              path: '/image/editing/image-cropper',
-              options: { action: 'crop' }
-            },
-            {
-              id: 'rotate-image',
-              name: 'Rotate Image',
-              description: 'Rotate images by degrees. Free, secure, no upload to server.',
-              seoTitle: 'Rotate Image — Rotate Images Online Free | singulariti.in',
-              seoDescription: 'Rotate images online for free. Rotate 90, 180, 270 degrees or any custom angle.',
-              engine: 'editing',
-              path: '/image/editing/rotate-image',
-              options: { action: 'rotate' }
-            },
-            {
-              id: 'flip-image',
-              name: 'Flip Image',
-              description: 'Flip images horizontally or vertically. Free, secure, no upload to server.',
-              seoTitle: 'Flip Image — Mirror Images Online Free | singulariti.in',
-              seoDescription: 'Flip and mirror images online for free. Instantly flip pictures horizontally or vertically.',
-              engine: 'editing',
-              path: '/image/editing/flip-image',
-              options: { action: 'flip' }
-            },
-            {
-              id: 'blur-image',
-              name: 'Blur Image',
-              description: 'Apply blur filters to images. Free, secure, no upload to server.',
-              seoTitle: 'Blur Image — Add Blur Effect Online Free | singulariti.in',
-              seoDescription: 'Blur images online for free. Add customizable blur filters instantly in your browser.',
-              engine: 'editing',
-              path: '/image/editing/blur-image',
-              options: { action: 'blur' }
-            },
-            {
-              id: 'pixelate-image',
-              name: 'Pixelate Image',
-              description: 'Censor or pixelate parts of an image. Free, secure, no upload to server.',
-              seoTitle: 'Pixelate Image — Pixelate Effect Online Free | singulariti.in',
-              seoDescription: 'Pixelate images online for free. Add pixelated effects instantly in your browser.',
-              engine: 'editing',
-              path: '/image/editing/pixelate-image',
-              options: { action: 'pixelate' }
-            },
-            {
-              id: 'grayscale-image',
-              name: 'Grayscale Image',
-              description: 'Convert images to black and white grayscale. Free, secure, no upload to server.',
-              seoTitle: 'Grayscale Image — Black and White Filter Online Free | singulariti.in',
-              seoDescription: 'Convert images to grayscale online for free. Instantly apply black and white filters.',
-              engine: 'editing',
-              path: '/image/editing/grayscale-image',
-              options: { action: 'grayscale' }
+              path: '/tools/image/editor'
             }
           ]
         },
@@ -322,6 +261,220 @@ export const registry: EcosystemRegistry = {
               engine: 'developer',
               path: '/image/developer/base64-to-image',
               options: { action: 'frombase64' }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'pdf',
+      name: 'PDF Tools',
+      description: 'Free online PDF tools to merge, split, rotate, delete pages, sign, watermark, and convert PDFs entirely in your browser.',
+      seoTitle: 'PDF Tools — Edit and Convert PDFs Online Free | Singulariti',
+      seoDescription: 'Free online browser-based PDF tools. Merge, split, rotate, sign, compress and convert PDFs instantly and securely without uploading to any server.',
+      path: '/tools/pdf',
+      collections: [
+        {
+          id: 'management',
+          name: 'PDF Management',
+          description: 'Organize, merge, split, rotate, delete, and extract PDF pages inside your browser.',
+          seoTitle: 'PDF Management Tools — Organize PDFs Online Free | Singulariti',
+          seoDescription: 'Free online PDF management tools. Merge, split, delete, rotate, rearrange, and extract PDF pages instantly.',
+          path: '/tools/pdf',
+          tools: [
+            {
+              id: 'merge-pdf',
+              name: 'Merge PDF',
+              description: 'Combine multiple PDF files into one directly in your browser.',
+              seoTitle: 'Merge PDF Online Free — Combine PDF Files | Singulariti',
+              seoDescription: 'Merge multiple PDF files into a single document. Safe, secure, and runs locally.',
+              engine: 'utility',
+              path: '/tools/pdf/merge-pdf'
+            },
+            {
+              id: 'split-pdf',
+              name: 'Split PDF',
+              description: 'Split a PDF into multiple documents by defining page ranges.',
+              seoTitle: 'Split PDF Online Free — Extract Page Ranges | Singulariti',
+              seoDescription: 'Extract pages or ranges of pages from your PDF file into a new document.',
+              engine: 'utility',
+              path: '/tools/pdf/split-pdf'
+            },
+            {
+              id: 'rotate-pdf',
+              name: 'Rotate PDF',
+              description: 'Rotate pages in a PDF document by 90, 180, or 270 degrees.',
+              seoTitle: 'Rotate PDF Online Free — Rotate PDF Pages | Singulariti',
+              seoDescription: 'Rotate single or multiple pages in a PDF file. Free and secure.',
+              engine: 'utility',
+              path: '/tools/pdf/rotate-pdf'
+            },
+            {
+              id: 'delete-pdf-pages',
+              name: 'Delete PDF Pages',
+              description: 'Remove pages from your PDF document easily in your browser.',
+              seoTitle: 'Delete PDF Pages Online Free — Remove PDF Pages | Singulariti',
+              seoDescription: 'Remove unwanted pages from a PDF document and download the new file.',
+              engine: 'utility',
+              path: '/tools/pdf/delete-pdf-pages'
+            },
+            {
+              id: 'rearrange-pdf-pages',
+              name: 'Rearrange PDF Pages',
+              description: 'Reorder pages of a PDF document using drag and drop.',
+              seoTitle: 'Rearrange PDF Pages Online Free — Sort PDF Pages | Singulariti',
+              seoDescription: 'Drag and drop PDF pages to rearrange their order easily in the browser.',
+              engine: 'utility',
+              path: '/tools/pdf/rearrange-pdf-pages'
+            },
+            {
+              id: 'extract-pdf-pages',
+              name: 'Extract PDF Pages',
+              description: 'Extract specific pages or page ranges from your PDF document.',
+              seoTitle: 'Extract PDF Pages Online Free — Extract Pages | Singulariti',
+              seoDescription: 'Extract only the pages you need from a PDF document. Safe and secure.',
+              engine: 'utility',
+              path: '/tools/pdf/extract-pdf-pages'
+            }
+          ]
+        },
+        {
+          id: 'conversion',
+          name: 'PDF Conversion',
+          description: 'Convert documents and images to and from PDF files in your browser.',
+          seoTitle: 'PDF Conversion Tools — Convert PDFs Online Free | Singulariti',
+          seoDescription: 'Free online PDF converter tools. Convert images to PDF and PDFs to images.',
+          path: '/tools/pdf',
+          tools: [
+            {
+              id: 'jpg-to-pdf',
+              name: 'JPG to PDF',
+              description: 'Convert JPG, JPEG, and PNG images into a PDF document.',
+              seoTitle: 'JPG to PDF Online Free — Images to PDF Converter | Singulariti',
+              seoDescription: 'Convert images to PDF files online. Reorder images, adjust margins, and orientation.',
+              engine: 'conversion',
+              path: '/tools/pdf/jpg-to-pdf'
+            },
+            {
+              id: 'pdf-to-jpg',
+              name: 'PDF to JPG',
+              description: 'Extract pages of a PDF as high-quality JPG images.',
+              seoTitle: 'PDF to JPG Online Free — PDF to Image Converter | Singulariti',
+              seoDescription: 'Convert pages in your PDF file into JPG images. Download single images or ZIP files.',
+              engine: 'conversion',
+              path: '/tools/pdf/pdf-to-jpg'
+            }
+          ]
+        },
+        {
+          id: 'utility',
+          name: 'PDF Utilities',
+          description: 'Compress, sign, watermark, count pages, and view metadata of PDF documents.',
+          seoTitle: 'PDF Utility Tools — Edit PDFs Online Free | Singulariti',
+          seoDescription: 'Free browser-based PDF utilities. Compress, sign, add watermarks, and inspect metadata.',
+          path: '/tools/pdf',
+          tools: [
+            {
+              id: 'compress-pdf',
+              name: 'Compress PDF',
+              description: 'Reduce the file size of your PDF documents in the browser.',
+              seoTitle: 'Compress PDF Online Free — Reduce PDF Size | Singulariti',
+              seoDescription: 'Optimize and compress PDF files locally on your device for fast sharing.',
+              engine: 'compression',
+              path: '/tools/pdf/compress-pdf'
+            },
+            {
+              id: 'sign-pdf',
+              name: 'Sign PDF',
+              description: 'Draw or upload a signature and place it on your PDF pages.',
+              seoTitle: 'Sign PDF Online Free — Draw and Place Signatures | Singulariti',
+              seoDescription: 'Add digital signatures to your PDF files securely. Draw or upload signature.',
+              engine: 'editing',
+              path: '/tools/pdf/sign-pdf'
+            },
+            {
+              id: 'watermark-pdf',
+              name: 'Add Watermark to PDF',
+              description: 'Add text or image watermarks to your PDF pages.',
+              seoTitle: 'Add Watermark to PDF Online Free — Text and Image | Singulariti',
+              seoDescription: 'Add customized text or image watermarks to select pages in your PDF file.',
+              engine: 'editing',
+              path: '/tools/pdf/watermark-pdf'
+            },
+            {
+              id: 'metadata-viewer',
+              name: 'PDF Metadata Viewer',
+              description: 'View and inspect hidden metadata of any PDF document.',
+              seoTitle: 'PDF Metadata Viewer — View PDF EXIF & Info | Singulariti',
+              seoDescription: 'Inspect hidden PDF properties, creation dates, author, producer and file stats.',
+              engine: 'utility',
+              path: '/tools/pdf/metadata-viewer'
+            },
+            {
+              id: 'page-counter',
+              name: 'PDF Page Counter',
+              description: 'Count pages of multiple PDF files and calculate totals.',
+              seoTitle: 'PDF Page Counter — Count PDF Pages Online | Singulariti',
+              seoDescription: 'Upload one or multiple PDF documents to count pages and get totals.',
+              engine: 'utility',
+              path: '/tools/pdf/page-counter'
+            }
+          ]
+        },
+        {
+          id: 'text',
+          name: 'PDF Text Extraction',
+          description: 'Extract textual content from PDF files in the browser.',
+          seoTitle: 'PDF Text Extraction — PDF to Text Online | Singulariti',
+          seoDescription: 'Extract text from PDF files online. Copy or download as plain text.',
+          path: '/tools/pdf',
+          tools: [
+            {
+              id: 'pdf-to-text',
+              name: 'PDF to Text',
+              description: 'Extract readable text from a PDF document.',
+              seoTitle: 'PDF to Text Online Free — Text Extractor | Singulariti',
+              seoDescription: 'Extract text from PDF pages instantly in the browser. Copy or save as txt file.',
+              engine: 'utility',
+              path: '/tools/pdf/pdf-to-text'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'qr',
+      name: 'QR Tools',
+      description: 'Free online tools to generate and scan custom QR codes in your browser.',
+      seoTitle: 'QR Code Tools — Generate & Scan QRs Online Free | Singulariti',
+      seoDescription: 'Create custom styled QR codes or scan QR codes from camera, image files, or PDF documents locally.',
+      path: '/tools/qr',
+      collections: [
+        {
+          id: 'qr-tools',
+          name: 'QR Code Tools',
+          description: 'Generate customized QR codes or scan QR codes instantly in the browser.',
+          seoTitle: 'QR Code Tools — Online Generators and Scanners | Singulariti',
+          seoDescription: 'Free online QR tools. Customize color, size, margins, add logos, export to PDF/SVG, or scan.',
+          path: '/tools/qr',
+          tools: [
+            {
+              id: 'qr-code-generator',
+              name: 'QR Code Generator',
+              description: 'Generate custom QR codes for text, URLs, Wi-Fi, UPI, email, phone, and more.',
+              seoTitle: 'QR Code Generator — Create Custom QR Codes | Singulariti',
+              seoDescription: 'Create custom styled QR codes with logo overlays and download as PNG, SVG, or PDF.',
+              engine: 'developer',
+              path: '/tools/qr/qr-code-generator'
+            },
+            {
+              id: 'qr-code-scanner',
+              name: 'QR Code Scanner',
+              description: 'Scan QR codes using camera, image files, or PDF documents.',
+              seoTitle: 'QR Code Scanner — Scan QR Online | Singulariti',
+              seoDescription: 'Scan QR codes from webcam, photos, or uploaded PDF pages locally.',
+              engine: 'utility',
+              path: '/tools/qr/qr-code-scanner'
             }
           ]
         }

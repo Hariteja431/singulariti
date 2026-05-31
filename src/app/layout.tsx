@@ -1,3 +1,4 @@
+import "@/lib/polyfill";
 import type { Metadata } from "next";
 import { Syne, Outfit, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";

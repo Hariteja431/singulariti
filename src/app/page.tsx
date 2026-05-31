@@ -4,7 +4,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { ImageIcon, Sparkles } from 'lucide-react';
+import { ImageIcon, Sparkles, FileText, QrCode } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
             Fast, secure, browser-based utility tools designed for creators, developers, students and professionals.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/image">
+            <Link href="/tools">
               <Button size="lg" variant="primary">Explore Tools</Button>
             </Link>
           </div>
@@ -48,6 +48,20 @@ export default function Home() {
               icon={<ImageIcon />}
               href="/image"
               badge={{ text: '13 Tools', variant: 'default' }}
+            />
+            <Card 
+              title="PDF Tools"
+              description="Merge, split, rotate, sign, compress and watermark PDF files."
+              icon={<FileText />}
+              href="/tools/pdf"
+              badge={{ text: '14 Tools', variant: 'default' }}
+            />
+            <Card 
+              title="QR Tools"
+              description="Generate custom styled QR codes or scan them securely."
+              icon={<QrCode />}
+              href="/tools/qr"
+              badge={{ text: '2 Tools', variant: 'default' }}
             />
           </div>
         </section>

@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Download, Loader2, Image as ImageIcon, RotateCcw, FlipHorizontal, FlipVertical, Crop } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Download, Loader2, RotateCcw, FlipHorizontal, FlipVertical, Crop, Sliders, Maximize2, Trash2, RefreshCw } from 'lucide-react';
 import { ToolRegistryItem } from '../../registry/types';
 import { Button } from '../ui/Button';
 import { Dropzone } from '../ui/Dropzone';
@@ -17,13 +17,16 @@ export function EditingEngine({ tool }: EditingEngineProps) {
   const [originalUrl, setOriginalUrl] = useState<string | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   
-  // Ref for the hidden original image used for processing
+  // Refs
   const imgRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const cropImgRef = useRef<HTMLImageElement>(null);
   
   const [isProcessing, setIsProcessing] = useState(false);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+
+  // Unified Editor Active Tab
+  const [activeTab, setActiveTab] = useState<string>('resize');
 
   // Tool specific states
   const [width, setWidth] = useState(0);
@@ -39,6 +42,25 @@ export function EditingEngine({ tool }: EditingEngineProps) {
   
   const [blur, setBlur] = useState(0);
   const [pixelSize, setPixelSize] = useState(1);
+  const [grayscale, setGrayscale] = useState(false);
+
+  // Set initial tab and preset parameters based on the specific tool route selected by the user
+  useEffect(() => {
+    if (tool.id === 'image-resizer') {
+      setActiveTab('resize');
+    } else if (tool.id === 'image-cropper') {
+      setActiveTab('crop');
+    } else if (tool.id === 'rotate-image' || tool.id === 'flip-image') {
+      setActiveTab('transform');
+      if (tool.id === 'rotate-image') setRotation(90);
+      if (tool.id === 'flip-image') setFlipH(true);
+    } else if (tool.id === 'blur-image' || tool.id === 'pixelate-image' || tool.id === 'grayscale-image') {
+      setActiveTab('filters');
+      if (tool.id === 'blur-image') setBlur(10);
+      if (tool.id === 'pixelate-image') setPixelSize(8);
+      if (tool.id === 'grayscale-image') setGrayscale(true);
+    }
+  }, [tool.id]);
 
   useEffect(() => {
     return () => {
@@ -62,8 +84,16 @@ export function EditingEngine({ tool }: EditingEngineProps) {
     setFlipV(false);
     setBlur(0);
     setPixelSize(1);
+    setGrayscale(false);
     setCrop(undefined);
     setCompletedCrop(null);
+
+    // Apply specific tool presets
+    if (tool.id === 'rotate-image') setRotation(90);
+    else if (tool.id === 'flip-image') setFlipH(true);
+    else if (tool.id === 'blur-image') setBlur(10);
+    else if (tool.id === 'pixelate-image') setPixelSize(8);
+    else if (tool.id === 'grayscale-image') setGrayscale(true);
   };
 
   const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -72,28 +102,34 @@ export function EditingEngine({ tool }: EditingEngineProps) {
     setHeight(naturalHeight);
     setImageLoaded(true);
 
-    if (tool.id === 'image-cropper') {
-      const initialCrop = centerCrop(
-        makeAspectCrop(
-          { unit: '%', width: 90 },
-          naturalWidth / naturalHeight,
-          naturalWidth,
-          naturalHeight
-        ),
+    const initialCrop = centerCrop(
+      makeAspectCrop(
+        { unit: '%', width: 90 },
+        naturalWidth / naturalHeight,
         naturalWidth,
         naturalHeight
-      );
-      setCrop(initialCrop);
-    } else {
-      // Auto-apply for non-cropper tools to show initial state
-      applyEffect(e.currentTarget);
-    }
+      ),
+      naturalWidth,
+      naturalHeight
+    );
+    setCrop(initialCrop);
   };
 
   const handleWidthChange = (val: string) => {
     const num = parseInt(val) || 0;
     if (lockAspect && imgRef.current) {
-      const ratio = imgRef.current.naturalHeight / imgRef.current.naturalWidth;
+      // Calculate aspect ratio dynamically based on current crop & rotation
+      let baseW = imgRef.current.naturalWidth;
+      let baseH = imgRef.current.naturalHeight;
+
+      if (completedCrop) {
+        baseW = completedCrop.width;
+        baseH = completedCrop.height;
+      }
+
+      // If rotated 90 or 270 degrees, dimensions swap
+      const isSwapped = rotation % 180 !== 0;
+      const ratio = isSwapped ? baseW / baseH : baseH / baseW;
       setHeight(Math.round(num * ratio));
     }
     setWidth(num);
@@ -102,21 +138,82 @@ export function EditingEngine({ tool }: EditingEngineProps) {
   const handleHeightChange = (val: string) => {
     const num = parseInt(val) || 0;
     if (lockAspect && imgRef.current) {
-      const ratio = imgRef.current.naturalWidth / imgRef.current.naturalHeight;
+      let baseW = imgRef.current.naturalWidth;
+      let baseH = imgRef.current.naturalHeight;
+
+      if (completedCrop) {
+        baseW = completedCrop.width;
+        baseH = completedCrop.height;
+      }
+
+      const isSwapped = rotation % 180 !== 0;
+      const ratio = isSwapped ? baseH / baseW : baseW / baseH;
       setWidth(Math.round(num * ratio));
     }
     setHeight(num);
   };
 
-  // Re-apply effect when sliders/buttons change (for instant preview)
+  const handleResetAll = () => {
+    setRotation(0);
+    setFlipH(false);
+    setFlipV(false);
+    setBlur(0);
+    setPixelSize(1);
+    setGrayscale(false);
+    setCompletedCrop(null);
+    if (imgRef.current) {
+      setWidth(imgRef.current.naturalWidth);
+      setHeight(imgRef.current.naturalHeight);
+      const initialCrop = centerCrop(
+        makeAspectCrop(
+          { unit: '%', width: 90 },
+          imgRef.current.naturalWidth / imgRef.current.naturalHeight,
+          imgRef.current.naturalWidth,
+          imgRef.current.naturalHeight
+        ),
+        imgRef.current.naturalWidth,
+        imgRef.current.naturalHeight
+      );
+      setCrop(initialCrop);
+    }
+  };
+
+  const handleRemoveCrop = () => {
+    setCompletedCrop(null);
+    setCrop(undefined);
+  };
+
+  // Recalculate dimensions automatically when rotation or crop selection completes
   useEffect(() => {
-    if (imageLoaded && imgRef.current && tool.id !== 'image-cropper') {
+    if (imageLoaded && imgRef.current) {
+      let srcW = imgRef.current.naturalWidth;
+      let srcH = imgRef.current.naturalHeight;
+
+      if (completedCrop && cropImgRef.current) {
+        const scaleX = imgRef.current.naturalWidth / cropImgRef.current.width;
+        const scaleY = imgRef.current.naturalHeight / cropImgRef.current.height;
+        srcW = completedCrop.width * scaleX;
+        srcH = completedCrop.height * scaleY;
+      }
+
+      const rad = (rotation * Math.PI) / 180;
+      const rotW = Math.abs(srcW * Math.cos(rad)) + Math.abs(srcH * Math.sin(rad));
+      const rotH = Math.abs(srcW * Math.sin(rad)) + Math.abs(srcH * Math.cos(rad));
+
+      setWidth(Math.round(rotW));
+      setHeight(Math.round(rotH));
+    }
+  }, [rotation, completedCrop, imageLoaded]);
+
+  // Re-apply pipeline effects when state variables change
+  useEffect(() => {
+    if (imageLoaded && imgRef.current && activeTab !== 'crop') {
       const debounce = setTimeout(() => {
         applyEffect(imgRef.current!);
       }, 50);
       return () => clearTimeout(debounce);
     }
-  }, [width, height, rotation, flipH, flipV, blur, pixelSize, imageLoaded, tool.id]);
+  }, [width, height, rotation, flipH, flipV, blur, pixelSize, grayscale, completedCrop, imageLoaded, activeTab]);
 
   const applyEffect = async (img: HTMLImageElement, isFinalRender = false) => {
     const canvas = canvasRef.current || document.createElement('canvas');
@@ -126,80 +223,85 @@ export function EditingEngine({ tool }: EditingEngineProps) {
     if (isFinalRender) setIsProcessing(true);
 
     try {
-      let finalW = img.naturalWidth;
-      let finalH = img.naturalHeight;
+      // 1. Calculate Crop source coordinates
+      let srcX = 0;
+      let srcY = 0;
+      let srcW = img.naturalWidth;
+      let srcH = img.naturalHeight;
 
-      if (tool.id === 'image-resizer') {
-        finalW = width || 1;
-        finalH = height || 1;
-      }
-
-      // Handle bounding box for arbitrary rotation
-      if (tool.id === 'rotate-image') {
-        const rad = (rotation * Math.PI) / 180;
-        finalW = Math.abs(img.naturalWidth * Math.cos(rad)) + Math.abs(img.naturalHeight * Math.sin(rad));
-        finalH = Math.abs(img.naturalWidth * Math.sin(rad)) + Math.abs(img.naturalHeight * Math.cos(rad));
-      }
-
-      if (tool.id === 'image-cropper' && completedCrop && cropImgRef.current) {
-         const scaleX = img.naturalWidth / cropImgRef.current.width;
-         const scaleY = img.naturalHeight / cropImgRef.current.height;
-         finalW = completedCrop.width * scaleX;
-         finalH = completedCrop.height * scaleY;
-      }
-
-      canvas.width = finalW;
-      canvas.height = finalH;
-
-      ctx.clearRect(0, 0, finalW, finalH);
-      ctx.save();
-
-      // Transform for rotation and flip
-      ctx.translate(finalW / 2, finalH / 2);
-      
-      if (tool.id === 'rotate-image') {
-        ctx.rotate((rotation * Math.PI) / 180);
-      }
-      
-      if (tool.id === 'flip-image') {
-        ctx.scale(flipH ? -1 : 1, flipV ? -1 : 1);
-      }
-
-      // Filters
-      let filterString = '';
-      if (tool.id === 'blur-image') filterString += `blur(${blur}px) `;
-      if (tool.id === 'grayscale-image') filterString += `grayscale(100%) `;
-      ctx.filter = filterString.trim() || 'none';
-
-      // Pixelate effect uses scaling
-      if (tool.id === 'pixelate-image' && pixelSize > 1) {
-        ctx.imageSmoothingEnabled = false;
-        const scaledW = img.naturalWidth / pixelSize;
-        const scaledH = img.naturalHeight / pixelSize;
-        
-        // Draw small
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = scaledW;
-        tempCanvas.height = scaledH;
-        const tempCtx = tempCanvas.getContext('2d')!;
-        tempCtx.drawImage(img, 0, 0, scaledW, scaledH);
-        
-        // Draw back scaled up
-        ctx.drawImage(tempCanvas, -img.naturalWidth / 2, -img.naturalHeight / 2, img.naturalWidth, img.naturalHeight);
-      } else if (tool.id === 'image-cropper' && completedCrop && cropImgRef.current) {
+      if (completedCrop && cropImgRef.current) {
         const scaleX = img.naturalWidth / cropImgRef.current.width;
         const scaleY = img.naturalHeight / cropImgRef.current.height;
-        ctx.translate(-finalW/2, -finalH/2);
-        ctx.drawImage(
-          img,
-          completedCrop.x * scaleX, completedCrop.y * scaleY, completedCrop.width * scaleX, completedCrop.height * scaleY,
-          0, 0, finalW, finalH
-        );
+        srcX = completedCrop.x * scaleX;
+        srcY = completedCrop.y * scaleY;
+        srcW = completedCrop.width * scaleX;
+        srcH = completedCrop.height * scaleY;
+      }
+
+      srcW = Math.max(1, srcW);
+      srcH = Math.max(1, srcH);
+
+      // 2. Draw cropped image to a temporary canvas
+      const cropCanvas = document.createElement('canvas');
+      cropCanvas.width = srcW;
+      cropCanvas.height = srcH;
+      const cropCtx = cropCanvas.getContext('2d');
+      if (cropCtx) {
+        cropCtx.drawImage(img, srcX, srcY, srcW, srcH, 0, 0, srcW, srcH);
+      }
+
+      // 3. Handle rotation & flipping onto a second temporary canvas
+      const transformCanvas = document.createElement('canvas');
+      const rad = (rotation * Math.PI) / 180;
+      const rotW = Math.abs(srcW * Math.cos(rad)) + Math.abs(srcH * Math.sin(rad));
+      const rotH = Math.abs(srcW * Math.sin(rad)) + Math.abs(srcH * Math.cos(rad));
+      
+      transformCanvas.width = Math.max(1, rotW);
+      transformCanvas.height = Math.max(1, rotH);
+
+      const transCtx = transformCanvas.getContext('2d');
+      if (transCtx) {
+        transCtx.save();
+        transCtx.translate(transformCanvas.width / 2, transformCanvas.height / 2);
+        transCtx.rotate(rad);
+        transCtx.scale(flipH ? -1 : 1, flipV ? -1 : 1);
+        transCtx.drawImage(cropCanvas, -srcW / 2, -srcH / 2, srcW, srcH);
+        transCtx.restore();
+      }
+
+      // 4. Resize and filter onto the final canvas
+      const finalW = width || Math.round(transformCanvas.width);
+      const finalH = height || Math.round(transformCanvas.height);
+
+      canvas.width = Math.max(1, finalW);
+      canvas.height = Math.max(1, finalH);
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.save();
+
+      // Apply filters (blur & grayscale)
+      let filterString = '';
+      if (blur > 0) filterString += `blur(${blur}px) `;
+      if (grayscale) filterString += `grayscale(100%) `;
+      ctx.filter = filterString.trim() || 'none';
+
+      // Apply pixelation or normal drawing with resizing
+      if (pixelSize > 1) {
+        ctx.imageSmoothingEnabled = false;
+        const scaledW = Math.max(1, Math.round(canvas.width / pixelSize));
+        const scaledH = Math.max(1, Math.round(canvas.height / pixelSize));
+
+        const pixelCanvas = document.createElement('canvas');
+        pixelCanvas.width = scaledW;
+        pixelCanvas.height = scaledH;
+        const pixelCtx = pixelCanvas.getContext('2d');
+        if (pixelCtx) {
+          pixelCtx.drawImage(transformCanvas, 0, 0, scaledW, scaledH);
+        }
+
+        ctx.drawImage(pixelCanvas, 0, 0, scaledW, scaledH, 0, 0, canvas.width, canvas.height);
       } else {
-        // Normal draw
-        const drawW = tool.id === 'image-resizer' ? width : img.naturalWidth;
-        const drawH = tool.id === 'image-resizer' ? height : img.naturalHeight;
-        ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
+        ctx.drawImage(transformCanvas, 0, 0, canvas.width, canvas.height);
       }
 
       ctx.restore();
@@ -223,147 +325,279 @@ export function EditingEngine({ tool }: EditingEngineProps) {
 
   const handleDownload = () => {
     if (!resultUrl) {
-      // Force final render to blob
       if (imgRef.current) applyEffect(imgRef.current, true);
     } else {
-      // Already rendered, trigger click
       const a = document.createElement('a');
       a.href = resultUrl;
-      a.download = `singulariti_${tool.id}_${file?.name || 'edited.jpg'}`;
+      a.download = `singulariti_edited_${file?.name || 'image.jpg'}`;
       a.click();
     }
   };
 
-  // When resultUrl changes and user clicked download, we auto click it
+  // Download trigger when compilation finishes
   useEffect(() => {
     if (resultUrl && isProcessing === false) {
       const a = document.createElement('a');
       a.href = resultUrl;
-      a.download = `singulariti_${tool.id}_${file?.name || 'edited.jpg'}`;
+      a.download = `singulariti_edited_${file?.name || 'image.jpg'}`;
       a.click();
     }
   }, [resultUrl, isProcessing]);
 
   return (
-    <div className="w-full max-w-5xl mx-auto my-12">
+    <div className="w-full max-w-6xl mx-auto my-6 px-2">
       {!file ? (
         <Dropzone 
           onFileSelect={processFile} 
           title="Drop image to edit"
         />
       ) : (
-        <div className="bg-surface border border-border rounded-xl p-6 md:p-8 shadow-sm">
+        <div className="bg-surface border border-border rounded-xl p-5 md:p-6 shadow-sm">
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-border">
-            <div>
-              <p className="font-sans text-[13px] text-slate mb-1">Editing file</p>
-              <h4 className="font-display font-bold text-lg text-ink truncate max-w-md">{file.name}</h4>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-border">
+            <div className="min-w-0">
+              <p className="font-sans text-[11px] font-bold text-slate uppercase tracking-wider mb-0.5">Image Editor Workspace</p>
+              <h4 className="font-display font-bold text-base text-ink truncate max-w-md">{file.name}</h4>
             </div>
-            <div className="flex items-center gap-3">
-              <Button variant="outline" size="sm" onClick={() => setFile(null)}>
-                Start Over
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" leftIcon={<RefreshCw className="w-3.5 h-3.5" />} onClick={handleResetAll}>
+                Reset Editor
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => setFile(null)}>
+                Change File
               </Button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left: Controls */}
-            <div className="lg:col-span-1 space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Left Column: Sidebar Tabs & Controls */}
+            <div className="lg:col-span-4 flex flex-col gap-5">
               
-              {tool.id === 'image-resizer' && (
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-[13px] font-medium text-slate mb-1">Width (px)</label>
-                    <input type="number" value={width} onChange={(e) => handleWidthChange(e.target.value)} className="w-full border border-border rounded-md px-3 py-2 bg-background text-ink" />
-                  </div>
-                  <div>
-                    <label className="block text-[13px] font-medium text-slate mb-1">Height (px)</label>
-                    <input type="number" value={height} onChange={(e) => handleHeightChange(e.target.value)} className="w-full border border-border rounded-md px-3 py-2 bg-background text-ink" />
-                  </div>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" checked={lockAspect} onChange={(e) => setLockAspect(e.target.checked)} className="accent-primary" />
-                    <span className="text-[13px] text-slate">Lock aspect ratio</span>
-                  </label>
-                </div>
-              )}
+              {/* Tab Selector */}
+              <div className="flex bg-background border border-border rounded-xl p-1 w-full">
+                {[
+                  { id: 'crop', name: 'Crop', icon: Crop },
+                  { id: 'resize', name: 'Resize', icon: Maximize2 },
+                  { id: 'transform', name: 'Rotate', icon: RotateCcw },
+                  { id: 'filters', name: 'Filters', icon: Sliders },
+                ].map((tab) => {
+                  const Icon = tab.icon;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`flex-1 py-2 px-1 rounded-lg font-sans font-bold text-[11px] uppercase tracking-wider flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all ${
+                        activeTab === tab.id
+                          ? 'bg-surface text-primary shadow-xs'
+                          : 'text-slate hover:text-ink'
+                      }`}
+                    >
+                      <Icon className="w-3.5 h-3.5" />
+                      <span>{tab.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
 
-              {tool.id === 'image-cropper' && (
-                <div className="space-y-4">
-                  <p className="text-[13px] text-slate">Drag the handles on the image to crop. Click apply when done.</p>
-                  <Button variant="outline" className="w-full" onClick={() => imgRef.current && applyEffect(imgRef.current, true)}>
-                    <Crop className="w-4 h-4 mr-2" /> Apply Crop
-                  </Button>
-                </div>
-              )}
+              {/* Active Tab Panel */}
+              <div className="p-5 bg-background border border-border rounded-xl min-h-[220px] flex flex-col justify-between">
+                <div>
+                  {activeTab === 'crop' && (
+                    <div className="space-y-4">
+                      <h5 className="font-display font-bold text-xs text-ink flex items-center uppercase tracking-wider">
+                        <Crop className="w-4 h-4 mr-2 text-primary" /> Crop Image
+                      </h5>
+                      <p className="text-[12px] font-sans text-slate leading-relaxed">
+                        Drag or resize the selection box on the image preview. The crop selection is applied automatically when viewing other controls.
+                      </p>
+                      {completedCrop ? (
+                        <div className="space-y-3 pt-2">
+                          <div className="flex items-center justify-between text-xs font-sans text-slate">
+                            <span>Crop Dimensions:</span>
+                            <span className="font-bold text-ink font-mono">
+                              {Math.round(completedCrop.width)} × {Math.round(completedCrop.height)} px
+                            </span>
+                          </div>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="w-full text-red-500 border-red-500/20 hover:bg-red-500/10" 
+                            onClick={handleRemoveCrop}
+                            leftIcon={<Trash2 className="w-3.5 h-3.5" />}
+                          >
+                            Remove Crop
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="p-3 bg-surface border border-border border-dashed rounded-lg text-center text-xs text-slate font-sans">
+                          Select an area on the image preview
+                        </div>
+                      )}
+                    </div>
+                  )}
 
-              {tool.id === 'rotate-image' && (
-                <div className="space-y-4">
-                  <div className="flex gap-2">
-                    <Button variant="outline" className="flex-1" onClick={() => setRotation(r => r - 90)}>
-                      <RotateCcw className="w-4 h-4 mr-2" /> -90°
-                    </Button>
-                    <Button variant="outline" className="flex-1" onClick={() => setRotation(r => r + 90)}>
-                      <RotateCcw className="w-4 h-4 mr-2 scale-x-[-1]" /> +90°
-                    </Button>
-                  </div>
-                  <div>
-                    <label className="block text-[13px] font-medium text-slate mb-1">Custom Rotation: {rotation}°</label>
-                    <input type="range" min="-180" max="180" value={rotation} onChange={(e) => setRotation(Number(e.target.value))} className="w-full accent-primary" />
-                  </div>
-                </div>
-              )}
+                  {activeTab === 'resize' && (
+                    <div className="space-y-4">
+                      <h5 className="font-display font-bold text-xs text-ink flex items-center uppercase tracking-wider">
+                        <Maximize2 className="w-4 h-4 mr-2 text-primary" /> Custom Resize
+                      </h5>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[10px] font-sans font-bold text-slate uppercase tracking-wider mb-1.5">Width (px)</label>
+                          <input
+                            type="number"
+                            value={width || ''}
+                            onChange={(e) => handleWidthChange(e.target.value)}
+                            className="w-full h-10 px-3 bg-surface border border-border rounded-lg text-sm text-ink outline-none focus:border-primary transition-colors font-mono"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-sans font-bold text-slate uppercase tracking-wider mb-1.5">Height (px)</label>
+                          <input
+                            type="number"
+                            value={height || ''}
+                            onChange={(e) => handleHeightChange(e.target.value)}
+                            className="w-full h-10 px-3 bg-surface border border-border rounded-lg text-sm text-ink outline-none focus:border-primary transition-colors font-mono"
+                          />
+                        </div>
+                      </div>
+                      <label className="flex items-center gap-2 cursor-pointer pt-2 select-none">
+                        <input
+                          type="checkbox"
+                          checked={lockAspect}
+                          onChange={(e) => setLockAspect(e.target.checked)}
+                          className="accent-primary rounded"
+                        />
+                        <span className="text-[12px] font-sans text-slate">Lock Aspect Ratio</span>
+                      </label>
+                    </div>
+                  )}
 
-              {tool.id === 'flip-image' && (
-                <div className="flex gap-2">
-                  <Button variant={flipH ? "primary" : "outline"} className="flex-1" onClick={() => setFlipH(!flipH)}>
-                    <FlipHorizontal className="w-4 h-4 mr-2" /> Horizontal
-                  </Button>
-                  <Button variant={flipV ? "primary" : "outline"} className="flex-1" onClick={() => setFlipV(!flipV)}>
-                    <FlipVertical className="w-4 h-4 mr-2" /> Vertical
-                  </Button>
-                </div>
-              )}
+                  {activeTab === 'transform' && (
+                    <div className="space-y-4">
+                      <h5 className="font-display font-bold text-xs text-ink flex items-center uppercase tracking-wider">
+                        <RotateCcw className="w-4 h-4 mr-2 text-primary" /> Transform Rotation
+                      </h5>
+                      
+                      <div className="space-y-2">
+                        <label className="block text-[10px] font-sans font-bold text-slate uppercase tracking-wider">
+                          Quick Rotation
+                        </label>
+                        <div className="flex gap-2">
+                          <Button variant="outline" size="sm" className="flex-1" onClick={() => setRotation((r) => (r - 90 + 360) % 360)}>
+                            -90°
+                          </Button>
+                          <Button variant="outline" size="sm" className="flex-1" onClick={() => setRotation((r) => (r + 90) % 360)}>
+                            +90°
+                          </Button>
+                          <Button variant="outline" size="sm" className="flex-1" onClick={() => setRotation(180)}>
+                            180°
+                          </Button>
+                        </div>
+                      </div>
 
-              {tool.id === 'blur-image' && (
-                <div className="space-y-4">
-                  <label className="block text-[13px] font-medium text-slate mb-1">Blur Radius: {blur}px</label>
-                  <input type="range" min="0" max="50" value={blur} onChange={(e) => setBlur(Number(e.target.value))} className="w-full accent-primary" />
-                </div>
-              )}
+                      <div className="space-y-1.5 pt-2">
+                        <div className="flex justify-between text-[11px] font-sans text-slate font-bold uppercase">
+                          <span>Custom Angle</span>
+                          <span>{rotation}°</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="0"
+                          max="359"
+                          value={rotation}
+                          onChange={(e) => setRotation(Number(e.target.value))}
+                          className="w-full accent-primary"
+                        />
+                      </div>
 
-              {tool.id === 'pixelate-image' && (
-                <div className="space-y-4">
-                  <label className="block text-[13px] font-medium text-slate mb-1">Pixel Block Size: {pixelSize}px</label>
-                  <input type="range" min="1" max="100" value={pixelSize} onChange={(e) => setPixelSize(Number(e.target.value))} className="w-full accent-primary" />
-                </div>
-              )}
+                      <div className="space-y-2 pt-3 border-t border-border">
+                        <label className="block text-[10px] font-sans font-bold text-slate uppercase tracking-wider">
+                          Mirror Flip
+                        </label>
+                        <div className="flex gap-2">
+                          <Button variant={flipH ? "primary" : "outline"} size="sm" className="flex-1" onClick={() => setFlipH(!flipH)}>
+                            <FlipHorizontal className="w-3.5 h-3.5 mr-1.5" /> Horiz
+                          </Button>
+                          <Button variant={flipV ? "primary" : "outline"} size="sm" className="flex-1" onClick={() => setFlipV(!flipV)}>
+                            <FlipVertical className="w-3.5 h-3.5 mr-1.5" /> Vert
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
-              {tool.id === 'grayscale-image' && (
-                <div className="space-y-4">
-                  <p className="text-[13px] text-slate">The grayscale filter is automatically applied.</p>
-                </div>
-              )}
+                  {activeTab === 'filters' && (
+                    <div className="space-y-4">
+                      <h5 className="font-display font-bold text-xs text-ink flex items-center uppercase tracking-wider">
+                        <Sliders className="w-4 h-4 mr-2 text-primary" /> Visual Filters
+                      </h5>
 
+                      <label className="flex items-center justify-between p-3 bg-surface border border-border rounded-lg cursor-pointer select-none">
+                        <span className="text-[12px] font-sans text-ink font-semibold">Grayscale Effect</span>
+                        <input
+                          type="checkbox"
+                          checked={grayscale}
+                          onChange={(e) => setGrayscale(e.target.checked)}
+                          className="accent-primary"
+                        />
+                      </label>
+
+                      <div className="space-y-1.5">
+                        <div className="flex justify-between text-[11px] font-sans text-slate font-bold uppercase">
+                          <span>Gaussian Blur</span>
+                          <span>{blur}px</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="0"
+                          max="40"
+                          value={blur}
+                          onChange={(e) => setBlur(Number(e.target.value))}
+                          className="w-full accent-primary"
+                        />
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <div className="flex justify-between text-[11px] font-sans text-slate font-bold uppercase">
+                          <span>Pixelate Blur</span>
+                          <span>{pixelSize}px</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="1"
+                          max="50"
+                          value={pixelSize}
+                          onChange={(e) => setPixelSize(Number(e.target.value))}
+                          className="w-full accent-primary"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Action Trigger */}
               <Button 
                 variant="primary" 
                 size="lg" 
-                className="w-full mt-8" 
+                className="w-full" 
                 onClick={handleDownload}
                 isLoading={isProcessing}
                 leftIcon={<Download className="w-5 h-5" />}
               >
-                Download Image
+                Apply & Download
               </Button>
             </div>
 
-            {/* Right: Preview */}
-            <div className="lg:col-span-2">
-              <div className="relative rounded-lg border border-border bg-background overflow-hidden min-h-[400px] flex items-center justify-center">
+            {/* Right Column: Visual Canvas / Crop Viewport */}
+            <div className="lg:col-span-8 flex flex-col justify-center">
+              <div className="relative rounded-xl border border-border bg-background/50 overflow-hidden min-h-[400px] flex items-center justify-center p-4">
                 {originalUrl && (
                   <img 
                     ref={imgRef}
                     src={originalUrl} 
-                    alt="Original hidden" 
+                    alt="Original hidden reference source" 
                     className="hidden" 
                     onLoad={onImageLoad} 
                   />
@@ -373,16 +607,19 @@ export function EditingEngine({ tool }: EditingEngineProps) {
                   <Loader2 className="w-8 h-8 animate-spin text-primary" />
                 )}
 
-                {imageLoaded && tool.id === 'image-cropper' ? (
-                  <ReactCrop crop={crop} onChange={c => setCrop(c)} onComplete={c => setCompletedCrop(c)}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img ref={cropImgRef} src={originalUrl!} alt="Crop target" className="max-h-[60vh] object-contain" />
-                  </ReactCrop>
+                {imageLoaded && activeTab === 'crop' ? (
+                  <div className="max-w-full max-h-[60vh] flex justify-center items-center">
+                    <ReactCrop crop={crop} onChange={c => setCrop(c)} onComplete={c => setCompletedCrop(c)}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img ref={cropImgRef} src={originalUrl!} alt="Crop bounding viewport" className="max-w-full max-h-[55vh] object-contain shadow-xs rounded-lg" />
+                    </ReactCrop>
+                  </div>
                 ) : (
-                  <canvas ref={canvasRef} className="max-w-full max-h-[60vh] object-contain shadow-sm" />
+                  imageLoaded && <canvas ref={canvasRef} className="max-w-full max-h-[60vh] object-contain shadow-sm bg-white rounded-lg border border-border" />
                 )}
               </div>
             </div>
+
           </div>
         </div>
       )}

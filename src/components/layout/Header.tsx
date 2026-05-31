@@ -45,7 +45,7 @@ export function Header() {
           </div>
 
           <nav className="flex items-center gap-4">
-            <Link href="/image" className="hidden md:block text-[15px] font-sans font-medium text-slate hover:text-primary transition-colors">Tools</Link>
+            <Link href="/tools" className="hidden md:block text-[15px] font-sans font-medium text-slate hover:text-primary transition-colors">Tools</Link>
             
             {mounted && (
               <button 
