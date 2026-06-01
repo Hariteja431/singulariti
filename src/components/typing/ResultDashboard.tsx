@@ -142,7 +142,8 @@ export function ResultDashboard({
             onClick={onRestart}
             className="w-full flex items-center justify-center space-x-2 bg-foreground text-background hover:opacity-90 px-4 py-3 rounded-xl transition-opacity font-sans text-sm font-semibold"
           >
-            <span>Start Next Test</span>
+            <RotateCcw size={16} />
+            <span>Restart Test</span>
             <kbd className="hidden sm:inline-block px-2 py-0.5 bg-background/20 rounded text-xs ml-2">Tab + Enter</kbd>
           </button>
         </div>
