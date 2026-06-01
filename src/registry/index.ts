@@ -584,6 +584,15 @@ export const registry: EcosystemRegistry = {
               path: '/tools/pdf/watermark-pdf'
             },
             {
+              id: 'protect-pdf',
+              name: 'Protect PDF',
+              description: 'Encrypt and lock your PDF document with a password.',
+              seoTitle: 'Protect PDF Online Free — Encrypt and Lock PDF | Singulariti',
+              seoDescription: 'Secure your PDF documents with a password entirely in your browser. No uploads, fast and private.',
+              engine: 'utility',
+              path: '/tools/pdf/protect-pdf'
+            },
+            {
               id: 'metadata-viewer',
               name: 'PDF Metadata Viewer',
               description: 'View and inspect hidden metadata of any PDF document.',

@@ -1,4 +1,5 @@
 import { PDFDocument, rgb, degrees, StandardFonts } from 'pdf-lib';
+import { encryptPDF } from '@pdfsmaller/pdf-encrypt-lite';
 import { readFileAsArrayBuffer } from '../fileHelpers';
 
 // Helper to convert hex colors to normalized RGB values for pdf-lib
@@ -497,4 +498,17 @@ export async function countPDFPages(
   }
 
   return { counts, total };
+}
+
+/**
+ * Encrypt and password protect a PDF file using RC4 128-bit encryption.
+ * Supports standard browser-based encryption without server dependencies.
+ */
+export async function protectPDFDocument(file: File, password: string): Promise<Uint8Array> {
+  const arrayBuffer = await readFileAsArrayBuffer(file);
+  const pdfBytes = new Uint8Array(arrayBuffer);
+  
+  // The encryptPDF function returns a Uint8Array
+  const encryptedBytes = await encryptPDF(pdfBytes, password);
+  return encryptedBytes;
 }

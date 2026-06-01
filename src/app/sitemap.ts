@@ -1,11 +1,11 @@
 import { MetadataRoute } from 'next';
-import { getCategories } from '@/registry';
+import { registry } from '@/registry';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://singulariti.app';
   const lastModified = new Date();
 
-  const categories = getCategories();
+  const categories = registry.categories;
   
   // Base routes
   const routes: MetadataRoute.Sitemap = [
