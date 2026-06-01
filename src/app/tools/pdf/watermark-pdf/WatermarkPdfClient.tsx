@@ -495,9 +495,9 @@ export function WatermarkPdfClient() {
             <div className="lg:col-span-7 flex flex-col items-center">
               <h3 className="font-display font-bold text-[14px] text-ink mb-4 w-full text-left">Visual Preview</h3>
               
-              <div className="w-full relative border border-border rounded-xl bg-background overflow-hidden p-6 flex justify-center items-center min-h-[400px]">
+              <div className="w-full relative border border-border rounded-xl bg-background p-6 flex justify-center items-center min-h-[400px]">
                 {pdfDoc ? (
-                  <div ref={previewContainerRef} className="relative border border-slate/30 shadow-md max-w-full overflow-hidden touch-none select-none">
+                  <div ref={previewContainerRef} className="relative border border-slate/30 shadow-md max-w-full touch-none select-none w-fit h-fit mx-auto">
                     <PageThumbnail
                       pdfDoc={pdfDoc}
                       pageNumber={1}
