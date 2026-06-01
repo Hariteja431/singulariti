@@ -7,7 +7,7 @@ export async function captureImageCard(elementId: string, filename: string = 'ty
   
   try {
     const canvas = await html2canvas(element, {
-      backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--background-color').trim() || '#0f172a',
+      backgroundColor: null,
       scale: 2, // high res
     });
     

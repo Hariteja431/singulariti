@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { TypingState } from '@/hooks/useTypingEngine';
 import { motion } from 'framer-motion';
+import { RotateCcw } from 'lucide-react';
 
 interface TypingAreaProps {
   state: TypingState;
@@ -184,10 +185,11 @@ export function TypingArea({ state, onInput, onRestart }: TypingAreaProps) {
             onRestart();
             inputRef.current?.focus();
           }}
-          className="flex items-center justify-center p-3 rounded-full hover:bg-surface text-slate hover:text-foreground transition-colors group cursor-pointer relative z-20"
+          className="flex items-center justify-center space-x-2 px-6 py-3 bg-surface hover:bg-surface/80 rounded-full text-foreground transition-colors group cursor-pointer shadow-sm border border-border/50 z-20"
           title="Restart Test"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-rotate-90 transition-transform duration-300"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          <RotateCcw size={18} className="group-hover:-rotate-90 transition-transform duration-300" />
+          <span className="font-sans font-medium text-sm">Restart Test</span>
         </button>
         <div className="text-center text-slate/70 text-sm font-sans flex justify-center items-center space-x-2">
           <kbd className="px-2 py-1 bg-surface border border-border rounded text-xs">Tab</kbd>

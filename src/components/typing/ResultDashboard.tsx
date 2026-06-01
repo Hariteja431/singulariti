@@ -31,8 +31,10 @@ export function ResultDashboard({
   };
 
   const handleCertificate = () => {
+    const name = window.prompt("Enter your name for the certificate:", "Typing Enthusiast");
+    if (!name) return;
     const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    generateCertificate('', wpm, accuracy, today);
+    generateCertificate(name, wpm, accuracy, today);
   };
 
   return (

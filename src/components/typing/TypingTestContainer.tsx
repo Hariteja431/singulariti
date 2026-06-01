@@ -45,7 +45,7 @@ export function TypingTestContainer() {
 
       {isFinished ? (
         <ResultDashboard 
-          wpm={metrics.currentWpm}
+          wpm={state.mode === 'time' ? metrics.peakWpm : metrics.currentWpm}
           rawWpm={metrics.currentRawWpm}
           accuracy={metrics.currentAccuracy}
           history={metrics.history}
