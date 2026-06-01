@@ -124,6 +124,7 @@ export function ToolEngine({ tool }: ToolEngineProps) {
         <Dropzone 
           onFileSelect={processFile} 
           title={`Drop ${tool.engine === 'compression' ? 'image' : 'file'} here`}
+          accept="image/*, image/svg+xml, .svg"
         />
       ) : (
         <div className="bg-surface border border-border rounded-xl p-6 md:p-8 shadow-sm">

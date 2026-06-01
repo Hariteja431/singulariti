@@ -3,7 +3,8 @@ self.addEventListener('message', async (e) => {
   const { id, file, quality, maxWidth } = e.data;
   
   try {
-    if (file.type === 'image/svg+xml') {
+    const isSvg = file.type.includes('svg') || (file.name && file.name.toLowerCase().endsWith('.svg'));
+    if (isSvg) {
       const text = await file.text();
       // Simple SVG compression: remove comments, extra whitespaces, newlines, and empty tags
       let compressedText = text

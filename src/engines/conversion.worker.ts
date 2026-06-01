@@ -3,8 +3,9 @@ self.addEventListener('message', async (e) => {
   const { id, file, toFormat } = e.data; // toFormat e.g., 'image/png'
   
   try {
+    const isSvgInput = file.type.includes('svg') || (file.name && file.name.toLowerCase().endsWith('.svg'));
     if (toFormat === 'image/svg+xml') {
-      if (file.type === 'image/svg+xml') {
+      if (isSvgInput) {
         self.postMessage({ id, success: true, blob: file, originalSize: file.size, newSize: file.size });
         return;
       }
@@ -21,7 +22,28 @@ self.addEventListener('message', async (e) => {
       return;
     }
 
-    const bitmap = await createImageBitmap(file);
+    let bitmap: ImageBitmap;
+    try {
+      bitmap = await createImageBitmap(file);
+    } catch (err) {
+      if (isSvgInput) {
+        const text = await file.text();
+        let newText = text;
+        if (!text.includes('width=') && text.includes('viewBox=')) {
+           const match = text.match(/viewBox=["'][^"']*?([\d\.]+)\s+([\d\.]+)["']/);
+           if (match) {
+              newText = text.replace('<svg ', `<svg width="${match[1]}" height="${match[2]}" `);
+           }
+        }
+        if (!newText.includes('width=')) {
+           newText = newText.replace('<svg ', '<svg width="1024" height="1024" ');
+        }
+        const newBlob = new Blob([newText], { type: 'image/svg+xml' });
+        bitmap = await createImageBitmap(newBlob);
+      } else {
+        throw err;
+      }
+    }
     
     const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
     const ctx = canvas.getContext('2d');
