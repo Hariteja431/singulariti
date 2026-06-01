@@ -58,6 +58,7 @@ export function ResultDashboard({
         <button
           data-html2canvas-ignore="true"
           onClick={onRestart}
+          suppressHydrationWarning
           className="absolute top-4 right-4 p-2 text-slate hover:text-foreground hover:bg-surface rounded-full transition-colors group z-20"
           title="Restart Test"
         >
@@ -154,6 +155,7 @@ export function ResultDashboard({
           </div>
           <button
             onClick={onRestart}
+            suppressHydrationWarning
             className="w-full flex items-center justify-center space-x-2 bg-foreground text-background hover:opacity-90 px-4 py-3 rounded-xl transition-opacity font-sans text-sm font-semibold"
           >
             <RotateCcw size={16} />

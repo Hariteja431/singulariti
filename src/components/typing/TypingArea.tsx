@@ -158,6 +158,7 @@ export function TypingArea({ state, onInput, onRestart }: TypingAreaProps) {
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         onFocus={() => setIsFocused(true)}
+        suppressHydrationWarning
         onBlur={() => setIsFocused(false)}
         autoComplete="off"
         autoCapitalize="off"
@@ -185,6 +186,7 @@ export function TypingArea({ state, onInput, onRestart }: TypingAreaProps) {
             onRestart();
             inputRef.current?.focus();
           }}
+          suppressHydrationWarning
           className="flex items-center justify-center space-x-2 px-6 py-3 bg-surface hover:bg-surface/80 rounded-full text-foreground transition-colors group cursor-pointer shadow-sm border border-border/50 z-20"
           title="Restart Test"
         >

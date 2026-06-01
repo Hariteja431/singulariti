@@ -40,6 +40,7 @@ export function TypingModesMenu({
       <div className="flex items-center space-x-2 bg-surface/50 rounded-full px-4 py-2">
         <button
           onClick={() => onModeChange('time')}
+          suppressHydrationWarning
           className={`flex items-center space-x-2 px-2 py-1 rounded text-sm font-sans transition-colors ${mode === 'time' ? 'text-primary' : 'text-slate hover:text-foreground'}`}
         >
           <Clock size={16} />
@@ -47,6 +48,7 @@ export function TypingModesMenu({
         </button>
         <button
           onClick={() => onModeChange('words')}
+          suppressHydrationWarning
           className={`flex items-center space-x-2 px-2 py-1 rounded text-sm font-sans transition-colors ${mode === 'words' ? 'text-primary' : 'text-slate hover:text-foreground'}`}
         >
           <Type size={16} />
@@ -60,6 +62,7 @@ export function TypingModesMenu({
           <button
             key={t}
             onClick={() => onTimeChange(t)}
+            suppressHydrationWarning
             className={`px-2 py-1 rounded text-sm font-system transition-colors ${timeLimit === t ? 'text-primary' : 'text-slate hover:text-foreground'}`}
           >
             {t}
@@ -69,6 +72,7 @@ export function TypingModesMenu({
           <button
             key={w}
             onClick={() => onWordChange(w)}
+            suppressHydrationWarning
             className={`px-2 py-1 rounded text-sm font-system transition-colors ${wordLimit === w ? 'text-primary' : 'text-slate hover:text-foreground'}`}
           >
             {w}
@@ -83,6 +87,7 @@ export function TypingModesMenu({
             key={d}
             onClick={() => onDifficultyChange(d)}
             title={d}
+            suppressHydrationWarning
             className={`flex items-center space-x-1 px-2 py-1 rounded text-sm font-sans transition-colors ${difficulty === d ? 'text-primary' : 'text-slate hover:text-foreground'}`}
           >
             {diffIcons[d]}
