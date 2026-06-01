@@ -169,22 +169,22 @@ export function ScientificCalculatorView({ toolId, title, description }: Scienti
       case 'sci':
         return base + "bg-surface border-border text-slate hover:bg-slate/5";
       case 'action':
-        return base + "bg-red-50 border-red-100 text-red-500 hover:bg-red-100 font-semibold";
+        return base + "bg-red-500/10 border-red-500/20 text-red-500 hover:bg-red-500/20 font-semibold";
       case 'op':
         return base + "bg-primary/10 border-primary/20 text-primary hover:bg-primary/20 font-semibold";
       case 'eval':
         return base + "bg-primary border-primary hover:bg-primary/90 text-dark font-bold row-span-2 h-[7.5rem] shadow-md";
       case 'num':
       default:
-        return base + "bg-white border-border text-ink hover:bg-slate/5 font-semibold text-lg";
+        return base + "bg-surface border-border text-ink hover:bg-slate/5 font-semibold text-lg";
     }
   };
 
   const inputs = (
-    <div className="w-full max-w-[400px] mx-auto bg-slate-50/50 p-4 sm:p-6 rounded-[2rem] border border-border shadow-sm">
+    <div className="w-full max-w-[400px] mx-auto bg-background/50 p-4 sm:p-6 rounded-[2rem] border border-border shadow-sm">
       {/* Display Screen */}
       <div 
-        className="bg-white border border-border/80 rounded-3xl p-5 text-right space-y-1 mb-6 flex flex-col justify-end shadow-inner relative overflow-hidden"
+        className="bg-surface border border-border/80 rounded-3xl p-5 text-right space-y-1 mb-6 flex flex-col justify-end shadow-inner relative overflow-hidden"
       >
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/40 via-primary/20 to-transparent"></div>
         

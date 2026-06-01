@@ -124,7 +124,7 @@ export function ToolEngine({ tool }: ToolEngineProps) {
         <Dropzone 
           onFileSelect={processFile} 
           title={`Drop ${tool.engine === 'compression' ? 'image' : 'file'} here`}
-          accept="image/*, image/svg+xml, .svg"
+          accept="image/*, .svg"
         />
       ) : (
         <div className="bg-surface border border-border rounded-xl p-6 md:p-8 shadow-sm">
@@ -281,7 +281,7 @@ export function ToolEngine({ tool }: ToolEngineProps) {
             {result && (
               <a 
                 href={result.url} 
-                download={`singulariti_${file.name.replace(/\.[^/.]+$/, "")}.${tool.options?.to ? tool.options.to.split('/')[1] : (result.type ? result.type.split('/')[1] : file.name.split('.').pop())}`}
+                download={`singulariti_${file.name.replace(/\.[^/.]+$/, "")}.${(tool.options?.to || result.type || '').includes('svg') ? 'svg' : (tool.options?.to ? tool.options.to.split('/')[1] : (result.type ? result.type.split('/')[1] : file.name.split('.').pop()))}`}
                 className="w-full md:w-auto"
               >
                 <Button variant="primary" size="lg" className="w-full" leftIcon={<Download className="w-5 h-5" />}>
