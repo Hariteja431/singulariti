@@ -7,6 +7,7 @@ import {
   Type,
   Square,
   Circle,
+  Triangle,
   Minus,
   ArrowUpRight,
   StickyNote,
@@ -17,11 +18,13 @@ import {
   ZoomIn,
   ZoomOut,
   Maximize2,
+  Minimize2,
   Trash2,
   Save,
   FolderOpen,
   RefreshCw
 } from 'lucide-react';
+
 import { WhiteboardTool } from '@/lib/whiteboard/whiteboardTypes';
 
 interface WhiteboardToolbarProps {
@@ -42,7 +45,10 @@ interface WhiteboardToolbarProps {
   onLoadBoard: () => void;
   hasSavedBoard: boolean;
   onClearSavedBoard: () => void;
+  isMaximized?: boolean;
+  onToggleMaximize?: () => void;
 }
+
 
 export function WhiteboardToolbar({
   activeTool,
@@ -61,7 +67,9 @@ export function WhiteboardToolbar({
   onSaveBoard,
   onLoadBoard,
   hasSavedBoard,
-  onClearSavedBoard
+  onClearSavedBoard,
+  isMaximized = false,
+  onToggleMaximize
 }: WhiteboardToolbarProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -87,6 +95,7 @@ export function WhiteboardToolbar({
     { id: 'text', icon: Type, label: 'Text' },
     { id: 'rect', icon: Square, label: 'Rectangle' },
     { id: 'circle', icon: Circle, label: 'Circle' },
+    { id: 'triangle', icon: Triangle, label: 'Triangle' },
     { id: 'line', icon: Minus, label: 'Line' },
     { id: 'arrow', icon: ArrowUpRight, label: 'Arrow' },
     { id: 'sticky', icon: StickyNote, label: 'Sticky Note' }
@@ -193,6 +202,13 @@ export function WhiteboardToolbar({
             title="Fit to Screen"
           >
             <Maximize2 className="w-4 h-4" />
+          </button>
+          <button
+            onClick={onToggleMaximize}
+            className="w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer transition-all duration-150 text-slate hover:bg-background hover:text-ink"
+            title={isMaximized ? "Restore Workspace" : "Maximize Workspace"}
+          >
+            {isMaximized ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4 rotate-45" />}
           </button>
         </div>
 
