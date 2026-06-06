@@ -10,6 +10,8 @@ import {
   FONT_FAMILIES,
   STICKY_COLORS
 } from '@/lib/whiteboard/whiteboardTypes';
+import { getStrokeDashArray } from '@/lib/whiteboard/whiteboardHelpers';
+
 
 interface WhiteboardSidebarProps {
   activeTool: WhiteboardTool;
@@ -27,7 +29,15 @@ interface WhiteboardSidebarProps {
   selectedObjectProps: any;
   onChangeSelectedObject: (props: any) => void;
   onDeleteSelected: () => void;
+  
+  canvasTheme?: 'light' | 'dark';
+  onChangeCanvasTheme?: (theme: 'light' | 'dark') => void;
+  gridType?: 'none' | 'grid' | 'dots';
+  onChangeGridType?: (type: 'none' | 'grid' | 'dots') => void;
+  strokeDash?: 'solid' | 'dashed' | 'dotted';
+  onChangeStrokeDash?: (style: 'solid' | 'dashed' | 'dotted') => void;
 }
+
 
 export function WhiteboardSidebar({
   activeTool,
@@ -42,7 +52,13 @@ export function WhiteboardSidebar({
   selectedObjectType,
   selectedObjectProps,
   onChangeSelectedObject,
-  onDeleteSelected
+  onDeleteSelected,
+  canvasTheme = 'light',
+  onChangeCanvasTheme,
+  gridType = 'none',
+  onChangeGridType,
+  strokeDash = 'solid',
+  onChangeStrokeDash
 }: WhiteboardSidebarProps) {
   
   // Helper to determine if we are editing a selected object or configuring a tool
@@ -51,7 +67,7 @@ export function WhiteboardSidebar({
   // Identify if selected object is a sticky note
   const isSelectedSticky = selectedObjectType === 'textbox' && selectedObjectProps?.isSticky;
   const isSelectedText = selectedObjectType === 'textbox' && !selectedObjectProps?.isSticky;
-  const isSelectedShape = selectedObjectType && ['rect', 'circle', 'line', 'path', 'polyline'].includes(selectedObjectType);
+  const isSelectedShape = selectedObjectType && ['rect', 'circle', 'line', 'path', 'polyline', 'triangle'].includes(selectedObjectType);
   const isSelectedImage = selectedObjectType === 'image';
 
   return (
@@ -254,6 +270,32 @@ export function WhiteboardSidebar({
                   className="w-full accent-primary bg-background rounded-lg appearance-none h-1.5 cursor-pointer"
                 />
               </div>
+
+              {/* Stroke Style */}
+              <div className="space-y-1.5">
+                <span className="text-[13px] font-sans font-medium text-slate">Line Style</span>
+                <div className="flex gap-2">
+                  {(['solid', 'dashed', 'dotted'] as const).map((style) => {
+                    const isSelected = selectedObjectProps.strokeDash === style;
+                    return (
+                      <button
+                        key={style}
+                        onClick={() => onChangeSelectedObject({ 
+                          strokeDashArray: getStrokeDashArray(style),
+                          strokeDash: style 
+                        })}
+                        className={`flex-1 h-8 rounded-md border text-[11px] font-sans font-medium capitalize cursor-pointer transition-all ${
+                          isSelected
+                            ? 'border-primary bg-primary/5 text-primary'
+                            : 'border-border text-slate hover:bg-background'
+                        }`}
+                      >
+                        {style}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           )}
 
@@ -298,6 +340,50 @@ export function WhiteboardSidebar({
       {/* Case 2: Configuring Active Drawing Tool Options */}
       {!isEditingObject && (
         <div className="space-y-5">
+          {/* Canvas Settings */}
+          <div className="space-y-3 pb-4 border-b border-border">
+            <span className="text-[13px] font-sans font-medium text-slate">Canvas Theme</span>
+            <div className="flex gap-2">
+              <button
+                onClick={() => onChangeCanvasTheme?.('light')}
+                className={`flex-1 h-8 rounded-md border text-xs font-sans font-medium cursor-pointer transition-all ${
+                  canvasTheme === 'light'
+                    ? 'border-primary bg-primary/5 text-primary'
+                    : 'border-border text-slate hover:bg-background'
+                }`}
+              >
+                Light
+              </button>
+              <button
+                onClick={() => onChangeCanvasTheme?.('dark')}
+                className={`flex-1 h-8 rounded-md border text-xs font-sans font-medium cursor-pointer transition-all ${
+                  canvasTheme === 'dark'
+                    ? 'border-primary bg-primary/5 text-primary'
+                    : 'border-border text-slate hover:bg-background'
+                }`}
+              >
+                Dark
+              </button>
+            </div>
+
+            <span className="text-[13px] font-sans font-medium text-slate">Canvas Background</span>
+            <div className="grid grid-cols-3 gap-2">
+              {(['none', 'grid', 'dots'] as const).map((type) => (
+                <button
+                  key={type}
+                  onClick={() => onChangeGridType?.(type)}
+                  className={`h-8 rounded-md border text-xs font-sans font-medium capitalize cursor-pointer transition-all ${
+                    gridType === type
+                      ? 'border-primary bg-primary/5 text-primary'
+                      : 'border-border text-slate hover:bg-background'
+                  }`}
+                >
+                  {type === 'none' ? 'Blank' : type}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Pen or Pencil Brush Settings */}
           {(activeTool === 'pen' || activeTool === 'pencil') && (
             <div className="space-y-4 animate-in fade-in duration-200">
@@ -343,8 +429,8 @@ export function WhiteboardSidebar({
             </div>
           )}
 
-          {/* Shapes settings (Rect, Circle, Line, Arrow) */}
-          {['rect', 'circle', 'line', 'arrow'].includes(activeTool) && (
+          {/* Shapes settings (Rect, Circle, Line, Arrow, Triangle) */}
+          {['rect', 'circle', 'line', 'arrow', 'triangle'].includes(activeTool) && (
             <div className="space-y-4 animate-in fade-in duration-200">
               <WhiteboardColorPicker
                 label="Outline Color"
@@ -393,6 +479,26 @@ export function WhiteboardSidebar({
                   onChange={(e) => onChangeShape({ opacity: parseFloat(e.target.value) })}
                   className="w-full accent-primary bg-background rounded-lg appearance-none h-1.5 cursor-pointer"
                 />
+              </div>
+
+              {/* Stroke Style */}
+              <div className="space-y-1.5">
+                <span className="text-[13px] font-sans font-medium text-slate">Line Style</span>
+                <div className="flex gap-2">
+                  {(['solid', 'dashed', 'dotted'] as const).map((style) => (
+                    <button
+                      key={style}
+                      onClick={() => onChangeStrokeDash?.(style)}
+                      className={`flex-1 h-8 rounded-md border text-[11px] font-sans font-medium capitalize cursor-pointer transition-all ${
+                        strokeDash === style
+                          ? 'border-primary bg-primary/5 text-primary'
+                          : 'border-border text-slate hover:bg-background'
+                      }`}
+                    >
+                      {style}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           )}

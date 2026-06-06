@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Download, FileImage, FileText } from 'lucide-react';
+import { Download, FileImage, FileText, FileCode } from 'lucide-react';
+
 import { Button } from '@/components/ui/Button';
 
 interface WhiteboardExportPanelProps {
-  onExport: (format: 'png' | 'jpg' | 'pdf', fileName: string, options: { quality: number; pdfOrientation: 'portrait' | 'landscape' }) => void;
+  onExport: (format: 'png' | 'jpg' | 'pdf' | 'svg', fileName: string, options: { quality: number; pdfOrientation: 'portrait' | 'landscape' }) => void;
 }
 
 export function WhiteboardExportPanel({ onExport }: WhiteboardExportPanelProps) {
   const [fileName, setFileName] = useState('my-whiteboard');
-  const [format, setFormat] = useState<'png' | 'jpg' | 'pdf'>('png');
+  const [format, setFormat] = useState<'png' | 'jpg' | 'pdf' | 'svg'>('png');
+
   const [quality, setQuality] = useState(0.9);
   const [pdfOrientation, setPdfOrientation] = useState<'portrait' | 'landscape'>('landscape');
 
@@ -38,15 +40,15 @@ export function WhiteboardExportPanel({ onExport }: WhiteboardExportPanelProps) 
       {/* Format Selector */}
       <div className="space-y-1.5">
         <label className="text-[12px] font-sans font-medium text-slate">Format</label>
-        <div className="grid grid-cols-3 gap-2">
-          {(['png', 'jpg', 'pdf'] as const).map((fmt) => {
+        <div className="grid grid-cols-4 gap-1">
+          {(['png', 'jpg', 'pdf', 'svg'] as const).map((fmt) => {
             const isActive = format === fmt;
             return (
               <button
                 key={fmt}
                 onClick={() => setFormat(fmt)}
                 className={`
-                  h-9 rounded-md border flex items-center justify-center gap-1.5 text-xs font-sans font-semibold cursor-pointer transition-all duration-150
+                  h-9 rounded-md border flex flex-col items-center justify-center gap-0.5 text-[10px] font-sans font-semibold cursor-pointer transition-all duration-150
                   ${isActive 
                     ? 'border-primary bg-primary/5 text-primary' 
                     : 'border-border bg-background text-slate hover:text-ink'
@@ -55,6 +57,8 @@ export function WhiteboardExportPanel({ onExport }: WhiteboardExportPanelProps) 
               >
                 {fmt === 'pdf' ? (
                   <FileText className="w-3.5 h-3.5" />
+                ) : fmt === 'svg' ? (
+                  <FileCode className="w-3.5 h-3.5" />
                 ) : (
                   <FileImage className="w-3.5 h-3.5" />
                 )}

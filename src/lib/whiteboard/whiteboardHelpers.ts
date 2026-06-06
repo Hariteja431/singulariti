@@ -1,6 +1,12 @@
 import * as fabric from 'fabric';
 import { ShapeOptions, TextOptions } from './whiteboardTypes';
 
+export function getStrokeDashArray(style?: 'solid' | 'dashed' | 'dotted') {
+  if (style === 'dashed') return [10, 5];
+  if (style === 'dotted') return [2, 4];
+  return undefined;
+}
+
 // Create a Rectangle
 export function createRect(pointer: { x: number; y: number }, options: ShapeOptions) {
   return new fabric.Rect({
@@ -14,7 +20,8 @@ export function createRect(pointer: { x: number; y: number }, options: ShapeOpti
     opacity: options.opacity,
     strokeUniform: true,
     selectable: true,
-    hasControls: true
+    hasControls: true,
+    strokeDashArray: getStrokeDashArray(options.strokeDash)
   });
 }
 
@@ -30,7 +37,8 @@ export function createCircle(pointer: { x: number; y: number }, options: ShapeOp
     opacity: options.opacity,
     strokeUniform: true,
     selectable: true,
-    hasControls: true
+    hasControls: true,
+    strokeDashArray: getStrokeDashArray(options.strokeDash)
   });
 }
 
@@ -42,9 +50,11 @@ export function createLine(pointer: { x: number; y: number }, options: ShapeOpti
     opacity: options.opacity,
     strokeUniform: true,
     selectable: true,
-    hasControls: true
+    hasControls: true,
+    strokeDashArray: getStrokeDashArray(options.strokeDash)
   });
 }
+
 
 // Create an Arrow Path
 export function createArrow(pointer: { x: number; y: number }, options: ShapeOptions) {
@@ -59,7 +69,8 @@ export function createArrow(pointer: { x: number; y: number }, options: ShapeOpt
     strokeLineJoin: 'round',
     strokeUniform: true,
     selectable: true,
-    hasControls: true
+    hasControls: true,
+    strokeDashArray: getStrokeDashArray(options.strokeDash)
   });
 }
 
@@ -104,7 +115,8 @@ export function updateArrowPath(pathObj: fabric.Path, fromX: number, fromY: numb
       strokeLineJoin: 'round',
       strokeUniform: true,
       selectable: true,
-      hasControls: true
+      hasControls: true,
+      strokeDashArray: pathObj.strokeDashArray
     });
   }
   
@@ -206,3 +218,22 @@ export function fitToScreen(canvas: fabric.Canvas) {
 
   canvas.absolutePan(new fabric.Point(panX, panY));
 }
+
+// Create a Triangle
+export function createTriangle(pointer: { x: number; y: number }, options: ShapeOptions) {
+  return new fabric.Triangle({
+    left: pointer.x,
+    top: pointer.y,
+    width: 0,
+    height: 0,
+    fill: options.fillColor,
+    stroke: options.strokeColor,
+    strokeWidth: options.strokeWidth,
+    opacity: options.opacity,
+    strokeUniform: true,
+    selectable: true,
+    hasControls: true,
+    strokeDashArray: getStrokeDashArray(options.strokeDash)
+  });
+}
+

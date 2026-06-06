@@ -15,8 +15,17 @@ import {
   updateArrowPath,
   createTextbox,
   createStickyNote,
-  fitToScreen
+  fitToScreen,
+  createTriangle,
+  getStrokeDashArray
 } from '@/lib/whiteboard/whiteboardHelpers';
+
+const getStrokeDashStyle = (dashArray?: number[] | null) => {
+  if (!dashArray) return 'solid';
+  if (dashArray[0] === 10 || dashArray[0] === 8) return 'dashed';
+  if (dashArray[0] === 2) return 'dotted';
+  return 'solid';
+};
 
 interface WhiteboardCanvasProps {
   activeTool: WhiteboardTool;
@@ -29,7 +38,12 @@ interface WhiteboardCanvasProps {
   onHistoryChange: (canUndo: boolean, canRedo: boolean) => void;
   onWarning: (msg: string | null) => void;
   onError: (msg: string | null) => void;
+  isMaximized?: boolean;
+  gridType?: 'none' | 'grid' | 'dots';
+  canvasTheme?: 'light' | 'dark';
+  strokeDash?: 'solid' | 'dashed' | 'dotted';
 }
+
 
 export interface WhiteboardCanvasRef {
   getCanvas: () => fabric.Canvas | null;
@@ -53,7 +67,11 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
   onSelectionChange,
   onHistoryChange,
   onWarning,
-  onError
+  onError,
+  isMaximized = false,
+  gridType = 'none',
+  canvasTheme = 'light',
+  strokeDash = 'solid'
 }, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -74,12 +92,63 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
   useEffect(() => {
     activeToolRef.current = activeTool;
     updateCanvasInteractions();
-  }, [activeTool, brush, shape, text, sticky]);
+  }, [activeTool, brush, shape, text, sticky, strokeDash]);
+
+  const updateGridOffset = () => {
+    const canvas = fabricCanvasRef.current;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
+    const zoom = canvas.getZoom();
+    const vpt = canvas.viewportTransform;
+    if (vpt) {
+      const panX = vpt[4];
+      const panY = vpt[5];
+      container.style.setProperty('--zoom', zoom.toString());
+      container.style.setProperty('--pan-x', panX.toString());
+      container.style.setProperty('--pan-y', panY.toString());
+    }
+  };
+
+  // Invert shapes color on theme change
+  useEffect(() => {
+    const canvas = fabricCanvasRef.current;
+    if (!canvas) return;
+    const isDark = canvasTheme === 'dark';
+    
+    // Set background to transparent so container background shows
+    canvas.backgroundColor = 'transparent';
+
+    canvas.getObjects().forEach((obj) => {
+      // Invert stroke
+      if (obj.stroke === '#000000' && isDark) {
+        obj.set({ stroke: '#FFFFFF' });
+      } else if (obj.stroke === '#FFFFFF' && !isDark) {
+        obj.set({ stroke: '#000000' });
+      }
+
+      // Invert fill
+      if (obj.fill === '#000000' && isDark) {
+        obj.set({ fill: '#FFFFFF' });
+      } else if (obj.fill === '#FFFFFF' && !isDark) {
+        obj.set({ fill: '#000000' });
+      }
+
+      // Text/Textbox fills
+      if ((obj as any).fill === '#000000' && isDark) {
+        obj.set({ fill: '#FFFFFF' });
+      } else if ((obj as any).fill === '#FFFFFF' && !isDark) {
+        obj.set({ fill: '#000000' });
+      }
+    });
+
+    canvas.requestRenderAll();
+  }, [canvasTheme]);
 
   // Handle Undo/Redo tracking helper
   const saveHistoryState = () => {
     const canvas = fabricCanvasRef.current;
     if (!canvas || isHandlingHistory.current) return;
+
 
     const stateJson = JSON.stringify((canvas as any).toJSON(['isSticky', 'selectable', 'hasControls']));
     
@@ -279,12 +348,17 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
     const canvas = new fabric.Canvas(canvasRef.current, {
       width,
       height,
-      backgroundColor: '#FFFFFF',
+      backgroundColor: 'transparent',
       selection: true, // allow group selection
       preserveObjectStacking: true // keep overlapping order
     });
 
     fabricCanvasRef.current = canvas;
+
+    // Initial grid offset setup and listener
+    updateGridOffset();
+    canvas.on('after:render', updateGridOffset);
+
 
     // Track selections
     const updateSelection = () => {
@@ -305,7 +379,8 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
         fontStyle: (activeObj as any).fontStyle,
         underline: (activeObj as any).underline,
         backgroundColor: activeObj.backgroundColor,
-        isSticky: (activeObj as any).isSticky
+        isSticky: (activeObj as any).isSticky,
+        strokeDash: getStrokeDashStyle(activeObj.strokeDashArray)
       });
     };
 
@@ -379,19 +454,25 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
       }
 
       // Drawing Shapes
-      if (['rect', 'circle', 'line', 'arrow'].includes(tool)) {
+      if (['rect', 'circle', 'line', 'arrow', 'triangle'].includes(tool)) {
         isDrawingShape.current = true;
         shapeStartPointer.current = pointer;
 
         let newObj: fabric.Object | null = null;
+        const shapeOptions = {
+          ...shape,
+          strokeDash
+        };
         if (tool === 'rect') {
-          newObj = createRect(pointer, shape);
+          newObj = createRect(pointer, shapeOptions);
         } else if (tool === 'circle') {
-          newObj = createCircle(pointer, shape);
+          newObj = createCircle(pointer, shapeOptions);
         } else if (tool === 'line') {
-          newObj = createLine(pointer, shape);
+          newObj = createLine(pointer, shapeOptions);
         } else if (tool === 'arrow') {
-          newObj = createArrow(pointer, shape);
+          newObj = createArrow(pointer, shapeOptions);
+        } else if (tool === 'triangle') {
+          newObj = createTriangle(pointer, shapeOptions);
         }
 
         if (newObj) {
@@ -475,6 +556,14 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
         } else if (tool === 'arrow') {
           const path = activeObj as fabric.Path;
           updateArrowPath(path, start.x, start.y, pointer.x, pointer.y);
+        } else if (tool === 'triangle') {
+          const triangle = activeObj as fabric.Triangle;
+          triangle.set({
+            width: Math.abs(dx),
+            height: Math.abs(dy),
+            left: dx > 0 ? start.x : pointer.x,
+            top: dy > 0 ? start.y : pointer.y
+          });
         }
 
         activeObj.setCoords();
@@ -631,10 +720,35 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
     canvas.requestRenderAll();
   };
 
+  const isDark = canvasTheme === 'dark';
+  const themeClasses = isDark ? 'bg-zinc-950 text-white border-zinc-800' : 'bg-white text-black border-border';
+  const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
+  const dotColor = isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.15)';
+
+  let backgroundStyle: React.CSSProperties = {};
+  if (gridType === 'grid') {
+    backgroundStyle = {
+      '--grid-color': gridColor,
+      backgroundSize: `calc(30px * var(--zoom, 1)) calc(30px * var(--zoom, 1))`,
+      backgroundPosition: `calc(var(--pan-x, 0) * 1px) calc(var(--pan-y, 0) * 1px)`,
+      backgroundImage: `linear-gradient(to right, var(--grid-color) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px)`,
+    } as React.CSSProperties;
+  } else if (gridType === 'dots') {
+    backgroundStyle = {
+      '--grid-color': dotColor,
+      backgroundSize: `calc(30px * var(--zoom, 1)) calc(30px * var(--zoom, 1))`,
+      backgroundPosition: `calc(var(--pan-x, 0) * 1px) calc(var(--pan-y, 0) * 1px)`,
+      backgroundImage: `radial-gradient(var(--grid-color) 1px, transparent 1px)`,
+    } as React.CSSProperties;
+  }
+
   return (
     <div 
       ref={containerRef} 
-      className="w-full h-[550px] relative border border-border bg-white rounded-2xl shadow-inner overflow-hidden cursor-crosshair"
+      className={`w-full relative border shadow-inner overflow-hidden cursor-crosshair transition-colors duration-200 ${themeClasses} ${
+        isMaximized ? 'flex-1 h-full min-h-0' : 'h-[550px] rounded-2xl'
+      }`}
+      style={backgroundStyle}
     >
       <canvas ref={canvasRef} className="absolute inset-0 block" />
     </div>

@@ -10,7 +10,9 @@ export type WhiteboardTool =
   | 'arrow'
   | 'sticky'
   | 'image'
-  | 'pan';
+  | 'pan'
+  | 'triangle';
+
 
 export interface BrushOptions {
   color: string;
@@ -23,7 +25,9 @@ export interface ShapeOptions {
   fillColor: string;
   strokeWidth: number;
   opacity: number;
+  strokeDash?: 'solid' | 'dashed' | 'dotted';
 }
+
 
 export interface TextOptions {
   fontFamily: string;
@@ -51,7 +55,9 @@ export interface WhiteboardState {
   panY: number;
   canUndo: boolean;
   canRedo: boolean;
+  strokeDash: 'solid' | 'dashed' | 'dotted';
 }
+
 
 export const FONT_FAMILIES = [
   'Outfit',
