@@ -19,6 +19,8 @@ import {
   ZoomOut,
   Maximize2,
   Minimize2,
+  Expand,
+  Shrink,
   Trash2,
   Save,
   FolderOpen,
@@ -203,13 +205,6 @@ export function WhiteboardToolbar({
           >
             <Maximize2 className="w-4 h-4" />
           </button>
-          <button
-            onClick={onToggleMaximize}
-            className="w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer transition-all duration-150 text-slate hover:bg-background hover:text-ink"
-            title={isMaximized ? "Restore Workspace" : "Maximize Workspace"}
-          >
-            {isMaximized ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4 rotate-45" />}
-          </button>
         </div>
 
         {/* Local Storage Save / Load / Clear Actions */}
@@ -235,11 +230,25 @@ export function WhiteboardToolbar({
 
           <button
             onClick={onClearBoard}
-            className="h-8 px-2.5 rounded-lg flex items-center gap-1.5 cursor-pointer transition-all duration-150 text-xs font-sans font-semibold text-red-500 hover:bg-red-500/10"
+            className="h-8 px-2.5 rounded-lg flex items-center gap-1.5 cursor-pointer transition-all duration-150 text-xs font-sans font-semibold text-red-500 hover:bg-red-500/10 border-r border-border pr-4 mr-1"
             title="Clear all drawings from current canvas"
           >
             <Trash2 className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Clear</span>
+          </button>
+
+          {/* Fullscreen Button */}
+          <button
+            onClick={onToggleMaximize}
+            className={`h-8 px-3 rounded-lg flex items-center gap-1.5 cursor-pointer transition-all duration-150 text-xs font-sans font-semibold ${
+              isMaximized 
+                ? 'bg-primary text-dark hover:bg-primary/90' 
+                : 'bg-zinc-800 text-white hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100'
+            }`}
+            title={isMaximized ? "Exit Fullscreen" : "Enter Fullscreen"}
+          >
+            {isMaximized ? <Shrink className="w-3.5 h-3.5" /> : <Expand className="w-3.5 h-3.5" />}
+            <span className="hidden sm:inline">{isMaximized ? "Exit Fullscreen" : "Fullscreen"}</span>
           </button>
         </div>
       </div>
