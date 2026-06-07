@@ -4,7 +4,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { ImageIcon, Sparkles, FileText, QrCode, Wand2, Calculator, Keyboard, Timer, Brush, Type, Code, Scale, Search } from 'lucide-react';
+import { ImageIcon, Cpu, FileText, QrCode, Wand2, Calculator, Keyboard, Timer, Brush, Type, Code, Scale, Search } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import { registry } from '@/registry';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -205,7 +205,7 @@ export default function Home() {
         {/* Trust / How it Works */}
         <section className="container mx-auto px-4 max-w-4xl text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-6">
-            <Sparkles className="w-8 h-8" />
+            <Cpu className="w-8 h-8" />
           </div>
           <h2 className="font-display font-bold text-3xl text-ink mb-4">How Browser Processing Works</h2>
           <p className="text-slate font-sans text-lg mb-8">

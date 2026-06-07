@@ -19,9 +19,16 @@ export function Footer() {
           <div>
             <h4 className="font-display font-bold text-[15px] text-ink mb-4">Ecosystem</h4>
             <ul className="space-y-2 flex flex-col">
-              <Link href="/image" className="text-[13px] text-slate hover:text-primary transition-colors">Image Tools</Link>
-              <Link href="/image/compression" className="text-[13px] text-slate hover:text-primary transition-colors">Compression Tools</Link>
-              <Link href="/image/conversion" className="text-[13px] text-slate hover:text-primary transition-colors">Conversion Tools</Link>
+              <Link href="/tools/pdf" className="text-[13px] text-slate hover:text-primary transition-colors">PDF Tools</Link>
+              <Link href="/tools/image" className="text-[13px] text-slate hover:text-primary transition-colors">Image Tools</Link>
+              <Link href="/tools/text" className="text-[13px] text-slate hover:text-primary transition-colors">Text Tools</Link>
+              <Link href="/tools/dev" className="text-[13px] text-slate hover:text-primary transition-colors">Developer Tools</Link>
+              <Link href="/tools/calculators" className="text-[13px] text-slate hover:text-primary transition-colors">Calculators</Link>
+              <Link href="/tools/convert" className="text-[13px] text-slate hover:text-primary transition-colors">Converters</Link>
+              <Link href="/tools/qr" className="text-[13px] text-slate hover:text-primary transition-colors">QR Tools</Link>
+              <Link href="/tools/seo" className="text-[13px] text-slate hover:text-primary transition-colors">SEO Tools</Link>
+              <Link href="/pomodoro-timer" className="text-[13px] text-slate hover:text-primary transition-colors">Pomodoro Timer</Link>
+              <Link href="/typing-speed-test" className="text-[13px] text-slate hover:text-primary transition-colors">Typing Speed Test</Link>
             </ul>
           </div>
           

@@ -45,7 +45,7 @@ export default function PomodoroTimerPage() {
         <PomodoroContainer />
 
         {/* SEO & Educational Content */}
-        <section className="mt-32 max-w-3xl mx-auto space-y-12 text-slate-300 px-4">
+        <section className="mt-32 max-w-3xl mx-auto space-y-12 text-slate px-4">
           <div className="space-y-4">
             <h2 className="text-2xl font-display font-semibold text-foreground">What is the Pomodoro Technique?</h2>
             <p className="leading-relaxed">
