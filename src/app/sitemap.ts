@@ -6,10 +6,8 @@ import { getAllPosts } from '@/lib/blog';
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://singulariti.in';
 
-  // Static dates to preserve crawl budget
-  const STATIC_DATE = new Date('2026-06-01');
-  const TOOLS_DATE = new Date('2026-06-07');
-  const lastModified = TOOLS_DATE;
+  // Use current date to signal fresh content to search engines
+  const lastModified = new Date();
 
   const categories = registry.categories;
 
@@ -17,31 +15,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: STATIC_DATE,
+      lastModified,
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: STATIC_DATE,
+      lastModified,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/contact`,
-      lastModified: STATIC_DATE,
+      lastModified,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/terms`,
-      lastModified: STATIC_DATE,
+      lastModified,
       changeFrequency: 'yearly',
       priority: 0.5,
     },
     {
       url: `${baseUrl}/privacy`,
-      lastModified: STATIC_DATE,
+      lastModified,
       changeFrequency: 'yearly',
       priority: 0.5,
     },
