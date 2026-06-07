@@ -6,6 +6,7 @@ import { TextBox } from '../shared/TextBox';
 import { ResultBox } from '../shared/ResultBox';
 import { Button } from '@/components/ui/Button';
 import { diffLines, diffWords, diffChars } from 'diff';
+import { getTextContent } from './textContent';
 
 interface TextToolContainerProps {
   toolId: string;
@@ -320,63 +321,6 @@ export function TextToolContainer({ toolId, toolName, toolDescription }: TextToo
     }
   };
 
-  // Static instructions and FAQs
-  const howToUseMap: Record<string, string[]> = {
-    'word-counter': [
-      "Type or paste your text into the input box.",
-      "The stats update automatically as you type.",
-      "Click Copy Result to save the summary details."
-    ],
-    'text-compare': [
-      "Enter the original text in the first input box.",
-      "Enter the comparison text in the second input box.",
-      "Select a comparison mode: Line, Word, or Character.",
-      "Click Compare Texts to view all differences with color coding."
-    ],
-    'text-diff': [
-      "Enter the original text in the left/first input box.",
-      "Enter the updated text in the right/second input box.",
-      "Click Compare and view inline additions (+) and deletions (-)."
-    ],
-    'lorem-ipsum': [
-      "Choose the number of paragraphs you need.",
-      "Click Generate Text.",
-      "Copy the formatted placeholder text directly."
-    ],
-    'random-text': [
-      "Select your preferred character length.",
-      "Click Generate String.",
-      "Copy the generated secure random string."
-    ]
-  };
-
-  const defaultHowToUse = [
-    "Paste your text into the input field.",
-    "Observe the auto-generated output update instantly.",
-    "Click Copy Result to copy the output to your clipboard."
-  ];
-
-  const faqsMap: Record<string, {question: string, answer: string}[]> = {
-    'word-counter': [
-      { question: "Is my text uploaded to a server?", answer: "No. The word counting logic executes entirely in your browser. Your data is private and secure." },
-      { question: "How does it define a word?", answer: "It splits words by any whitespace sequence. Words separated by spaces, tabs, or newlines are counted separately." }
-    ],
-    'text-compare': [
-      { question: "How does Text Compare highlight differences?", answer: "In line mode, it aligns lines horizontally, highlighting changed, added, and removed lines. In word mode, it highlights individual additions (+green) and deletions (-red) inline. In character mode, it shows the exact position and replaced letters." }
-    ],
-    'text-diff': [
-      { question: "How does the diff checker work?", answer: "It compares the two text inputs line-by-line. Deleted lines are indicated with a minus (-) prefix, and added lines have a plus (+) prefix." }
-    ],
-    'lorem-ipsum': [
-      { question: "What is Lorem Ipsum?", answer: "Lorem Ipsum is standard placeholder dummy text used in graphic, print, and web design layout mockups." }
-    ]
-  };
-
-  const defaultFaqs = [
-    { question: "Is this tool free?", answer: "Yes, all Singulariti tools are 100% free with no usage limits." },
-    { question: "Does this save any data?", answer: "No, all actions happen inside your local browser. No data is stored or transmitted." }
-  ];
-
   const needsSecondInput = toolId === 'text-compare' || toolId === 'text-diff';
   const isInteractive = needsSecondInput || toolId === 'find-replace' || toolId === 'lorem-ipsum' || toolId === 'random-text';
 
@@ -387,6 +331,8 @@ export function TextToolContainer({ toolId, toolName, toolDescription }: TextToo
     setCompareSummary(null);
   };
 
+  const content = getTextContent(toolId);
+
   return (
     <ToolLayout
       utilityId={toolId}
@@ -394,8 +340,8 @@ export function TextToolContainer({ toolId, toolName, toolDescription }: TextToo
       description={toolDescription}
       categoryName="Text Tools"
       categoryPath="/tools/text"
-      howToUse={howToUseMap[toolId] || defaultHowToUse}
-      faqs={faqsMap[toolId] || defaultFaqs}
+      howToUse={content.howToUse}
+      faqs={content.faqs}
     >
       <div className="space-y-6">
         {/* Generators Controls */}

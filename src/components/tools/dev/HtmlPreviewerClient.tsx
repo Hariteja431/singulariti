@@ -57,7 +57,7 @@ export function HtmlPreviewerClient() {
         });
       };
 
-      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.4/beautify-html.min.js');
+      await loadScript('https://cdn.jsdelivr.net/npm/js-beautify@1.15.1/js/lib/beautify-html.min.js');
 
       const w = window as any;
       if (typeof w.html_beautify === 'function') {
@@ -235,7 +235,7 @@ export function HtmlPreviewerClient() {
           ) : store.layout === 'code-only' ? (
             renderEditor()
           ) : (
-            <PanelGroup direction={store.layout === 'vertical' ? 'horizontal' : 'vertical'}>
+            <PanelGroup orientation={store.layout === 'vertical' ? 'horizontal' : 'vertical'}>
               <Panel defaultSize={50} minSize={30}>
                 {renderEditor()}
               </Panel>

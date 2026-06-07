@@ -7,8 +7,8 @@ import { getUtilitySEO } from '@/lib/seo/utilityMetadata';
 const seo = getUtilitySEO('html-previewer');
 
 export const metadata = buildMetadata({
-  title: seo?.seoTitle || 'Premium HTML Previewer | Singulariti',
-  description: seo?.seoDescription || 'Render raw HTML code elements live in a safe frame with Monaco Editor.',
+  title: seo?.title || 'Premium HTML Previewer | Singulariti',
+  description: seo?.description || 'Render raw HTML code elements live in a safe frame with Monaco Editor.',
   canonical: `https://singulariti.in/tools/dev/html-previewer`,
 });
 

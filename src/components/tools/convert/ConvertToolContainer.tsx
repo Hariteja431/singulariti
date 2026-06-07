@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { ToolLayout } from '../shared/ToolLayout';
 import { Button } from '@/components/ui/Button';
+import { getConvertContent } from './convertContent';
 
 interface ConvertToolContainerProps {
   toolId: string;
@@ -288,6 +289,7 @@ export function ConvertToolContainer({ toolId, toolName, toolDescription }: Conv
   ];
 
   const activeUnits = toolId === 'temperature-converter' ? tempUnits : units;
+  const content = getConvertContent(toolId);
 
   return (
     <ToolLayout
@@ -296,10 +298,8 @@ export function ConvertToolContainer({ toolId, toolName, toolDescription }: Conv
       description={toolDescription}
       categoryName="Unit Conversion Tools"
       categoryPath="/tools/convert"
-      howToUse={["Enter the value to convert.", "Select the input unit (From) and target unit (To).", "View the converted result instantly.", "Use the Swap button to reverse the units."]}
-      faqs={[
-        { question: "Is this calculation accurate?", answer: "Yes, all conversion scales use the standard international SI constants." }
-      ]}
+      howToUse={content.howToUse}
+      faqs={content.faqs}
     >
       <div className="space-y-6 max-w-2xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">

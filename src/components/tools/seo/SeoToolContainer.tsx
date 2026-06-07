@@ -5,6 +5,7 @@ import { ToolLayout } from '../shared/ToolLayout';
 import { TextBox } from '../shared/TextBox';
 import { ResultBox } from '../shared/ResultBox';
 import { Button } from '@/components/ui/Button';
+import { getSeoContent } from './seoContent';
 
 interface SeoToolContainerProps {
   toolId: string;
@@ -890,6 +891,8 @@ export function SeoToolContainer({ toolId, toolName, toolDescription }: SeoToolC
     'twitter-card-generator'
   ].includes(toolId);
 
+  const content = getSeoContent(toolId);
+
   return (
     <ToolLayout
       utilityId={toolId}
@@ -897,15 +900,8 @@ export function SeoToolContainer({ toolId, toolName, toolDescription }: SeoToolC
       description={toolDescription}
       categoryName="SEO Tools"
       categoryPath="/tools/seo"
-      howToUse={[
-        "Fill out target configuration values or paste HTML/Text context.",
-        "View keyword counts, formatting evaluations, or generated codes in real-time.",
-        "Use copy options to transfer output tags, sitemaps, or clean slug text directly."
-      ]}
-      faqs={[
-        { question: "Do you transmit data to outer servers?", answer: "No. Everything (including keyword calculations, DOM heading hierarchies, and tags compilation) is computed directly in the local browser." },
-        { question: "Why is meta tag verification important?", answer: "Google truncates titles past 60 characters and descriptions past 160 characters. Verifying optimal SEO lengths keeps pages looking crisp in SERPs." }
-      ]}
+      howToUse={content.howToUse}
+      faqs={content.faqs}
     >
       <div className="space-y-6">
         {/* If Form-based, render form then output */}

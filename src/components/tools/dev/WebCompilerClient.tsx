@@ -166,9 +166,9 @@ export function WebCompilerClient() {
       };
 
       await Promise.all([
-        loadScript('https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.4/beautify.min.js'),
-        loadScript('https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.4/beautify-css.min.js'),
-        loadScript('https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.4/beautify-html.min.js')
+        loadScript('https://cdn.jsdelivr.net/npm/js-beautify@1.15.1/js/lib/beautify.min.js'),
+        loadScript('https://cdn.jsdelivr.net/npm/js-beautify@1.15.1/js/lib/beautify-css.min.js'),
+        loadScript('https://cdn.jsdelivr.net/npm/js-beautify@1.15.1/js/lib/beautify-html.min.js')
       ]);
 
       const w = window as any;

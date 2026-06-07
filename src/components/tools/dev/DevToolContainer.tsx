@@ -13,6 +13,7 @@ import { DevicePreviewFrame } from '../shared/DevicePreviewFrame';
 import { Group as PanelGroup, Panel, Separator as PanelResizeHandle } from 'react-resizable-panels';
 import { Play, Download, Layout, FileJson, AlignLeft, Image as ImageIcon } from 'lucide-react';
 import { saveAs } from 'file-saver';
+import { getDevContent } from './devContent';
 
 interface DevToolContainerProps {
   toolId: string;
@@ -511,6 +512,7 @@ export function DevToolContainer({ toolId, toolName, toolDescription }: DevToolC
       setError('Beautifier library is not loaded yet.');
     }
   };
+  const content = getDevContent(toolId);
 
   return (
     <ToolLayout
@@ -519,23 +521,8 @@ export function DevToolContainer({ toolId, toolName, toolDescription }: DevToolC
       description={toolDescription}
       categoryName="Developer Tools"
       categoryPath="/tools/dev"
-      howToUse={
-        toolId === 'html-previewer'
-          ? [
-              "Write or paste raw HTML code into the code editor panel.",
-              "Click the Run button to load or update the preview.",
-              "Switch between desktop, tablet, and mobile layouts to preview responsive designs."
-            ]
-          : ["Enter code, text, or parameters into the source input.", "View formatted or computed result instantly in the output section.", "Click Copy Result to save the formatted result."]
-      }
-      faqs={
-        toolId === 'html-previewer'
-          ? [
-              { question: "Is this preview safe?", answer: "Yes, the HTML is rendered inside a sandboxed iframe, restricting direct access to the parent document and preventing security issues." },
-              { question: "Can I download the HTML file?", answer: "Yes, click the Export button to download the HTML file directly to your device." }
-            ]
-          : [{ question: "Is my code secure?", answer: "Yes, all formatting, minification, and encodings occur strictly inside your browser. No files or text segments are uploaded." }]
-      }
+      howToUse={content.howToUse}
+      faqs={content.faqs}
     >
       <div className="space-y-6">
         {/* Custom Actions */}
@@ -829,7 +816,7 @@ export function DevToolContainer({ toolId, toolName, toolDescription }: DevToolC
                       <MonacoEditorWrapper 
                         language="html" 
                         value={htmlPreviewStore.html} 
-                        onChange={(v) => htmlPreviewStore.setHtml(v || '')} 
+                        onChange={(v: string | undefined) => htmlPreviewStore.setHtml(v || '')} 
                       />
                     ) : (
                       <DevicePreviewFrame 
@@ -852,7 +839,7 @@ export function DevToolContainer({ toolId, toolName, toolDescription }: DevToolC
                 <MonacoEditorWrapper 
                   language="html" 
                   value={htmlPreviewStore.html} 
-                  onChange={(v) => htmlPreviewStore.setHtml(v || '')} 
+                  onChange={(v: string | undefined) => htmlPreviewStore.setHtml(v || '')} 
                 />
               ) : (
                 <PanelGroup orientation={htmlPreviewStore.layout === 'vertical' ? 'horizontal' : 'vertical'}>
@@ -861,7 +848,7 @@ export function DevToolContainer({ toolId, toolName, toolDescription }: DevToolC
                       <MonacoEditorWrapper 
                         language="html" 
                         value={htmlPreviewStore.html} 
-                        onChange={(v) => htmlPreviewStore.setHtml(v || '')} 
+                        onChange={(v: string | undefined) => htmlPreviewStore.setHtml(v || '')} 
                       />
                     </div>
                   </Panel>
