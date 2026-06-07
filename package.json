@@ -13,6 +13,7 @@
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
+    "@monaco-editor/react": "^4.7.0",
     "@pdfsmaller/pdf-encrypt-lite": "^1.0.2",
     "busboy": "^1.6.0",
     "colorthief": "^3.3.1",
@@ -36,6 +37,7 @@
     "react-dom": "19.2.4",
     "react-dropzone": "^15.0.0",
     "react-image-crop": "^11.0.10",
+    "react-resizable-panels": "^4.11.2",
     "recharts": "^3.8.1",
     "sql-formatter": "^15.8.0",
     "zustand": "^5.0.14"

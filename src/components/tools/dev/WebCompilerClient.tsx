@@ -1,142 +1,284 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import { useWebCompilerStore, LayoutMode } from '@/store/useCompilerStore';
+import { MonacoEditorWrapper } from '../shared/MonacoEditorWrapper';
+import { DevicePreviewFrame } from '../shared/DevicePreviewFrame';
+import { ConsoleOverlay } from '../shared/ConsoleOverlay';
 import { ToolLayout } from '../shared/ToolLayout';
-import { Maximize2, Minimize2 } from 'lucide-react';
+import { Play, Download, Upload, Layout, FileJson, Settings2, Trash2, Eraser, AlignLeft } from 'lucide-react';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
 export function WebCompilerClient() {
-  const [html, setHtml] = useState('<h1>Hello World</h1>\n<p>Start editing to see some magic happen!</p>');
-  const [css, setCss] = useState('body {\n  font-family: system-ui, sans-serif;\n  padding: 20px;\n  background-color: #f8fafc;\n  color: #0f172a;\n}\n\nh1 {\n  color: #0f766e;\n}');
-  const [js, setJs] = useState('console.log("Compiler loaded successfully.");');
+  const store = useWebCompilerStore();
   const [srcDoc, setSrcDoc] = useState('');
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [logs, setLogs] = useState<any[]>([]);
+  const [activeTab, setActiveTab] = useState<'html' | 'css' | 'js'>('html');
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Debounced compilation
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      const combined = `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <style>
-              ${css}
-            </style>
-          </head>
-          <body>
-            ${html}
-            <script>
-              try {
-                ${js}
-              } catch (err) {
-                console.error("JavaScript Error: ", err);
-              }
-            <\/script>
-          </body>
-        </html>
-      `;
-      setSrcDoc(combined);
-    }, 500);
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-    return () => clearTimeout(timeout);
-  }, [html, css, js]);
+  // Iframe Message Listener for Console
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.source === 'singulariti-compiler-console') {
+        setLogs(prev => [...prev, {
+          id: Date.now().toString() + Math.random(),
+          type: event.data.type,
+          content: event.data.content,
+          timestamp: Date.now()
+        }]);
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
+  const generateSrcDoc = () => {
+    const consoleInterceptor = `
+      <script>
+        const originalConsole = {
+          log: console.log,
+          error: console.error,
+          warn: console.warn,
+          info: console.info
+        };
+
+        function sendLog(type, args) {
+          const content = Array.from(args).map(arg => 
+            typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+          ).join(' ');
+          window.parent.postMessage({ source: 'singulariti-compiler-console', type, content }, '*');
+        }
+
+        console.log = function() { sendLog('log', arguments); originalConsole.log.apply(console, arguments); };
+        console.error = function() { sendLog('error', arguments); originalConsole.error.apply(console, arguments); };
+        console.warn = function() { sendLog('warn', arguments); originalConsole.warn.apply(console, arguments); };
+        console.info = function() { sendLog('info', arguments); originalConsole.info.apply(console, arguments); };
+        
+        window.addEventListener('error', function(e) {
+          sendLog('error', [e.message + ' at line ' + e.lineno]);
+        });
+      <\/script>
+    `;
+
+    return `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          ${consoleInterceptor}
+          <style>${store.css}</style>
+        </head>
+        <body>
+          ${store.html}
+          <script>
+            try {
+              ${store.js}
+            } catch (err) {
+              console.error(err);
+            }
+          <\/script>
+        </body>
+      </html>
+    `;
+  };
+
+  useEffect(() => {
+    if (store.autoRun) {
+      const timeout = setTimeout(() => {
+        setSrcDoc(generateSrcDoc());
+      }, 500);
+      return () => clearTimeout(timeout);
+    }
+  }, [store.html, store.css, store.js, store.autoRun]);
+
+  const handleManualRun = () => {
+    setSrcDoc(generateSrcDoc());
+  };
+
+  const handleExport = async () => {
+    const zip = new JSZip();
+    zip.file('index.html', `<!DOCTYPE html>\n<html>\n<head>\n  <meta charset="utf-8">\n  <link rel="stylesheet" href="styles.css">\n</head>\n<body>\n  ${store.html}\n  <script src="script.js"></script>\n</body>\n</html>`);
+    zip.file('styles.css', store.css);
+    zip.file('script.js', store.js);
+    
+    const content = await zip.generateAsync({ type: 'blob' });
+    saveAs(content, 'singulariti-project.zip');
+  };
+
+  const loadTemplate = (name: string) => {
+    if (name === 'portfolio') {
+      store.loadTemplate({
+        html: '<div class="portfolio">\n  <h1>My Portfolio</h1>\n  <p>Welcome to my premium playground.</p>\n  <button id="btn">Click Me</button>\n</div>',
+        css: 'body { font-family: system-ui; background: #0f172a; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }\n.portfolio { text-align: center; }\nbutton { padding: 10px 20px; border-radius: 8px; border: none; background: #0ea5e9; color: white; cursor: pointer; }',
+        js: 'document.getElementById("btn").addEventListener("click", () => {\n  console.log("Button clicked!");\n  alert("Hello from Singulariti!");\n});'
+      });
+    }
+  };
+
+  const formatCode = async () => {
+    try {
+      const beautify = (await import('js-beautify')).default;
+      store.setHtml(beautify.html(store.html, { indent_size: 2 }));
+      store.setCss(beautify.css(store.css, { indent_size: 2 }));
+      store.setJs(beautify.js(store.js, { indent_size: 2 }));
+    } catch (e) {
+      console.error('Beautify failed', e);
+    }
+  };
+
+  const renderEditors = () => {
+    if (isMobile) {
+      return (
+        <div className="flex flex-col h-full bg-surface border-r border-border">
+          <div className="flex border-b border-border bg-background">
+            {['html', 'css', 'js'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab as any)}
+                className={`flex-1 py-3 text-[13px] font-bold uppercase tracking-wider transition-colors ${activeTab === tab ? 'border-b-2 border-primary text-primary' : 'text-slate hover:bg-slate/5'}`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+          <div className="flex-1 relative">
+            {activeTab === 'html' && <MonacoEditorWrapper language="html" value={store.html} onChange={(v) => store.setHtml(v || '')} />}
+            {activeTab === 'css' && <MonacoEditorWrapper language="css" value={store.css} onChange={(v) => store.setCss(v || '')} />}
+            {activeTab === 'js' && <MonacoEditorWrapper language="javascript" value={store.js} onChange={(v) => store.setJs(v || '')} />}
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <PanelGroup direction={store.layout === 'vertical' ? 'horizontal' : 'vertical'}>
+        <Panel defaultSize={33} minSize={20}>
+          <div className="flex flex-col h-full bg-surface border border-border rounded-lg overflow-hidden m-1">
+            <div className="bg-background px-4 py-2 border-b border-border flex justify-between items-center text-[12px] font-sans font-bold text-ink uppercase tracking-wider">
+              HTML
+            </div>
+            <MonacoEditorWrapper language="html" value={store.html} onChange={(v) => store.setHtml(v || '')} />
+          </div>
+        </Panel>
+        <PanelResizeHandle className="w-2 bg-transparent hover:bg-primary/20 transition-colors" />
+        <Panel defaultSize={33} minSize={20}>
+          <div className="flex flex-col h-full bg-surface border border-border rounded-lg overflow-hidden m-1">
+            <div className="bg-background px-4 py-2 border-b border-border flex justify-between items-center text-[12px] font-sans font-bold text-ink uppercase tracking-wider">
+              CSS
+            </div>
+            <MonacoEditorWrapper language="css" value={store.css} onChange={(v) => store.setCss(v || '')} />
+          </div>
+        </Panel>
+        <PanelResizeHandle className="w-2 bg-transparent hover:bg-primary/20 transition-colors" />
+        <Panel defaultSize={33} minSize={20}>
+          <div className="flex flex-col h-full bg-surface border border-border rounded-lg overflow-hidden m-1">
+            <div className="bg-background px-4 py-2 border-b border-border flex justify-between items-center text-[12px] font-sans font-bold text-ink uppercase tracking-wider">
+              JS
+            </div>
+            <MonacoEditorWrapper language="javascript" value={store.js} onChange={(v) => store.setJs(v || '')} />
+          </div>
+        </Panel>
+      </PanelGroup>
+    );
+  };
 
   return (
     <ToolLayout
       utilityId="web-compiler"
-      title="Web Compiler"
-      description="Write HTML, CSS, and JavaScript and see the results instantly. Perfect for prototyping and testing web snippets."
+      title="Premium Web Compiler"
+      description="A production-grade HTML, CSS, and JS playground with Monaco Editor, live responsive preview, and console integration."
       categoryName="Developer Tools"
       categoryPath="/tools/dev"
-      howToUse={[
-        "Type your HTML markup in the HTML editor panel.",
-        "Add styling in the CSS panel to visually format your HTML.",
-        "Write logic or interactivity in the JavaScript panel.",
-        "Watch your code execute and render instantly in the Live Preview pane."
-      ]}
-      faqs={[
-        { question: "Is this secure?", answer: "Yes. Your code is executed locally in a sandboxed iframe inside your browser. No code is transmitted to a server." },
-        { question: "Does it support external libraries?", answer: "Currently, you can use standard browser APIs. If you need external libraries, add `<script src='...'>` or `<link rel='stylesheet' href='...'>` inside the HTML editor." }
-      ]}
     >
-      <div className={`flex flex-col gap-6 ${isExpanded ? 'fixed inset-4 z-50 bg-background overflow-hidden' : ''}`}>
-        {isExpanded && (
-          <div className="flex justify-between items-center px-4 py-3 bg-surface border border-border rounded-xl">
-            <h3 className="font-display font-bold text-ink text-lg">Live Web Compiler</h3>
-            <button 
-              onClick={() => setIsExpanded(false)}
-              className="p-2 bg-background border border-border rounded-lg hover:bg-slate/10 transition-colors"
-            >
-              <Minimize2 className="w-5 h-5 text-ink" />
-            </button>
-          </div>
-        )}
+      <div className="flex flex-col w-full h-[85vh] border border-border rounded-2xl overflow-hidden bg-background shadow-sm">
         
-        {/* Editors Grid */}
-        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-4 ${isExpanded ? 'h-[40vh]' : 'h-64 md:h-80'}`}>
-          {/* HTML Editor */}
-          <div className="flex flex-col border border-border rounded-xl bg-surface overflow-hidden h-full">
-            <div className="bg-slate/5 px-4 py-2 border-b border-border flex justify-between items-center">
-              <span className="text-[12px] font-sans font-bold text-ink uppercase tracking-wider">HTML</span>
-            </div>
-            <textarea
-              className="flex-1 w-full p-4 bg-background text-ink font-mono text-[13px] outline-none resize-none"
-              value={html}
-              onChange={(e) => setHtml(e.target.value)}
-              spellCheck={false}
-              placeholder="<!-- HTML here -->"
-            />
+        {/* Top Toolbar */}
+        <div className="flex items-center justify-between px-4 py-3 bg-surface border-b border-border shrink-0">
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={handleManualRun}
+              className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-[13px] font-bold hover:bg-primary/90 transition-colors"
+            >
+              <Play className="w-4 h-4 fill-current" /> Run
+            </button>
+            <div className="h-6 w-px bg-border mx-2" />
+            <select 
+              onChange={(e) => loadTemplate(e.target.value)}
+              className="px-3 py-2 bg-background border border-border rounded-lg text-[13px] font-medium text-ink outline-none focus:border-primary cursor-pointer hidden md:block"
+            >
+              <option value="">Load Template...</option>
+              <option value="portfolio">Portfolio Theme</option>
+            </select>
           </div>
 
-          {/* CSS Editor */}
-          <div className="flex flex-col border border-border rounded-xl bg-surface overflow-hidden h-full">
-            <div className="bg-slate/5 px-4 py-2 border-b border-border flex justify-between items-center">
-              <span className="text-[12px] font-sans font-bold text-ink uppercase tracking-wider">CSS</span>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={formatCode}
+              className="p-2 text-slate hover:bg-slate/10 hover:text-ink rounded-lg transition-colors flex items-center gap-2 text-[13px] font-medium"
+              title="Format Code"
+            >
+              <AlignLeft className="w-4 h-4" /> <span className="hidden md:inline">Format</span>
+            </button>
+            <button 
+              onClick={handleExport}
+              className="p-2 text-slate hover:bg-slate/10 hover:text-ink rounded-lg transition-colors flex items-center gap-2 text-[13px] font-medium"
+              title="Export as ZIP"
+            >
+              <Download className="w-4 h-4" /> <span className="hidden md:inline">Export</span>
+            </button>
+            <div className="h-6 w-px bg-border mx-2 hidden md:block" />
+            <div className="hidden md:flex items-center gap-1 bg-background p-1 rounded-lg border border-border">
+              <button 
+                onClick={() => store.setLayout('horizontal')}
+                className={`p-1.5 rounded-md ${store.layout === 'horizontal' ? 'bg-primary text-white' : 'text-slate hover:bg-slate/10'}`}
+                title="Horizontal Split"
+              >
+                <Layout className="w-4 h-4" />
+              </button>
+              <button 
+                onClick={() => store.setLayout('vertical')}
+                className={`p-1.5 rounded-md ${store.layout === 'vertical' ? 'bg-primary text-white' : 'text-slate hover:bg-slate/10'}`}
+                title="Vertical Split"
+              >
+                <Layout className="w-4 h-4 rotate-90" />
+              </button>
             </div>
-            <textarea
-              className="flex-1 w-full p-4 bg-background text-ink font-mono text-[13px] outline-none resize-none"
-              value={css}
-              onChange={(e) => setCss(e.target.value)}
-              spellCheck={false}
-              placeholder="/* CSS here */"
-            />
-          </div>
-
-          {/* JS Editor */}
-          <div className="flex flex-col border border-border rounded-xl bg-surface overflow-hidden h-full">
-            <div className="bg-slate/5 px-4 py-2 border-b border-border flex justify-between items-center">
-              <span className="text-[12px] font-sans font-bold text-ink uppercase tracking-wider">JS</span>
-            </div>
-            <textarea
-              className="flex-1 w-full p-4 bg-background text-ink font-mono text-[13px] outline-none resize-none"
-              value={js}
-              onChange={(e) => setJs(e.target.value)}
-              spellCheck={false}
-              placeholder="// JavaScript here"
-            />
           </div>
         </div>
 
-        {/* Live Preview Area */}
-        <div className={`flex flex-col border border-border rounded-xl bg-white overflow-hidden ${isExpanded ? 'flex-1' : 'h-96 md:h-[500px]'}`}>
-          <div className="bg-surface px-4 py-2 border-b border-border flex justify-between items-center">
-            <span className="text-[12px] font-sans font-bold text-ink uppercase tracking-wider">Live Preview</span>
-            {!isExpanded && (
-              <button 
-                onClick={() => setIsExpanded(true)}
-                className="text-[12px] font-medium text-primary hover:text-primary/80 flex items-center gap-1"
-              >
-                <Maximize2 className="w-3.5 h-3.5" /> Fullscreen
-              </button>
-            )}
-          </div>
-          <iframe
-            srcDoc={srcDoc}
-            title="Web Compiler Preview"
-            className="w-full h-full border-none bg-white"
-            sandbox="allow-scripts allow-modals"
-          />
+        {/* Main Workspace */}
+        <div className="flex-1 overflow-hidden relative">
+          {store.layout === 'preview-only' ? (
+            <div className="w-full h-full relative flex flex-col">
+              <DevicePreviewFrame srcDoc={srcDoc} deviceView={store.deviceView} setDeviceView={store.setDeviceView} />
+              <ConsoleOverlay logs={logs} onClear={() => setLogs([])} />
+            </div>
+          ) : store.layout === 'code-only' ? (
+            renderEditors()
+          ) : (
+            <PanelGroup direction={isMobile || store.layout === 'horizontal' ? 'vertical' : 'horizontal'}>
+              <Panel defaultSize={50} minSize={30}>
+                {renderEditors()}
+              </Panel>
+              <PanelResizeHandle className={`bg-border hover:bg-primary/50 transition-colors ${isMobile || store.layout === 'horizontal' ? 'h-2' : 'w-2'}`} />
+              <Panel defaultSize={50} minSize={30}>
+                <div className="w-full h-full relative flex flex-col">
+                  <DevicePreviewFrame srcDoc={srcDoc} deviceView={store.deviceView} setDeviceView={store.setDeviceView} />
+                  <ConsoleOverlay logs={logs} onClear={() => setLogs([])} />
+                </div>
+              </Panel>
+            </PanelGroup>
+          )}
         </div>
       </div>
     </ToolLayout>
