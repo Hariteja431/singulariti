@@ -14,6 +14,7 @@ export function HtmlPreviewerClient() {
   const [srcDoc, setSrcDoc] = useState('');
   const [isMobile, setIsMobile] = useState(false);
   const [activeTab, setActiveTab] = useState<'editor' | 'preview'>('editor');
+  const [runKey, setRunKey] = useState(0);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
@@ -34,6 +35,7 @@ export function HtmlPreviewerClient() {
 
   const handleManualRun = () => {
     setSrcDoc(store.html);
+    setRunKey(prev => prev + 1);
   };
 
   const handleExportHTML = () => {

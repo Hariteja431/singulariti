@@ -74,7 +74,6 @@ export function createArrow(pointer: { x: number; y: number }, options: ShapeOpt
   });
 }
 
-// Update Arrow Path coordinates
 export function updateArrowPath(pathObj: fabric.Path, fromX: number, fromY: number, toX: number, toY: number) {
   const dx = toX - fromX;
   const dy = toY - fromY;
@@ -89,36 +88,19 @@ export function updateArrowPath(pathObj: fabric.Path, fromX: number, fromY: numb
   const x2 = toX - headLength * Math.cos(angle + Math.PI / 6);
   const y2 = toY - headLength * Math.sin(angle + Math.PI / 6);
 
-  const pathData = [
-    ['M', fromX, fromY],
-    ['L', toX, toY],
-    ['M', toX, toY],
-    ['L', x1, y1],
-    ['M', toX, toY],
-    ['L', x2, y2]
-  ];
-
-  const anyPath = pathObj as any;
-  anyPath.set({ path: pathData });
+  const pathDataString = `M ${fromX} ${fromY} L ${toX} ${toY} M ${toX} ${toY} L ${x1} ${y1} M ${toX} ${toY} L ${x2} ${y2}`;
   
-  if (typeof anyPath._dimensionsAndPathOffset === 'function') {
-    anyPath._dimensionsAndPathOffset();
-  } else if (typeof anyPath._initPath === 'function') {
-    anyPath._initPath();
-  } else if (typeof anyPath.initialize === 'function') {
-    anyPath.initialize(pathData, {
-      stroke: pathObj.stroke,
-      strokeWidth: pathObj.strokeWidth,
-      fill: 'transparent',
-      opacity: pathObj.opacity,
-      strokeLineCap: 'round',
-      strokeLineJoin: 'round',
-      strokeUniform: true,
-      selectable: true,
-      hasControls: true,
-      strokeDashArray: pathObj.strokeDashArray
-    });
-  }
+  // In Fabric v7, the safest way to dynamically change a path's coordinates while keeping
+  // bounding boxes and offsets correct is to parse a new path string and update properties.
+  const tempPath = new fabric.Path(pathDataString);
+  pathObj.set({
+    path: tempPath.path,
+    width: tempPath.width,
+    height: tempPath.height,
+    pathOffset: tempPath.pathOffset,
+    left: tempPath.left,
+    top: tempPath.top
+  });
   
   pathObj.setCoords();
 }

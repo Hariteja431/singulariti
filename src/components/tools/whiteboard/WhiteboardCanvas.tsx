@@ -42,6 +42,7 @@ interface WhiteboardCanvasProps {
   gridType?: 'none' | 'grid' | 'dots';
   canvasTheme?: 'light' | 'dark';
   strokeDash?: 'solid' | 'dashed' | 'dotted';
+  onToolChange?: (tool: WhiteboardTool) => void;
 }
 
 
@@ -71,7 +72,8 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
   isMaximized = false,
   gridType = 'none',
   canvasTheme = 'light',
-  strokeDash = 'solid'
+  strokeDash = 'solid',
+  onToolChange
 }, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -455,6 +457,7 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
 
       // Drawing Shapes
       if (['rect', 'circle', 'line', 'arrow', 'triangle'].includes(tool)) {
+        if (opt.target) return; // Prevent drawing if clicking on existing object
         isDrawingShape.current = true;
         shapeStartPointer.current = pointer;
 
@@ -486,6 +489,7 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
 
       // Drawing Text & Sticky Notes
       if (tool === 'text' || tool === 'sticky') {
+        if (opt.target) return; // Prevent creating if clicking on existing object
         saveHistoryState();
         
         let newObj: fabric.Object | null = null;
@@ -504,6 +508,7 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
             (newObj as fabric.Textbox).enterEditing();
             (newObj as fabric.Textbox).selectAll();
           }
+          if (onToolChange) onToolChange('select');
         }
       }
     });
@@ -579,6 +584,7 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
         activeShapeObject.current = null;
         shapeStartPointer.current = null;
         saveHistoryState();
+        if (onToolChange) onToolChange('select');
       }
     });
 
@@ -708,11 +714,12 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
         canvas.hoverCursor = 'crosshair';
         canvas.defaultCursor = 'crosshair';
         
-        // Disable selecting/moving objects while drawing shape
+        // Keep objects selectable even while drawing tool is active, 
+        // so that clicking them selects them instead of drawing
         canvas.getObjects().forEach(obj => {
           obj.set({
-            selectable: false,
-            evented: false
+            selectable: true,
+            evented: true
           });
         });
       }

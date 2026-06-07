@@ -444,6 +444,7 @@ export default function OnlineWhiteboardClient() {
             gridType={gridType}
             canvasTheme={canvasTheme}
             strokeDash={strokeDash}
+            onToolChange={handleSelectTool}
           />
         </div>
 

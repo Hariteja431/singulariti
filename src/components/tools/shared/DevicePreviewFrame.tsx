@@ -8,9 +8,10 @@ interface DevicePreviewFrameProps {
   srcDoc: string;
   deviceView: DeviceView;
   setDeviceView: (view: DeviceView) => void;
+  runKey?: number;
 }
 
-export function DevicePreviewFrame({ srcDoc, deviceView, setDeviceView }: DevicePreviewFrameProps) {
+export function DevicePreviewFrame({ srcDoc, deviceView, setDeviceView, runKey }: DevicePreviewFrameProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [isRotated, setIsRotated] = useState(false);
@@ -137,7 +138,7 @@ export function DevicePreviewFrame({ srcDoc, deviceView, setDeviceView }: Device
           }}
         >
           <iframe
-            key={srcDoc}
+            key={`${srcDoc}-${runKey || 0}`}
             srcDoc={srcDoc}
             title="Preview Frame"
             className="w-full h-full border-none bg-white block"

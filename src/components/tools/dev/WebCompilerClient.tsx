@@ -14,6 +14,7 @@ import { saveAs } from 'file-saver';
 export function WebCompilerClient() {
   const store = useWebCompilerStore();
   const [srcDoc, setSrcDoc] = useState('');
+  const [runKey, setRunKey] = useState(0);
   const [logs, setLogs] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState<'html' | 'css' | 'js'>('html');
   const [isMobile, setIsMobile] = useState(false);
@@ -127,6 +128,7 @@ export function WebCompilerClient() {
 
   const handleManualRun = () => {
     setSrcDoc(generateSrcDoc());
+    setRunKey(prev => prev + 1);
   };
 
   const handleExport = async () => {
@@ -380,7 +382,7 @@ export function WebCompilerClient() {
         <div className="flex-1 overflow-hidden relative">
           {store.layout === 'preview-only' ? (
             <div className="w-full h-full relative flex flex-col">
-              <DevicePreviewFrame srcDoc={srcDoc} deviceView={store.deviceView} setDeviceView={store.setDeviceView} />
+              <DevicePreviewFrame srcDoc={srcDoc} deviceView={store.deviceView} setDeviceView={store.setDeviceView} runKey={runKey} />
               <ConsoleOverlay logs={logs} onClear={() => setLogs([])} />
             </div>
           ) : store.layout === 'code-only' ? (
@@ -393,7 +395,7 @@ export function WebCompilerClient() {
               <PanelResizeHandle className="bg-border hover:bg-primary/50 transition-colors h-2" />
               <Panel id="outer-preview-panel" defaultSize={50} minSize={30}>
                 <div className="w-full h-full relative flex flex-col p-1">
-                  <DevicePreviewFrame srcDoc={srcDoc} deviceView={store.deviceView} setDeviceView={store.setDeviceView} />
+                  <DevicePreviewFrame srcDoc={srcDoc} deviceView={store.deviceView} setDeviceView={store.setDeviceView} runKey={runKey} />
                   <ConsoleOverlay logs={logs} onClear={() => setLogs([])} />
                 </div>
               </Panel>
