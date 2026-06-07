@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import { Group as PanelGroup, Panel, Separator as PanelResizeHandle } from 'react-resizable-panels';
 import { useWebCompilerStore, LayoutMode } from '@/store/useCompilerStore';
 import { MonacoEditorWrapper } from '../shared/MonacoEditorWrapper';
 import { DevicePreviewFrame } from '../shared/DevicePreviewFrame';
