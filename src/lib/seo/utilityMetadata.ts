@@ -3927,34 +3927,6 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     },
     "schemaType": "WebApplication"
 },
-  "html-previewer": {
-    "utilityId": "html-previewer",
-    "name": "HTML Previewer",
-    "section": "Developer Utilities",
-    "subSection": "Utilities & Previewers",
-    "url": "/tools/dev/html-previewer",
-    "title": "HTML Previewer - Developer Utility Tool",
-    "description": "Generate hashes, pick colors, or preview code files locally using the html previewer utility. Safe and secure client-side tools for software developer workflows.",
-    "canonical": "https://singulariti.in/tools/dev/html-previewer",
-    "robots": {
-        "index": true,
-        "follow": true
-    },
-    "openGraph": {
-        "title": "HTML Previewer - Developer Utility Tool",
-        "description": "Generate hashes, pick colors, or preview code files locally using the html previewer utility. Safe and secure client-side tools for software developer workflows.",
-        "url": "https://singulariti.in/tools/dev/html-previewer",
-        "type": "website",
-        "image": "https://singulariti.in/og-fallback.png"
-    },
-    "twitter": {
-        "card": "summary_large_image",
-        "title": "HTML Previewer - Developer Utility Tool",
-        "description": "Generate hashes, pick colors, or preview code files locally using the html previewer utility. Safe and secure client-side tools for software developer workflows.",
-        "image": "https://singulariti.in/og-fallback.png"
-    },
-    "schemaType": "WebApplication"
-},
   "length-converter": {
     "utilityId": "length-converter",
     "name": "Length Converter",

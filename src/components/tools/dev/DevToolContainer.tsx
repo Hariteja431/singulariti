@@ -5,7 +5,6 @@ import { ToolLayout } from '../shared/ToolLayout';
 import { TextBox } from '../shared/TextBox';
 import { ResultBox } from '../shared/ResultBox';
 import { Button } from '@/components/ui/Button';
-import js_beautify from 'js-beautify';
 import { format as formatSql } from 'sql-formatter';
 import { sanitizeHtml } from '@/lib/sanitization';
 
@@ -74,11 +73,64 @@ export function DevToolContainer({ toolId, toolName, toolDescription }: DevToolC
 
   // Code Beautifier language selection
   const [beautifyLanguage, setBeautifyLanguage] = useState<'js' | 'html' | 'css'>('js');
+  const [beautifierLoaded, setBeautifierLoaded] = useState(false);
 
   // UUID states
   const [uuidResult, setUuidResult] = useState('');
   const [copiedUuid, setCopiedUuid] = useState(false);
+
+  // Dynamic script loader for js-beautify CDN
+  useEffect(() => {
+    if (toolId !== 'code-beautifier') return;
+
+    let active = true;
+    const loadScript = (url: string): Promise<void> => {
+      return new Promise((resolve, reject) => {
+        if (document.querySelector(`script[src="${url}"]`)) {
+          resolve();
+          return;
+        }
+        const script = document.createElement('script');
+        script.src = url;
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error(`Failed to load script: ${url}`));
+        document.head.appendChild(script);
+      });
+    };
+
+    Promise.all([
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.4/beautify.min.js'),
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.4/beautify-css.min.js'),
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.4/beautify-html.min.js')
+    ]).then(() => {
+      if (active) setBeautifierLoaded(true);
+    }).catch((err) => {
+      if (active) setError('Failed to load code beautifier libraries: ' + err.message);
+    });
+
+    return () => {
+      active = false;
+    };
+  }, [toolId]);
   
+  // Reset all states when switching/re-entering tools
+  useEffect(() => {
+    setInput('');
+    setOutput('');
+    setError('');
+    setRegexPattern('[a-zA-Z]+');
+    setRegexFlags('g');
+    setHashType('SHA-256');
+    setColorInput('#0f766e');
+    setColorRgb('rgb(15, 118, 110)');
+    setColorHsl('hsl(175, 77%, 26%)');
+    setColorError('');
+    setCopiedType(null);
+    setBeautifyLanguage('js');
+    setUuidResult('');
+    setCopiedUuid(false);
+  }, [toolId]);
+
   // Live Unix clock interval
   useEffect(() => {
     if (toolId !== 'unix-time-converter') return;
@@ -259,6 +311,10 @@ export function DevToolContainer({ toolId, toolName, toolDescription }: DevToolC
             setOutput('');
             break;
           }
+          if (!beautifierLoaded) {
+            setOutput('Loading beautifier libraries...');
+            break;
+          }
           try {
             const options = {
               indent_size: 2,
@@ -267,12 +323,15 @@ export function DevToolContainer({ toolId, toolName, toolDescription }: DevToolC
               end_with_newline: true
             };
             let formatted = '';
-            if (beautifyLanguage === 'js') {
-              formatted = js_beautify.js(input, options);
-            } else if (beautifyLanguage === 'html') {
-              formatted = js_beautify.html(input, options);
-            } else if (beautifyLanguage === 'css') {
-              formatted = js_beautify.css(input, options);
+            const w = window as any;
+            if (beautifyLanguage === 'js' && typeof w.js_beautify === 'function') {
+              formatted = w.js_beautify(input, options);
+            } else if (beautifyLanguage === 'html' && typeof w.html_beautify === 'function') {
+              formatted = w.html_beautify(input, options);
+            } else if (beautifyLanguage === 'css' && typeof w.css_beautify === 'function') {
+              formatted = w.css_beautify(input, options);
+            } else {
+              throw new Error('Beautifier library is not loaded yet.');
             }
             setOutput(formatted);
           } catch (err: any) {
@@ -290,10 +349,6 @@ export function DevToolContainer({ toolId, toolName, toolDescription }: DevToolC
             .replace(/`(.*)`/gim, '<code>$1</code>')
             .replace(/\n$/gim, '<br />');
           setOutput(html);
-          break;
-        }
-        case 'html-previewer': {
-          setOutput(input);
           break;
         }
         default:
@@ -598,42 +653,21 @@ export function DevToolContainer({ toolId, toolName, toolDescription }: DevToolC
 
         {/* Input & Output */}
         {toolId !== 'uuid-generator' && toolId !== 'unix-time-converter' && toolId !== 'color-picker-tool' && (
-          <div className={`grid ${toolId === 'html-previewer' ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1'} gap-6`}>
-            <div className={toolId === 'html-previewer' ? 'h-full flex flex-col' : ''}>
+          <div className="grid grid-cols-1 gap-6">
+            <div>
               <TextBox 
                 value={input} 
                 onChange={setInput} 
-                label={toolId === 'html-previewer' ? 'HTML / CSS / JS Code' : 'Source Input'} 
+                label="Source Input" 
                 error={error} 
-                rows={toolId === 'html-previewer' ? 24 : 8}
+                rows={8}
                 placeholder={
                   toolId === 'jwt-decoder' 
                     ? 'Paste encoded JWT token here...' 
-                    : toolId === 'html-previewer' 
-                    ? 'Paste raw HTML, inline CSS, and scripts here...' 
                     : 'Paste raw content here...'
                 }
               />
             </div>
-            {toolId === 'html-previewer' && (
-              <div className="space-y-2 h-full flex flex-col">
-                <label className="text-[13px] font-sans font-semibold text-ink uppercase tracking-wider">Live Preview</label>
-                <div className="flex-1 min-h-[400px] lg:min-h-full border border-border bg-white rounded-xl overflow-hidden relative">
-                  {output ? (
-                    <iframe 
-                      srcDoc={output}
-                      title="HTML Previewer Frame" 
-                      className="w-full h-full border-none absolute inset-0"
-                      sandbox="allow-scripts"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-slate font-sans text-sm p-4 text-center">
-                      Your live preview will appear here as you type.
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
             {toolId === 'markdown-previewer' && output && (
               <div className="space-y-2">
                 <label className="text-[13px] font-sans font-semibold text-ink uppercase tracking-wider">Markdown Output Preview</label>
@@ -643,9 +677,7 @@ export function DevToolContainer({ toolId, toolName, toolDescription }: DevToolC
                 />
               </div>
             )}
-            {toolId !== 'html-previewer' && (
-              <ResultBox value={output} downloadFileName={`${toolId}-result.txt`} />
-            )}
+            <ResultBox value={output} downloadFileName={`${toolId}-result.txt`} />
           </div>
         )}
       </div>
