@@ -23,6 +23,7 @@ interface ToolLayoutProps {
   faqs: FaqItem[];
   privacyLabel?: string;
   children: React.ReactNode;
+  relatedTools?: { name: string; url: string; description: string }[];
 }
 
 export function ToolLayout({
@@ -34,7 +35,8 @@ export function ToolLayout({
   howToUse,
   faqs,
   privacyLabel,
-  children
+  children,
+  relatedTools
 }: ToolLayoutProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -52,6 +54,39 @@ export function ToolLayout({
           description={seo.description}
           section={seo.section}
           canonical={seo.canonical}
+        />
+      )}
+      {faqs && faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map(faq => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+              }
+            }))
+          })}}
+        />
+      )}
+      {howToUse && howToUse.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": `How to use ${title}`,
+            "description": description,
+            "step": howToUse.map((step, index) => ({
+              "@type": "HowToStep",
+              "position": index + 1,
+              "text": step
+            }))
+          })}}
         />
       )}
       <Header />
@@ -156,6 +191,20 @@ export function ToolLayout({
             </div>
           )}
         </section>
+        {/* Related Tools Cross-linking */}
+        {relatedTools && relatedTools.length > 0 && (
+          <section className="container mx-auto px-4 max-w-6xl mt-12 mb-6 w-full">
+            <h2 className="font-display font-bold text-2xl text-ink mb-6 text-center">Related Tools</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {relatedTools.map((tool, i) => (
+                <Link key={i} href={tool.url} className="group block bg-surface border border-border rounded-xl p-5 hover:border-primary/50 hover:shadow-sm transition-all duration-300">
+                  <h3 className="font-display font-bold text-[17px] text-ink group-hover:text-primary transition-colors mb-2">{tool.name}</h3>
+                  <p className="font-sans text-[14px] text-slate leading-relaxed">{tool.description}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
       <Footer />
     </>

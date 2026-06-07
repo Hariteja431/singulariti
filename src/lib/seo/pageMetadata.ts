@@ -42,21 +42,21 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
     }
   },
   "about": {
-    title: "About Online Utility Tools - Free Browser-Side Utilities",
-    description: "Learn about this local utilities project. All processing runs 100% inside your browser using JavaScript and client-side APIs for privacy.",
+    title: "About Singulariti – Free Browser-Based Utility Tools",
+    description: "Learn about Singulariti's mission to provide fast, secure, and free browser-based utility tools for image editing, PDF compression, and developer encoding with zero server uploads.",
     path: "/about",
     robots: { index: true, follow: true },
     openGraph: {
-      title: "About Online Utility Tools - Free Browser-Side Utilities",
-      description: "Learn about this local utilities project. All processing runs 100% inside your browser using JavaScript and client-side APIs for privacy.",
+      title: "About Singulariti – Free Browser-Based Utility Tools",
+      description: "Learn about Singulariti's mission to provide fast, secure, and free browser-based utility tools for image editing, PDF compression, and developer encoding with zero server uploads.",
       url: "https://singulariti.in/about",
       type: "website",
       image: "https://singulariti.in/og-fallback.png"
     },
     twitter: {
       card: "summary_large_image",
-      title: "About Online Utility Tools - Free Browser-Side Utilities",
-      description: "Learn about this local utilities project. All processing runs 100% inside your browser using JavaScript and client-side APIs for privacy.",
+      title: "About Singulariti – Free Browser-Based Utility Tools",
+      description: "Learn about Singulariti's mission to provide fast, secure, and free browser-based utility tools for image editing, PDF compression, and developer encoding with zero server uploads.",
       image: "https://singulariti.in/og-fallback.png"
     }
   },
@@ -148,13 +148,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       description: "Use image utilities to compress, convert and resize image files for uploads, sharing, previews and web preparation.",
       url: "https://singulariti.in/image",
       type: "website",
-      image: "https://singulariti.in/og/image-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     },
     twitter: {
       card: "summary_large_image",
       title: "Image Utilities for Compression, Conversion and Resizing",
       description: "Use image utilities to compress, convert and resize image files for uploads, sharing, previews and web preparation.",
-      image: "https://singulariti.in/og/image-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     }
   },
   "category-editing": {
@@ -167,13 +167,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       description: "Edit images with cropping, filters, text overlays, watermarks, color adjustments and enhancement utilities.",
       url: "https://singulariti.in/editing",
       type: "website",
-      image: "https://singulariti.in/og/image-editing-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     },
     twitter: {
       card: "summary_large_image",
       title: "Image Editing Utilities for Cropping, Filters, Watermarks and Enhancements",
       description: "Edit images with cropping, filters, text overlays, watermarks, color adjustments and enhancement utilities.",
-      image: "https://singulariti.in/og/image-editing-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     }
   },
   "category-pdf": {
@@ -186,13 +186,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       description: "Use PDF utilities to merge, split, compress, convert, rotate, sign, watermark and manage document pages.",
       url: "https://singulariti.in/tools/pdf",
       type: "website",
-      image: "https://singulariti.in/og/pdf-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     },
     twitter: {
       card: "summary_large_image",
       title: "PDF Utilities for Merging, Splitting, Compressing and Converting Files",
       description: "Use PDF utilities to merge, split, compress, convert, rotate, sign, watermark and manage document pages.",
-      image: "https://singulariti.in/og/pdf-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     }
   },
   "category-qr": {
@@ -205,13 +205,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       description: "Generate, customize and scan QR codes for links, text, labels, documents and quick access information.",
       url: "https://singulariti.in/tools/qr",
       type: "website",
-      image: "https://singulariti.in/og/qr-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     },
     twitter: {
       card: "summary_large_image",
       title: "QR Utilities for Generating, Customizing and Scanning QR Codes",
       description: "Generate, customize and scan QR codes for links, text, labels, documents and quick access information.",
-      image: "https://singulariti.in/og/qr-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     }
   },
   "category-calculators": {
@@ -224,13 +224,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       description: "Use calculator utilities for finance, health, math, tax, percentage, date and everyday calculation tasks.",
       url: "https://singulariti.in/tools/calculators",
       type: "website",
-      image: "https://singulariti.in/og/calculator-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     },
     twitter: {
       card: "summary_large_image",
       title: "Calculator Utilities for Finance, Health, Math, Tax and Date Calculations",
       description: "Use calculator utilities for finance, health, math, tax, percentage, date and everyday calculation tasks.",
-      image: "https://singulariti.in/og/calculator-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     }
   },
   "category-text": {
@@ -243,13 +243,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       description: "Explore text utilities for word counting, character counting, case conversion, text cleaning, sorting and comparison tasks.",
       url: "https://singulariti.in/tools/text",
       type: "website",
-      image: "https://singulariti.in/og/text-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     },
     twitter: {
       card: "summary_large_image",
       title: "Text Utilities for Counting, Cleaning, Formatting and Comparing Text",
       description: "Explore text utilities for word counting, character counting, case conversion, text cleaning, sorting and comparison tasks.",
-      image: "https://singulariti.in/og/text-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     }
   },
   "category-dev": {
@@ -262,13 +262,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       description: "Use developer utilities for formatting code, validating structured data, encoding values, previewing HTML and generating identifiers.",
       url: "https://singulariti.in/tools/dev",
       type: "website",
-      image: "https://singulariti.in/og/developer-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     },
     twitter: {
       card: "summary_large_image",
       title: "Developer Utilities for Formatting, Encoding, Previewing and Generating Data",
       description: "Use developer utilities for formatting code, validating structured data, encoding values, previewing HTML and generating identifiers.",
-      image: "https://singulariti.in/og/developer-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     }
   },
   "category-convert": {
@@ -281,13 +281,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       description: "Convert units for length, weight, temperature, area, volume, speed, time, data storage and number systems.",
       url: "https://singulariti.in/tools/convert",
       type: "website",
-      image: "https://singulariti.in/og/unit-conversion-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     },
     twitter: {
       card: "summary_large_image",
       title: "Unit Conversion Utilities for Length, Weight, Temperature, Area and Data",
       description: "Convert units for length, weight, temperature, area, volume, speed, time, data storage and number systems.",
-      image: "https://singulariti.in/og/unit-conversion-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     }
   },
   "category-seo": {
@@ -300,13 +300,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       description: "Use SEO utilities to generate meta tags, check keyword usage, review headings, create sitemaps and prepare robots.txt files.",
       url: "https://singulariti.in/tools/seo",
       type: "website",
-      image: "https://singulariti.in/og/seo-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     },
     twitter: {
       card: "summary_large_image",
       title: "SEO Utilities for Meta Tags, Keywords, Headings, Sitemaps and Robots Files",
       description: "Use SEO utilities to generate meta tags, check keyword usage, review headings, create sitemaps and prepare robots.txt files.",
-      image: "https://singulariti.in/og/seo-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     }
   },
   "tools": {
@@ -357,13 +357,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       description: "Draw, write, sketch, add shapes, and export the whiteboard directly in the browser. Free, secure, and operates client-side.",
       url: "https://singulariti.in/tools/editing/online-whiteboard",
       type: "website",
-      image: "https://singulariti.in/og/image-editing-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     },
     twitter: {
       card: "summary_large_image",
       title: "Online Whiteboard - Draw, Write and Export Ideas | Singulariti",
       description: "Draw, write, sketch, add shapes, and export the whiteboard directly in the browser. Free, secure, and operates client-side.",
-      image: "https://singulariti.in/og/image-editing-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     }
   },
   "pomodoro-timer": {
@@ -395,13 +395,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       description: "Free online browser-based image editor. Upscale, sharpen, denoise, enhance, adjust brightness, and overlay watermarks locally without uploading.",
       url: "https://singulariti.in/tools/image/editor",
       type: "website",
-      image: "https://singulariti.in/og/image-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     },
     twitter: {
       card: "summary_large_image",
       title: "Image Editor Tools - Edit & Adjust Images Online | Singulariti",
       description: "Free online browser-based image editor. Upscale, sharpen, denoise, enhance, adjust brightness, and overlay watermarks locally without uploading.",
-      image: "https://singulariti.in/og/image-utilities.png"
+      image: "https://singulariti.in/og-fallback.png"
     }
   },
   "blog-utility-guides": {
@@ -433,13 +433,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
         description: "Use image compression utilities to reduce image file sizes without losing quality. Works instantly in the web browser.",
         url: "https://singulariti.in/image/compression",
         type: "website",
-        image: "https://singulariti.in/og/image-utilities.png"
+        image: "https://singulariti.in/og-fallback.png"
       },
       twitter: {
         card: "summary_large_image",
         title: "Image Compression Utilities - Compress Images Online",
         description: "Use image compression utilities to reduce image file sizes without losing quality. Works instantly in the web browser.",
-        image: "https://singulariti.in/og/image-utilities.png"
+        image: "https://singulariti.in/og-fallback.png"
       }
     },
     "collection-image-conversion": {
@@ -452,13 +452,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
         description: "Use image conversion utilities to convert images between different formats instantly and securely in the web browser.",
         url: "https://singulariti.in/image/conversion",
         type: "website",
-        image: "https://singulariti.in/og/image-utilities.png"
+        image: "https://singulariti.in/og-fallback.png"
       },
       twitter: {
         card: "summary_large_image",
         title: "Image Conversion Utilities - Convert Images Online",
         description: "Use image conversion utilities to convert images between different formats instantly and securely in the web browser.",
-        image: "https://singulariti.in/og/image-utilities.png"
+        image: "https://singulariti.in/og-fallback.png"
       }
     },
     "collection-image-utility": {
@@ -471,13 +471,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
         description: "Use image utility tools to extract color palettes, pick colors, check dimensions, and view EXIF metadata.",
         url: "https://singulariti.in/image/utility",
         type: "website",
-        image: "https://singulariti.in/og/image-utilities.png"
+        image: "https://singulariti.in/og-fallback.png"
       },
       twitter: {
         card: "summary_large_image",
         title: "Image Utility Tools - Analyze Images Online",
         description: "Use image utility tools to extract color palettes, pick colors, check dimensions, and view EXIF metadata.",
-        image: "https://singulariti.in/og/image-utilities.png"
+        image: "https://singulariti.in/og-fallback.png"
       }
     },
     "collection-image-developer": {
@@ -490,13 +490,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
         description: "Use image developer utilities to convert images to Base64 strings and decode Base64 data URIs securely.",
         url: "https://singulariti.in/image/developer",
         type: "website",
-        image: "https://singulariti.in/og/image-utilities.png"
+        image: "https://singulariti.in/og-fallback.png"
       },
       twitter: {
         card: "summary_large_image",
         title: "Image Developer Utilities - Base64 Conversion",
         description: "Use image developer utilities to convert images to Base64 strings and decode Base64 data URIs securely.",
-        image: "https://singulariti.in/og/image-utilities.png"
+        image: "https://singulariti.in/og-fallback.png"
       }
     },
     "collection-editing-tools": {
@@ -509,13 +509,13 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
         description: "Use image editing utilities to resize, crop, rotate, flip, and apply filters to images directly in the browser.",
         url: "https://singulariti.in/editing/tools",
         type: "website",
-        image: "https://singulariti.in/og/image-editing-utilities.png"
+        image: "https://singulariti.in/og-fallback.png"
       },
       twitter: {
         card: "summary_large_image",
         title: "Image Editing Utilities - Edit Images Online",
         description: "Use image editing utilities to resize, crop, rotate, flip, and apply filters to images directly in the browser.",
-        image: "https://singulariti.in/og/image-editing-utilities.png"
+        image: "https://singulariti.in/og-fallback.png"
       }
     }
   };

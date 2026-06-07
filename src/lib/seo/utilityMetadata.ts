@@ -1,3 +1,10 @@
+/**
+ * SEO STANDARDS FOR SINGULARITI.IN UTILITIES
+ *
+ * TITLE: [Action] [Format] Online – [Benefit] (50-60 chars max)
+ * DESCRIPTION: Unique, 120-155 characters. Must mention it's free, browser-based, and has zero privacy risk/no server uploads.
+ * OG IMAGE: Always use "https://singulariti.in/og-fallback.png" unless a specific image exists in /public/og/[category].png.
+ */
 export type UtilitySEO = {
   utilityId: string;
   name: string;
@@ -34,7 +41,7 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Compression Tools",
     "url": "/image/compression/image-compressor",
-    "title": "Image Compressor - Reduce Image File Size",
+    "title": "Compress Image Online Free – Reduce Image File Size",
     "description": "Compress image files to reduce size for upload, sharing or storage. Useful for large photos, web images and form limits.",
     "canonical": "https://singulariti.in/image/compression/image-compressor",
     "robots": {
@@ -42,17 +49,17 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "follow": true
     },
     "openGraph": {
-        "title": "Image Compressor - Reduce Image File Size",
-        "description": "Compress image files to reduce size for upload, sharing or storage. Useful for large photos, web images and form limits.",
+        "title": "Compress Image Online Free – Reduce Image File Size",
+        "description": "Reduce image file sizes instantly without losing visible quality. Upload your image, choose your compression level, and download — all processed safely in your browser.",
         "url": "https://singulariti.in/image/compression/image-compressor",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "Image Compressor - Reduce Image File Size",
-        "description": "Compress image files to reduce size for upload, sharing or storage. Useful for large photos, web images and form limits.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Compress Image Online Free – Reduce Image File Size",
+        "description": "Reduce image file sizes instantly without losing visible quality. Upload your image, choose your compression level, and download — all processed safely in your browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -63,24 +70,24 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "subSection": "Compression Tools",
     "url": "/image/compression/jpg-compressor",
     "title": "JPG Compressor - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform jpg compressor tasks in the browser without registration.",
+    "description": "Reduce image file sizes instantly without losing visible quality. Upload your image, choose your compression level, and download — all processed safely in your browser.",
     "canonical": "https://singulariti.in/image/compression/jpg-compressor",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "JPG Compressor - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpg compressor tasks in the browser without registration.",
+        "title": "Compress JPG Online Free – Reduce File Size Without Quality Loss",
+        "description": "Reduce JPG file sizes instantly without losing visible quality. Upload your JPG, choose your compression level, and download — all processed safely in your browser.",
         "url": "https://singulariti.in/image/compression/jpg-compressor",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "JPG Compressor - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpg compressor tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Compress JPG Online Free – Reduce File Size Without Quality Loss",
+        "description": "Reduce JPG file sizes instantly without losing visible quality. Upload your JPG, choose your compression level, and download — all processed safely in your browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -90,25 +97,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Compression Tools",
     "url": "/image/compression/jpeg-compressor",
-    "title": "JPEG Compressor - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform jpeg compressor tasks in the browser without registration.",
+    "title": "Compress JPEG Online Free – Reduce File Size Instantly",
+    "description": "Reduce JPEG file sizes instantly without losing visible quality. Upload your JPEG, choose your compression level, and download — all processed safely in your browser.",
     "canonical": "https://singulariti.in/image/compression/jpeg-compressor",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "JPEG Compressor - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpeg compressor tasks in the browser without registration.",
+        "title": "Compress JPEG Online Free – Reduce File Size Instantly",
+        "description": "Reduce JPEG file sizes instantly without losing visible quality. Upload your JPEG, choose your compression level, and download — all processed safely in your browser.",
         "url": "https://singulariti.in/image/compression/jpeg-compressor",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "JPEG Compressor - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpeg compressor tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Compress JPEG Online Free – Reduce File Size Instantly",
+        "description": "Reduce JPEG file sizes instantly without losing visible quality. Upload your JPEG, choose your compression level, and download — all processed safely in your browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -118,25 +125,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Compression Tools",
     "url": "/image/compression/png-compressor",
-    "title": "PNG Compressor - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform png compressor tasks in the browser without registration.",
+    "title": "Compress PNG Online Free – Reduce File Size Safely",
+    "description": "Reduce PNG file sizes instantly without losing visible quality. Upload your PNG, choose your compression level, and download — all processed safely in your browser.",
     "canonical": "https://singulariti.in/image/compression/png-compressor",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "PNG Compressor - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform png compressor tasks in the browser without registration.",
+        "title": "Compress PNG Online Free – Reduce File Size Safely",
+        "description": "Reduce PNG file sizes instantly without losing visible quality. Upload your PNG, choose your compression level, and download — all processed safely in your browser.",
         "url": "https://singulariti.in/image/compression/png-compressor",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "PNG Compressor - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform png compressor tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Compress PNG Online Free – Reduce File Size Safely",
+        "description": "Reduce PNG file sizes instantly without losing visible quality. Upload your PNG, choose your compression level, and download — all processed safely in your browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -146,25 +153,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Compression Tools",
     "url": "/image/compression/webp-compressor",
-    "title": "WebP Compressor - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform webp compressor tasks in the browser without registration.",
+    "title": "Compress WebP Online Free – Reduce File Size Easily",
+    "description": "Reduce WebP file sizes instantly without losing visible quality. Upload your WebP, choose your compression level, and download — all processed safely in your browser.",
     "canonical": "https://singulariti.in/image/compression/webp-compressor",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "WebP Compressor - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform webp compressor tasks in the browser without registration.",
+        "title": "Compress WebP Online Free – Reduce File Size Easily",
+        "description": "Reduce WebP file sizes instantly without losing visible quality. Upload your WebP, choose your compression level, and download — all processed safely in your browser.",
         "url": "https://singulariti.in/image/compression/webp-compressor",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "WebP Compressor - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform webp compressor tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Compress WebP Online Free – Reduce File Size Easily",
+        "description": "Reduce WebP file sizes instantly without losing visible quality. Upload your WebP, choose your compression level, and download — all processed safely in your browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -174,25 +181,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Compression Tools",
     "url": "/image/compression/svg-compressor",
-    "title": "SVG Compressor - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform svg compressor tasks in the browser without registration.",
+    "title": "Compress SVG Online Free – Optimize Vector Graphics",
+    "description": "Optimize SVG files by removing unnecessary metadata and whitespace. Drag and drop your SVG to get a smaller, cleaner file instantly without sending files to any server.",
     "canonical": "https://singulariti.in/image/compression/svg-compressor",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "SVG Compressor - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform svg compressor tasks in the browser without registration.",
+        "title": "Compress SVG Online Free – Optimize Vector Graphics",
+        "description": "Optimize SVG files by removing unnecessary metadata and whitespace. Drag and drop your SVG to get a smaller, cleaner file instantly without sending files to any server.",
         "url": "https://singulariti.in/image/compression/svg-compressor",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "SVG Compressor - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform svg compressor tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Compress SVG Online Free – Optimize Vector Graphics",
+        "description": "Optimize SVG files by removing unnecessary metadata and whitespace. Drag and drop your SVG to get a smaller, cleaner file instantly without sending files to any server.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -202,25 +209,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/jpg-to-png",
-    "title": "JPG to PNG - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform jpg to png tasks in the browser without registration.",
+    "title": "Convert JPG to PNG Online – Free Browser Image Converter",
+    "description": "Easily convert standard JPG images to the transparent PNG format. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/jpg-to-png",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "JPG to PNG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpg to png tasks in the browser without registration.",
+        "title": "Convert JPG to PNG Online – Free Browser Image Converter",
+        "description": "Easily convert standard JPG images to the transparent PNG format. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/jpg-to-png",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "JPG to PNG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpg to png tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert JPG to PNG Online – Free Browser Image Converter",
+        "description": "Easily convert standard JPG images to the transparent PNG format. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -230,25 +237,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/png-to-jpg",
-    "title": "PNG to JPG - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform png to jpg tasks in the browser without registration.",
+    "title": "Convert PNG to JPG Online – Free Browser Image Converter",
+    "description": "Easily convert transparent or large PNG images to the universally accepted JPG format. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/png-to-jpg",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "PNG to JPG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform png to jpg tasks in the browser without registration.",
+        "title": "Convert PNG to JPG Online – Free Browser Image Converter",
+        "description": "Easily convert transparent or large PNG images to the universally accepted JPG format. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/png-to-jpg",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "PNG to JPG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform png to jpg tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert PNG to JPG Online – Free Browser Image Converter",
+        "description": "Easily convert transparent or large PNG images to the universally accepted JPG format. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -258,25 +265,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/jpg-to-webp",
-    "title": "JPG to WebP - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform jpg to webp tasks in the browser without registration.",
+    "title": "Convert JPG to WebP Online – Free Browser Image Converter",
+    "description": "Easily convert standard JPG images to the next-gen WebP format. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/jpg-to-webp",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "JPG to WebP - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpg to webp tasks in the browser without registration.",
+        "title": "Convert JPG to WebP Online – Free Browser Image Converter",
+        "description": "Easily convert standard JPG images to the next-gen WebP format. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/jpg-to-webp",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "JPG to WebP - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpg to webp tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert JPG to WebP Online – Free Browser Image Converter",
+        "description": "Easily convert standard JPG images to the next-gen WebP format. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -286,25 +293,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/png-to-webp",
-    "title": "PNG to WebP - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform png to webp tasks in the browser without registration.",
+    "title": "Convert PNG to WebP Online – Free Browser Image Converter",
+    "description": "Easily convert transparent PNG images to the highly compressed WebP format. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/png-to-webp",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "PNG to WebP - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform png to webp tasks in the browser without registration.",
+        "title": "Convert PNG to WebP Online – Free Browser Image Converter",
+        "description": "Easily convert transparent PNG images to the highly compressed WebP format. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/png-to-webp",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "PNG to WebP - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform png to webp tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert PNG to WebP Online – Free Browser Image Converter",
+        "description": "Easily convert transparent PNG images to the highly compressed WebP format. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -314,25 +321,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/webp-to-jpg",
-    "title": "WebP to JPG - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform webp to jpg tasks in the browser without registration.",
+    "title": "Convert WebP to JPG Online – Free Browser Image Converter",
+    "description": "Easily convert next-gen WebP images to the universally accepted JPG format. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/webp-to-jpg",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "WebP to JPG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform webp to jpg tasks in the browser without registration.",
+        "title": "Convert WebP to JPG Online – Free Browser Image Converter",
+        "description": "Easily convert next-gen WebP images to the universally accepted JPG format. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/webp-to-jpg",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "WebP to JPG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform webp to jpg tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert WebP to JPG Online – Free Browser Image Converter",
+        "description": "Easily convert next-gen WebP images to the universally accepted JPG format. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -342,25 +349,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/webp-to-png",
-    "title": "WebP to PNG - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform webp to png tasks in the browser without registration.",
+    "title": "Convert WebP to PNG Online – Free Browser Image Converter",
+    "description": "Easily convert next-gen WebP images to the transparent PNG format. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/webp-to-png",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "WebP to PNG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform webp to png tasks in the browser without registration.",
+        "title": "Convert WebP to PNG Online – Free Browser Image Converter",
+        "description": "Easily convert next-gen WebP images to the transparent PNG format. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/webp-to-png",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "WebP to PNG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform webp to png tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert WebP to PNG Online – Free Browser Image Converter",
+        "description": "Easily convert next-gen WebP images to the transparent PNG format. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -370,25 +377,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/jpg-to-jpeg",
-    "title": "JPG to JPEG - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform jpg to jpeg tasks in the browser without registration.",
+    "title": "Convert JPG to JPEG Online – Free Browser Image Converter",
+    "description": "Easily convert JPG images to the JPEG extension format. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/jpg-to-jpeg",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "JPG to JPEG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpg to jpeg tasks in the browser without registration.",
+        "title": "Convert JPG to JPEG Online – Free Browser Image Converter",
+        "description": "Easily convert JPG images to the JPEG extension format. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/jpg-to-jpeg",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "JPG to JPEG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpg to jpeg tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert JPG to JPEG Online – Free Browser Image Converter",
+        "description": "Easily convert JPG images to the JPEG extension format. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -398,25 +405,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/jpeg-to-jpg",
-    "title": "JPEG to JPG - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform jpeg to jpg tasks in the browser without registration.",
+    "title": "Convert JPEG to JPG Online – Free Browser Image Converter",
+    "description": "Easily convert JPEG images to the standard JPG extension format. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/jpeg-to-jpg",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "JPEG to JPG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpeg to jpg tasks in the browser without registration.",
+        "title": "Convert JPEG to JPG Online – Free Browser Image Converter",
+        "description": "Easily convert JPEG images to the standard JPG extension format. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/jpeg-to-jpg",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "JPEG to JPG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpeg to jpg tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert JPEG to JPG Online – Free Browser Image Converter",
+        "description": "Easily convert JPEG images to the standard JPG extension format. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -426,25 +433,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/svg-to-png",
-    "title": "SVG to PNG - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform svg to png tasks in the browser without registration.",
+    "title": "Convert SVG to PNG Online – Free Browser Image Converter",
+    "description": "Easily convert scalable SVG vectors to the transparent PNG raster format. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/svg-to-png",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "SVG to PNG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform svg to png tasks in the browser without registration.",
+        "title": "Convert SVG to PNG Online – Free Browser Image Converter",
+        "description": "Easily convert scalable SVG vectors to the transparent PNG raster format. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/svg-to-png",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "SVG to PNG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform svg to png tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert SVG to PNG Online – Free Browser Image Converter",
+        "description": "Easily convert scalable SVG vectors to the transparent PNG raster format. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -454,25 +461,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/svg-to-jpg",
-    "title": "SVG to JPG - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform svg to jpg tasks in the browser without registration.",
+    "title": "Convert SVG to JPG Online – Free Browser Image Converter",
+    "description": "Easily convert scalable SVG vectors to the universally accepted JPG format. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/svg-to-jpg",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "SVG to JPG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform svg to jpg tasks in the browser without registration.",
+        "title": "Convert SVG to JPG Online – Free Browser Image Converter",
+        "description": "Easily convert scalable SVG vectors to the universally accepted JPG format. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/svg-to-jpg",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "SVG to JPG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform svg to jpg tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert SVG to JPG Online – Free Browser Image Converter",
+        "description": "Easily convert scalable SVG vectors to the universally accepted JPG format. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -482,25 +489,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/svg-to-webp",
-    "title": "SVG to WebP - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform svg to webp tasks in the browser without registration.",
+    "title": "Convert SVG to WebP Online – Free Browser Image Converter",
+    "description": "Easily convert scalable SVG vectors to the next-gen WebP format. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/svg-to-webp",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "SVG to WebP - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform svg to webp tasks in the browser without registration.",
+        "title": "Convert SVG to WebP Online – Free Browser Image Converter",
+        "description": "Easily convert scalable SVG vectors to the next-gen WebP format. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/svg-to-webp",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "SVG to WebP - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform svg to webp tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert SVG to WebP Online – Free Browser Image Converter",
+        "description": "Easily convert scalable SVG vectors to the next-gen WebP format. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -510,25 +517,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/png-to-svg",
-    "title": "PNG to SVG - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform png to svg tasks in the browser without registration.",
+    "title": "Convert PNG to SVG Online – Free Browser Image Converter",
+    "description": "Easily convert transparent PNG images to scalable SVG vectors. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/png-to-svg",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "PNG to SVG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform png to svg tasks in the browser without registration.",
+        "title": "Convert PNG to SVG Online – Free Browser Image Converter",
+        "description": "Easily convert transparent PNG images to scalable SVG vectors. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/png-to-svg",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "PNG to SVG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform png to svg tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert PNG to SVG Online – Free Browser Image Converter",
+        "description": "Easily convert transparent PNG images to scalable SVG vectors. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -538,25 +545,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/jpg-to-svg",
-    "title": "JPG to SVG - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform jpg to svg tasks in the browser without registration.",
+    "title": "Convert JPG to SVG Online – Free Browser Image Converter",
+    "description": "Easily convert standard JPG images to scalable SVG vectors. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/jpg-to-svg",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "JPG to SVG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpg to svg tasks in the browser without registration.",
+        "title": "Convert JPG to SVG Online – Free Browser Image Converter",
+        "description": "Easily convert standard JPG images to scalable SVG vectors. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/jpg-to-svg",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "JPG to SVG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform jpg to svg tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert JPG to SVG Online – Free Browser Image Converter",
+        "description": "Easily convert standard JPG images to scalable SVG vectors. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -566,25 +573,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Conversion Tools",
     "url": "/image/conversion/webp-to-svg",
-    "title": "WebP to SVG - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform webp to svg tasks in the browser without registration.",
+    "title": "Convert WebP to SVG Online – Free Browser Image Converter",
+    "description": "Easily convert next-gen WebP images to scalable SVG vectors. Fast, free, and processed entirely within your web browser.",
     "canonical": "https://singulariti.in/image/conversion/webp-to-svg",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "WebP to SVG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform webp to svg tasks in the browser without registration.",
+        "title": "Convert WebP to SVG Online – Free Browser Image Converter",
+        "description": "Easily convert next-gen WebP images to scalable SVG vectors. Fast, free, and processed entirely within your web browser.",
         "url": "https://singulariti.in/image/conversion/webp-to-svg",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "WebP to SVG - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform webp to svg tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Convert WebP to SVG Online – Free Browser Image Converter",
+        "description": "Easily convert next-gen WebP images to scalable SVG vectors. Fast, free, and processed entirely within your web browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -594,25 +601,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Utility Tools",
     "url": "/image/utility/image-metadata-viewer",
-    "title": "Image Metadata Viewer - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform image metadata viewer tasks in the browser without registration.",
+    "title": "Image Metadata Viewer Online – Read EXIF Data Free",
+    "description": "Extract and read hidden EXIF data from your photos instantly. Upload an image to view camera settings, location data, and date taken with zero privacy risk.",
     "canonical": "https://singulariti.in/image/utility/image-metadata-viewer",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "Image Metadata Viewer - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform image metadata viewer tasks in the browser without registration.",
+        "title": "Image Metadata Viewer Online – Read EXIF Data Free",
+        "description": "Extract and read hidden EXIF data from your photos instantly. Upload an image to view camera settings, location data, and date taken with zero privacy risk.",
         "url": "https://singulariti.in/image/utility/image-metadata-viewer",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "Image Metadata Viewer - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform image metadata viewer tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Image Metadata Viewer Online – Read EXIF Data Free",
+        "description": "Extract and read hidden EXIF data from your photos instantly. Upload an image to view camera settings, location data, and date taken with zero privacy risk.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -622,25 +629,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Utility Tools",
     "url": "/image/utility/image-dimension-checker",
-    "title": "Image Dimension Checker - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform image dimension checker tasks in the browser without registration.",
+    "title": "Image Dimension Checker Online – Find Image Size Free",
+    "description": "Check the exact pixel dimensions and aspect ratio of your image instantly. Upload a photo to see its width and height directly in your browser.",
     "canonical": "https://singulariti.in/image/utility/image-dimension-checker",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "Image Dimension Checker - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform image dimension checker tasks in the browser without registration.",
+        "title": "Image Dimension Checker Online – Find Image Size Free",
+        "description": "Check the exact pixel dimensions and aspect ratio of your image instantly. Upload a photo to see its width and height directly in your browser.",
         "url": "https://singulariti.in/image/utility/image-dimension-checker",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "Image Dimension Checker - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform image dimension checker tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Image Dimension Checker Online – Find Image Size Free",
+        "description": "Check the exact pixel dimensions and aspect ratio of your image instantly. Upload a photo to see its width and height directly in your browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -650,25 +657,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Utility Tools",
     "url": "/image/utility/image-format-detector",
-    "title": "Image Format Detector - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform image format detector tasks in the browser without registration.",
+    "title": "Image Format Detector Online – Identify Image Types Free",
+    "description": "Determine the true file format of an image instantly. Upload a file to see its MIME type and extension directly in your browser without any server uploads.",
     "canonical": "https://singulariti.in/image/utility/image-format-detector",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "Image Format Detector - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform image format detector tasks in the browser without registration.",
+        "title": "Image Format Detector Online – Identify Image Types Free",
+        "description": "Determine the true file format of an image instantly. Upload a file to see its MIME type and extension directly in your browser without any server uploads.",
         "url": "https://singulariti.in/image/utility/image-format-detector",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "Image Format Detector - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform image format detector tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Image Format Detector Online – Identify Image Types Free",
+        "description": "Determine the true file format of an image instantly. Upload a file to see its MIME type and extension directly in your browser without any server uploads.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -678,25 +685,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Utility Tools",
     "url": "/image/utility/color-picker-from-image",
-    "title": "Color Picker From Image - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform color picker from image tasks in the browser without registration.",
+    "title": "Color Picker From Image Online – Extract Colors Free",
+    "description": "Extract HEX and RGB colors directly from your images. Upload a photo and use the eyedropper tool to pick any color instantly in your browser.",
     "canonical": "https://singulariti.in/image/utility/color-picker-from-image",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "Color Picker From Image - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform color picker from image tasks in the browser without registration.",
+        "title": "Color Picker From Image Online – Extract Colors Free",
+        "description": "Extract HEX and RGB colors directly from your images. Upload a photo and use the eyedropper tool to pick any color instantly in your browser.",
         "url": "https://singulariti.in/image/utility/color-picker-from-image",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "Color Picker From Image - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform color picker from image tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Color Picker From Image Online – Extract Colors Free",
+        "description": "Extract HEX and RGB colors directly from your images. Upload a photo and use the eyedropper tool to pick any color instantly in your browser.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -706,25 +713,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Utility Tools",
     "url": "/image/utility/image-color-palette-extractor",
-    "title": "Image Color Palette Extractor - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform image color palette extractor tasks in the browser without registration.",
+    "title": "Image Color Palette Extractor Online – Generate Palettes",
+    "description": "Automatically extract the dominant color palette from your images. Upload a photo to generate beautiful color schemes instantly without sending files to a server.",
     "canonical": "https://singulariti.in/image/utility/image-color-palette-extractor",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "Image Color Palette Extractor - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform image color palette extractor tasks in the browser without registration.",
+        "title": "Image Color Palette Extractor Online – Generate Palettes",
+        "description": "Automatically extract the dominant color palette from your images. Upload a photo to generate beautiful color schemes instantly without sending files to a server.",
         "url": "https://singulariti.in/image/utility/image-color-palette-extractor",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "Image Color Palette Extractor - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform image color palette extractor tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Image Color Palette Extractor Online – Generate Palettes",
+        "description": "Automatically extract the dominant color palette from your images. Upload a photo to generate beautiful color schemes instantly without sending files to a server.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -734,25 +741,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Developer Tools",
     "url": "/image/developer/image-to-base64",
-    "title": "Image to Base64 - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform image to base64 tasks in the browser without registration.",
+    "title": "Image to Base64 Converter Online – Free Developer Tool",
+    "description": "Convert images to Base64 encoded strings for direct CSS or HTML embedding. Drag and drop your image to get the data URL instantly without any server uploads.",
     "canonical": "https://singulariti.in/image/developer/image-to-base64",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "Image to Base64 - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform image to base64 tasks in the browser without registration.",
+        "title": "Image to Base64 Converter Online – Free Developer Tool",
+        "description": "Convert images to Base64 encoded strings for direct CSS or HTML embedding. Drag and drop your image to get the data URL instantly without any server uploads.",
         "url": "https://singulariti.in/image/developer/image-to-base64",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "Image to Base64 - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform image to base64 tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Image to Base64 Converter Online – Free Developer Tool",
+        "description": "Convert images to Base64 encoded strings for direct CSS or HTML embedding. Drag and drop your image to get the data URL instantly without any server uploads.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -762,25 +769,25 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Utilities",
     "subSection": "Developer Tools",
     "url": "/image/developer/base64-to-image",
-    "title": "Base64 to Image - Free Online Utility Tool",
-    "description": "Use this local utility tool to perform base64 to image tasks in the browser without registration.",
+    "title": "Base64 to Image Decoder Online – Free Developer Tool",
+    "description": "Decode Base64 strings back into viewable and downloadable images. Paste your Base64 text to get the original image instantly without any server uploads.",
     "canonical": "https://singulariti.in/image/developer/base64-to-image",
     "robots": {
         "index": true,
         "follow": true
     },
     "openGraph": {
-        "title": "Base64 to Image - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform base64 to image tasks in the browser without registration.",
+        "title": "Base64 to Image Decoder Online – Free Developer Tool",
+        "description": "Decode Base64 strings back into viewable and downloadable images. Paste your Base64 text to get the original image instantly without any server uploads.",
         "url": "https://singulariti.in/image/developer/base64-to-image",
         "type": "website",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "Base64 to Image - Free Online Utility Tool",
-        "description": "Use this local utility tool to perform base64 to image tasks in the browser without registration.",
-        "image": "https://singulariti.in/og/image-utilities.png"
+        "title": "Base64 to Image Decoder Online – Free Developer Tool",
+        "description": "Decode Base64 strings back into viewable and downloadable images. Paste your Base64 text to get the original image instantly without any server uploads.",
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -802,13 +809,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to crop image directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/crop-image",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Crop Image - Edit Image Online",
         "description": "Use this online image tool to crop image directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -830,13 +837,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Resize images using width, height or aspect ratio. Useful for uploads, previews, thumbnails and layout preparation.",
         "url": "https://singulariti.in/editing/tools/image-resizer",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Image Resizer - Resize Images by Width, Height or Ratio",
         "description": "Resize images using width, height or aspect ratio. Useful for uploads, previews, thumbnails and layout preparation.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -858,13 +865,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to rotate image directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/rotate-image",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Rotate Image - Edit Image Online",
         "description": "Use this online image tool to rotate image directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -886,13 +893,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to flip image directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/flip-image",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Flip Image - Edit Image Online",
         "description": "Use this online image tool to flip image directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -914,13 +921,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to image upscaler directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/image-upscaler",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Image Upscaler - Edit Image Online",
         "description": "Use this online image tool to image upscaler directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -942,13 +949,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to image enhancer directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/image-enhancer",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Image Enhancer - Edit Image Online",
         "description": "Use this online image tool to image enhancer directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -970,13 +977,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to sharpen image directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/image-sharpen",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Sharpen Image - Edit Image Online",
         "description": "Use this online image tool to sharpen image directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -998,13 +1005,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to denoise image directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/image-denoiser",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Denoise Image - Edit Image Online",
         "description": "Use this online image tool to denoise image directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1026,13 +1033,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to brightness & contrast directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/brightness-and-contrast-adjuster",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Brightness & Contrast - Edit Image Online",
         "description": "Use this online image tool to brightness & contrast directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1054,13 +1061,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to color adjuster directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/color-adjuster",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Color Adjuster - Edit Image Online",
         "description": "Use this online image tool to color adjuster directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1082,13 +1089,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to grayscale converter directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/grayscale",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Grayscale Converter - Edit Image Online",
         "description": "Use this online image tool to grayscale converter directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1110,13 +1117,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to color to black & white directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/color-to-black-and-white",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Color to Black & White - Edit Image Online",
         "description": "Use this online image tool to color to black & white directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1138,13 +1145,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to black & white to color directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/black-and-white-to-color",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Black & White to Color - Edit Image Online",
         "description": "Use this online image tool to black & white to color directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1166,13 +1173,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to blur image directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/blur-image",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Blur Image - Edit Image Online",
         "description": "Use this online image tool to blur image directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1194,13 +1201,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to pixelate image directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/pixelate-image",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Pixelate Image - Edit Image Online",
         "description": "Use this online image tool to pixelate image directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1222,13 +1229,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to add watermark directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/add-watermark-to-image",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Add Watermark - Edit Image Online",
         "description": "Use this online image tool to add watermark directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1238,7 +1245,7 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Image Editing Utilities",
     "subSection": "Image Editing Tools",
     "url": "/editing/tools/add-text-on-image",
-    "title": "Add Text - Edit Image Online",
+    "title": "Add Text to Image Online – Free Browser-Based Editor",
     "description": "Use this online image tool to add text directly in your web browser. Free, secure, and operates entirely client-side.",
     "canonical": "https://singulariti.in/editing/tools/add-text-on-image",
     "robots": {
@@ -1246,17 +1253,17 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "follow": true
     },
     "openGraph": {
-        "title": "Add Text - Edit Image Online",
+        "title": "Add Text to Image Online – Free Browser-Based Editor",
         "description": "Use this online image tool to add text directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/add-text-on-image",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "Add Text - Edit Image Online",
+        "title": "Add Text to Image Online – Free Browser-Based Editor",
         "description": "Use this online image tool to add text directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1278,13 +1285,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use this online image tool to add logo overlay directly in your web browser. Free, secure, and operates entirely client-side.",
         "url": "https://singulariti.in/editing/tools/add-logo-overlay",
         "type": "website",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Add Logo Overlay - Edit Image Online",
         "description": "Use this online image tool to add logo overlay directly in your web browser. Free, secure, and operates entirely client-side.",
-        "image": "https://singulariti.in/og/image-editing-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1306,13 +1313,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Merge multiple PDF files into one document. Useful for combining reports, forms, notes and document pages.",
         "url": "https://singulariti.in/tools/pdf/merge-pdf",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "PDF Merger - Combine Multiple PDF Files",
         "description": "Merge multiple PDF files into one document. Useful for combining reports, forms, notes and document pages.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1334,13 +1341,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Split PDF files by selected pages or ranges. Useful for extracting sections, separating forms and managing large documents.",
         "url": "https://singulariti.in/tools/pdf/split-pdf",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "PDF Splitter - Split PDF Pages into Separate Files",
         "description": "Split PDF files by selected pages or ranges. Useful for extracting sections, separating forms and managing large documents.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1350,7 +1357,7 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "PDF Utilities",
     "subSection": "PDF Management",
     "url": "/tools/pdf/rotate-pdf",
-    "title": "Rotate PDF - Manage PDF Pages",
+    "title": "Rotate PDF Pages Online – Free Browser PDF Rotation Tool",
     "description": "Use the rotate pdf utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
     "canonical": "https://singulariti.in/tools/pdf/rotate-pdf",
     "robots": {
@@ -1358,17 +1365,17 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "follow": true
     },
     "openGraph": {
-        "title": "Rotate PDF - Manage PDF Pages",
+        "title": "Rotate PDF Pages Online – Free Browser PDF Rotation Tool",
         "description": "Use the rotate pdf utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
         "url": "https://singulariti.in/tools/pdf/rotate-pdf",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "Rotate PDF - Manage PDF Pages",
+        "title": "Rotate PDF Pages Online – Free Browser PDF Rotation Tool",
         "description": "Use the rotate pdf utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1390,13 +1397,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the delete pdf pages utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
         "url": "https://singulariti.in/tools/pdf/delete-pdf-pages",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Delete PDF Pages - Manage PDF Pages",
         "description": "Use the delete pdf pages utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1418,13 +1425,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the rearrange pdf pages utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
         "url": "https://singulariti.in/tools/pdf/rearrange-pdf-pages",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Rearrange PDF Pages - Manage PDF Pages",
         "description": "Use the rearrange pdf pages utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1446,13 +1453,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the extract pdf pages utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
         "url": "https://singulariti.in/tools/pdf/extract-pdf-pages",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Extract PDF Pages - Manage PDF Pages",
         "description": "Use the extract pdf pages utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1474,13 +1481,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert files between formats with the jpg to pdf utility seamlessly in the browser. Safe, fast, and fully client-side.",
         "url": "https://singulariti.in/tools/pdf/jpg-to-pdf",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "JPG to PDF - Convert PDF Documents",
         "description": "Convert files between formats with the jpg to pdf utility seamlessly in the browser. Safe, fast, and fully client-side.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1502,13 +1509,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert files between formats with the pdf to jpg utility seamlessly in the browser. Safe, fast, and fully client-side.",
         "url": "https://singulariti.in/tools/pdf/pdf-to-jpg",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "PDF to JPG - Convert PDF Documents",
         "description": "Convert files between formats with the pdf to jpg utility seamlessly in the browser. Safe, fast, and fully client-side.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1530,13 +1537,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Compress PDF files to reduce size for upload, sharing or storage. Learn file validation, size reduction and output handling.",
         "url": "https://singulariti.in/tools/pdf/compress-pdf",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "PDF Compressor - Reduce PDF File Size",
         "description": "Compress PDF files to reduce size for upload, sharing or storage. Learn file validation, size reduction and output handling.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1546,7 +1553,7 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "PDF Utilities",
     "subSection": "PDF Utilities",
     "url": "/tools/pdf/sign-pdf",
-    "title": "Sign PDF - Manage PDF Pages",
+    "title": "Sign PDF Online Free – Add Signature to PDF in Browser",
     "description": "Use the sign pdf utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
     "canonical": "https://singulariti.in/tools/pdf/sign-pdf",
     "robots": {
@@ -1554,17 +1561,17 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "follow": true
     },
     "openGraph": {
-        "title": "Sign PDF - Manage PDF Pages",
+        "title": "Sign PDF Online Free – Add Signature to PDF in Browser",
         "description": "Use the sign pdf utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
         "url": "https://singulariti.in/tools/pdf/sign-pdf",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "Sign PDF - Manage PDF Pages",
+        "title": "Sign PDF Online Free – Add Signature to PDF in Browser",
         "description": "Use the sign pdf utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1586,13 +1593,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert files between formats with the add watermark to pdf utility seamlessly in the browser. Safe, fast, and fully client-side.",
         "url": "https://singulariti.in/tools/pdf/watermark-pdf",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Add Watermark to PDF - Convert PDF Documents",
         "description": "Convert files between formats with the add watermark to pdf utility seamlessly in the browser. Safe, fast, and fully client-side.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1614,13 +1621,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the protect pdf utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
         "url": "https://singulariti.in/tools/pdf/protect-pdf",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Protect PDF - Manage PDF Pages",
         "description": "Use the protect pdf utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1642,13 +1649,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the pdf metadata viewer utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
         "url": "https://singulariti.in/tools/pdf/metadata-viewer",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "PDF Metadata Viewer - Manage PDF Pages",
         "description": "Use the pdf metadata viewer utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1670,13 +1677,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the pdf page counter utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
         "url": "https://singulariti.in/tools/pdf/page-counter",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "PDF Page Counter - Manage PDF Pages",
         "description": "Use the pdf page counter utility to manage pages easily in the browser. Rearrange pages, combine files, or apply custom modifications safely.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1698,13 +1705,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert files between formats with the pdf to text utility seamlessly in the browser. Safe, fast, and fully client-side.",
         "url": "https://singulariti.in/tools/pdf/pdf-to-text",
         "type": "website",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "PDF to Text - Convert PDF Documents",
         "description": "Convert files between formats with the pdf to text utility seamlessly in the browser. Safe, fast, and fully client-side.",
-        "image": "https://singulariti.in/og/pdf-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1726,13 +1733,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Create QR codes from text, URLs or contact information. Useful for sharing links, labels, documents and quick access data.",
         "url": "https://singulariti.in/tools/qr/qr-code-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "QR Code Generator - Generate QR Codes from Text or URLs",
         "description": "Create QR codes from text, URLs or contact information. Useful for sharing links, labels, documents and quick access data.",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1754,13 +1761,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Scan QR codes from camera or image input and view decoded text. Useful for reading links, labels and embedded QR data.",
         "url": "https://singulariti.in/tools/qr/qr-code-scanner",
         "type": "website",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "QR Code Scanner - Scan and Read QR Code Data",
         "description": "Scan QR codes from camera or image input and view decoded text. Useful for reading links, labels and embedded QR data.",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1782,13 +1789,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate custom QR codes using the url qr code generator for url instantly. Customize size, download image, or share easily.",
         "url": "https://singulariti.in/tools/qr/url-qr-code-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "URL QR Code Generator - Create QR Codes",
         "description": "Generate custom QR codes using the url qr code generator for url instantly. Customize size, download image, or share easily.",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1810,13 +1817,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate custom QR codes using the text qr code generator for text instantly. Customize size, download image, or share easily.",
         "url": "https://singulariti.in/tools/qr/text-qr-code-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Text QR Code Generator - Create QR Codes",
         "description": "Generate custom QR codes using the text qr code generator for text instantly. Customize size, download image, or share easily.",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1838,13 +1845,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate custom QR codes using the wi-fi qr code generator for wi-fi instantly. Customize size, download image, or share easily.",
         "url": "https://singulariti.in/tools/qr/wifi-qr-code-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Wi-Fi QR Code Generator - Create QR Codes",
         "description": "Generate custom QR codes using the wi-fi qr code generator for wi-fi instantly. Customize size, download image, or share easily.",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1866,13 +1873,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate custom QR codes using the vcard qr code generator for vcard instantly. Customize size, download image, or share easily.",
         "url": "https://singulariti.in/tools/qr/vcard-qr-code-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "vCard QR Code Generator - Create QR Codes",
         "description": "Generate custom QR codes using the vcard qr code generator for vcard instantly. Customize size, download image, or share easily.",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1894,13 +1901,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate custom QR codes using the email qr code generator for email instantly. Customize size, download image, or share easily.",
         "url": "https://singulariti.in/tools/qr/email-qr-code-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Email QR Code Generator - Create QR Codes",
         "description": "Generate custom QR codes using the email qr code generator for email instantly. Customize size, download image, or share easily.",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1922,13 +1929,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate custom QR codes using the phone qr code generator for phone instantly. Customize size, download image, or share easily.",
         "url": "https://singulariti.in/tools/qr/phone-qr-code-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Phone QR Code Generator - Create QR Codes",
         "description": "Generate custom QR codes using the phone qr code generator for phone instantly. Customize size, download image, or share easily.",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1950,13 +1957,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate custom QR codes using the sms qr code generator for sms instantly. Customize size, download image, or share easily.",
         "url": "https://singulariti.in/tools/qr/sms-qr-code-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "SMS QR Code Generator - Create QR Codes",
         "description": "Generate custom QR codes using the sms qr code generator for sms instantly. Customize size, download image, or share easily.",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -1978,13 +1985,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate custom QR codes using the upi qr code generator for upi instantly. Customize size, download image, or share easily.",
         "url": "https://singulariti.in/tools/qr/upi-qr-code-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "UPI QR Code Generator - Create QR Codes",
         "description": "Generate custom QR codes using the upi qr code generator for upi instantly. Customize size, download image, or share easily.",
-        "image": "https://singulariti.in/og/qr-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2006,13 +2013,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Calculate EMI, total payment and interest from loan amount, rate and tenure using the standard EMI formula.",
         "url": "https://singulariti.in/tools/calculators/emi-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "EMI Calculator - Calculate Monthly Loan Payments",
         "description": "Calculate EMI, total payment and interest from loan amount, rate and tenure using the standard EMI formula.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2034,13 +2041,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the sip calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/sip-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "SIP Calculator - Calculate Values Online",
         "description": "Use the sip calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2062,13 +2069,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the compound interest calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/compound-interest-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Compound Interest Calculator - Calculate Values Online",
         "description": "Use the compound interest calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2090,13 +2097,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the cagr calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/cagr-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "CAGR Calculator - Calculate Values Online",
         "description": "Use the cagr calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2118,13 +2125,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the fd calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/fd-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "FD Calculator - Calculate Values Online",
         "description": "Use the fd calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2146,13 +2153,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the roi calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/roi-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "ROI Calculator - Calculate Values Online",
         "description": "Use the roi calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2174,13 +2181,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the currency converter to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/currency-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Currency Converter - Calculate Values Online",
         "description": "Use the currency converter to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2202,13 +2209,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the mortgage calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/mortgage-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Mortgage Calculator - Calculate Values Online",
         "description": "Use the mortgage calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2230,13 +2237,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the loan calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/loan-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Loan Calculator - Calculate Values Online",
         "description": "Use the loan calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2258,13 +2265,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the income tax calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/income-tax-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Income Tax Calculator - Calculate Values Online",
         "description": "Use the income tax calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2286,13 +2293,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the gst calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/gst-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "GST Calculator - Calculate Values Online",
         "description": "Use the gst calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2314,13 +2321,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the discount calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/discount-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Discount Calculator - Calculate Values Online",
         "description": "Use the discount calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2342,13 +2349,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the profit calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/profit-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Profit Calculator - Calculate Values Online",
         "description": "Use the profit calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2370,13 +2377,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the youtube earnings calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/youtube-earnings-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "YouTube Earnings Calculator - Calculate Values Online",
         "description": "Use the youtube earnings calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2398,13 +2405,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the adsense revenue calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/adsense-revenue-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "AdSense Revenue Calculator - Calculate Values Online",
         "description": "Use the adsense revenue calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2426,13 +2433,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the simple interest calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/simple-interest-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Simple Interest Calculator - Calculate Values Online",
         "description": "Use the simple interest calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2454,13 +2461,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the salary calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/salary-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Salary Calculator - Calculate Values Online",
         "description": "Use the salary calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2482,13 +2489,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Calculate percentages from part and whole values. Useful for discounts, marks, comparisons and everyday math tasks.",
         "url": "https://singulariti.in/tools/calculators/percentage-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Percentage Calculator - Calculate Percentages Quickly",
         "description": "Calculate percentages from part and whole values. Useful for discounts, marks, comparisons and everyday math tasks.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2510,13 +2517,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the cgpa calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/cgpa-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "CGPA Calculator - Calculate Values Online",
         "description": "Use the cgpa calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2538,13 +2545,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the scientific calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/scientific-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Scientific Calculator - Calculate Values Online",
         "description": "Use the scientific calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2566,13 +2573,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the basic calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/basic-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Basic Calculator - Calculate Values Online",
         "description": "Use the basic calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2594,13 +2601,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the age calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/age-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Age Calculator - Calculate Values Online",
         "description": "Use the age calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2622,13 +2629,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the date difference calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/date-difference-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Date Difference Calculator - Calculate Values Online",
         "description": "Use the date difference calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2650,13 +2657,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Calculate BMI from height and weight values. Useful for basic health reference and body mass index checks.",
         "url": "https://singulariti.in/tools/calculators/bmi-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "BMI Calculator - Calculate Body Mass Index",
         "description": "Calculate BMI from height and weight values. Useful for basic health reference and body mass index checks.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2678,13 +2685,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the calorie calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/calorie-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Calorie Calculator - Calculate Values Online",
         "description": "Use the calorie calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2706,13 +2713,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the tip calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/tip-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Tip Calculator - Calculate Values Online",
         "description": "Use the tip calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2734,13 +2741,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the time duration calculator to compute values instantly in the browser using standard mathematical formulas.",
         "url": "https://singulariti.in/tools/calculators/time-duration-calculator",
         "type": "website",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Time Duration Calculator - Calculate Values Online",
         "description": "Use the time duration calculator to compute values instantly in the browser using standard mathematical formulas.",
-        "image": "https://singulariti.in/og/calculator-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2762,13 +2769,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Count words from pasted text and review text length. Useful for assignments, forms, content writing and application limits.",
         "url": "https://singulariti.in/tools/text/word-counter",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Word Counter - Count Words and Text Length",
         "description": "Count words from pasted text and review text length. Useful for assignments, forms, content writing and application limits.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2790,13 +2797,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Count characters in text with or without spaces. Useful for descriptions, form limits, captions and short content checks.",
         "url": "https://singulariti.in/tools/text/character-counter",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Character Counter - Count Characters With or Without Spaces",
         "description": "Count characters in text with or without spaces. Useful for descriptions, form limits, captions and short content checks.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2818,13 +2825,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert text into uppercase, lowercase, title case or sentence case. Useful for formatting headings, notes and copied text.",
         "url": "https://singulariti.in/tools/text/case-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Case Converter - Change Text Case Online",
         "description": "Convert text into uppercase, lowercase, title case or sentence case. Useful for formatting headings, notes and copied text.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2846,13 +2853,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Clean, sort, or convert the casing of your text online using the remove duplicate lines utility. Useful for copywriting, formatting, and general content preparation.",
         "url": "https://singulariti.in/tools/text/remove-duplicate-lines",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Remove Duplicate Lines - Format and Edit Text",
         "description": "Clean, sort, or convert the casing of your text online using the remove duplicate lines utility. Useful for copywriting, formatting, and general content preparation.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2874,13 +2881,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Clean, sort, or convert the casing of your text online using the text sorter utility. Useful for copywriting, formatting, and general content preparation.",
         "url": "https://singulariti.in/tools/text/text-sorter",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Text Sorter - Format and Edit Text",
         "description": "Clean, sort, or convert the casing of your text online using the text sorter utility. Useful for copywriting, formatting, and general content preparation.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2902,13 +2909,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Compare two text inputs to identify added, removed or changed content. Useful for checking revisions, drafts and copied text.",
         "url": "https://singulariti.in/tools/text/text-compare",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Text Compare - Find Differences Between Two Texts",
         "description": "Compare two text inputs to identify added, removed or changed content. Useful for checking revisions, drafts and copied text.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2930,13 +2937,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Clean, sort, or convert the casing of your text online using the text diff checker utility. Useful for copywriting, formatting, and general content preparation.",
         "url": "https://singulariti.in/tools/text/text-diff",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Text Diff Checker - Format and Edit Text",
         "description": "Clean, sort, or convert the casing of your text online using the text diff checker utility. Useful for copywriting, formatting, and general content preparation.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2958,13 +2965,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Clean, sort, or convert the casing of your text online using the remove extra spaces utility. Useful for copywriting, formatting, and general content preparation.",
         "url": "https://singulariti.in/tools/text/remove-extra-spaces",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Remove Extra Spaces - Format and Edit Text",
         "description": "Clean, sort, or convert the casing of your text online using the remove extra spaces utility. Useful for copywriting, formatting, and general content preparation.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -2986,13 +2993,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Analyze text input and count characters, words or patterns using the line counter in real time. Useful for content limits and copy editing.",
         "url": "https://singulariti.in/tools/text/line-counter",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Line Counter - Count Text Metrics",
         "description": "Analyze text input and count characters, words or patterns using the line counter in real time. Useful for content limits and copy editing.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3014,13 +3021,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Analyze text input and count characters, words or patterns using the sentence counter in real time. Useful for content limits and copy editing.",
         "url": "https://singulariti.in/tools/text/sentence-counter",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Sentence Counter - Count Text Metrics",
         "description": "Analyze text input and count characters, words or patterns using the sentence counter in real time. Useful for content limits and copy editing.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3042,13 +3049,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Analyze text input and count characters, words or patterns using the paragraph counter in real time. Useful for content limits and copy editing.",
         "url": "https://singulariti.in/tools/text/paragraph-counter",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Paragraph Counter - Count Text Metrics",
         "description": "Analyze text input and count characters, words or patterns using the paragraph counter in real time. Useful for content limits and copy editing.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3070,13 +3077,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Clean, sort, or convert the casing of your text online using the text reverser utility. Useful for copywriting, formatting, and general content preparation.",
         "url": "https://singulariti.in/tools/text/text-reverser",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Text Reverser - Format and Edit Text",
         "description": "Clean, sort, or convert the casing of your text online using the text reverser utility. Useful for copywriting, formatting, and general content preparation.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3098,13 +3105,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Clean, sort, or convert the casing of your text online using the slug generator utility. Useful for copywriting, formatting, and general content preparation.",
         "url": "https://singulariti.in/tools/text/slug-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Slug Generator - Format and Edit Text",
         "description": "Clean, sort, or convert the casing of your text online using the slug generator utility. Useful for copywriting, formatting, and general content preparation.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3126,13 +3133,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Clean, sort, or convert the casing of your text online using the find and replace text utility. Useful for copywriting, formatting, and general content preparation.",
         "url": "https://singulariti.in/tools/text/find-replace",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Find and Replace Text - Format and Edit Text",
         "description": "Clean, sort, or convert the casing of your text online using the find and replace text utility. Useful for copywriting, formatting, and general content preparation.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3154,13 +3161,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Clean, sort, or convert the casing of your text online using the text to uppercase utility. Useful for copywriting, formatting, and general content preparation.",
         "url": "https://singulariti.in/tools/text/text-uppercase",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Text to Uppercase - Format and Edit Text",
         "description": "Clean, sort, or convert the casing of your text online using the text to uppercase utility. Useful for copywriting, formatting, and general content preparation.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3182,13 +3189,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Clean, sort, or convert the casing of your text online using the text to lowercase utility. Useful for copywriting, formatting, and general content preparation.",
         "url": "https://singulariti.in/tools/text/text-lowercase",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Text to Lowercase - Format and Edit Text",
         "description": "Clean, sort, or convert the casing of your text online using the text to lowercase utility. Useful for copywriting, formatting, and general content preparation.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3210,13 +3217,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Clean, sort, or convert the casing of your text online using the capitalize text utility. Useful for copywriting, formatting, and general content preparation.",
         "url": "https://singulariti.in/tools/text/capitalize-text",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Capitalize Text - Format and Edit Text",
         "description": "Clean, sort, or convert the casing of your text online using the capitalize text utility. Useful for copywriting, formatting, and general content preparation.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3238,13 +3245,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Clean, sort, or convert the casing of your text online using the title case converter utility. Useful for copywriting, formatting, and general content preparation.",
         "url": "https://singulariti.in/tools/text/title-case",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Title Case Converter - Format and Edit Text",
         "description": "Clean, sort, or convert the casing of your text online using the title case converter utility. Useful for copywriting, formatting, and general content preparation.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3266,13 +3273,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Clean, sort, or convert the casing of your text online using the lorem ipsum generator utility. Useful for copywriting, formatting, and general content preparation.",
         "url": "https://singulariti.in/tools/text/lorem-ipsum",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Lorem Ipsum Generator - Format and Edit Text",
         "description": "Clean, sort, or convert the casing of your text online using the lorem ipsum generator utility. Useful for copywriting, formatting, and general content preparation.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3294,13 +3301,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Clean, sort, or convert the casing of your text online using the random text generator utility. Useful for copywriting, formatting, and general content preparation.",
         "url": "https://singulariti.in/tools/text/random-text",
         "type": "website",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Random Text Generator - Format and Edit Text",
         "description": "Clean, sort, or convert the casing of your text online using the random text generator utility. Useful for copywriting, formatting, and general content preparation.",
-        "image": "https://singulariti.in/og/text-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3322,13 +3329,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Format raw or minified JSON into readable output with indentation. Useful for API responses, configuration files and debugging.",
         "url": "https://singulariti.in/tools/dev/json-formatter",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "JSON Formatter - Format and Read JSON Data",
         "description": "Format raw or minified JSON into readable output with indentation. Useful for API responses, configuration files and debugging.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3350,13 +3357,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate hashes, pick colors, or preview code files locally using the json validator utility. Safe and secure client-side tools for software developer workflows.",
         "url": "https://singulariti.in/tools/dev/json-validator",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "JSON Validator - Developer Utility Tool",
         "description": "Generate hashes, pick colors, or preview code files locally using the json validator utility. Safe and secure client-side tools for software developer workflows.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3378,13 +3385,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Format XML input into a readable structure with indentation. Useful for checking tags, nested data and structured documents.",
         "url": "https://singulariti.in/tools/dev/xml-formatter",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "XML Formatter - Format and Read XML Data",
         "description": "Format XML input into a readable structure with indentation. Useful for checking tags, nested data and structured documents.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3406,13 +3413,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Format messy or minified code with the yaml formatter into a readable structured layout. Useful for debugging, formatting, and code syntax checks.",
         "url": "https://singulariti.in/tools/dev/yaml-formatter",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "YAML Formatter - Format and Read YAML Data",
         "description": "Format messy or minified code with the yaml formatter into a readable structured layout. Useful for debugging, formatting, and code syntax checks.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3434,13 +3441,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Format messy or minified code with the sql formatter into a readable structured layout. Useful for debugging, formatting, and code syntax checks.",
         "url": "https://singulariti.in/tools/dev/sql-formatter",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "SQL Formatter - Format and Read SQL Data",
         "description": "Format messy or minified code with the sql formatter into a readable structured layout. Useful for debugging, formatting, and code syntax checks.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3462,13 +3469,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate hashes, pick colors, or preview code files locally using the code beautifier utility. Safe and secure client-side tools for software developer workflows.",
         "url": "https://singulariti.in/tools/dev/code-beautifier",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Code Beautifier - Developer Utility Tool",
         "description": "Generate hashes, pick colors, or preview code files locally using the code beautifier utility. Safe and secure client-side tools for software developer workflows.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3490,13 +3497,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Encode or decode data payloads instantly using the base64 encoder/decoder in the browser. Useful for developer configurations, JWT analysis, and secure url conversions.",
         "url": "https://singulariti.in/tools/dev/base64-encoder-decoder",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Base64 Encoder/Decoder - Encode and Decode Data",
         "description": "Encode or decode data payloads instantly using the base64 encoder/decoder in the browser. Useful for developer configurations, JWT analysis, and secure url conversions.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3518,13 +3525,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Encode or decode data payloads instantly using the url encoder/decoder in the browser. Useful for developer configurations, JWT analysis, and secure url conversions.",
         "url": "https://singulariti.in/tools/dev/url-encoder-decoder",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "URL Encoder/Decoder - Encode and Decode Data",
         "description": "Encode or decode data payloads instantly using the url encoder/decoder in the browser. Useful for developer configurations, JWT analysis, and secure url conversions.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3546,13 +3553,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Encode or decode data payloads instantly using the jwt decoder in the browser. Useful for developer configurations, JWT analysis, and secure url conversions.",
         "url": "https://singulariti.in/tools/dev/jwt-decoder",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "JWT Decoder - Encode and Decode Data",
         "description": "Encode or decode data payloads instantly using the jwt decoder in the browser. Useful for developer configurations, JWT analysis, and secure url conversions.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3574,13 +3581,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Encode or decode data payloads instantly using the html encoder/decoder in the browser. Useful for developer configurations, JWT analysis, and secure url conversions.",
         "url": "https://singulariti.in/tools/dev/html-encoder-decoder",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "HTML Encoder/Decoder - Encode and Decode Data",
         "description": "Encode or decode data payloads instantly using the html encoder/decoder in the browser. Useful for developer configurations, JWT analysis, and secure url conversions.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3602,13 +3609,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Minify and compress code using the html minifier by removing extra spaces and comments. Useful for optimizing load speed and file size.",
         "url": "https://singulariti.in/tools/dev/html-minifier",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "HTML Minifier - Minify HTML Code",
         "description": "Minify and compress code using the html minifier by removing extra spaces and comments. Useful for optimizing load speed and file size.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3630,13 +3637,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Minify and compress code using the css minifier by removing extra spaces and comments. Useful for optimizing load speed and file size.",
         "url": "https://singulariti.in/tools/dev/css-minifier",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "CSS Minifier - Minify CSS Code",
         "description": "Minify and compress code using the css minifier by removing extra spaces and comments. Useful for optimizing load speed and file size.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3646,7 +3653,7 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "section": "Developer Utilities",
     "subSection": "Minifiers & Testers",
     "url": "/tools/dev/js-minifier",
-    "title": "JS Minifier - Minify JS Code",
+    "title": "JS Minifier Online – Minify JavaScript Code Free",
     "description": "Minify and compress code using the js minifier by removing extra spaces and comments. Useful for optimizing load speed and file size.",
     "canonical": "https://singulariti.in/tools/dev/js-minifier",
     "robots": {
@@ -3654,17 +3661,17 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "follow": true
     },
     "openGraph": {
-        "title": "JS Minifier - Minify JS Code",
+        "title": "JS Minifier Online – Minify JavaScript Code Free",
         "description": "Minify and compress code using the js minifier by removing extra spaces and comments. Useful for optimizing load speed and file size.",
         "url": "https://singulariti.in/tools/dev/js-minifier",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
-        "title": "JS Minifier - Minify JS Code",
+        "title": "JS Minifier Online – Minify JavaScript Code Free",
         "description": "Minify and compress code using the js minifier by removing extra spaces and comments. Useful for optimizing load speed and file size.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3686,13 +3693,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate hashes, pick colors, or preview code files locally using the regex tester utility. Safe and secure client-side tools for software developer workflows.",
         "url": "https://singulariti.in/tools/dev/regex-tester",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Regex Tester - Developer Utility Tool",
         "description": "Generate hashes, pick colors, or preview code files locally using the regex tester utility. Safe and secure client-side tools for software developer workflows.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3714,13 +3721,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate UUID values for testing, records, mock data and development workflows without manually creating identifiers.",
         "url": "https://singulariti.in/tools/dev/uuid-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "UUID Generator - Create Unique Identifier Values",
         "description": "Generate UUID values for testing, records, mock data and development workflows without manually creating identifiers.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3742,13 +3749,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate hashes, pick colors, or preview code files locally using the hash generator utility. Safe and secure client-side tools for software developer workflows.",
         "url": "https://singulariti.in/tools/dev/hash-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Hash Generator - Developer Utility Tool",
         "description": "Generate hashes, pick colors, or preview code files locally using the hash generator utility. Safe and secure client-side tools for software developer workflows.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3770,13 +3777,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate hashes, pick colors, or preview code files locally using the color picker utility. Safe and secure client-side tools for software developer workflows.",
         "url": "https://singulariti.in/tools/dev/color-picker-tool",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Color Picker - Developer Utility Tool",
         "description": "Generate hashes, pick colors, or preview code files locally using the color picker utility. Safe and secure client-side tools for software developer workflows.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3798,13 +3805,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate hashes, pick colors, or preview code files locally using the hex to rgb converter utility. Safe and secure client-side tools for software developer workflows.",
         "url": "https://singulariti.in/tools/dev/hex-to-rgb",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "HEX to RGB Converter - Developer Utility Tool",
         "description": "Generate hashes, pick colors, or preview code files locally using the hex to rgb converter utility. Safe and secure client-side tools for software developer workflows.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3826,13 +3833,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate hashes, pick colors, or preview code files locally using the rgb to hex converter utility. Safe and secure client-side tools for software developer workflows.",
         "url": "https://singulariti.in/tools/dev/rgb-to-hex",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "RGB to HEX Converter - Developer Utility Tool",
         "description": "Generate hashes, pick colors, or preview code files locally using the rgb to hex converter utility. Safe and secure client-side tools for software developer workflows.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3854,13 +3861,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate hashes, pick colors, or preview code files locally using the timestamp converter utility. Safe and secure client-side tools for software developer workflows.",
         "url": "https://singulariti.in/tools/dev/timestamp-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Timestamp Converter - Developer Utility Tool",
         "description": "Generate hashes, pick colors, or preview code files locally using the timestamp converter utility. Safe and secure client-side tools for software developer workflows.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3882,13 +3889,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate hashes, pick colors, or preview code files locally using the unix time converter utility. Safe and secure client-side tools for software developer workflows.",
         "url": "https://singulariti.in/tools/dev/unix-time-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Unix Time Converter - Developer Utility Tool",
         "description": "Generate hashes, pick colors, or preview code files locally using the unix time converter utility. Safe and secure client-side tools for software developer workflows.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3910,13 +3917,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate hashes, pick colors, or preview code files locally using the markdown previewer utility. Safe and secure client-side tools for software developer workflows.",
         "url": "https://singulariti.in/tools/dev/markdown-previewer",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Markdown Previewer - Developer Utility Tool",
         "description": "Generate hashes, pick colors, or preview code files locally using the markdown previewer utility. Safe and secure client-side tools for software developer workflows.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3938,13 +3945,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate hashes, pick colors, or preview code files locally using the html previewer utility. Safe and secure client-side tools for software developer workflows.",
         "url": "https://singulariti.in/tools/dev/html-previewer",
         "type": "website",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "HTML Previewer - Developer Utility Tool",
         "description": "Generate hashes, pick colors, or preview code files locally using the html previewer utility. Safe and secure client-side tools for software developer workflows.",
-        "image": "https://singulariti.in/og/developer-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3966,13 +3973,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert length values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/length-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Length Converter - Convert Length Units",
         "description": "Convert length values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -3994,13 +4001,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert weight values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/weight-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Weight Converter - Convert Weight Units",
         "description": "Convert weight values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4022,13 +4029,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert temperature values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/temperature-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Temperature Converter - Convert Temperature Units",
         "description": "Convert temperature values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4050,13 +4057,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert area values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/area-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Area Converter - Convert Area Units",
         "description": "Convert area values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4078,13 +4085,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert volume values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/volume-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Volume Converter - Convert Volume Units",
         "description": "Convert volume values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4106,13 +4113,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert speed values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/speed-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Speed Converter - Convert Speed Units",
         "description": "Convert speed values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4134,13 +4141,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert time values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/time-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Time Converter - Convert Time Units",
         "description": "Convert time values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4162,13 +4169,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert data storage values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/data-storage-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Data Storage Converter - Convert Data Storage Units",
         "description": "Convert data storage values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4190,13 +4197,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert fuel efficiency values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/fuel-efficiency-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Fuel Efficiency Converter - Convert Fuel Efficiency Units",
         "description": "Convert fuel efficiency values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4218,13 +4225,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert angle values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/angle-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Angle Converter - Convert Angle Units",
         "description": "Convert angle values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4246,13 +4253,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert pressure values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/pressure-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Pressure Converter - Convert Pressure Units",
         "description": "Convert pressure values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4274,13 +4281,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert energy values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/energy-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Energy Converter - Convert Energy Units",
         "description": "Convert energy values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4302,13 +4309,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert power values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/power-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Power Converter - Convert Power Units",
         "description": "Convert power values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4330,13 +4337,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert frequency values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/frequency-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Frequency Converter - Convert Frequency Units",
         "description": "Convert frequency values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4358,13 +4365,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Convert number base values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
         "url": "https://singulariti.in/tools/convert/number-base-converter",
         "type": "website",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Number Base Converter - Convert Number Base Units",
         "description": "Convert number base values between different standard measurement units. Useful for school, science and everyday unit conversion tasks.",
-        "image": "https://singulariti.in/og/unit-conversion-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4386,13 +4393,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Generate page title, description and social preview tags for webpages. Useful for preparing basic SEO metadata.",
         "url": "https://singulariti.in/tools/seo/meta-tag-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Meta Tag Generator - Create SEO Meta Tags",
         "description": "Generate page title, description and social preview tags for webpages. Useful for preparing basic SEO metadata.",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4414,13 +4421,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the meta title length checker to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
         "url": "https://singulariti.in/tools/seo/meta-title-checker",
         "type": "website",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Meta Title Length Checker - SEO Optimization Tool",
         "description": "Use the meta title length checker to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4442,13 +4449,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the meta description length checker to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
         "url": "https://singulariti.in/tools/seo/meta-description-checker",
         "type": "website",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Meta Description Length Checker - SEO Optimization Tool",
         "description": "Use the meta description length checker to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4470,13 +4477,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Check keyword count and density percentage in text. Useful for reviewing content balance and basic SEO writing checks.",
         "url": "https://singulariti.in/tools/seo/seo-keyword-density",
         "type": "website",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Keyword Density Checker - Calculate Keyword Usage in Text",
         "description": "Check keyword count and density percentage in text. Useful for reviewing content balance and basic SEO writing checks.",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4498,13 +4505,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the slug generator to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
         "url": "https://singulariti.in/tools/seo/seo-slug-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Slug Generator - SEO Optimization Tool",
         "description": "Use the slug generator to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4526,13 +4533,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the robots.txt generator to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
         "url": "https://singulariti.in/tools/seo/robots-txt-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Robots.txt Generator - SEO Optimization Tool",
         "description": "Use the robots.txt generator to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4554,13 +4561,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the sitemap xml generator to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
         "url": "https://singulariti.in/tools/seo/sitemap-xml-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Sitemap XML Generator - SEO Optimization Tool",
         "description": "Use the sitemap xml generator to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4582,13 +4589,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the open graph tag generator to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
         "url": "https://singulariti.in/tools/seo/open-graph-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Open Graph Tag Generator - SEO Optimization Tool",
         "description": "Use the open graph tag generator to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4610,13 +4617,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the twitter card generator to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
         "url": "https://singulariti.in/tools/seo/twitter-card-generator",
         "type": "website",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Twitter Card Generator - SEO Optimization Tool",
         "description": "Use the twitter card generator to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4638,13 +4645,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the word count for seo to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
         "url": "https://singulariti.in/tools/seo/seo-word-count",
         "type": "website",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Word Count for SEO - SEO Optimization Tool",
         "description": "Use the word count for seo to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },
@@ -4666,13 +4673,13 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
         "description": "Use the heading structure checker to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
         "url": "https://singulariti.in/tools/seo/heading-structure-checker",
         "type": "website",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "twitter": {
         "card": "summary_large_image",
         "title": "Heading Structure Checker - SEO Optimization Tool",
         "description": "Use the heading structure checker to check keyword density, generate meta tags, or analyze sitemap parameters to optimize your webpage structure for search engines.",
-        "image": "https://singulariti.in/og/seo-utilities.png"
+        "image": "https://singulariti.in/og-fallback.png"
     },
     "schemaType": "WebApplication"
 },

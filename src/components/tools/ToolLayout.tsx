@@ -19,6 +19,9 @@ interface ToolLayoutProps {
   privacyLabel?: string;
   onClearError?: () => void;
   children: React.ReactNode;
+  howToUse?: string[];
+  faqs?: { question: string; answer: string }[];
+  relatedTools?: { name: string; url: string; description: string }[];
 }
 
 export function ToolLayout({
@@ -31,9 +34,13 @@ export function ToolLayout({
   warning,
   privacyLabel,
   onClearError,
-  children
+  children,
+  howToUse,
+  faqs,
+  relatedTools
 }: ToolLayoutProps) {
   const [mounted, setMounted] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
 
   useEffect(() => {
@@ -64,6 +71,39 @@ export function ToolLayout({
           description={seo.description}
           section={seo.section}
           canonical={seo.canonical}
+        />
+      )}
+      {faqs && faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map(faq => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+              }
+            }))
+          })}}
+        />
+      )}
+      {howToUse && howToUse.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": `How to use ${title}`,
+            "description": description,
+            "step": howToUse.map((step, index) => ({
+              "@type": "HowToStep",
+              "position": index + 1,
+              "text": step
+            }))
+          })}}
         />
       )}
       <Header />
@@ -149,6 +189,68 @@ export function ToolLayout({
             {children}
           </div>
         </section>
+
+        {/* Details & FAQ Area */}
+        <section className="container mx-auto px-4 md:px-6 max-w-4xl mt-12 space-y-12">
+          {/* How to Use */}
+          {howToUse && howToUse.length > 0 && (
+            <div className="bg-surface/50 border border-border/60 rounded-2xl p-6 md:p-8">
+              <h2 className="font-display font-bold text-xl text-ink mb-6">How to Use</h2>
+              <ol className="space-y-4">
+                {howToUse.map((step, i) => (
+                  <li key={i} className="flex gap-4 font-sans text-sm text-slate">
+                    <span className="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary font-bold text-xs">
+                      {i + 1}
+                    </span>
+                    <span className="pt-0.5">{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
+
+          {/* FAQs */}
+          {faqs && faqs.length > 0 && (
+            <div className="space-y-4">
+              <h2 className="font-display font-bold text-xl text-ink mb-6 text-center">Frequently Asked Questions</h2>
+              <div className="space-y-3">
+                {faqs.map((faq, i) => (
+                  <div key={i} className="border border-border bg-surface rounded-xl overflow-hidden transition-colors">
+                    <button
+                      onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                      className="w-full flex items-center justify-between p-5 text-left font-display font-bold text-[15px] text-ink hover:text-primary transition-colors focus:outline-none"
+                    >
+                      <span>{faq.question}</span>
+                      <span className="text-slate flex-shrink-0 text-xl font-light">
+                        {openFaq === i ? '-' : '+'}
+                      </span>
+                    </button>
+                    {openFaq === i && (
+                      <div className="px-5 pb-5 pt-0 text-sm font-sans text-slate leading-relaxed border-t border-border/50 animate-in fade-in duration-200">
+                        {faq.answer}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* Related Tools Cross-linking */}
+        {relatedTools && relatedTools.length > 0 && (
+          <section className="container mx-auto px-4 md:px-6 max-w-6xl mt-12 mb-6 w-full">
+            <h2 className="font-display font-bold text-2xl text-ink mb-6 text-center">Related Tools</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {relatedTools.map((tool, i) => (
+                <Link key={i} href={tool.url} className="group block bg-surface border border-border rounded-xl p-5 hover:border-primary/50 hover:shadow-sm transition-all duration-300">
+                  <h3 className="font-display font-bold text-[17px] text-ink group-hover:text-primary transition-colors mb-2">{tool.name}</h3>
+                  <p className="font-sans text-[14px] text-slate leading-relaxed">{tool.description}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
 
       <Footer />

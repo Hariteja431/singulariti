@@ -5,19 +5,30 @@ interface SeoSchemaProps {
   description: string;
   section: string;
   canonical: string;
+  collectionName?: string;
+  collectionUrl?: string;
 }
 
-export function SeoSchema({ name, description, section, canonical }: SeoSchemaProps) {
+export function SeoSchema({ name, description, section, canonical, collectionName, collectionUrl }: SeoSchemaProps) {
   // 1. WebApplication Schema
   const webAppSchema = {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
+    "@type": ["WebApplication", "SoftwareApplication"],
     "name": name,
     "applicationCategory": section,
     "url": canonical,
     "description": description,
     "operatingSystem": "Web Browser",
-    "browserRequirements": "Requires JavaScript. Requires HTML5."
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": "Browser-based processing, No file upload required, Instant results, Zero privacy risk, No registration needed",
+    "applicationSubCategory": "UtilityApplication",
+    "isAccessibleForFree": true,
+    "isFamilyFriendly": true
   };
 
   // 2. BreadcrumbList Schema
@@ -39,29 +50,47 @@ export function SeoSchema({ name, description, section, canonical }: SeoSchemaPr
   const sectionSlug = getSectionSlug(section);
   const sectionUrl = `https://singulariti.in/${sectionSlug}`;
 
+  const itemListElement = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://singulariti.in"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": section,
+      "item": sectionUrl
+    }
+  ];
+
+  if (collectionName && collectionUrl) {
+    itemListElement.push({
+      "@type": "ListItem",
+      "position": 3,
+      "name": collectionName,
+      "item": collectionUrl
+    });
+    itemListElement.push({
+      "@type": "ListItem",
+      "position": 4,
+      "name": name,
+      "item": canonical
+    });
+  } else {
+    itemListElement.push({
+      "@type": "ListItem",
+      "position": 3,
+      "name": name,
+      "item": canonical
+    });
+  }
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://singulariti.in"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": section,
-        "item": sectionUrl
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": name,
-        "item": canonical
-      }
-    ]
+    "itemListElement": itemListElement
   };
 
   return (
