@@ -65,7 +65,7 @@ export function WebCompilerClient() {
         function sendLog(type, args) {
           try {
             const content = Array.from(args).map(arg => {
-              if (arg instanceof Event) return '[object Event]';
+              if (arg instanceof Event) return 'Event: ' + (arg.type || 'unknown');
               if (arg instanceof Error) return arg.toString();
               return typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg);
             }).join(' ');
@@ -76,12 +76,19 @@ export function WebCompilerClient() {
         }
 
         console.log = function() { sendLog('log', arguments); originalConsole.log.apply(console, arguments); };
-        console.error = function() { sendLog('error', arguments); originalConsole.error.apply(console, arguments); };
+        console.error = function() { sendLog('error', arguments); };
         console.warn = function() { sendLog('warn', arguments); originalConsole.warn.apply(console, arguments); };
         console.info = function() { sendLog('info', arguments); originalConsole.info.apply(console, arguments); };
         
         window.addEventListener('error', function(e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
           sendLog('error', [e.message + ' at line ' + e.lineno]);
+        });
+        window.addEventListener('unhandledrejection', function(e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          sendLog('error', ['Unhandled Promise Rejection: ' + (e.reason || 'unknown')]);
         });
       <\/script>
     `;
