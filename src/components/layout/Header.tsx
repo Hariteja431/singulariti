@@ -60,8 +60,8 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Tubelight Navbar: Inline on Desktop, Floating Bottom on Mobile */}
-          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:static md:bottom-auto md:left-auto md:translate-x-0 md:flex-1 md:flex md:justify-center">
+          {/* Tubelight Navbar: Inline on Desktop, Floating Below Header on Mobile */}
+          <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 md:static md:top-auto md:left-auto md:translate-x-0 md:flex-1 md:flex md:justify-center">
             <NavBar items={navItems} />
           </div>
 

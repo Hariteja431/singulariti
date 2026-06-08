@@ -105,7 +105,7 @@ export function NavBar({ items, className }: NavBarProps) {
                       transition={{ duration: 0.2 }}
                       className={cn(
                         "absolute left-1/2 -translate-x-1/2 w-48 bg-surface border border-border rounded-2xl shadow-xl overflow-hidden flex flex-col py-2",
-                        "bottom-full mb-4 md:bottom-auto md:top-full md:mt-4 md:mb-0"
+                        "top-full mt-4"
                       )}
                     >
                       {item.dropdownItems!.map((dropItem) => (
