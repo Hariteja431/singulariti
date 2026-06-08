@@ -50,23 +50,25 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 h-[70px] w-full bg-surface/80 backdrop-blur-md border-b border-border">
+      {/* Floating Navbar (Centered globally) */}
+      <div className="fixed top-20 md:top-24 left-1/2 -translate-x-1/2 z-50 pointer-events-none">
+        <div className="pointer-events-auto">
+          <NavBar items={navItems} />
+        </div>
+      </div>
+
+      <header className="sticky top-0 z-40 h-[70px] w-full bg-surface/80 backdrop-blur-md">
         <div className="container mx-auto px-4 md:px-6 h-full flex items-center justify-between max-w-7xl">
           
           {/* Left: Logo */}
-          <div className="flex items-center w-auto lg:w-[250px]">
+          <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <Logo />
             </Link>
           </div>
 
-          {/* Center: Tubelight Navbar (Hidden on mobile top header, shows at bottom) */}
-          <div className="flex-1 flex justify-center">
-            <NavBar items={navItems} />
-          </div>
-
           {/* Right: Search and Theme Toggle */}
-          <div className="flex items-center justify-end gap-2 w-auto lg:w-[250px]">
+          <div className="flex items-center justify-end gap-2">
             <button 
               onClick={() => setIsSearchOpen(true)}
               className="hidden lg:flex items-center bg-background border border-border rounded-full px-3 py-1.5 text-slate w-48 hover:border-slate transition-colors text-left"

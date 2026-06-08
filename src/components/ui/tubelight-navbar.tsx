@@ -1,8 +1,9 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { LucideIcon, ChevronDown } from "lucide-react"
 
 function cn(...classes: (string | undefined | null | false)[]) {
@@ -27,31 +28,25 @@ interface NavBarProps {
 }
 
 export function NavBar({ items, className }: NavBarProps) {
-  const [activeTab, setActiveTab] = useState(items[0].name)
-  const [isMobile, setIsMobile] = useState(false)
+  const pathname = usePathname()
   const [hoveredTab, setHoveredTab] = useState<string | null>(null)
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
-
   return (
-    <div
-      className={cn(
-        "fixed bottom-0 left-1/2 -translate-x-1/2 sm:relative sm:bottom-auto sm:left-auto sm:translate-x-0 z-50 mb-6 sm:mb-0",
-        className,
-      )}
-    >
+    <div className={cn("relative z-50", className)}>
       <div className="flex items-center gap-1 sm:gap-3 bg-surface/80 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
         {items.map((item) => {
           const Icon = item.icon
-          const isActive = activeTab === item.name
+          
+          // Determine active state based on pathname
+          let isActive = false;
+          if (item.url === '/' && pathname === '/') {
+            isActive = true;
+          } else if (item.url !== '/' && pathname.startsWith(item.url)) {
+            isActive = true;
+          } else if (item.dropdownItems?.some(dropItem => pathname.startsWith(dropItem.url))) {
+            isActive = true;
+          }
+
           const isHovered = hoveredTab === item.name
           const hasDropdown = item.dropdownItems && item.dropdownItems.length > 0;
 
@@ -64,7 +59,6 @@ export function NavBar({ items, className }: NavBarProps) {
             >
               <Link
                 href={item.url}
-                onClick={() => setActiveTab(item.name)}
                 className={cn(
                   "relative cursor-pointer text-sm font-medium px-4 md:px-6 py-2 rounded-full transition-colors flex items-center gap-1.5",
                   "text-slate hover:text-primary",
@@ -105,13 +99,13 @@ export function NavBar({ items, className }: NavBarProps) {
                 <AnimatePresence>
                   {isHovered && (
                     <motion.div
-                      initial={{ opacity: 0, y: isMobile ? 10 : -10 }}
+                      initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: isMobile ? 10 : -10 }}
+                      exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.2 }}
                       className={cn(
                         "absolute left-1/2 -translate-x-1/2 w-48 bg-surface border border-border rounded-2xl shadow-xl overflow-hidden flex flex-col py-2",
-                        "bottom-full mb-4 sm:bottom-auto sm:top-full sm:mt-4 sm:mb-0"
+                        "top-full mt-4"
                       )}
                     >
                       {item.dropdownItems!.map((dropItem) => (
@@ -119,7 +113,6 @@ export function NavBar({ items, className }: NavBarProps) {
                           key={dropItem.name}
                           href={dropItem.url}
                           onClick={() => {
-                            setActiveTab(item.name);
                             setHoveredTab(null);
                           }}
                           className="px-4 py-2.5 text-sm text-slate hover:text-primary hover:bg-primary/5 transition-colors"
