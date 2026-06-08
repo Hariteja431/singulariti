@@ -51,10 +51,10 @@ export function parsePageRanges(rangeStr: string, maxPages: number): number[] {
  */
 export async function checkPdfPasswordProtected(arrayBuffer: ArrayBuffer): Promise<boolean> {
   try {
-    const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: false });
-    return pdfDoc.isEncrypted;
+    await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+    return false;
   } catch (error: any) {
-    if (error.message && error.message.includes('password')) {
+    if (error.message && (error.message.includes('password') || error.message.includes('encrypt') || error.message.includes('Encrypt'))) {
       return true;
     }
     // If it's another parsing error, throw it so it can be handled as corrupted

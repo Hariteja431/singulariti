@@ -1,6 +1,6 @@
 import { PDFDocument, rgb, degrees, StandardFonts } from 'pdf-lib';
 import { encryptPDF } from '@pdfsmaller/pdf-encrypt-lite';
-import { readFileAsArrayBuffer } from '../fileHelpers';
+import { readFileAsArrayBuffer, dataUrlToArrayBuffer } from '../fileHelpers';
 
 // Helper to convert hex colors to normalized RGB values for pdf-lib
 function hexToRgb(hex: string) {
@@ -20,7 +20,7 @@ export async function mergePDFs(files: File[]): Promise<Uint8Array> {
 
   for (const file of files) {
     const arrayBuffer = await readFileAsArrayBuffer(file);
-    const pdfDoc = await PDFDocument.load(arrayBuffer);
+    const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
     const copiedPages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
     copiedPages.forEach((page) => mergedPdf.addPage(page));
   }
@@ -34,7 +34,7 @@ export async function mergePDFs(files: File[]): Promise<Uint8Array> {
  */
 export async function splitPDF(file: File, pageNumbers: number[]): Promise<Uint8Array> {
   const arrayBuffer = await readFileAsArrayBuffer(file);
-  const pdfDoc = await PDFDocument.load(arrayBuffer);
+  const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
   const newPdf = await PDFDocument.create();
 
   // Convert 1-based page numbers to 0-based indices
@@ -54,7 +54,7 @@ export async function rotatePDF(
   pageRotations: Record<number, number>
 ): Promise<Uint8Array> {
   const arrayBuffer = await readFileAsArrayBuffer(file);
-  const pdfDoc = await PDFDocument.load(arrayBuffer);
+  const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
   const pages = pdfDoc.getPages();
 
   Object.entries(pageRotations).forEach(([pageIndexStr, rotation]) => {
@@ -78,7 +78,7 @@ export async function deletePDFPages(
   pageNumbersToDelete: number[]
 ): Promise<Uint8Array> {
   const arrayBuffer = await readFileAsArrayBuffer(file);
-  const pdfDoc = await PDFDocument.load(arrayBuffer);
+  const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
   
   // Sort descending to avoid index shifting when deleting
   const indicesToDelete = pageNumbersToDelete
@@ -103,7 +103,7 @@ export async function rearrangePDFPages(
   newOrder: number[]
 ): Promise<Uint8Array> {
   const arrayBuffer = await readFileAsArrayBuffer(file);
-  const srcDoc = await PDFDocument.load(arrayBuffer);
+  const srcDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
   const newPdf = await PDFDocument.create();
 
   const copiedPages = await newPdf.copyPages(srcDoc, newOrder);
@@ -224,7 +224,7 @@ export async function imagesToPDF(
  */
 export async function compressPDF(file: File): Promise<Uint8Array> {
   const arrayBuffer = await readFileAsArrayBuffer(file);
-  const pdfDoc = await PDFDocument.load(arrayBuffer);
+  const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
   
   // Re-serialization with object streams enabled removes unreferenced objects,
   // compresses cross-reference tables and standard streams
@@ -246,12 +246,12 @@ export async function signPDF(
   sigHeight: number,
   sigRotation: number
 ): Promise<Uint8Array> {
-  const pdfDoc = await PDFDocument.load(arrayBuffer);
+  const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
   const page = pdfDoc.getPage(pageIndex);
   const { width: pdfW, height: pdfH } = page.getSize();
 
   // Draw signature (signatureDataUrl is a PNG base64 data URI)
-  const imageBytes = await fetch(signatureDataUrl).then((res) => res.arrayBuffer());
+  const imageBytes = dataUrlToArrayBuffer(signatureDataUrl);
   const sigImage = signatureDataUrl.startsWith('data:image/png')
     ? await pdfDoc.embedPng(imageBytes)
     : await pdfDoc.embedJpg(imageBytes);
@@ -280,16 +280,18 @@ export interface WatermarkOptions {
   type: 'text' | 'image';
   text?: string;
   imageFile?: File; // For image watermarks
-  fontSize?: number;
   color?: string; // Hex color string, e.g. '#FF0000'
   opacity?: number; // 0 to 1
   rotation?: number; // degrees
-  position: 'center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'custom';
-  customX?: number; // percentage (0 to 100)
-  customY?: number; // percentage (0 to 100)
-  imageSize?: number; // percentage of page size, default 40
+  xPercent: number; // Top-left visual x percentage (0 to 1)
+  yPercent: number; // Top-left visual y percentage (0 to 1)
+  fontSizePercent?: number; // Text font size percent (0 to 1)
+  imageWidthPercent?: number; // Image width percent (0 to 1)
+  imageHeightPercent?: number; // Image height percent (0 to 1)
   applyToAll: boolean;
   selectedPages?: number[]; // 1-based page numbers
+  previewPageWidth?: number;
+  previewPageHeight?: number;
 }
 
 /**
@@ -300,7 +302,7 @@ export async function addWatermarkToPDF(
   options: WatermarkOptions
 ): Promise<Uint8Array> {
   const arrayBuffer = await readFileAsArrayBuffer(file);
-  const pdfDoc = await PDFDocument.load(arrayBuffer);
+  const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
   const pageCount = pdfDoc.getPageCount();
 
   const pagesToWatermark: number[] = [];
@@ -334,96 +336,118 @@ export async function addWatermarkToPDF(
 
     const page = pdfDoc.getPage(pageIndex);
     const { width: pageWidth, height: pageHeight } = page.getSize();
+    const pageRotation = page.getRotation().angle;
+    
+    const isRotated90or270 = pageRotation === 90 || pageRotation === 270;
+    const visualWidth = isRotated90or270 ? pageHeight : pageWidth;
+    const visualHeight = isRotated90or270 ? pageWidth : pageHeight;
 
-    // Determine watermark coordinates based on position preset
     const opacity = options.opacity ?? 0.3;
-    const rotation = degrees(options.rotation ?? 45);
 
     if (options.type === 'text' && options.text && helveticaFont) {
       const text = options.text;
-      const size = options.fontSize ?? 48;
       const rgbColor = hexToRgb(options.color ?? '#FF0000');
-      const textWidth = helveticaFont.widthOfTextAtSize(text, size);
-      
-      let x = pageWidth / 2;
-      let y = pageHeight / 2;
 
-      // Adjust text position
-      if (options.position === 'center') {
-        x = (pageWidth - textWidth) / 2;
-        y = pageHeight / 2;
-      } else if (options.position === 'top-left') {
-        x = 40;
-        y = pageHeight - 60;
-      } else if (options.position === 'top-right') {
-        x = pageWidth - textWidth - 40;
-        y = pageHeight - 60;
-      } else if (options.position === 'bottom-left') {
-        x = 40;
-        y = 60;
-      } else if (options.position === 'bottom-right') {
-        x = pageWidth - textWidth - 40;
-        y = 60;
-      } else if (options.position === 'custom') {
-        // Custom coordinates based on percentage
-        const pX = options.customX ?? 50;
-        const pY = options.customY ?? 50;
-        x = (pX / 100) * pageWidth - textWidth / 2;
-        y = pageHeight - ((pY / 100) * pageHeight) - (size / 2); 
+      const fontSizePercent = options.fontSizePercent ?? 0.08;
+      const fontSize = fontSizePercent * visualHeight;
+      const watermarkWidth = helveticaFont.widthOfTextAtSize(text, fontSize);
+      const watermarkHeight = fontSize;
+
+      const pdfX = options.xPercent * visualWidth;
+      const pdfY = visualHeight - (options.yPercent * visualHeight) - watermarkHeight;
+
+      console.log({
+        previewPageWidth: options.previewPageWidth ?? 0,
+        previewPageHeight: options.previewPageHeight ?? 0,
+        xPercent: options.xPercent,
+        yPercent: options.yPercent,
+        pdfWidth: visualWidth,
+        pdfHeight: visualHeight,
+        watermarkWidth,
+        watermarkHeight,
+        pdfX,
+        pdfY,
+      });
+
+      const userRotation = options.rotation ?? 45;
+      
+      let x_p = pdfX;
+      let y_p = pdfY;
+      let rotation_p = userRotation;
+
+      if (pageRotation === 90) {
+        x_p = pageWidth - pdfY;
+        y_p = pdfX;
+        rotation_p = userRotation - 270;
+      } else if (pageRotation === 180) {
+        x_p = pageWidth - pdfX;
+        y_p = pageHeight - pdfY;
+        rotation_p = userRotation - 180;
+      } else if (pageRotation === 270) {
+        x_p = pdfY;
+        y_p = pageHeight - pdfX;
+        rotation_p = userRotation - 90;
       }
 
       page.drawText(text, {
-        x,
-        y,
-        size,
+        x: x_p,
+        y: y_p,
+        size: fontSize,
         font: helveticaFont,
         color: rgb(rgbColor.r, rgbColor.g, rgbColor.b),
         opacity,
-        rotate: rotation
+        rotate: degrees(rotation_p)
       });
     } else if (options.type === 'image' && embeddedImage) {
-      // Set image dimensions: scale down if it exceeds a portion of the page
-      const sizePercent = options.imageSize ?? 40;
-      const maxW = pageWidth * (sizePercent / 100);
-      const maxH = pageHeight * (sizePercent / 100);
+      const imageWidthPercent = options.imageWidthPercent ?? 0.4;
+      const imageHeightPercent = options.imageHeightPercent ?? 0.4;
+
+      const watermarkWidth = imageWidthPercent * visualWidth;
+      const watermarkHeight = imageHeightPercent * visualHeight;
+
+      const pdfX = options.xPercent * visualWidth;
+      const pdfY = visualHeight - (options.yPercent * visualHeight) - watermarkHeight;
+
+      console.log({
+        previewPageWidth: options.previewPageWidth ?? 0,
+        previewPageHeight: options.previewPageHeight ?? 0,
+        xPercent: options.xPercent,
+        yPercent: options.yPercent,
+        pdfWidth: visualWidth,
+        pdfHeight: visualHeight,
+        watermarkWidth,
+        watermarkHeight,
+        pdfX,
+        pdfY,
+      });
+
+      const userRotation = options.rotation ?? 0;
       
-      const imgRatio = embeddedImage.width / embeddedImage.height;
-      let w = maxW;
-      let h = maxW / imgRatio;
+      let x_p = pdfX;
+      let y_p = pdfY;
+      let rotation_p = userRotation;
 
-      if (h > maxH) {
-        h = maxH;
-        w = maxH * imgRatio;
-      }
-
-      let x = (pageWidth - w) / 2;
-      let y = (pageHeight - h) / 2;
-
-      if (options.position === 'top-left') {
-        x = 40;
-        y = pageHeight - h - 40;
-      } else if (options.position === 'top-right') {
-        x = pageWidth - w - 40;
-        y = pageHeight - h - 40;
-      } else if (options.position === 'bottom-left') {
-        x = 40;
-        y = 40;
-      } else if (options.position === 'bottom-right') {
-        x = pageWidth - w - 40;
-        y = 40;
-      } else if (options.position === 'custom') {
-        const pX = options.customX ?? 50;
-        const pY = options.customY ?? 50;
-        x = (pX / 100) * pageWidth - w / 2;
-        y = pageHeight - ((pY / 100) * pageHeight) - h / 2;
+      if (pageRotation === 90) {
+        x_p = pageWidth - pdfY;
+        y_p = pdfX;
+        rotation_p = userRotation - 270;
+      } else if (pageRotation === 180) {
+        x_p = pageWidth - pdfX;
+        y_p = pageHeight - pdfY;
+        rotation_p = userRotation - 180;
+      } else if (pageRotation === 270) {
+        x_p = pdfY;
+        y_p = pageHeight - pdfX;
+        rotation_p = userRotation - 90;
       }
 
       page.drawImage(embeddedImage, {
-        x,
-        y,
-        width: w,
-        height: h,
-        opacity
+        x: x_p,
+        y: y_p,
+        width: watermarkWidth,
+        height: watermarkHeight,
+        opacity,
+        rotate: degrees(rotation_p)
       });
     }
   }
@@ -453,7 +477,7 @@ export interface PDFMetadata {
  */
 export async function viewPDFMetadata(file: File): Promise<PDFMetadata> {
   const arrayBuffer = await readFileAsArrayBuffer(file);
-  const pdfDoc = await PDFDocument.load(arrayBuffer);
+  const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
   
   const title = pdfDoc.getTitle();
   const author = pdfDoc.getAuthor();
@@ -491,7 +515,7 @@ export async function countPDFPages(
 
   for (const file of files) {
     const arrayBuffer = await readFileAsArrayBuffer(file);
-    const pdfDoc = await PDFDocument.load(arrayBuffer);
+    const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
     const pageCount = pdfDoc.getPageCount();
     counts.push({ fileName: file.name, pages: pageCount });
     total += pageCount;

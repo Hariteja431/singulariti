@@ -1,10 +1,8 @@
 import * as pdfjsLib from 'pdfjs-dist';
 
-// Initialize the PDF.js worker dynamically from a CDN to avoid Next.js bundling issues
+// Initialize the PDF.js worker dynamically from local public directory to avoid CORS/origin issues
 if (typeof window !== 'undefined') {
-  // Use the matching version of pdfjs-dist from unpkg CDN
-  const version = pdfjsLib.version || '4.0.370';
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 }
 
 /**

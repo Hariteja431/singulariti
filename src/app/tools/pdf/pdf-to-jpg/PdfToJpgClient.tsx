@@ -10,7 +10,7 @@ import { PageThumbnail } from '@/components/tools/PageThumbnail';
 import { loadPdfDocument, renderPageToDataUrl } from '@/lib/pdf/pdfRenderHelpers';
 import { downloadAllAsZip, downloadBlob } from '@/lib/downloadHelpers';
 import { checkPdfPasswordProtected, validatePdfFile } from '@/lib/pdf/pdfValidation';
-import { formatFileSize } from '@/lib/fileHelpers';
+import { formatFileSize, dataUrlToBlob } from '@/lib/fileHelpers';
 import { FileText, Download, FileImage, Image as ImageIcon } from 'lucide-react';
 
 export function PdfToJpgClient() {
@@ -67,8 +67,7 @@ export function PdfToJpgClient() {
     setError(null);
     try {
       const dataUrl = await handleConvertPage(pageNum);
-      const res = await fetch(dataUrl);
-      const blob = await res.blob();
+      const blob = dataUrlToBlob(dataUrl);
       const baseName = file.name.replace(/\.[^/.]+$/, "");
       downloadBlob(blob, `${baseName}_page_${pageNum}.jpg`);
     } catch (err: any) {
@@ -92,8 +91,7 @@ export function PdfToJpgClient() {
       for (let i = 1; i <= pdfDoc.numPages; i++) {
         setProgress({ current: i, total: pdfDoc.numPages });
         const dataUrl = await handleConvertPage(i);
-        const res = await fetch(dataUrl);
-        const blob = await res.blob();
+        const blob = dataUrlToBlob(dataUrl);
         images.push({
           name: `${baseName}_page_${i}.jpg`,
           blob
