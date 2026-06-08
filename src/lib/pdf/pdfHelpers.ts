@@ -2,6 +2,27 @@ import { PDFDocument, rgb, degrees, StandardFonts } from 'pdf-lib';
 import { encryptPDF } from '@pdfsmaller/pdf-encrypt-lite';
 import { dataUrlToArrayBuffer } from '../fileHelpers';
 import { readPdfFile } from './readPdfFile';
+import { getPdfWatermarkPosition, getCenteredDrawPosition, WatermarkPosition } from './getWatermarkPosition';
+
+function hexToPdfRgb(hex: string) {
+  const clean = hex.replace("#", "");
+
+  const r = parseInt(clean.slice(0, 2), 16) / 255;
+  const g = parseInt(clean.slice(2, 4), 16) / 255;
+  const b = parseInt(clean.slice(4, 6), 16) / 255;
+
+  return rgb(r, g, b);
+}
+
+function hexToRgb01(hex: string) {
+  const clean = hex.replace("#", "");
+
+  const r = parseInt(clean.substring(0, 2), 16) / 255;
+  const g = parseInt(clean.substring(2, 4), 16) / 255;
+  const b = parseInt(clean.substring(4, 6), 16) / 255;
+
+  return rgb(r, g, b);
+}
 
 // Helper to convert hex colors to normalized RGB values for pdf-lib
 function hexToRgb(hex: string) {
@@ -286,6 +307,10 @@ export interface WatermarkOptions {
   rotation?: number; // degrees
   xPercent: number; // Top-left visual x percentage (0 to 1)
   yPercent: number; // Top-left visual y percentage (0 to 1)
+  positionPreset: WatermarkPosition;
+  fontSize?: number; // Exact text font size
+  imageSize?: number; // Image scale percentage (e.g. 40 for 40%)
+  imageAspectRatio?: number | null;
   fontSizePercent?: number; // Text font size percent (0 to 1)
   imageWidthPercent?: number; // Image width percent (0 to 1)
   imageHeightPercent?: number; // Image height percent (0 to 1)
@@ -337,118 +362,132 @@ export async function addWatermarkToPDF(
 
     const page = pdfDoc.getPage(pageIndex);
     const { width: pageWidth, height: pageHeight } = page.getSize();
-    const pageRotation = page.getRotation().angle;
+    const rotationAngle = page.getRotation().angle;
     
-    const isRotated90or270 = pageRotation === 90 || pageRotation === 270;
-    const visualWidth = isRotated90or270 ? pageHeight : pageWidth;
-    const visualHeight = isRotated90or270 ? pageWidth : pageHeight;
+    const isRotated90or270 = rotationAngle === 90 || rotationAngle === 270;
+    const effectiveWidth = isRotated90or270 ? pageHeight : pageWidth;
+    const effectiveHeight = isRotated90or270 ? pageWidth : pageHeight;
 
-    const opacity = options.opacity ?? 0.3;
+    let opacity = options.opacity ?? 0.2;
+    if (opacity > 1) {
+      opacity = opacity / 100;
+    }
 
     if (options.type === 'text' && options.text && helveticaFont) {
       const text = options.text;
-      const rgbColor = hexToRgb(options.color ?? '#FF0000');
+      const rgbColor = hexToPdfRgb(options.color ?? '#FF0000');
 
-      const fontSizePercent = options.fontSizePercent ?? 0.08;
-      const fontSize = fontSizePercent * visualHeight;
+      const fontSize = options.fontSize ?? 48;
       const watermarkWidth = helveticaFont.widthOfTextAtSize(text, fontSize);
       const watermarkHeight = fontSize;
 
-      const pdfX = options.xPercent * visualWidth;
-      const pdfY = visualHeight - (options.yPercent * visualHeight) - watermarkHeight;
-
-      console.log({
-        previewPageWidth: options.previewPageWidth ?? 0,
-        previewPageHeight: options.previewPageHeight ?? 0,
+      const basePos = getPdfWatermarkPosition({
+        pageWidth: effectiveWidth,
+        pageHeight: effectiveHeight,
+        itemWidth: watermarkWidth,
+        itemHeight: watermarkHeight,
+        position: options.positionPreset,
+        margin: 40,
         xPercent: options.xPercent,
         yPercent: options.yPercent,
-        pdfWidth: visualWidth,
-        pdfHeight: visualHeight,
-        watermarkWidth,
-        watermarkHeight,
-        pdfX,
-        pdfY,
       });
 
-      const userRotation = options.rotation ?? 45;
-      
-      let x_p = pdfX;
-      let y_p = pdfY;
-      let rotation_p = userRotation;
-
-      if (pageRotation === 90) {
-        x_p = pageWidth - pdfY;
-        y_p = pdfX;
-        rotation_p = userRotation - 270;
-      } else if (pageRotation === 180) {
-        x_p = pageWidth - pdfX;
-        y_p = pageHeight - pdfY;
-        rotation_p = userRotation - 180;
-      } else if (pageRotation === 270) {
-        x_p = pdfY;
-        y_p = pageHeight - pdfX;
-        rotation_p = userRotation - 90;
-      }
-
-      page.drawText(text, {
-        x: x_p,
-        y: y_p,
-        size: fontSize,
-        font: helveticaFont,
-        color: rgb(rgbColor.r, rgbColor.g, rgbColor.b),
-        opacity,
-        rotate: degrees(rotation_p)
-      });
-    } else if (options.type === 'image' && embeddedImage) {
-      const imageWidthPercent = options.imageWidthPercent ?? 0.4;
-      const imageHeightPercent = options.imageHeightPercent ?? 0.4;
-
-      const watermarkWidth = imageWidthPercent * visualWidth;
-      const watermarkHeight = imageHeightPercent * visualHeight;
-
-      const pdfX = options.xPercent * visualWidth;
-      const pdfY = visualHeight - (options.yPercent * visualHeight) - watermarkHeight;
-
-      console.log({
-        previewPageWidth: options.previewPageWidth ?? 0,
-        previewPageHeight: options.previewPageHeight ?? 0,
-        xPercent: options.xPercent,
-        yPercent: options.yPercent,
-        pdfWidth: visualWidth,
-        pdfHeight: visualHeight,
-        watermarkWidth,
-        watermarkHeight,
-        pdfX,
-        pdfY,
-      });
+      const centerX = basePos.x + watermarkWidth / 2;
+      const centerY = basePos.y + watermarkHeight / 2;
 
       const userRotation = options.rotation ?? 0;
       
-      let x_p = pdfX;
-      let y_p = pdfY;
-      let rotation_p = userRotation;
+      const drawPos = getCenteredDrawPosition({
+        centerX,
+        centerY,
+        itemWidth: watermarkWidth,
+        itemHeight: watermarkHeight,
+        rotation: -userRotation,
+      });
 
-      if (pageRotation === 90) {
-        x_p = pageWidth - pdfY;
-        y_p = pdfX;
-        rotation_p = userRotation - 270;
-      } else if (pageRotation === 180) {
-        x_p = pageWidth - pdfX;
-        y_p = pageHeight - pdfY;
-        rotation_p = userRotation - 180;
-      } else if (pageRotation === 270) {
-        x_p = pdfY;
-        y_p = pageHeight - pdfX;
-        rotation_p = userRotation - 90;
+      let drawX = drawPos.x;
+      let drawY = drawPos.y;
+      let drawRotation = -userRotation;
+
+      if (rotationAngle === 90) {
+        drawX = pageWidth - drawPos.y;
+        drawY = drawPos.x;
+        drawRotation = -userRotation - 90;
+      } else if (rotationAngle === 180) {
+        drawX = pageWidth - drawPos.x;
+        drawY = pageHeight - drawPos.y;
+        drawRotation = -userRotation - 180;
+      } else if (rotationAngle === 270) {
+        drawX = drawPos.y;
+        drawY = pageHeight - drawPos.x;
+        drawRotation = -userRotation - 270;
+      }
+
+      page.drawText(text, {
+        x: drawX,
+        y: drawY,
+        size: fontSize,
+        font: helveticaFont,
+        color: rgbColor,
+        opacity,
+        rotate: degrees(drawRotation)
+      });
+    } else if (options.type === 'image' && embeddedImage) {
+      const imageSize = options.imageSize ?? 40;
+      const imageAspectRatio = options.imageAspectRatio ?? 1;
+
+      const watermarkWidth = (imageSize / 100) * effectiveWidth;
+      const watermarkHeight = imageAspectRatio ? watermarkWidth / imageAspectRatio : watermarkWidth;
+
+      const basePos = getPdfWatermarkPosition({
+        pageWidth: effectiveWidth,
+        pageHeight: effectiveHeight,
+        itemWidth: watermarkWidth,
+        itemHeight: watermarkHeight,
+        position: options.positionPreset,
+        margin: 40,
+        xPercent: options.xPercent,
+        yPercent: options.yPercent,
+      });
+
+      const centerX = basePos.x + watermarkWidth / 2;
+      const centerY = basePos.y + watermarkHeight / 2;
+
+      const userRotation = options.rotation ?? 0;
+
+      const drawPos = getCenteredDrawPosition({
+        centerX,
+        centerY,
+        itemWidth: watermarkWidth,
+        itemHeight: watermarkHeight,
+        rotation: -userRotation,
+      });
+
+      let drawX = drawPos.x;
+      let drawY = drawPos.y;
+      let drawRotation = -userRotation;
+
+      if (rotationAngle === 90) {
+        drawX = pageWidth - drawPos.y;
+        drawY = drawPos.x;
+        drawRotation = -userRotation - 90;
+      } else if (rotationAngle === 180) {
+        drawX = pageWidth - drawPos.x;
+        drawY = pageHeight - drawPos.y;
+        drawRotation = -userRotation - 180;
+      } else if (rotationAngle === 270) {
+        drawX = drawPos.y;
+        drawY = pageHeight - drawPos.x;
+        drawRotation = -userRotation - 270;
       }
 
       page.drawImage(embeddedImage, {
-        x: x_p,
-        y: y_p,
+        x: drawX,
+        y: drawY,
         width: watermarkWidth,
         height: watermarkHeight,
         opacity,
-        rotate: degrees(rotation_p)
+        rotate: degrees(drawRotation)
       });
     }
   }

@@ -12,6 +12,7 @@ import { loadPdfDocument } from '@/lib/pdf/pdfRenderHelpers';
 import { addWatermarkToPDF, WatermarkOptions, countPDFPages } from '@/lib/pdf/pdfHelpers';
 import { checkPdfPasswordProtected, validatePdfFile, getPdfErrorMessage } from '@/lib/pdf/pdfValidation';
 import { readPdfFile } from '@/lib/pdf/readPdfFile';
+import { getPdfWatermarkPosition, pdfToPreviewPosition, WatermarkPosition } from '@/lib/pdf/getWatermarkPosition';
 import { formatFileSize } from '@/lib/fileHelpers';
 import { FileText, Type, Image as ImageIcon, Sparkles, Settings } from 'lucide-react';
 
@@ -30,6 +31,7 @@ const getTextWidth = (text: string, size: number) => {
 export function WatermarkPdfClient() {
   const [file, setFile] = useState<File | null>(null);
   const [pdfDoc, setPdfDoc] = useState<pdfjsLib.PDFDocumentProxy | null>(null);
+  const [pdfPageSize, setPdfPageSize] = useState<{ width: number; height: number } | null>(null);
   const [pageCount, setPageCount] = useState<number | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -118,6 +120,10 @@ export function WatermarkPdfClient() {
       
       const doc = await loadPdfDocument(selectedFile);
       setPdfDoc(doc);
+
+      const page = await doc.getPage(1);
+      const viewport = page.getViewport({ scale: 1 });
+      setPdfPageSize({ width: viewport.width, height: viewport.height });
     } catch (err: any) {
       console.error(err);
       setError(getPdfErrorMessage(err));
@@ -171,38 +177,28 @@ export function WatermarkPdfClient() {
   useEffect(() => {
     if (positionPreset === 'custom') return;
 
-    const pWidth = containerWidth || 400;
-    const pHeight = containerHeight || 565;
+    const pdfPageWidth = pdfPageSize?.width || 595.27;
+    const pdfPageHeight = pdfPageSize?.height || 841.89;
 
-    const wWidth = getWatermarkWidth(pWidth);
-    const wHeight = getWatermarkHeight(pHeight);
+    const watermarkWidthInPdfPoints = watermarkType === 'text'
+      ? getTextWidth(text, fontSize)
+      : (imageSize / 100) * pdfPageWidth;
 
-    let xPercent = 0.5;
-    let yPercent = 0.5;
+    const watermarkHeightInPdfPoints = watermarkType === 'text'
+      ? fontSize
+      : (imageAspectRatio ? (imageSize / 100) * pdfPageWidth / imageAspectRatio : (imageSize / 100) * pdfPageWidth);
 
-    switch (positionPreset) {
-      case 'top-left':
-        xPercent = 0.1;
-        yPercent = 0.1;
-        break;
-      case 'top-right':
-        xPercent = 0.9 - (wWidth / pWidth);
-        yPercent = 0.1;
-        break;
-      case 'bottom-left':
-        xPercent = 0.1;
-        yPercent = 0.9 - (wHeight / pHeight);
-        break;
-      case 'bottom-right':
-        xPercent = 0.9 - (wWidth / pWidth);
-        yPercent = 0.9 - (wHeight / pHeight);
-        break;
-      case 'center':
-      default:
-        xPercent = 0.5 - (wWidth / pWidth) / 2;
-        yPercent = 0.5 - (wHeight / pHeight) / 2;
-        break;
-    }
+    const { x: pdfX, y: pdfY } = getPdfWatermarkPosition({
+      pageWidth: pdfPageWidth,
+      pageHeight: pdfPageHeight,
+      itemWidth: watermarkWidthInPdfPoints,
+      itemHeight: watermarkHeightInPdfPoints,
+      position: positionPreset,
+      margin: 40,
+    });
+
+    const xPercent = pdfX / pdfPageWidth;
+    const yPercent = (pdfPageHeight - pdfY - watermarkHeightInPdfPoints) / pdfPageHeight;
 
     setPosition({ xPercent, yPercent });
   }, [
@@ -212,10 +208,7 @@ export function WatermarkPdfClient() {
     fontSize,
     imageSize,
     imageAspectRatio,
-    containerWidth,
-    containerHeight,
-    getWatermarkWidth,
-    getWatermarkHeight
+    pdfPageSize,
   ]);
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -310,22 +303,6 @@ export function WatermarkPdfClient() {
         }
       }
 
-      let fontSizePercent = 0;
-      let imageWidthPercent = 0;
-      let imageHeightPercent = 0;
-
-      if (previewContainerRef.current) {
-        const pWidth = previewContainerRef.current.offsetWidth;
-        const pHeight = previewContainerRef.current.offsetHeight;
-        
-        fontSizePercent = fontSize / pHeight;
-        imageWidthPercent = imageSize / 100;
-
-        const imgWidth = imageWidthPercent * pWidth;
-        const imgHeight = imageAspectRatio ? imgWidth / imageAspectRatio : imgWidth;
-        imageHeightPercent = imgHeight / pHeight;
-      }
-
       const options: WatermarkOptions = {
         type: watermarkType,
         text,
@@ -335,9 +312,10 @@ export function WatermarkPdfClient() {
         rotation,
         xPercent: position.xPercent,
         yPercent: position.yPercent,
-        fontSizePercent,
-        imageWidthPercent,
-        imageHeightPercent,
+        positionPreset: positionPreset,
+        fontSize,
+        imageSize,
+        imageAspectRatio,
         applyToAll,
         selectedPages: applyToAll ? undefined : pagesToWatermark,
         previewPageWidth: containerWidth,
@@ -361,6 +339,7 @@ export function WatermarkPdfClient() {
     if (resultBlobUrl) URL.revokeObjectURL(resultBlobUrl);
     setFile(null);
     setPdfDoc(null);
+    setPdfPageSize(null);
     setPageCount(null);
     setImageFile(null);
     setImagePreview(null);
@@ -706,12 +685,48 @@ export function WatermarkPdfClient() {
                     {/* Watermark Overlay */}
                     {((watermarkType === 'text' && text.trim()) || (watermarkType === 'image' && imagePreview)) && previewContainerRef.current ? (
                       (() => {
+                        const pdfPageWidth = pdfPageSize?.width || 595.27;
+                        const pdfPageHeight = pdfPageSize?.height || 841.89;
+
                         const pWidth = containerWidth || previewContainerRef.current.offsetWidth || 400;
                         const pHeight = containerHeight || previewContainerRef.current.offsetHeight || 565;
-                        const xPercent = position.xPercent;
-                        const yPercent = position.yPercent;
-                        const wWidth = getWatermarkWidth(pWidth);
-                        const wHeight = getWatermarkHeight(pHeight);
+
+                        const scaleX = pWidth / pdfPageWidth;
+                        const scaleY = pHeight / pdfPageHeight;
+
+                        const watermarkWidthInPdfPoints = watermarkType === 'text'
+                          ? getTextWidth(text, fontSize)
+                          : (imageSize / 100) * pdfPageWidth;
+
+                        const watermarkHeightInPdfPoints = watermarkType === 'text'
+                          ? fontSize
+                          : (imageAspectRatio ? (imageSize / 100) * pdfPageWidth / imageAspectRatio : (imageSize / 100) * pdfPageWidth);
+
+                        const wWidth = watermarkWidthInPdfPoints * scaleX;
+                        const wHeight = watermarkHeightInPdfPoints * scaleY;
+                        const previewFontSize = fontSize * scaleY;
+
+                        const pdfPos = getPdfWatermarkPosition({
+                          pageWidth: pdfPageWidth,
+                          pageHeight: pdfPageHeight,
+                          itemWidth: watermarkWidthInPdfPoints,
+                          itemHeight: watermarkHeightInPdfPoints,
+                          position: positionPreset,
+                          margin: 40,
+                          xPercent: position.xPercent,
+                          yPercent: position.yPercent,
+                        });
+
+                        const previewPos = pdfToPreviewPosition({
+                          pdfX: pdfPos.x,
+                          pdfY: pdfPos.y,
+                          pdfPageWidth,
+                          pdfPageHeight,
+                          previewWidth: pWidth,
+                          previewHeight: pHeight,
+                          itemWidth: watermarkWidthInPdfPoints,
+                          itemHeight: watermarkHeightInPdfPoints,
+                        });
 
                         return (
                           <div
@@ -721,22 +736,22 @@ export function WatermarkPdfClient() {
                             }`}
                             style={{
                               position: "absolute",
-                              left: `${xPercent * 100}%`,
-                              top: `${yPercent * 100}%`,
-                              width: `${wWidth}px`,
-                              height: `${wHeight}px`,
+                              left: `${previewPos.left}px`,
+                              top: `${previewPos.top}px`,
+                              width: `${previewPos.width}px`,
+                              height: `${previewPos.height}px`,
                               transform: `rotate(${rotation}deg)`,
-                              transformOrigin: "top left",
+                              transformOrigin: "center center",
                               zIndex: 50,
                             }}
                           >
                             {watermarkType === 'text' ? (
                               <div
-                                className="font-sans font-bold whitespace-nowrap select-none pointer-events-none w-full h-full flex items-center justify-start"
+                                className="font-sans font-bold whitespace-nowrap select-none pointer-events-none w-full h-full flex items-center justify-center text-center"
                                 style={{
                                   color: color,
                                   opacity: opacity,
-                                  fontSize: `${fontSize}px`,
+                                  fontSize: `${fontSize * previewPos.scaleX}px`,
                                   lineHeight: 1,
                                 }}
                               >
