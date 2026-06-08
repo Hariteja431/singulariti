@@ -50,13 +50,6 @@ export function Header() {
 
   return (
     <>
-      {/* Floating Navbar (Centered globally) */}
-      <div className="fixed top-20 md:top-24 left-1/2 -translate-x-1/2 z-50 pointer-events-none">
-        <div className="pointer-events-auto">
-          <NavBar items={navItems} />
-        </div>
-      </div>
-
       <header className="sticky top-0 z-40 h-[70px] w-full bg-surface/80 backdrop-blur-md">
         <div className="container mx-auto px-4 md:px-6 h-full flex items-center justify-between max-w-7xl">
           
@@ -67,10 +60,16 @@ export function Header() {
             </Link>
           </div>
 
+          {/* Tubelight Navbar: Inline on Desktop, Floating Bottom on Mobile */}
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:static md:bottom-auto md:left-auto md:translate-x-0 md:flex-1 md:flex md:justify-center">
+            <NavBar items={navItems} />
+          </div>
+
           {/* Right: Search and Theme Toggle */}
           <div className="flex items-center justify-end gap-2">
             <button 
               onClick={() => setIsSearchOpen(true)}
+              suppressHydrationWarning
               className="hidden lg:flex items-center bg-background border border-border rounded-full px-3 py-1.5 text-slate w-48 hover:border-slate transition-colors text-left"
             >
               <Search className="w-4 h-4 mr-2" />

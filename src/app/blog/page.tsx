@@ -126,6 +126,7 @@ export default async function BlogHomePage() {
                   name="q"
                   placeholder="Enter JSON, PDF, word counter, or calculation formulas..."
                   required
+                  suppressHydrationWarning
                   className="w-full font-sans text-xs text-ink bg-background border border-border rounded-xl pl-10 pr-4 py-3.5 focus:border-primary focus:outline-none transition-colors"
                 />
               </div>
