@@ -1911,15 +1911,15 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     },
     "schemaType": "WebApplication"
 },
-  "phone-qr-code-generator": {
-    "utilityId": "phone-qr-code-generator",
+  "phone-number-qr-code-generator": {
+    "utilityId": "phone-number-qr-code-generator",
     "name": "Phone QR Code Generator",
     "section": "QR Utilities",
     "subSection": "QR Code Tools",
-    "url": "/tools/qr/phone-qr-code-generator",
+    "url": "/tools/qr/phone-number-qr-code-generator",
     "title": "Phone QR Code Generator - Create QR Codes",
     "description": "Generate custom QR codes using the phone qr code generator for phone instantly. Customize size, download image, or share easily.",
-    "canonical": "https://singulariti.in/tools/qr/phone-qr-code-generator",
+    "canonical": "https://singulariti.in/tools/qr/phone-number-qr-code-generator",
     "robots": {
         "index": true,
         "follow": true
@@ -1927,7 +1927,7 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "openGraph": {
         "title": "Phone QR Code Generator - Create QR Codes",
         "description": "Generate custom QR codes using the phone qr code generator for phone instantly. Customize size, download image, or share easily.",
-        "url": "https://singulariti.in/tools/qr/phone-qr-code-generator",
+        "url": "https://singulariti.in/tools/qr/phone-number-qr-code-generator",
         "type": "website",
         "image": "https://singulariti.in/og-fallback.png"
     },

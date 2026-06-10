@@ -6,20 +6,20 @@ interface PremiumIconContainerProps {
 }
 
 export function PremiumIconContainer({ children, className = "w-14 h-14" }: PremiumIconContainerProps) {
-  // Premium Apple-Style Duotone Squircle for landing page
+  // True Glassmorphism Aesthetic for landing page
   return (
-    <div className={`relative flex items-center justify-center ${className} bg-primary/10 dark:bg-primary/20 border border-primary/20 dark:border-primary/30 rounded-2xl group-hover:scale-105 group-hover:-translate-y-1 group-hover:shadow-[0_8px_30px_rgba(20,184,166,0.2)] transition-all duration-300 overflow-hidden`}>
-      {/* Inner subtle glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent dark:from-white/5 dark:to-transparent pointer-events-none rounded-2xl" />
+    <div className={`relative flex items-center justify-center ${className} bg-slate-50/60 dark:bg-slate-800/40 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 rounded-2xl group-hover:scale-105 group-hover:-translate-y-1 group-hover:shadow-[0_8px_30px_rgba(20,184,166,0.15)] group-hover:border-primary/30 group-hover:bg-primary/5 dark:group-hover:bg-primary/10 transition-all duration-300 overflow-hidden`}>
+      {/* Inner top highlight for glass depth */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent dark:via-white/10" />
       
       {/* The Duotone Icon */}
-      <div className="relative z-10 text-primary transition-transform duration-300 ease-out">
+      <div className="relative z-10 text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors duration-300 drop-shadow-sm">
         {React.isValidElement(children) 
           ? React.cloneElement(children as React.ReactElement<any>, { 
               strokeWidth: 2, 
-              className: "w-7 h-7",
+              className: "w-7 h-7 transition-colors duration-300",
               fill: "currentColor",
-              fillOpacity: 0.2
+              fillOpacity: 0.15
             }) 
           : children}
       </div>

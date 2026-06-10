@@ -1904,12 +1904,12 @@ export const toolRegistry: UtilityRegistryItem[] = [
     ]
   },
   {
-    "id": "phone-qr-code-generator",
+    "id": "phone-number-qr-code-generator",
     "name": "Phone QR Code Generator",
     "sectionId": "qr",
     "subSectionId": "qr-qr-tools",
-    "utilityUrl": "/tools/qr/phone-qr-code-generator",
-    "guideSlug": "phone-qr-code-generator-guide",
+    "utilityUrl": "/tools/qr/phone-number-qr-code-generator",
+    "guideSlug": "phone-number-qr-code-generator-guide",
     "shortDescription": "Create a QR code that initiates a phone call when scanned.",
     "inputType": [
       "Configuration Settings",

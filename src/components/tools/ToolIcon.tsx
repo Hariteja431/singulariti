@@ -168,33 +168,19 @@ export function ToolIcon({ toolId, className = "w-14 h-14" }: ToolIconProps) {
     else IconComponent = QrCode;
   }
 
-  // Fallback
-  if (!IconComponent) IconComponent = Code;
-
-  // Premium Apple-Style Duotone Squircle
-  // Using pure light teal backgrounds in light mode, and deep glassy teal in dark mode.
-  const isQrTool = id.includes('qr') || id.includes('barcode');
-
+  // True Glassmorphism Aesthetic
   return (
-    <div className={`relative flex items-center justify-center ${className} bg-primary/10 dark:bg-primary/20 border border-primary/20 dark:border-primary/30 rounded-2xl group-hover:scale-105 group-hover:-translate-y-1 group-hover:shadow-[0_8px_30px_rgba(20,184,166,0.2)] transition-all duration-300 overflow-hidden`}>
-      {/* Inner subtle glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent dark:from-white/5 dark:to-transparent pointer-events-none rounded-2xl" />
+    <div className={`relative flex items-center justify-center ${className} bg-slate-50/60 dark:bg-slate-800/40 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 rounded-2xl group-hover:scale-105 group-hover:-translate-y-1 group-hover:shadow-[0_8px_30px_rgba(20,184,166,0.15)] group-hover:border-primary/30 group-hover:bg-primary/5 dark:group-hover:bg-primary/10 transition-all duration-300 overflow-hidden`}>
+      {/* Inner top highlight for glass depth */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent dark:via-white/10" />
       
-      {/* Background QR code watermark for QR tools */}
-      {isQrTool && (
-        <QrCode 
-          className="absolute inset-0 w-full h-full p-2 text-primary opacity-30 dark:opacity-30 z-0 pointer-events-none" 
-          strokeWidth={1.5}
-        />
-      )}
-
-      {/* The Duotone Icon */}
-      {/* fill="currentColor" fillOpacity={0.2} creates a stunning duotone premium effect without needing custom SVGs */}
+      {/* The Icon */}
+      {/* Starts as neutral slate, transitions to vibrant primary on hover */}
       <IconComponent 
-        className="w-7 h-7 text-primary relative z-10 drop-shadow-md" 
+        className="w-7 h-7 text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors duration-300 drop-shadow-sm relative z-10" 
         strokeWidth={2} 
         fill="currentColor" 
-        fillOpacity={0.2} 
+        fillOpacity={0.15} 
       />
     </div>
   );
