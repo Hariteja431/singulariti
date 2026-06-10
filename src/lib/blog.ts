@@ -61,6 +61,9 @@ export interface BlogPost {
     limitations?: string[];
     privacyNote?: string;
     conclusion: string;
+    technicalExplanation?: string;
+    packagesUsed?: string[];
+    codeSnippets?: { title: string; language: string; code: string; }[];
   };
   faqs: FAQItem[];
 }
@@ -662,6 +665,15 @@ Clean Formatted Output
         "Calculations are strictly limited to valid JSON formats; invalid structures are rejected."
       ],
       privacyNote: "This tool is designed to work in the browser where possible. The input can be processed locally without needing to upload it. Credentials and tokens remain inside the local session.",
+      technicalExplanation: "Under the hood, the JSON Formatter leverages the native V8 JavaScript engine built into your browser. When you paste data, the tool attempts to parse it using `JSON.parse()`. If successful, it then restructures the output using `JSON.stringify(data, null, 2)` to apply uniform 2-space indentation. Because this all happens locally in the browser's memory sandbox, no external APIs are needed, making the operation instantaneous and secure.",
+      packagesUsed: ["React", "Lucide Icons", "Native JavaScript API"],
+      codeSnippets: [
+        {
+          title: "Native JSON Parsing Logic",
+          language: "javascript",
+          code: "try {\n  const parsed = JSON.parse(rawInput);\n  const formatted = JSON.stringify(parsed, null, 2);\n  return formatted;\n} catch (error) {\n  return 'Syntax Error: ' + error.message;\n}"
+        }
+      ],
       conclusion: "Formatting and inspecting JSON code payload parameters is completed locally in the browser tab. The tool helps developers and students validate JSON files safely and instantly."
     },
     faqs: [
@@ -765,6 +777,15 @@ Metric Output
         "Counting logic depends on whitespace dividers, which may affect specific languages without spacing."
       ],
       privacyNote: "This tool is designed to work in the browser where possible. The input can be processed locally without needing to upload it. Draft parameters are not sent to any database.",
+      technicalExplanation: "The Word Counter uses straightforward Regular Expressions (Regex) and String prototype methods to tokenize the text. To count words, the input is trimmed of excess whitespace and split by spaces `\\s+`. The length of the resulting array provides the word count. Character counts are derived simply from the string length, and lines are counted by splitting on newline characters `\\n`.",
+      packagesUsed: ["Vanilla JavaScript", "React State"],
+      codeSnippets: [
+        {
+          title: "Word and Line Counting Algorithm",
+          language: "javascript",
+          code: "const wordCount = text.trim() === '' ? 0 : text.trim().split(/\\s+/).length;\nconst charCount = text.length;\nconst charCountNoSpaces = text.replace(/\\s/g, '').length;\nconst lineCount = text === '' ? 0 : text.split('\\n').length;"
+        }
+      ],
       conclusion: "Inspecting character numbers and text structures is made fast and private. The tool runs local javascript calculations to protect content parameters."
     },
     faqs: [
@@ -977,6 +998,15 @@ Optimized PDF Download
         "Layout conversions depend on the input file layout and fonts."
       ],
       privacyNote: "This tool is designed to work in the browser where possible. The input can be processed locally without needing to upload it. Documents remain in-memory and are not uploaded to remote databases.",
+      technicalExplanation: "Our PDF Compressor utilizes `pdf-lib`, a powerful library that can read and write PDF documents directly within JavaScript. When you upload a file, the browser parses its binary structure into memory. The tool then iterates over the document's pages and embedded resources, removing redundant metadata, scaling down image streams, and recompiling the binary payload to produce a smaller file.",
+      packagesUsed: ["pdf-lib", "Browser FileReader API", "React"],
+      codeSnippets: [
+        {
+          title: "Reading and Compressing PDF Streams",
+          language: "javascript",
+          code: "import { PDFDocument } from 'pdf-lib';\n\n// Load PDF directly into browser memory\nconst pdfDoc = await PDFDocument.load(fileBuffer);\n\n// Optimization algorithms applied here\n// e.g., removing unneeded metadata\npdfDoc.setTitle('');\npdfDoc.setAuthor('');\n\n// Recompile to a compressed byte array\nconst compressedBytes = await pdfDoc.save({ useObjectStreams: true });"
+        }
+      ],
       conclusion: "Optimizing PDF sizes is completed locally inside the browser. This secure approach protects personal data during file shrinking."
     },
     faqs: [
@@ -1193,6 +1223,8 @@ Formatted Output
         "Calculations are handled locally in-browser; very large file inputs may experience rendering delay depending on device memory."
       ],
       privacyNote: "This tool is designed to work in the browser where possible. The input can be processed locally without needing to upload it. This guarantees complete confidentiality for personal files or text parameters.",
+      technicalExplanation: "This tool leverages native browser APIs and efficient JavaScript algorithms to perform calculations and data transformations directly on your device. By avoiding round-trips to a backend server, the application minimizes latency and ensures that your data remains securely within your local session.",
+      packagesUsed: ["Next.js", "React", "Tailwind CSS"],
       conclusion: "Processing and inspecting values is made simple, safe, and immediate using the browser-side scripting engine."
     },
     faqs: [

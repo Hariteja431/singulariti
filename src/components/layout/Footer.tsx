@@ -77,6 +77,7 @@ export function Footer() {
               <Link href="/about" className="text-[13px] text-slate hover:text-primary transition-colors">About</Link>
               <Link href="/blog" className="text-[13px] text-slate hover:text-primary transition-colors">Blog</Link>
               <Link href="/contact" className="text-[13px] text-slate hover:text-primary transition-colors">Contact</Link>
+              <Link href="/feedback" className="text-[13px] text-slate hover:text-primary transition-colors">Feedback & Requests</Link>
             </ul>
           </div>
           

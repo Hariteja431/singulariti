@@ -79,6 +79,25 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       image: "https://singulariti.in/og-fallback.png"
     }
   },
+  "feedback": {
+    title: "Submit Feedback / Request Tool - Singulariti",
+    description: "Submit feedback, report bugs, or request new utility tools for Singulariti. Help us improve our browser-side utilities.",
+    path: "/feedback",
+    robots: { index: true, follow: true },
+    openGraph: {
+      title: "Submit Feedback / Request Tool - Singulariti",
+      description: "Submit feedback, report bugs, or request new utility tools for Singulariti. Help us improve our browser-side utilities.",
+      url: "https://singulariti.in/feedback",
+      type: "website",
+      image: "https://singulariti.in/og-fallback.png"
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Submit Feedback / Request Tool - Singulariti",
+      description: "Submit feedback, report bugs, or request new utility tools for Singulariti. Help us improve our browser-side utilities.",
+      image: "https://singulariti.in/og-fallback.png"
+    }
+  },
   "privacy": {
     title: "Privacy Policy - Online Utility Tools",
     description: "Read how this website handles browser-side processing, temporary file handling, analytics and privacy-related information.",

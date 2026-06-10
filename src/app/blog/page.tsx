@@ -21,6 +21,7 @@ import {
   Eye,
   FileText
 } from 'lucide-react';
+import { BlogSearchAutocomplete } from '@/components/blog/BlogSearchAutocomplete';
 
 import { buildMetadata } from '@/lib/seo/metadata';
 import { getPageSEO } from '@/lib/seo/pageMetadata';
@@ -95,7 +96,7 @@ export default async function BlogHomePage() {
     <>
       <Header />
       <main className="flex-1 w-full bg-background pt-24 pb-16">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl space-y-16">
+        <div className="container mx-auto px-4 md:px-8 max-w-7xl space-y-24">
           
           {/* 1. Hero Section */}
           <section className="max-w-4xl mx-auto text-center space-y-6">
@@ -114,33 +115,13 @@ export default async function BlogHomePage() {
           </section>
 
           {/* 2. Interactive Search Form Component */}
-          <section className="max-w-2xl mx-auto bg-surface border border-border p-6 rounded-2xl space-y-4 shadow-sm">
+          <section className="max-w-3xl mx-auto bg-surface border border-border p-8 rounded-3xl space-y-5 shadow-sm">
             <h3 className="font-display font-bold text-xs text-slate uppercase tracking-wider">Search Utility Guides</h3>
-            <form action="/blog/search" method="GET" className="relative flex gap-3">
-              <div className="relative flex-1">
-                <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <Search className="h-4.5 w-4.5 text-slate" />
-                </span>
-                <input
-                  type="text"
-                  name="q"
-                  placeholder="Enter JSON, PDF, word counter, or calculation formulas..."
-                  required
-                  suppressHydrationWarning
-                  className="w-full font-sans text-xs text-ink bg-background border border-border rounded-xl pl-10 pr-4 py-3.5 focus:border-primary focus:outline-none transition-colors"
-                />
-              </div>
-              <button
-                type="submit"
-                className="bg-primary hover:bg-primary/95 text-white font-sans font-bold text-xs px-5 py-3.5 rounded-xl transition-colors shadow-sm"
-              >
-                Search
-              </button>
-            </form>
+            <BlogSearchAutocomplete />
           </section>
 
           {/* 3. Main Guide Series (Dashboard Layout) */}
-          <section className="space-y-6 max-w-6xl mx-auto">
+          <section className="space-y-10 max-w-6xl mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-border pb-4">
               <div>
                 <h2 className="font-display font-bold text-2xl text-ink tracking-tight flex items-center gap-2">
@@ -158,7 +139,7 @@ export default async function BlogHomePage() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               {blogSeriesList.map((series, idx) => {
                 const count = toolRegistry.filter(t => t.sectionId === series.sectionId).length;
                 const gradients = [
@@ -174,7 +155,7 @@ export default async function BlogHomePage() {
                 return (
                   <div key={series.id} className="bg-surface border border-border rounded-2xl flex flex-col justify-between overflow-hidden hover:border-primary/60 transition-colors shadow-sm">
                     <div className={`h-12 bg-gradient-to-r ${gradient} border-b flex items-center px-5`} />
-                    <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="p-8 flex-1 flex flex-col justify-between space-y-6">
                       <div className="space-y-2">
                         <div className="flex justify-between items-center">
                           <h3 className="font-display font-bold text-base text-ink">
@@ -204,7 +185,7 @@ export default async function BlogHomePage() {
           </section>
 
           {/* 4. Recent Guides Section */}
-          <section className="space-y-6 max-w-6xl mx-auto">
+          <section className="space-y-10 max-w-6xl mx-auto">
             <div className="border-b border-border pb-4">
               <h2 className="font-display font-bold text-2xl text-ink tracking-tight flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-primary" /> Recent Guides
@@ -213,15 +194,15 @@ export default async function BlogHomePage() {
                 Deep dive tutorials describing calculations, operation flows, and logic structures.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               {recentGuides.map((guide) => {
                 const tool = toolRegistry.find(t => t.id === guide.utilityId);
                 const series = blogSeriesList.find(s => s.sectionId === guide.seriesId);
                 const sub = subSectionRegistry.find(ss => ss.id === guide.subSeriesId);
                 
                 return (
-                  <div key={guide.id} className="bg-surface border border-border rounded-2xl p-6 flex flex-col justify-between hover:border-primary/45 transition-colors shadow-sm">
-                    <div className="space-y-3">
+                  <div key={guide.id} className="bg-surface border border-border rounded-3xl p-8 flex flex-col justify-between hover:border-primary/45 transition-colors shadow-sm">
+                    <div className="space-y-4">
                       <div className="flex flex-wrap gap-1.5 text-[9px] font-sans font-bold uppercase tracking-wider">
                         {series && (
                           <span className="text-primary bg-primary/10 px-2 py-0.5 rounded">

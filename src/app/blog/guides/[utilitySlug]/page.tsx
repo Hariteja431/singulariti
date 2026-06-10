@@ -18,9 +18,14 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return toolRegistry.map((tool) => ({
-    utilitySlug: tool.guideSlug,
-  }));
+  const { getAllPosts } = await import('@/lib/blog');
+  const toolSlugs = toolRegistry.map((tool) => ({ utilitySlug: tool.guideSlug }));
+  const postSlugs = getAllPosts().map(p => ({ utilitySlug: p.slug }));
+  
+  // Deduplicate slugs
+  const allSlugs = Array.from(new Set([...toolSlugs.map(t => t.utilitySlug), ...postSlugs.map(p => p.utilitySlug)]));
+  
+  return allSlugs.map(slug => ({ utilitySlug: slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -48,15 +53,15 @@ export default async function UtilityGuidePage({ params }: PageProps) {
   const { utilitySlug } = await params;
   const post = getPostBySlug(utilitySlug);
 
-  // Look up tool metadata in our registry
+  // Look up tool metadata in our registry (might be undefined for general guides)
   const tool = toolRegistry.find(t => t.guideSlug === utilitySlug);
 
-  if (!post || !tool) {
+  if (!post) {
     notFound();
   }
 
-  const section = sectionRegistry.find(s => s.id === tool.sectionId);
-  const subSection = subSectionRegistry.find(ss => ss.id === tool.subSectionId);
+  const section = tool ? sectionRegistry.find(s => s.id === tool.sectionId) : undefined;
+  const subSection = tool ? subSectionRegistry.find(ss => ss.id === tool.subSectionId) : undefined;
 
   // Schema Markup generation
   const breadcrumbSchema = {
@@ -78,8 +83,8 @@ export default async function UtilityGuidePage({ params }: PageProps) {
       {
         "@type": "ListItem",
         "position": 3,
-        "name": tool.name,
-        "item": `https://singulariti.in/blog/guides/${tool.guideSlug}`
+        "name": tool ? tool.name : post.title,
+        "item": `https://singulariti.in/blog/guides/${utilitySlug}`
       }
     ]
   };
@@ -163,18 +168,20 @@ export default async function UtilityGuidePage({ params }: PageProps) {
               </>
             )}
             <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />
-            <span className="text-ink font-semibold truncate max-w-[200px] sm:max-w-sm">{tool.name}</span>
+            <span className="text-ink font-semibold truncate max-w-[200px] sm:max-w-sm">{tool ? tool.name : post.title}</span>
           </nav>
 
           {/* Article Header */}
           <header className="max-w-4xl mb-12">
             <div className="flex flex-wrap items-center gap-2 mb-4">
               <span className="text-[11px] font-sans font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-full">
-                {section?.name || 'Utility'}
+                {section ? section.name : post.category}
               </span>
-              <span className="text-[11px] font-sans font-bold uppercase tracking-wider text-slate bg-border/40 px-2.5 py-1 rounded-full">
-                {subSection?.name || 'General'}
-              </span>
+              {subSection && (
+                <span className="text-[11px] font-sans font-bold uppercase tracking-wider text-slate bg-border/40 px-2.5 py-1 rounded-full">
+                  {subSection.name}
+                </span>
+              )}
             </div>
 
             <h1 className="font-display font-bold text-3xl md:text-5xl text-ink leading-tight tracking-tight mb-6">
@@ -209,29 +216,31 @@ export default async function UtilityGuidePage({ params }: PageProps) {
             {/* Post Workspace */}
             <div className="lg:col-span-3 space-y-10 max-w-3xl">
               
-              {/* Tool CTA Block */}
-              <div className="p-6 bg-primary/[0.03] border border-primary/20 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
-                <div className="space-y-1.5 text-center md:text-left">
-                  <h4 className="font-sans font-bold text-sm text-ink">Utility: {tool.name}</h4>
-                  <p className="font-sans text-xs text-slate max-w-md">{tool.shortDescription}</p>
-                </div>
-                <div className="flex gap-2.5 w-full md:w-auto">
-                  <Link 
-                    href={tool.utilityUrl}
-                    className="flex-1 md:flex-initial inline-flex items-center justify-center px-5 py-3 bg-primary hover:bg-primary/95 text-white font-sans font-bold text-xs rounded-xl transition-all shadow-sm gap-1.5"
-                  >
-                    <Play className="w-3.5 h-3.5 fill-white" /> Use Utility
-                  </Link>
-                  {section && (
+              {/* Tool CTA Block - Only display if a tool is associated */}
+              {tool && (
+                <div className="p-6 bg-primary/[0.03] border border-primary/20 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+                  <div className="space-y-1.5 text-center md:text-left">
+                    <h4 className="font-sans font-bold text-sm text-ink">Utility: {tool.name}</h4>
+                    <p className="font-sans text-xs text-slate max-w-md">{tool.shortDescription}</p>
+                  </div>
+                  <div className="flex gap-2.5 w-full md:w-auto">
                     <Link 
-                      href={`/blog/series/${section.slug}`}
-                      className="flex-1 md:flex-initial inline-flex items-center justify-center px-5 py-3 bg-background border border-border hover:border-primary hover:text-primary text-slate font-sans font-semibold text-xs rounded-xl transition-all"
+                      href={tool.utilityUrl}
+                      className="flex-1 md:flex-initial inline-flex items-center justify-center px-5 py-3 bg-primary hover:bg-primary/95 text-white font-sans font-bold text-xs rounded-xl transition-all shadow-sm gap-1.5"
                     >
-                      Back to {section.name} Guides
+                      <Play className="w-3.5 h-3.5 fill-white" /> Use Utility
                     </Link>
-                  )}
+                    {section && (
+                      <Link 
+                        href={`/blog/series/${section.slug}`}
+                        className="flex-1 md:flex-initial inline-flex items-center justify-center px-5 py-3 bg-background border border-border hover:border-primary hover:text-primary text-slate font-sans font-semibold text-xs rounded-xl transition-all"
+                      >
+                        Back to {section.name} Guides
+                      </Link>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Back Navigation buttons under title (requested) */}
               {section && (

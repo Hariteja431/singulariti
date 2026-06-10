@@ -4,7 +4,8 @@ import React from 'react';
 import { BlogPost } from '@/lib/blog';
 import { 
   ArrowRight, Shield, AlertTriangle, Cpu, HelpCircle, 
-  ListChecks, Users, Layers, Activity, FileText, CheckCircle 
+  ListChecks, Users, Layers, Activity, FileText, CheckCircle,
+  Settings, Box, Code
 } from 'lucide-react';
 
 interface BlogArticleProps {
@@ -16,7 +17,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
   if (!sections) return null;
 
   return (
-    <article className="space-y-10 font-sans text-slate blog-article-content">
+    <article className="space-y-16 font-sans text-slate blog-article-content">
       
       {/* 1. Introduction */}
       <section className="blog-content-body">
@@ -321,7 +322,66 @@ export function BlogArticle({ post }: BlogArticleProps) {
         </section>
       )}
 
-      {/* 17. Limitations */}
+      {/* 17. Under the Hood: Technical Details */}
+      {(sections.technicalExplanation || sections.packagesUsed || sections.codeSnippets) && (
+        <section className="bg-surface border border-border p-8 rounded-3xl space-y-8 shadow-sm">
+          <div className="border-b border-border pb-4">
+            <h3 className="font-display font-bold text-lg text-ink tracking-tight flex items-center gap-2">
+              <Settings className="w-5 h-5 text-primary" /> Technology Behind the Tool
+            </h3>
+            <p className="text-sm font-sans text-slate mt-1">Understanding how this utility processes data locally.</p>
+          </div>
+
+          {sections.technicalExplanation && (
+            <div className="space-y-3">
+              <h4 className="font-display font-bold text-sm text-ink uppercase tracking-wider flex items-center gap-2">
+                <Activity className="w-4 h-4 text-primary" /> How It Actually Works
+              </h4>
+              <p className="text-sm text-slate leading-relaxed bg-background p-5 rounded-2xl border border-border/50">
+                {sections.technicalExplanation}
+              </p>
+            </div>
+          )}
+
+          {sections.packagesUsed && sections.packagesUsed.length > 0 && (
+            <div className="space-y-3">
+              <h4 className="font-display font-bold text-sm text-ink uppercase tracking-wider flex items-center gap-2">
+                <Box className="w-4 h-4 text-primary" /> Packages & APIs Used
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {sections.packagesUsed.map((pkg, idx) => (
+                  <span key={idx} className="bg-primary/10 text-primary border border-primary/20 px-3 py-1.5 rounded-lg text-xs font-semibold font-mono">
+                    {pkg}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {sections.codeSnippets && sections.codeSnippets.length > 0 && (
+            <div className="space-y-4">
+              <h4 className="font-display font-bold text-sm text-ink uppercase tracking-wider flex items-center gap-2">
+                <Code className="w-4 h-4 text-primary" /> Core Logic Snippets
+              </h4>
+              <div className="space-y-4">
+                {sections.codeSnippets.map((snippet, idx) => (
+                  <div key={idx} className="rounded-2xl overflow-hidden border border-border bg-background">
+                    <div className="flex items-center justify-between px-4 py-2.5 bg-surface border-b border-border">
+                      <span className="text-xs font-display font-bold text-ink">{snippet.title}</span>
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate bg-border/40 px-2 py-0.5 rounded">{snippet.language}</span>
+                    </div>
+                    <pre className="p-4 overflow-x-auto text-[12px] font-mono text-ink leading-relaxed">
+                      <code>{snippet.code}</code>
+                    </pre>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* 18. Limitations */}
       {sections.limitations && sections.limitations.length > 0 && (
         <section className="p-5 border border-slate/30 bg-surface rounded-2xl space-y-3">
           <h3 className="font-display font-bold text-sm text-ink uppercase tracking-wider flex items-center gap-1.5">

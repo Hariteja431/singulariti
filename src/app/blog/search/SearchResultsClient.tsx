@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { toolRegistry, sectionRegistry, subSectionRegistry, UtilityRegistryItem } from '@/content/tools/toolRegistry';
+import { getAllPosts, BlogPost } from '@/lib/blog';
 import { Search, Compass, Play, ArrowLeft, ArrowRight, ListFilter, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
 
 function SearchResultsContent() {
@@ -57,6 +58,18 @@ function SearchResultsContent() {
   };
 
   const filteredResults = toolRegistry.filter(tool => matchesQuery(tool) && matchesFilters(tool));
+
+  // Search Blog Posts
+  const allPosts = getAllPosts();
+  const blogResults = allPosts.filter(post => {
+    if (!query) return false; // Show posts only if there's a search query? Or show all if empty? Let's show matching if query.
+    if (!query && !selectedSection && !selectedSubSection && !selectedOpType) return true;
+    
+    const term = query.toLowerCase();
+    const titleMatch = post.title ? post.title.toLowerCase().includes(term) : false;
+    const descMatch = post.metaDescription ? post.metaDescription.toLowerCase().includes(term) : false;
+    return titleMatch || descMatch;
+  });
 
   // Pagination Parameters
   const pageSize = 12;
@@ -165,7 +178,44 @@ function SearchResultsContent() {
       </section>
 
       {/* Results Listings Grid */}
-      <section className="space-y-8 max-w-5xl">
+      <section className="space-y-12 max-w-5xl">
+        
+        {/* Blog Guides Results */}
+        {blogResults.length > 0 && (
+          <div className="space-y-6">
+            <h2 className="font-display font-bold text-xl text-ink border-b border-border pb-2">
+              Related Articles & Guides
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {blogResults.map((post) => (
+                <Link 
+                  key={post.slug}
+                  href={`/blog/guides/${post.slug}`}
+                  className="bg-surface border border-border p-5 rounded-2xl hover:border-primary/50 transition-all flex flex-col gap-2 group"
+                >
+                  <div className="flex justify-between items-start mb-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded">
+                      Guide
+                    </span>
+                    <span className="text-xs text-slate">{post.publishedAt}</span>
+                  </div>
+                  <h3 className="font-display font-bold text-base text-ink group-hover:text-primary transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="text-xs text-slate leading-relaxed line-clamp-2">
+                    {post.metaDescription}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Tool Results */}
+        <div className="space-y-6">
+          <h2 className="font-display font-bold text-xl text-ink border-b border-border pb-2">
+            Utility Tools
+          </h2>
         {paginatedResults.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginatedResults.map((tool) => {
@@ -228,6 +278,7 @@ function SearchResultsContent() {
             <p className="font-sans text-slate text-sm">No utility tools matched your search parameters.</p>
           </div>
         )}
+        </div>
 
         {/* Pagination Controls */}
         {totalPages > 1 && (
