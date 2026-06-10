@@ -24,11 +24,11 @@ import {
 
 interface ToolIconProps {
   toolId: string;
-  className?: string; // e.g., 'w-12 h-12' for the container
+  className?: string; 
   fallback?: React.ReactNode;
 }
 
-export function ToolIcon({ toolId, className = "w-12 h-12", fallback }: ToolIconProps) {
+export function ToolIcon({ toolId, className = "w-14 h-14" }: ToolIconProps) {
   const id = toolId.toLowerCase();
 
   // Determine the single most relevant icon for the tool
@@ -171,14 +171,21 @@ export function ToolIcon({ toolId, className = "w-12 h-12", fallback }: ToolIcon
   // Fallback
   if (!IconComponent) IconComponent = Code;
 
-  // Premium, ultra-clean aesthetic (Vercel/Linear style)
+  // Premium Apple-Style Duotone Squircle
+  // Using pure light teal backgrounds in light mode, and deep glassy teal in dark mode.
   return (
-    <div className={`relative flex items-center justify-center ${className} bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all duration-300`}>
-      {/* Icon */}
-      <IconComponent className="w-5 h-5 text-primary" strokeWidth={2} />
+    <div className={`relative flex items-center justify-center ${className} bg-primary/10 dark:bg-primary/20 border border-primary/20 dark:border-primary/30 rounded-2xl group-hover:scale-105 group-hover:-translate-y-1 group-hover:shadow-[0_8px_30px_rgba(20,184,166,0.2)] transition-all duration-300 overflow-hidden`}>
+      {/* Inner subtle glow */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent dark:from-white/5 dark:to-transparent pointer-events-none rounded-2xl" />
       
-      {/* Soft Glow Ring on Hover */}
-      <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 ring-1 ring-primary/20 dark:ring-primary/30 transition-opacity duration-300 pointer-events-none" />
+      {/* The Duotone Icon */}
+      {/* fill="currentColor" fillOpacity={0.2} creates a stunning duotone premium effect without needing custom SVGs */}
+      <IconComponent 
+        className="w-7 h-7 text-primary relative z-10" 
+        strokeWidth={2} 
+        fill="currentColor" 
+        fillOpacity={0.2} 
+      />
     </div>
   );
 }
