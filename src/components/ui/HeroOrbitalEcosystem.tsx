@@ -314,16 +314,17 @@ export default function HeroOrbitalEcosystem() {
         >
           <defs>
             <radialGradient id="sg-core-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.45" />
+              <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.2" />
+              <stop offset="50%" stopColor="var(--color-primary)" stopOpacity="0.05" />
               <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0" />
             </radialGradient>
             <filter id="sg-edge-glow" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur stdDeviation="5" result="blur" />
               <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
             </filter>
-            <filter id="sg-bulb-glow" x="-80%" y="-80%" width="260%" height="260%">
-              <feGaussianBlur stdDeviation="10" result="blur" />
-              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+            <filter id="sg-bulb-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
           </defs>
 
@@ -363,23 +364,23 @@ export default function HeroOrbitalEcosystem() {
           <line x1="90" y1="225" x2="252" y2="210" stroke="var(--color-primary)" strokeOpacity="0.2" strokeWidth="1.5" strokeDasharray="4,4" />
           <line x1="270" y1="225" x2="108" y2="210" stroke="var(--color-primary)" strokeOpacity="0.2" strokeWidth="1.5" strokeDasharray="4,4" />
 
-          {/* The Energy Bulb (Exactly at Vertex 180, 175) */}
-          <circle cx="180" cy="175" r="40" fill="url(#sg-core-glow)" />
+          {/* Subtle Ambient Energy Core */}
+          <circle cx="180" cy="175" r="32" fill="url(#sg-core-glow)" />
           
-          {/* Inner mechanical rotating hexagon inside the bulb */}
-          <g id="inner-hex" stroke="var(--color-primary)" strokeWidth="1.5" strokeOpacity="0.6" fill="none">
-            <polygon points="180,152 199,163.5 199,186.5 180,198 161,186.5 161,163.5" />
-          </g>
+          {/* Delicate Breathing Inner Ring */}
+          <circle cx="180" cy="175" r="14" stroke="var(--color-primary)" strokeWidth="0.5" strokeOpacity="0.5" fill="none">
+            <animate attributeName="r" values="14;16;14" dur="4s" repeatCount="indefinite" />
+            <animate attributeName="stroke-opacity" values="0.3;0.6;0.3" dur="4s" repeatCount="indefinite" />
+          </circle>
 
-          <circle cx="180" cy="175" r="24" fill="var(--color-primary)" fillOpacity="0.7" filter="url(#sg-bulb-glow)">
-            <animate attributeName="r" values="20;26;20" dur="3s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite" />
+          {/* Minimalist Solid Core */}
+          <circle cx="180" cy="175" r="4" fill="var(--color-primary)" fillOpacity="0.9" filter="url(#sg-bulb-glow)">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite" />
           </circle>
-          <circle cx="180" cy="175" r="12" fill="#ffffff" filter="url(#sg-bulb-glow)">
-            <animate attributeName="r" values="10;14;10" dur="1.5s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="180" cy="175" r="6" fill="#ffffff">
-            <animate attributeName="opacity" values="0.8;1;0.8" dur="0.75s" repeatCount="indefinite" />
+          
+          {/* Micro White Center Dot */}
+          <circle cx="180" cy="175" r="1.5" fill="#ffffff">
+             <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" />
           </circle>
 
         </svg>
