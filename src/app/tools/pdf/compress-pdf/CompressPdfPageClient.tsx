@@ -7,6 +7,13 @@ const CompressPdfClient = dynamic(
   { ssr: false }
 );
 
+import { ToolContentBlock } from '@/components/seo/ToolContentBlock';
+
 export function CompressPdfPageClient() {
-  return <CompressPdfClient />;
+  return (
+    <>
+      <CompressPdfClient />
+      <ToolContentBlock utilityId="compress-pdf" />
+    </>
+  );
 }

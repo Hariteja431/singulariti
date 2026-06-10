@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 import { QRType } from '@/lib/qr/qrHelpers';
+import { ToolContentBlock } from '@/components/seo/ToolContentBlock';
 
 const QrCodeGeneratorClient = dynamic(() => import('../qr-code-generator/QrCodeGeneratorClient').then(mod => mod.QrCodeGeneratorClient), {
   ssr: false,
@@ -12,6 +13,7 @@ const QrCodeGeneratorClient = dynamic(() => import('../qr-code-generator/QrCodeG
 export function QrPageClient({
   initialType,
   isStandalone,
+  toolId,
   toolName,
   toolDescription,
   toolSeoTitle,
@@ -19,19 +21,23 @@ export function QrPageClient({
 }: {
   initialType: QRType;
   isStandalone: boolean;
+  toolId: string;
   toolName: string;
   toolDescription: string;
   toolSeoTitle?: string;
   toolSeoDescription?: string;
 }) {
   return (
-    <QrCodeGeneratorClient 
-      initialType={initialType} 
-      isStandalone={isStandalone}
-      toolName={toolName}
-      toolDescription={toolDescription}
-      toolSeoTitle={toolSeoTitle}
-      toolSeoDescription={toolSeoDescription}
-    />
+    <>
+      <QrCodeGeneratorClient 
+        initialType={initialType} 
+        isStandalone={isStandalone}
+        toolName={toolName}
+        toolDescription={toolDescription}
+        toolSeoTitle={toolSeoTitle}
+        toolSeoDescription={toolSeoDescription}
+      />
+      <ToolContentBlock utilityId={toolId} />
+    </>
   );
 }

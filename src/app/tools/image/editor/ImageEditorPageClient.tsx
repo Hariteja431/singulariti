@@ -8,6 +8,13 @@ const ImageEditorClient = dynamic(() => import('@/components/tools/image-editor/
   loading: () => <div className="min-h-screen flex items-center justify-center">Loading Image Editor...</div>
 });
 
+import { ToolContentBlock } from '@/components/seo/ToolContentBlock';
+
 export function ImageEditorPageClient() {
-  return <ImageEditorClient />;
+  return (
+    <>
+      <ImageEditorClient />
+      <ToolContentBlock utilityId="image-compressor" />
+    </>
+  );
 }

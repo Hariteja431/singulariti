@@ -27,6 +27,7 @@ export default async function QRToolPage(props: { params: Promise<{ tool: string
     <QrPageClient 
       initialType={initialType} 
       isStandalone={true}
+      toolId={tool.id}
       toolName={tool.name}
       toolDescription={tool.description}
       toolSeoTitle={tool.seoTitle}
