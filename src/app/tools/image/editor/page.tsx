@@ -1,7 +1,12 @@
 import { buildMetadata } from '@/lib/seo/metadata';
 import { getPageSEO } from '@/lib/seo/pageMetadata';
 import React from 'react';
-import { ImageEditorClient } from '@/components/tools/image-editor/ImageEditorClient';
+import dynamic from 'next/dynamic';
+
+const ImageEditorClient = dynamic(() => import('@/components/tools/image-editor/ImageEditorClient').then(mod => mod.ImageEditorClient), {
+  ssr: false,
+  loading: () => <div className="min-h-screen flex items-center justify-center">Loading Image Editor...</div>
+});
 
 const seo = getPageSEO('image-editor')!;
 export const metadata = buildMetadata({

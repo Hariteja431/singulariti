@@ -9,7 +9,6 @@ export async function loadPdfDocument(file: File): Promise<pdfjsLib.PDFDocumentP
   const loadingTask = pdfjsLib.getDocument({
     data: new Uint8Array(arrayBuffer),
     useWorkerFetch: false,
-    isEvalSupported: false,
     useSystemFonts: true,
   });
   return loadingTask.promise;

@@ -3,7 +3,12 @@ import { getUtilitySEO } from '@/lib/seo/utilityMetadata';
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { getToolByPath, getCategoryById } from '@/registry';
-import { QrCodeGeneratorClient } from '../qr-code-generator/QrCodeGeneratorClient';
+import dynamic from 'next/dynamic';
+
+const QrCodeGeneratorClient = dynamic(() => import('../qr-code-generator/QrCodeGeneratorClient').then(mod => mod.QrCodeGeneratorClient), {
+  ssr: false,
+  loading: () => <div className="min-h-screen flex items-center justify-center">Loading QR Generator...</div>
+});
 import { QRType } from '@/lib/qr/qrHelpers';
 
 export default async function QRToolPage(props: { params: Promise<{ tool: string }> }) {

@@ -162,7 +162,7 @@ export function TaskManagement({
               }`}
             >
               <div className="flex items-center space-x-3 overflow-hidden">
-                <button onClick={() => toggleTask(t.id)} className="text-primary flex-shrink-0">
+                <button aria-label="Toggle task completion" onClick={() => toggleTask(t.id)} className="text-primary flex-shrink-0">
                   {t.completed ? <CheckCircle2 size={20} /> : <Circle size={20} />}
                 </button>
                 <span className={`text-sm truncate ${t.completed ? 'line-through text-slate' : ''}`}>

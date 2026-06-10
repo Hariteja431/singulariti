@@ -18,8 +18,12 @@ export function Button({
   className = '',
   children,
   disabled,
+  'aria-label': ariaLabel,
   ...props
 }: ButtonProps) {
+  // Warn or handle missing aria-label for icon-only buttons
+  const isIconOnly = !children && (leftIcon || rightIcon);
+  const resolvedAriaLabel = ariaLabel || (isIconOnly ? 'Icon button' : undefined);
   const baseStyle = "inline-flex items-center justify-center font-sans font-medium transition-all active:scale-[0.97] focus:outline-2 focus:outline-offset-2 focus:outline-primary disabled:opacity-50 disabled:pointer-events-none";
   
   const variants = {
@@ -39,6 +43,7 @@ export function Button({
     <button
       className={`${baseStyle} ${variants[variant]} ${sizes[size]} ${className}`}
       disabled={disabled || isLoading}
+      aria-label={resolvedAriaLabel}
       {...props}
     >
       {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
