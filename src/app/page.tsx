@@ -53,10 +53,10 @@ export default function Home() {
     <>
 
       <Header />
-      <main className="flex-1 w-full flex flex-col items-center pt-8 sm:pt-12 pb-12">
+      <main className="flex-1 w-full flex flex-col items-center pt-8 lg:pt-12 pb-12">
         {/* Hero Section */}
-        <section className="w-full max-w-[1400px] mx-auto px-4 mb-24 sm:mb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[550px] lg:min-h-[700px]">
+        <section className="w-full max-w-7xl mx-auto px-4 my-8 lg:my-12 mb-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[600px]">
             
             {/* Left Column - Premium Copy */}
             <div className="flex flex-col items-center lg:items-start text-center lg:text-left z-10">
