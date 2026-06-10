@@ -85,13 +85,13 @@ export default function HeroOrbitalEcosystem() {
 
   // ─── Animation loop (60fps Canvas & DOM Transform Engine) ───────────────────
   const startAnimation = useCallback(() => {
-    const canvas = canvasRef.current;
-    const stage = stageRef.current;
-    const svgEl = svgRef.current;
-    if (!canvas || !stage || !svgEl) return;
-    const ctx = canvas.getContext("2d")!;
-
     function loop() {
+      const canvas = canvasRef.current;
+      const stage = stageRef.current;
+      const svgEl = svgRef.current;
+      if (!canvas || !stage || !svgEl) return;
+      const ctx = canvas.getContext("2d")!;
+
       tRef.current += 0.01;
       
       // Auto-rotate slowly, but smoothly seek to the active node if one is selected
