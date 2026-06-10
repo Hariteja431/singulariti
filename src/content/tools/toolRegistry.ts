@@ -4457,10 +4457,40 @@ export const blogSubSeriesList: BlogSubSeries[] = subSectionRegistry.map(sub => 
   };
 });
 
+export const guideTitleMap: Record<string, string> = {
+  "merge-pdf": "How to Merge PDF Files",
+  "split-pdf": "How to Split PDF Pages",
+  "rotate-pdf": "How to Rotate PDF Pages",
+  "delete-pdf-pages": "How to Remove Pages from a PDF",
+  "rearrange-pdf-pages": "How to Rearrange PDF Pages",
+  "extract-pdf-pages": "How to Extract PDF Pages",
+  "compress-pdf": "How to Compress PDF Files",
+  "pdf-to-jpg": "How to Convert PDF to JPG",
+  "jpg-to-pdf": "How to Convert JPG to PDF",
+  "add-watermark-to-pdf": "How to Add a Watermark to PDF",
+  "sign-pdf": "How to Sign a PDF Online"
+};
+
+export function getToolGuideTitle(tool: { id: string; name: string; operationType?: string }): string {
+  if (guideTitleMap[tool.id]) {
+    return guideTitleMap[tool.id];
+  }
+  const isCompressor = tool.operationType === "compressor" || tool.name.toLowerCase().includes("compress");
+  if (isCompressor) {
+    return `How to Compress ${tool.name.replace(/\s*Compressor|\s*Compress/gi, "")} Files`;
+  }
+  return `How to Use the ${tool.name} Tool`;
+}
+
 export const blogGuidesList: BlogGuide[] = toolRegistry.map(tool => {
-  const title = `How the ${tool.name} Works: File Size Reduction, Operation Flow, and Limits`;
-  const metaTitle = `How the ${tool.name} Works | Singulariti`;
-  const metaDescription = `Learn how the ${tool.name.toLowerCase()} validates the file, processes values, and handles limits locally.`;
+  const title = getToolGuideTitle(tool);
+  let metaTitle = `${title} | Singulariti`;
+  if (metaTitle.length > 60) {
+    metaTitle = title.slice(0, 60);
+  }
+  
+  const desc = `Step-by-step guide on how to use ${tool.name.toLowerCase()} safely in your browser. Learn how it works, inputs required, outputs produced, and privacy rules.`;
+  const metaDescription = desc.length > 155 ? desc.slice(0, 152) + "..." : desc;
   const featured = ['image-compressor', 'pdf-compressor', 'json-formatter', 'word-counter', 'meta-tag-generator', 'emi-calculator'].includes(tool.id);
   
   return {

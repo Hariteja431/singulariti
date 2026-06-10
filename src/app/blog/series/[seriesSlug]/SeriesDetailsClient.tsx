@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { notFound, useSearchParams, useRouter } from 'next/navigation';
 import { 
@@ -22,8 +22,8 @@ import {
   Calendar
 } from 'lucide-react';
 
-interface PageProps {
-  params: Promise<{ seriesSlug: string }>;
+interface SeriesDetailsContentProps {
+  seriesSlug: string;
 }
 
 // Map sectionSlug to guide slug inside blog.ts
@@ -36,8 +36,7 @@ function getPostGuideSlug(sectionSlug: string): string {
   return slug.replace('-utilities', '-tools-guide');
 }
 
-export function SeriesDetailsContent({ params }: PageProps) {
-  const { seriesSlug } = use(params);
+export function SeriesDetailsContent({ seriesSlug }: SeriesDetailsContentProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
 

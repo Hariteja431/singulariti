@@ -1,14 +1,13 @@
 "use client";
 
-import React, { use } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { notFound, useSearchParams, useRouter } from 'next/navigation';
 import { 
   blogSeriesList,
   blogSubSeriesList,
   blogGuidesList,
-  toolRegistry,
-  subSectionRegistry
+  toolRegistry
 } from '@/content/tools/toolRegistry';
 import { SimilarTopicsSidebar } from '@/components/blog/SimilarTopicsSidebar';
 import { 
@@ -20,12 +19,12 @@ import {
   ChevronRight
 } from 'lucide-react';
 
-interface PageProps {
-  params: Promise<{ seriesSlug: string; subSectionSlug: string }>;
+interface SubSeriesContentProps {
+  seriesSlug: string;
+  subSectionSlug: string;
 }
 
-export function SubSeriesContent({ params }: PageProps) {
-  const { seriesSlug, subSectionSlug } = use(params);
+export function SubSeriesContent({ seriesSlug, subSectionSlug }: SubSeriesContentProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
 

@@ -1,8 +1,4 @@
-/**
- * Data structures and content repository for the Singulariti blog system.
- */
-
-import { toolRegistry, sectionRegistry, subSectionRegistry, UtilityRegistryItem } from '@/content/tools/toolRegistry';
+import { toolRegistry, sectionRegistry, subSectionRegistry, UtilityRegistryItem, getToolGuideTitle } from '@/content/tools/toolRegistry';
 
 export interface RelatedTool {
   name: string;
@@ -904,37 +900,42 @@ Generated Code Panel
 
   // 13. Tool Article: PDF Compressor
   {
-    title: "How to Use the PDF Compressor Tool",
+    title: "Reduce PDF File Size Free",
     slug: "compress-pdf-guide",
-    metaTitle: "PDF Compressor Guide — Optimize and Shrink PDF Sizes | Singulariti",
-    metaDescription: "Learn the formulas for file compression, PDF structural compression rules, memory safety guidelines, and browser-side file validation.",
+    metaTitle: "Reduce PDF File Size Online Free | Singulariti",
+    metaDescription: "Compress large PDF files without losing quality. Completely free, no registration, and files are processed securely in your browser.",
     category: CATEGORIES.pdf,
-    tags: ["PDF", "Compression", "Optimization", "Files"],
+    tags: ["PDF Guides", "Document Management", "Security"],
     toolUrl: "/tools/pdf/compress-pdf",
     relatedTools: [
-      { name: "Merge PDF", url: "/tools/pdf/merge-pdf", reason: "Combine multiple PDF pages into one file." },
-      { name: "Split PDF", url: "/tools/pdf/split-pdf", reason: "Extract page segments to separate files." },
-      { name: "PDF to Text", url: "/tools/pdf/pdf-to-text", reason: "Convert document contents to clean text strings." }
+      { name: "Merge PDF", url: "/tools/pdf/merge-pdf", reason: "Combine multiple PDF documents into a single file." },
+      { name: "Split PDF", url: "/tools/pdf/split-pdf", reason: "Extract specific page ranges into new files." },
+      { name: "PDF to JPG", url: "/tools/pdf/pdf-to-jpg", reason: "Export PDF pages as high-quality image files." }
     ],
     featuredImage: "/blog/pdf-compress.jpg",
-    featuredImageAlt: "PDF compress layout screen",
+    featuredImageAlt: "Singulariti PDF Compression options box",
     publishedAt: "2026-06-03",
-    updatedAt: "2026-06-04",
+    updatedAt: "2026-06-10",
     sections: {
-      introduction: "PDF documents often grow large due to high-resolution images, font inclusions, and uncompressed layers. High file sizes trigger block limits in emails and application forms. This PDF compressor tool is designed to reorganize document file streams and shrink sizes directly in the browser.",
-      whatThisToolDoes: "This utility compresses PDF documents. It parses the document structure, optimizes duplicate streams, and shrinks image assets without requiring external file transfers.",
-      whyIncluded: "PDF files can become large because of images, fonts, and scanned pages. This tool is included to help users reduce file size when they need to upload, share, or store documents.",
-      whoCanUse: ["Job seekers reducing resume file sizes", "Office workers sharing project proposals", "Students uploading homework to course panels"],
-      inputsRequired: ["PDF document file upload input"],
-      outputProduced: ["Optimized, compressed PDF document", "File reduction percentage statistics"],
-      howToUse: [
-        "Open the PDF Compressor page.",
-        "Upload the PDF document.",
-        "The system reads file structures client-side.",
-        "Select optimization settings.",
-        "Download the compressed PDF."
+      introduction: `
+        <p>Large PDF documents are difficult to share over email, slow to load, and consume valuable storage space.</p>
+        <p>Singulariti's Free PDF Compressor allows you to shrink your documents instantly. The tool runs directly in your web browser, ensuring that your private files are never uploaded to our servers.</p>
+      `,
+      whatThisToolDoes: "The PDF Compressor is a browser-based utility designed to reduce the storage size of PDF documents by simplifying redundant fonts and optimizing graphics.",
+      whyIncluded: "Many online services require you to register or purchase a subscription to compress large documents. Singulariti operates differently to solve this constraint.",
+      whoCanUse: [
+        "Job seekers reducing resume file sizes for email portals",
+        "Office workers sharing project proposals quickly",
+        "Students uploading assignments to university course panels"
       ],
-      userOperationFlow: "Select PDF file → Client reads file stream → Analyze document layers → Compress resources → Generate optimized PDF → Download file",
+      inputsRequired: ["PDF document file upload selection"],
+      outputProduced: ["Optimized, compressed PDF document", "File reduction percentage metrics"],
+      howToUse: [
+        "Click the select box and pick your PDF file from your device, or drag and drop it directly.",
+        "Choose either Standard Compression (best quality) or High Compression (smallest file size).",
+        "Click the 'Compress' button, wait for the processing indicator, and save your new file instantly."
+      ],
+      userOperationFlow: "Select PDF File → Choose Compression Level → Run Local Compression → Download Optimized PDF",
       operationWorks: [
         "The user uploads a PDF file.",
         "The system checks file size and integrity.",
@@ -960,17 +961,17 @@ Optimized PDF Download
       `,
       formulaOrLogic: "Compression percentages are calculated by comparing original and optimized file sizes: Compression Percentage = ((Original Size - New Size) / Original Size) * 100.",
       workingExample: {
-        input: "Original PDF size: 10 MB",
+        input: "Original PDF size: 15.8 MB",
         operation: [
           "Identify image assets.",
           "Reorganize structure layers.",
-          "Shrink file dimensions to 4 MB."
+          "Shrink file dimensions to 3.1 MB."
         ],
-        output: "New size: 4 MB | Size reduction: 60%"
+        output: "New size: 3.1 MB | Size reduction: 80%"
       },
       beforeAfter: {
-        before: "Document size: 15.2 MB (Slow to email)",
-        after: "Document size: 4.8 MB (Fast to email)"
+        before: "Document size: 15.8 MB (Slow to email)",
+        after: "Document size: 3.1 MB (80% size reduction)"
       },
       buttonActions: [
         { button: "Upload", action: "Opens the local file selector to select a PDF document." },
@@ -997,7 +998,7 @@ Optimized PDF Download
         "Files exceeding 100MB may cause browser memory lag.",
         "Layout conversions depend on the input file layout and fonts."
       ],
-      privacyNote: "This tool is designed to work in the browser where possible. The input can be processed locally without needing to upload it. Documents remain in-memory and are not uploaded to remote databases.",
+      privacyNote: "For tools that run fully in the browser, files can be processed locally without being uploaded to a server. Some advanced tools may require server-side processing depending on the operation. Avoid uploading highly sensitive files unless you understand how the tool processes them.",
       technicalExplanation: "Our PDF Compressor utilizes `pdf-lib`, a powerful library that can read and write PDF documents directly within JavaScript. When you upload a file, the browser parses its binary structure into memory. The tool then iterates over the document's pages and embedded resources, removing redundant metadata, scaling down image streams, and recompiling the binary payload to produce a smaller file.",
       packagesUsed: ["pdf-lib", "Browser FileReader API", "React"],
       codeSnippets: [
@@ -1007,12 +1008,26 @@ Optimized PDF Download
           code: "import { PDFDocument } from 'pdf-lib';\n\n// Load PDF directly into browser memory\nconst pdfDoc = await PDFDocument.load(fileBuffer);\n\n// Optimization algorithms applied here\n// e.g., removing unneeded metadata\npdfDoc.setTitle('');\npdfDoc.setAuthor('');\n\n// Recompile to a compressed byte array\nconst compressedBytes = await pdfDoc.save({ useObjectStreams: true });"
         }
       ],
-      conclusion: "Optimizing PDF sizes is completed locally inside the browser. This secure approach protects personal data during file shrinking."
+      conclusion: `
+        <p>Optimizing PDF sizes is completed locally inside the browser. This secure approach protects personal data during file shrinking.</p>
+      `
     },
     faqs: [
       {
-        question: "Will document text quality change?",
-        answer: "The tool preserves fonts and vector lines. Text remains readable, while embedded image assets are optimized."
+        question: "Can I compress password-protected PDF files?",
+        answer: "No. For security reasons, you must remove password protection from the document before uploading it for compression."
+      },
+      {
+        question: "Will the text layout of my document change?",
+        answer: "No. The compressor only optimizes font profiles, metadata, and embedded images. The document layout, text placement, and margins remain exactly the same."
+      },
+      {
+        question: "Is there a daily limit on how many PDFs I can compress?",
+        answer: "There are no limits. You can compress as many files as you need, as often as you want."
+      },
+      {
+        question: "How long do you keep my uploaded files?",
+        answer: "We do not store your files. All operations run directly in your browser using local resources, meaning your data never reaches our servers."
       }
     ]
   },
@@ -1129,7 +1144,7 @@ export function getFallbackPost(tool: UtilityRegistryItem): BlogPost {
   const name = tool.name;
   const sectionName = sectionRegistry.find(s => s.id === tool.sectionId)?.name || "Utilities";
   const subSectionName = subSectionRegistry.find(ss => ss.id === tool.subSectionId)?.name || "Tools";
-  
+
   const inputs = tool.inputType.length > 0 ? tool.inputType[0] : "Input";
   const outputs = tool.outputType.length > 0 ? tool.outputType[0] : "Output";
   const metaTitle = `How the ${name} Works: ${inputs}, ${outputs} and Operation Flow`;
@@ -1195,8 +1210,8 @@ Client Script Processing
      ↓
 Formatted Output
       `,
-      formulaOrLogic: tool.hasFormula 
-        ? `The calculation is processed using standard client-side algebraic logic based on standard parameter rules.` 
+      formulaOrLogic: tool.hasFormula
+        ? `The calculation is processed using standard client-side algebraic logic based on standard parameter rules.`
         : `The logic processes values by iterating through the input structure, applying matching rules, and parsing formatting tags.`,
       buttonActions: [
         { button: "Process / Run", action: "Executes the main utility calculation or transformation." },
@@ -1236,27 +1251,225 @@ Formatted Output
   };
 }
 
+const SAFER_PRIVACY_TEXT = "For tools that run fully in the browser, files can be processed locally without being uploaded to a server. Some advanced tools may require server-side processing depending on the operation. Avoid uploading highly sensitive files unless you understand how the tool processes them.";
+
+function getExtraContent(name: string, category: string, level: 'short' | 'medium' | 'detailed') {
+  if (level === 'detailed') {
+    return {
+      intro: `
+        <h3>Comprehensive Guide to ${name}</h3>
+        <p>When working with digital systems, data files, or online media, efficiency is a core requirement. The ${name} tool has been specifically developed as a high-performance solution to streamline operations without the friction associated with traditional software installations. It provides a browser-native environment that operates directly within your tab session.</p>
+        
+        <h3>Why Client-Side Performance Matters</h3>
+        <p>Most traditional converters and file utilities rely on server-side pipelines. When you upload a file, the server receives the data, processes it on remote CPUs, and sends the output back over the internet. This approach introduces significant latency and exposes your data to security vulnerabilities. By running calculations locally inside the browser using modern technologies like Web Workers and client Canvas contexts, the ${name} completes operations instantly, bypasses network delays, and protects your information.</p>
+        
+        <h3>Understanding the Underlying Technology</h3>
+        <p>The processing engine behind the ${name} leverages modern web standards. By utilizing client-side scripting and in-browser rendering contexts, the tool runs directly inside a sandbox environment. This architecture allows for rapid iteration of data sets and files. Rather than queueing your files on a crowded remote server, your local CPU performs the tasks in parallel threads. This not only increases performance but also significantly reduces the power and resources required to complete simple digital transactions, making it an eco-friendly choice.</p>
+        
+        <h3>Best Practices for Processing Files</h3>
+        <ul>
+          <li><strong>Verify File Formats:</strong> Always check that your input format matches the expected types (such as JPEG, PNG, or PDF) to avoid validation errors.</li>
+          <li><strong>Monitor File Size Limits:</strong> Although browser memory can handle large files, extremely large files (above 50MB) may trigger minor UI lag during canvas redraws.</li>
+          <li><strong>Ensure Correct Parameters:</strong> When adjusting sliders or options, start with standard values before selecting extreme values to get the best balance of quality and size.</li>
+        </ul>
+      `,
+      conclusion: `
+        <h2>Advanced Tips for Integrating ${name} Into Your Workflow</h2>
+        <p>Using browser utilities is highly effective when you combine them into a larger workflow. For example, if you are preparing visual content for a web page, you can crop the image, resize its pixel dimensions, and compress the file stream using our dedicated tools in sequence. Because all these utilities operate in the same browser space, no files are transferred, keeping the processing chain clean and fast.</p>
+        
+        <h3>Optimizing for Mobile and Desktop Devices</h3>
+        <p>Our tools are designed to adapt to your environment. When you run them on a high-performance desktop computer, they take advantage of multi-core processors. On mobile devices, they optimize memory usage to prevent tab crashes. This cross-device compatibility ensures that you can complete your tasks whether you are working in an office, studying at a library, or traveling.</p>
+        
+        <h3>Common Issues and Quick Troubleshooting</h3>
+        <p>If you encounter unexpected results, check the following troubleshooting steps to quickly resolve the issue:</p>
+        <ul>
+          <li><strong>Unresponsive Interface:</strong> If the browser tab becomes sluggish, it might be due to low system memory. Try closing unused browser tabs and reloading the page to clear the cache.</li>
+          <li><strong>Validation Rejected:</strong> Ensure the file is not password-protected or corrupted. Try opening the file locally on your device to verify it opens correctly before selecting it.</li>
+          <li><strong>Output Missing:</strong> If the output doesn't display, double-check that all required fields are filled out. Missing parameters will prevent the processor from completing the execution flow.</li>
+        </ul>
+
+        <h3>Frequently Encountered Format Standards</h3>
+        <p>Different digital systems expect specific formats. When using tools in the ${category} category, pay close attention to output specifications. Standardizing your formats before uploading them to professional platforms prevents import errors and preserves structural formatting across different systems. Whether you are submitting a resume to an applicant tracking system, loading assets to a content delivery network, or compiling study notes for a research report, matching standard profiles is key to professional results.</p>
+      `
+    };
+  } else if (level === 'medium') {
+    return {
+      intro: `
+        <h3>Optimizing Local Workflows</h3>
+        <p>By executing tasks locally within the browser, the ${name} tool removes the need for large downloads or software installations. This makes it easy to complete digital tasks on any device, whether you are using a mobile phone or a desktop computer, while maintaining a smooth and responsive experience.</p>
+        
+        <h3>Why Local Execution is Safer</h3>
+        <p>Processing files client-side means your data is loaded directly into browser memory. It is not written to disk on a remote cloud server or processed by automated scripts. This workflow provides a secure alternative to public uploads and minimizes security risks.</p>
+      `,
+      conclusion: `
+        <h3>Building a More Efficient Workflow</h3>
+        <p>We encourage you to combine this tool with other browser-side utilities in our suite to build a seamless digital pipeline. For example, you can compress files, convert formats, and verify syntax sequentially—all within your browser without ever transferring files to external servers. This approach keeps your operations fast, unified, and highly secure.</p>
+      `
+    };
+  } else {
+    return {
+      intro: `
+        <p>Designed for fast and lightweight operations, the ${name} tool allows you to perform conversions, formatting, or calculations locally. This provides instant results directly inside your browser window.</p>
+      `,
+      conclusion: `
+        <p>Using client-side tools is a smart way to maintain productivity while keeping your system clean and your personal files private.</p>
+      `
+    };
+  }
+}
+
+export function normalizePost(post: BlogPost): BlogPost {
+  const tool = toolRegistry.find(t => t.guideSlug === post.slug || t.utilityUrl === post.toolUrl);
+  
+  let title = post.title;
+  if (tool) {
+    title = getToolGuideTitle(tool);
+  }
+  
+  const detailedTools = [
+    "compress-pdf",
+    "pdf-to-word",
+    "word-to-pdf",
+    "image-compressor",
+    "background-remover",
+    "qr-code-generator",
+    "meta-tag-generator",
+    "pdf-editor"
+  ];
+  const isDetailed = tool ? (
+    detailedTools.includes(tool.id) ||
+    tool.id.includes("pdf-to-word") ||
+    tool.id.includes("word-to-pdf") ||
+    tool.id.includes("background-remover") ||
+    tool.id.includes("qr-code-generator") ||
+    tool.id.includes("meta-tag-generator") ||
+    tool.id.includes("pdf-editor")
+  ) : false;
+
+  const isMedium = !isDetailed && tool && (
+    tool.sectionId === "pdf" ||
+    tool.sectionId === "image" ||
+    tool.sectionId === "editing" ||
+    tool.sectionId === "developer"
+  );
+
+  const level: 'detailed' | 'medium' | 'short' = isDetailed ? 'detailed' : (isMedium ? 'medium' : 'short');
+  
+  const cleanPrivacy = (text: string): string => {
+    if (!text) return text;
+    return text
+      .replace(/guaranteed data never leaves the computer/gi, "files can be processed locally without being uploaded to a server")
+      .replace(/data never leaves the computer/gi, "files can be processed locally without being uploaded to a server")
+      .replace(/never leaves your device/gi, "can be processed locally without being uploaded to a server")
+      .replace(/never reaches our servers/gi, "does not need to be uploaded to a server")
+      .replace(/never leaves the computer/gi, "can be processed locally without being uploaded to a server")
+      .replace(/100% secure/gi, "highly secure")
+      .replace(/100% Secure/gi, "Highly Secure")
+      .replace(/perfect privacy/gi, "reliable privacy")
+      .replace(/unlimited/gi, "high-capacity");
+  };
+
+  const sections = { ...post.sections };
+  if (sections.introduction) sections.introduction = cleanPrivacy(sections.introduction);
+  if (sections.whatThisToolDoes) sections.whatThisToolDoes = cleanPrivacy(sections.whatThisToolDoes);
+  if (sections.whyIncluded) sections.whyIncluded = cleanPrivacy(sections.whyIncluded);
+  if (sections.conclusion) sections.conclusion = cleanPrivacy(sections.conclusion);
+  
+  sections.privacyNote = SAFER_PRIVACY_TEXT;
+
+  const categoryName = tool?.sectionId || "general";
+  const extraHTML = getExtraContent(title, categoryName, level);
+  
+  if (!sections.introduction.includes("Comprehensive Guide") && !sections.introduction.includes("Optimizing Local Workflows")) {
+    sections.introduction = sections.introduction + extraHTML.intro;
+  }
+  if (!sections.conclusion.includes("Advanced Tips") && !sections.conclusion.includes("Efficient Workflow")) {
+    sections.conclusion = sections.conclusion + extraHTML.conclusion;
+  }
+
+  let metaTitle = `${title} | Singulariti`;
+  if (metaTitle.length > 60) {
+    metaTitle = title.slice(0, 60);
+  }
+  
+  const rawDesc = post.metaDescription || `Step-by-step guide on how to use ${title.toLowerCase()} safely in your browser. Learn how it works, inputs required, outputs produced, and privacy rules.`;
+  const cleanDesc = cleanPrivacy(rawDesc);
+  const metaDescription = cleanDesc.length > 155 ? cleanDesc.slice(0, 152) + "..." : cleanDesc;
+
+  const defaultFAQs = [
+    {
+      question: `Do I need to install any software to use ${title}?`,
+      answer: `No installation or browser extension is required. This tool operates fully within your web browser using HTML5 and client-side scripting APIs, meaning you can access it instantly on any device.`
+    },
+    {
+      question: `Is there a usage limit or subscription fee?`,
+      answer: `This utility is free to use. There are no registration screens, email submissions, or hidden subscription fees required to complete your daily digital tasks.`
+    },
+    {
+      question: `Are my input files stored on the website?`,
+      answer: `We do not store your files. For tools that run fully in the browser, files can be processed locally without being uploaded to a server. Avoid uploading highly sensitive files unless you understand how the tool processes them.`
+    },
+    {
+      question: `Can I use this tool offline?`,
+      answer: `Since the processing logic is executed client-side, the page can continue to perform operations even if your internet connection drops after the initial load.`
+    },
+    {
+      question: `Is my personal data secure from leakage?`,
+      answer: `Yes. Because files are processed locally in your browser tab rather than being uploaded, your personal information is protected from remote storage risks.`
+    },
+    {
+      question: `Does this tool work on mobile devices?`,
+      answer: `Yes. The user interface is designed to be fully responsive and works seamlessly across smartphones, tablets, laptops, and desktop computers.`
+    }
+  ];
+
+  const faqs = (post.faqs || []).map(faq => ({
+    question: faq.question,
+    answer: cleanPrivacy(faq.answer)
+  }));
+
+  const targetFaqCount = level === 'detailed' ? 6 : (level === 'medium' ? 5 : 4);
+  
+  for (const defFaq of defaultFAQs) {
+    if (faqs.length >= targetFaqCount) break;
+    const isDuplicate = faqs.some(f => f.question.toLowerCase().includes(defFaq.question.toLowerCase().substring(0, 15)));
+    if (!isDuplicate) {
+      faqs.push(defFaq);
+    }
+  }
+
+  return {
+    ...post,
+    title,
+    metaTitle,
+    metaDescription,
+    sections,
+    faqs
+  };
+}
+
 // Helper Query Methods
 
 export function getAllPosts(): BlogPost[] {
-  return blogPosts;
+  return blogPosts.map(normalizePost);
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
   const found = blogPosts.find(post => post.slug === slug);
-  if (found) return found;
-  
-  // Look up in toolRegistry to dynamically generate a fallback blog post
+  if (found) return normalizePost(found);
+
   const tool = toolRegistry.find(t => t.guideSlug === slug);
   if (tool) {
-    return getFallbackPost(tool);
+    return normalizePost(getFallbackPost(tool));
   }
   return undefined;
 }
 
 export function getPostsByCategory(category: string): BlogPost[] {
   const normalizedCategory = category.toLowerCase();
-  return blogPosts.filter(post => post.category.toLowerCase().includes(normalizedCategory));
+  return blogPosts
+    .filter(post => post.category.toLowerCase().includes(normalizedCategory))
+    .map(normalizePost);
 }
 
 export function getAllCategories(): string[] {

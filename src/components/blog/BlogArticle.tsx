@@ -3,14 +3,31 @@
 import React from 'react';
 import { BlogPost } from '@/lib/blog';
 import { 
-  ArrowRight, Shield, AlertTriangle, Cpu, HelpCircle, 
-  ListChecks, Users, Layers, Activity, FileText, CheckCircle,
-  Settings, Box, Code
+  ArrowRight,
+  Shield,
+  AlertTriangle,
+  Cpu,
+  HelpCircle,
+  ListChecks,
+  Users,
+  Layers,
+  Activity,
+  FileText,
+  CheckCircle,
+  Settings,
+  Box,
+  Code,
 } from 'lucide-react';
 
 interface BlogArticleProps {
   post: BlogPost;
 }
+
+const cleanStepText = (text: string) =>
+  text.replace(/^\s*(?:\d+[\.\)\-]\s*)+/, '').trim();
+
+const cleanListItem = (text: string) =>
+  text.replace(/^\s*(?:[•\-*\u2022]\s*)+/, '').trim();
 
 export function BlogArticle({ post }: BlogArticleProps) {
   const { sections } = post;
@@ -54,7 +71,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
             {sections.whoCanUse.map((user, idx) => (
               <li key={idx} className="flex items-center gap-2 bg-surface border border-border p-2.5 rounded-xl">
                 <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                <span className="text-ink text-[13px] font-semibold">{user}</span>
+                <span className="text-ink text-[13px] font-semibold">{cleanListItem(user)}</span>
               </li>
             ))}
           </ul>
@@ -71,7 +88,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
                 {sections.inputsRequired.map((inp, idx) => (
                   <li key={idx} className="flex items-start gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                    <span>{inp}</span>
+                    <span>{cleanListItem(inp)}</span>
                   </li>
                 ))}
               </ul>
@@ -84,7 +101,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
                 {sections.outputProduced.map((out, idx) => (
                   <li key={idx} className="flex items-start gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                    <span>{out}</span>
+                    <span>{cleanListItem(out)}</span>
                   </li>
                 ))}
               </ul>
@@ -105,27 +122,10 @@ export function BlogArticle({ post }: BlogArticleProps) {
                 <span className="w-6 h-6 rounded-full bg-primary/10 border border-primary/20 text-primary flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                   {idx + 1}
                 </span>
-                <span className="leading-relaxed pt-0.5">{step}</span>
+                <span className="leading-relaxed pt-0.5">{cleanStepText(step)}</span>
               </li>
             ))}
           </ol>
-        </section>
-      )}
-
-      {/* 7. User Operation Flow */}
-      {sections.userOperationFlow && (
-        <section className="bg-surface/50 border border-border rounded-2xl p-5 space-y-3">
-          <h3 className="font-display font-bold text-[13px] text-ink uppercase tracking-wider">User Operation Flow</h3>
-          <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
-            {sections.userOperationFlow.split(' → ').map((flowStep, idx, arr) => (
-              <React.Fragment key={idx}>
-                <span className="bg-background border border-border px-3 py-1.5 rounded-lg text-ink font-semibold shadow-xs">
-                  {flowStep}
-                </span>
-                {idx < arr.length - 1 && <ArrowRight className="w-3.5 h-3.5 text-slate/50" />}
-              </React.Fragment>
-            ))}
-          </div>
         </section>
       )}
 
@@ -139,7 +139,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
                 {sections.operationWorks.map((work, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                    <span className="leading-relaxed">{work}</span>
+                    <span className="leading-relaxed">{cleanListItem(work)}</span>
                   </li>
                 ))}
               </ul>
@@ -152,36 +152,12 @@ export function BlogArticle({ post }: BlogArticleProps) {
                 {sections.internalProcessingFlow.map((flow, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                    <span className="leading-relaxed font-mono text-slate">{flow}</span>
+                    <span className="leading-relaxed font-mono text-slate">{cleanListItem(flow)}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
-        </section>
-      )}
-
-      {/* 9. Operation Diagram */}
-      {sections.operationDiagram && (
-        <section className="space-y-3">
-          <h3 className="font-display font-bold text-xs text-slate uppercase tracking-wider">Operation Diagram</h3>
-          <pre className="bg-surface border border-border p-4 rounded-xl overflow-x-auto text-[11px] font-mono text-ink leading-normal whitespace-pre">
-            {sections.operationDiagram.trim()}
-          </pre>
-        </section>
-      )}
-
-      {/* 10. Formula or Logic */}
-      {sections.formulaOrLogic && (
-        <section className="bg-primary/5 border border-primary/20 p-5 rounded-2xl space-y-3">
-          <h3 className="font-display font-bold text-sm text-primary uppercase tracking-wider flex items-center gap-1.5">
-            <Layers className="w-4 h-4" /> Formula / Calculation / Logic
-          </h3>
-          <div className="blog-content-body text-sm leading-relaxed">
-            <p className="font-mono bg-background/50 border border-border/60 p-3.5 rounded-xl text-ink font-semibold">
-              {sections.formulaOrLogic}
-            </p>
-          </div>
         </section>
       )}
 
@@ -201,7 +177,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
               <span className="text-[10px] uppercase font-bold tracking-wider text-slate block mb-1">Execution Steps</span>
               <ul className="list-decimal pl-4 space-y-1 font-sans text-slate text-xs">
                 {sections.workingExample.operation.map((opStep, idx) => (
-                  <li key={idx}>{opStep}</li>
+                  <li key={idx}>{cleanStepText(opStep)}</li>
                 ))}
               </ul>
             </div>
@@ -266,7 +242,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
                 {sections.majorUses.map((use, idx) => (
                   <li key={idx} className="flex items-start gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                    <span>{use}</span>
+                    <span>{cleanListItem(use)}</span>
                   </li>
                 ))}
               </ul>
@@ -279,7 +255,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
                 {sections.minorUses.map((use, idx) => (
                   <li key={idx} className="flex items-start gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                    <span>{use}</span>
+                    <span>{cleanListItem(use)}</span>
                   </li>
                 ))}
               </ul>
@@ -298,7 +274,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
             {sections.commonMistakes.map((mistake, idx) => (
               <li key={idx} className="flex items-start gap-2">
                 <span className="font-semibold text-amber-500 dark:text-amber-400 mt-0.5">•</span>
-                <span className="leading-relaxed">{mistake}</span>
+                <span className="leading-relaxed">{cleanListItem(mistake)}</span>
               </li>
             ))}
           </ul>
@@ -315,7 +291,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
             {sections.invalidInputHandling.map((handler, idx) => (
               <li key={idx} className="flex items-start gap-2">
                 <span className="font-semibold text-red-500 dark:text-red-400 mt-0.5">•</span>
-                <span className="leading-relaxed">{handler}</span>
+                <span className="leading-relaxed">{cleanListItem(handler)}</span>
               </li>
             ))}
           </ul>
@@ -391,7 +367,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
             {sections.limitations.map((lim, idx) => (
               <li key={idx} className="flex items-start gap-2 text-slate">
                 <span className="font-semibold text-slate mt-0.5">•</span>
-                <span className="leading-relaxed">{lim}</span>
+                <span className="leading-relaxed">{cleanListItem(lim)}</span>
               </li>
             ))}
           </ul>

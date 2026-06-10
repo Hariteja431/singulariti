@@ -3,10 +3,16 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, Link2 } from 'lucide-react';
-import { RelatedTool } from '@/lib/blog';
+
+interface RelatedToolItem {
+  name: string;
+  url: string;
+  reason?: string;
+  description?: string;
+}
 
 interface RelatedToolsProps {
-  tools: RelatedTool[];
+  tools: RelatedToolItem[];
 }
 
 export function RelatedTools({ tools }: RelatedToolsProps) {
@@ -32,7 +38,7 @@ export function RelatedTools({ tools }: RelatedToolsProps) {
                 {tool.name}
               </span>
               <p className="font-sans text-[11px] text-slate leading-relaxed">
-                {tool.reason}
+                {tool.reason || tool.description}
               </p>
             </div>
             <ArrowRight className="w-4 h-4 text-slate group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0 mt-0.5" />

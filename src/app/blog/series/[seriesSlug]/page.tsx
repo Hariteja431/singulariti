@@ -1,5 +1,4 @@
 import React, { Suspense } from 'react';
-import { notFound } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { blogSeriesList } from '@/content/tools/toolRegistry';
@@ -32,17 +31,14 @@ export async function generateMetadata({ params }: PageProps) {
   });
 }
 
-export default function SeriesDetailsPage(props: PageProps) {
+export default async function SeriesDetailsPage({ params }: PageProps) {
+  const { seriesSlug } = await params;
   return (
     <>
       <Header />
       <main className="flex-1 w-full bg-background pt-24 pb-16">
-        <Suspense fallback={
-          <div className="container mx-auto px-4 max-w-7xl text-center py-20 font-sans text-slate">
-            Loading series guides...
-          </div>
-        }>
-          <SeriesDetailsContent {...props} />
+        <Suspense fallback={null}>
+          <SeriesDetailsContent seriesSlug={seriesSlug} />
         </Suspense>
       </main>
       <Footer />

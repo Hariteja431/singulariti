@@ -75,7 +75,7 @@ export default async function BlogHomePage() {
     {
       title: "How Browser-Side Utilities Process Files Locally",
       slug: "why-online-utility-tools-are-useful", // Anchor to privacy section
-      description: "Explore the internal processing flow using Web Workers and client memory canvas sandboxes that guarantee data never leaves the computer.",
+      description: "Explore the internal processing flow using Web Workers and client memory canvas sandboxes where files can be processed locally without being uploaded to a server.",
       icon: Lock
     },
     {

@@ -10,32 +10,46 @@ interface HeaderItem {
 }
 
 interface TableOfContentsProps {
-  htmlContent: string;
+  htmlContent?: string;
+  sections?: { id: string; heading: string }[];
 }
 
-export function TableOfContents({ htmlContent }: TableOfContentsProps) {
+export function TableOfContents({ htmlContent, sections }: TableOfContentsProps) {
   const [headings, setHeadings] = useState<HeaderItem[]>([]);
 
   useEffect(() => {
-    // Wait for DOM to render article content
-    const container = document.querySelector('.blog-article-content');
-    if (!container) return;
+    if (sections && sections.length > 0) {
+      setHeadings(
+        sections.map((sec) => ({
+          id: sec.id,
+          text: sec.heading,
+          isSub: false
+        }))
+      );
+      return;
+    }
 
-    const hElements = container.querySelectorAll('h2, h3');
-    const items: HeaderItem[] = [];
+    if (htmlContent) {
+      // Wait for DOM to render article content
+      const container = document.querySelector('.blog-article-content');
+      if (!container) return;
 
-    hElements.forEach((el, idx) => {
-      const id = el.id || `heading-${idx}`;
-      el.id = id;
-      items.push({
-        id,
-        text: el.textContent || '',
-        isSub: el.tagName.toLowerCase() === 'h3'
+      const hElements = container.querySelectorAll('h2, h3');
+      const items: HeaderItem[] = [];
+
+      hElements.forEach((el, idx) => {
+        const id = el.id || `heading-${idx}`;
+        el.id = id;
+        items.push({
+          id,
+          text: el.textContent || '',
+          isSub: el.tagName.toLowerCase() === 'h3'
+        });
       });
-    });
 
-    setHeadings(items);
-  }, [htmlContent]);
+      setHeadings(items);
+    }
+  }, [htmlContent, sections]);
 
   if (headings.length === 0) return null;
 
