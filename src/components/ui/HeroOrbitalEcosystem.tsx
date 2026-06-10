@@ -159,7 +159,7 @@ export default function HeroOrbitalEcosystem() {
 
       // Responsive orbit radius based on screen size
       const isMobile = W < 640;
-      const R = Math.min(W, H) * (isMobile ? 0.45 : 0.43);
+      const R = Math.min(W, H) * (isMobile ? 0.48 : 0.43);
 
       nodes.forEach((node, i) => {
         const a = orbitAngle + (i / nodes.length) * Math.PI * 2;
@@ -306,7 +306,7 @@ export default function HeroOrbitalEcosystem() {
         <svg
           ref={svgRef}
           viewBox="0 0 360 360"
-          className="w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] lg:w-[420px] lg:h-[420px] overflow-visible drop-shadow-[0_0_20px_rgba(20,184,166,0.4)]"
+          className="w-[260px] h-[260px] sm:w-[280px] sm:h-[280px] lg:w-[420px] lg:h-[420px] overflow-visible drop-shadow-[0_0_20px_rgba(20,184,166,0.4)]"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >

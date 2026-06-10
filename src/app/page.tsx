@@ -8,6 +8,7 @@ import { ImageIcon, FileText, QrCode, Wand2, Calculator, Keyboard, Timer, Brush,
 import { Badge } from '@/components/ui/Badge';
 import { PremiumIconContainer } from '@/components/ui/PremiumIconContainer';
 import HeroOrbitalEcosystem from '@/components/ui/HeroOrbitalEcosystem';
+import { AnimatedTealLine } from '@/components/ui/AnimatedTealLine';
 import { registry } from '@/registry';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { getPageSEO } from '@/lib/seo/pageMetadata';
@@ -55,9 +56,14 @@ export default function Home() {
       <Header />
       <main className="flex-1 w-full flex flex-col items-center pt-28 lg:pt-6 pb-12">
         {/* Hero Section */}
-        <section className="w-full max-w-7xl mx-auto px-4 mt-2 lg:mt-6 mb-16 lg:mb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center lg:min-h-[650px]">
+        <section className="relative w-full max-w-7xl mx-auto px-4 mt-2 lg:mt-6 mb-16 lg:mb-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center lg:min-h-[650px] relative">
             
+            {/* Desktop Vertical Line */}
+            <div className="hidden lg:block absolute left-1/2 top-[10%] bottom-[10%] w-[1px] -translate-x-1/2 bg-gradient-to-b from-transparent via-teal-500/10 to-transparent z-0">
+               <AnimatedTealLine orientation="vertical" className="w-[1px] h-full" />
+            </div>
+
             {/* Left Column - Premium Copy */}
             <div className="flex flex-col items-center lg:items-start text-center lg:text-left z-10">
               <Badge className="mb-8 border-primary/20 bg-primary/5 text-primary shadow-sm backdrop-blur-sm" variant="outline">
@@ -104,8 +110,20 @@ export default function Home() {
             </div>
 
             {/* Right Column - Orbital Ecosystem */}
-            <div className="relative w-full h-full min-h-[500px] lg:min-h-[600px] flex items-center justify-center">
+            <div className="relative w-full h-full min-h-[500px] lg:min-h-[600px] flex flex-col items-center justify-center z-10">
+              
+              {/* Mobile Horizontal Line Above */}
+              <div className="lg:hidden w-full max-w-[280px] h-[1px] bg-gradient-to-r from-transparent via-teal-500/10 to-transparent mb-2">
+                 <AnimatedTealLine orientation="horizontal" className="w-full h-[1px]" />
+              </div>
+
               <HeroOrbitalEcosystem />
+
+              {/* Mobile Horizontal Line Below */}
+              <div className="lg:hidden w-full max-w-[280px] h-[1px] bg-gradient-to-r from-transparent via-teal-500/10 to-transparent mt-2">
+                 <AnimatedTealLine orientation="horizontal" className="w-full h-[1px]" reverse />
+              </div>
+
             </div>
             
           </div>
