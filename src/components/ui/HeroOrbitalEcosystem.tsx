@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ArrowRight, ImageIcon, FileText, QrCode, Wand2, Calculator, Keyboard, Timer, Brush, Type, Code, Scale, Search, X } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
-import { Card } from "@/components/ui/Card";
 import { registry } from "@/registry";
 import Link from "next/link";
 
@@ -64,13 +63,11 @@ export default function HeroOrbitalEcosystem() {
       } else if (window.innerWidth < 1024) { // tablet
         setRadius(180);
       } else { // desktop
-        setRadius(220);
+        setRadius(230);
       }
     };
     
-    // Initial check
     handleResize();
-    
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -107,16 +104,17 @@ export default function HeroOrbitalEcosystem() {
     });
   };
 
+  // Steady, periodic, synchronized motion
   useEffect(() => {
     let rotationTimer: NodeJS.Timeout;
 
     if (autoRotate) {
       rotationTimer = setInterval(() => {
         setRotationAngle((prev) => {
-          const newAngle = (prev + 0.15) % 360; 
+          const newAngle = (prev + 0.1) % 360; // Smooth steady rotation
           return Number(newAngle.toFixed(3));
         });
-      }, 50);
+      }, 30);
     }
 
     return () => {
@@ -146,7 +144,7 @@ export default function HeroOrbitalEcosystem() {
 
     const zIndex = Math.round(100 + 50 * Math.cos(radian));
     const opacity = Math.max(
-      0.3,
+      0.4,
       Math.min(1, 0.4 + 0.6 * ((1 + Math.sin(radian)) / 2))
     );
 
@@ -159,72 +157,84 @@ export default function HeroOrbitalEcosystem() {
       ref={containerRef}
       onClick={handleContainerClick}
     >
-      {/* 3D Hollow Prism Background */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-30 dark:opacity-40 pointer-events-none overflow-hidden scale-150 sm:scale-100">
-        <svg 
-          viewBox="0 0 100 100" 
-          className="w-[500px] h-[500px] md:w-[800px] md:h-[800px] lg:w-[1000px] lg:h-[1000px] drop-shadow-[0_0_40px_rgba(20,184,166,0.3)] animate-[spin_120s_linear_infinite]" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/* Back faces (wireframe illusion) */}
-          <polygon points="50,10 15,85 85,85" className="stroke-slate/10 dark:stroke-slate/20" strokeWidth="0.5" />
-          
-          {/* Front Wireframe */}
-          <polygon points="50,10 15,85 85,85" className="stroke-primary/40 dark:stroke-primary/60" strokeWidth="0.5" strokeLinejoin="round" />
-          
-          {/* Inner 3D perspective lines */}
-          <line x1="50" y1="10" x2="50" y2="60" className="stroke-primary/50 dark:stroke-primary/70" strokeWidth="1" strokeLinecap="round" />
-          <line x1="15" y1="85" x2="50" y2="60" className="stroke-primary/50 dark:stroke-primary/70" strokeWidth="1" strokeLinecap="round" />
-          <line x1="85" y1="85" x2="50" y2="60" className="stroke-primary/50 dark:stroke-primary/70" strokeWidth="1" strokeLinecap="round" />
-          
-          {/* Inner bottom face to give depth */}
-          <polygon points="15,85 85,85 50,60" className="fill-primary/5 dark:fill-primary/10" />
-
-          {/* Floating geometric fragments for premiumness */}
-          <circle cx="25" cy="40" r="1" className="fill-primary/60" />
-          <circle cx="75" cy="50" r="1.5" className="fill-primary/40" />
-          <circle cx="45" cy="80" r="0.8" className="fill-slate/40" />
-        </svg>
-      </div>
-
       <div className="relative w-full max-w-2xl h-full flex items-center justify-center">
         <div
           className="absolute w-full h-full flex items-center justify-center transition-transform duration-1000 ease-out"
           ref={orbitRef}
-          style={{
-            perspective: "1000px",
-          }}
+          style={{ perspective: "1000px" }}
         >
           
-          {/* Outer Orbit Rings (Responsive) */}
+          {/* Energy Rings - steady synced rotation */}
+          {/* Outer Energy Stream */}
           <div 
-            className="absolute rounded-full border border-slate/10 dark:border-white/5 pointer-events-none transition-all duration-500"
+            className="absolute rounded-full border border-slate/10 dark:border-white/5 pointer-events-none transition-all duration-500 flex items-center justify-center"
             style={{ width: radius * 2, height: radius * 2 }}
-          ></div>
+          >
+            {/* Synchronized glowing trail rotating opposite to orbit nodes */}
+            <div 
+              className="absolute w-full h-full rounded-full border-t border-primary/40 dark:border-primary/60 blur-[1px]"
+              style={{ transform: `rotate(-${rotationAngle * 2}deg)` }}
+            ></div>
+          </div>
+          
+          {/* Inner Energy Stream */}
           <div 
-            className="absolute rounded-full border border-slate/5 dark:border-white/5 pointer-events-none transition-all duration-500"
+            className="absolute rounded-full border border-slate/5 dark:border-white/5 pointer-events-none transition-all duration-500 flex items-center justify-center"
             style={{ width: radius * 1.3, height: radius * 1.3 }}
-          ></div>
+          >
+            <div 
+              className="absolute w-full h-full rounded-full border-b border-primary/30 dark:border-primary/50 blur-[2px]"
+              style={{ transform: `rotate(${rotationAngle * 1.5}deg)` }}
+            ></div>
+          </div>
 
-          {/* Central Prism Bulb */}
-          <div className="absolute z-10 flex items-center justify-center">
-            {/* Glowing Aura Rings */}
-            <div className="absolute w-16 h-16 sm:w-24 sm:h-24 rounded-full border border-primary/20 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite] opacity-50"></div>
-            <div className="absolute w-24 h-24 sm:w-32 sm:h-32 rounded-full border border-primary/10 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite] opacity-30" style={{ animationDelay: "1s" }}></div>
+          {/* Central High-Energy Prism Core */}
+          <div className="absolute z-10 flex items-center justify-center scale-[0.6] sm:scale-[0.8] lg:scale-100">
+            {/* Background intense glow */}
+            <div className="absolute w-32 h-32 bg-primary/20 rounded-full blur-[40px] mix-blend-screen"></div>
             
-            {/* The Bulb from Logo */}
-            <svg 
-              viewBox="0 0 100 100" 
-              className="w-12 h-12 sm:w-16 sm:h-16 drop-shadow-[0_0_15px_var(--color-primary)]" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="50" cy="50" r="25" className="fill-primary">
-                <animate attributeName="r" values="22;28;22" dur="3s" repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" />
-              </circle>
-            </svg>
+            {/* 3D Wireframe Prism inside the circle */}
+            <div className="relative w-48 h-48 flex items-center justify-center">
+              <svg 
+                viewBox="0 0 100 100" 
+                className="w-full h-full drop-shadow-[0_0_20px_rgba(20,184,166,0.6)]" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ transform: `rotate(${rotationAngle * 0.5}deg)` }} // Steady sync
+              >
+                {/* Back faces (wireframe illusion) */}
+                <polygon points="50,10 15,85 85,85" className="stroke-slate/30 dark:stroke-slate/40" strokeWidth="1" />
+                
+                {/* Front Wireframe */}
+                <polygon points="50,10 15,85 85,85" className="stroke-primary" strokeWidth="1.5" strokeLinejoin="round" />
+                
+                {/* Inner 3D perspective lines */}
+                <line x1="50" y1="10" x2="50" y2="60" className="stroke-primary" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="15" y1="85" x2="50" y2="60" className="stroke-primary" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="85" y1="85" x2="50" y2="60" className="stroke-primary" strokeWidth="1.5" strokeLinecap="round" />
+                
+                {/* Inner bottom face to give depth */}
+                <polygon points="15,85 85,85 50,60" className="fill-primary/20 dark:fill-primary/30 backdrop-blur-sm" />
+              </svg>
+
+              {/* The Inner Pulsing Bulb Core */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-3">
+                <svg 
+                  viewBox="0 0 100 100" 
+                  className="w-10 h-10 drop-shadow-[0_0_15px_var(--color-primary)]" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="50" cy="50" r="30" className="fill-primary">
+                    <animate attributeName="r" values="25;35;25" dur="3s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" />
+                  </circle>
+                  <circle cx="50" cy="50" r="15" className="fill-white drop-shadow-[0_0_10px_white]">
+                     <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite" />
+                  </circle>
+                </svg>
+              </div>
+            </div>
           </div>
 
           {/* Orbiting Nodes */}
@@ -235,7 +245,7 @@ export default function HeroOrbitalEcosystem() {
 
             const nodeStyle = {
               transform: `translate(${position.x}px, ${position.y}px)`,
-              zIndex: isExpanded ? 200 : position.zIndex,
+              zIndex: isExpanded ? 300 : position.zIndex,
               opacity: isExpanded ? 1 : position.opacity,
             };
 
@@ -243,7 +253,7 @@ export default function HeroOrbitalEcosystem() {
               <div
                 key={item.id}
                 ref={(el) => { nodeRefs.current[item.id] = el; }}
-                className="absolute transition-all duration-700 cursor-pointer"
+                className="absolute transition-all duration-700 cursor-pointer flex flex-col items-center justify-center"
                 style={nodeStyle}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -254,39 +264,59 @@ export default function HeroOrbitalEcosystem() {
                 {/* Node Label (hidden when expanded to prevent clutter) */}
                 <div
                   className={`
-                    absolute top-12 sm:top-14 left-1/2 -translate-x-1/2 whitespace-nowrap
-                    text-[10px] sm:text-[11px] font-semibold tracking-wider font-display
+                    absolute top-14 sm:top-16 whitespace-nowrap
+                    text-[10px] sm:text-[11px] font-bold tracking-wider font-display uppercase
                     transition-all duration-300 pointer-events-none
-                    ${isExpanded ? "opacity-0" : "text-ink/60 dark:text-slate/60"}
+                    ${isExpanded ? "opacity-0" : "text-ink/80 dark:text-slate/80 drop-shadow-sm"}
                   `}
                 >
                   {item.title}
                 </div>
 
-                {/* Node Icon Circle */}
+                {/* Node Diamond Icon Container to match the Prism vibe */}
                 <div
                   className={`
-                  w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center relative
+                  w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center relative
                   ${
                     isExpanded
-                      ? "bg-primary text-white scale-125 border-transparent shadow-[0_0_20px_var(--color-primary)]"
-                      : "bg-surface dark:bg-[#111111] text-ink dark:text-white border border-slate/20 dark:border-white/10 hover:border-primary/50 hover:text-primary transition-colors"
+                      ? "scale-125"
+                      : "hover:scale-110"
                   }
-                  transition-all duration-300 transform
+                  transition-transform duration-300
                 `}
                 >
-                  <Icon size={isExpanded ? 18 : 16} strokeWidth={isExpanded ? 2 : 1.5} className="sm:w-5 sm:h-5" />
+                  {/* The Diamond Background */}
+                  <div className={`
+                    absolute inset-0 rotate-45 transition-colors duration-300
+                    ${isExpanded 
+                      ? "bg-primary border-primary shadow-[0_0_25px_var(--color-primary)]" 
+                      : "bg-surface/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border border-slate/30 dark:border-white/10 shadow-[inset_0_0_10px_rgba(20,184,166,0.1)] group-hover:border-primary/50 group-hover:shadow-[0_0_15px_rgba(20,184,166,0.3)]"}
+                  `}></div>
+
+                  {/* The actual icon, counter-rotated so it stands upright */}
+                  <div className="relative z-10 transition-colors duration-300">
+                    <Icon 
+                      size={isExpanded ? 18 : 16} 
+                      strokeWidth={isExpanded ? 2.5 : 2} 
+                      className={`
+                        sm:w-5 sm:h-5
+                        ${isExpanded ? "text-white" : "text-ink dark:text-white group-hover:text-primary"}
+                      `} 
+                    />
+                  </div>
                 </div>
 
                 {/* Expanded Card Detail */}
                 {isExpanded && (
                   <div className="absolute top-16 sm:top-20 left-1/2 -translate-x-1/2 w-[280px] sm:w-[320px] z-[300] animate-in fade-in zoom-in-95 duration-200">
-                    <div className="rounded-xl bg-surface/95 dark:bg-[#0a0a0a]/95 backdrop-blur-xl border border-border dark:border-white/10 shadow-2xl p-4 sm:p-5">
+                    <div className="rounded-xl bg-surface/95 dark:bg-[#0a0a0a]/95 backdrop-blur-xl border border-primary/20 dark:border-primary/30 shadow-[0_10px_40px_-10px_rgba(20,184,166,0.3)] p-4 sm:p-5">
                       
                       {/* Header */}
                       <div className="flex justify-between items-start mb-3">
                         <div className="flex items-center gap-2 text-primary">
-                          <Icon size={16} strokeWidth={2} />
+                          <div className="w-6 h-6 rotate-45 bg-primary/20 flex items-center justify-center rounded-sm">
+                            <Icon size={12} strokeWidth={2.5} className="-rotate-45 text-primary" />
+                          </div>
                           <h3 className="font-display font-bold text-[15px] sm:text-base text-ink dark:text-white leading-tight">
                             {item.title}
                           </h3>
