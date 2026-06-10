@@ -1,124 +1,184 @@
 import React from 'react';
 import { 
-  // Base Objects
-  Image as ImageIcon, FileText, Code2, Calculator, Search, Type, Ruler, QrCode, Database,
-  // Modifiers
-  Minimize2, ArrowRightLeft, Scissors, Maximize, RotateCw, Wand2, Filter, Palette, Stamp,
-  Lock, Unlock, ShieldCheck, CheckCircle2, KeyRound, Sparkles, Binary, Link, Replace, Mail, Globe, 
-  TrendingUp, Activity, Zap
+  // Compressors
+  Minimize, Shrink,
+  // Converters
+  ArrowRightLeft, FileImage, FileText, FileCode2, Binary, Frame, CodeXml, Combine, Replace,
+  // Editing
+  Crop, Maximize, RotateCw, FlipHorizontal, Wand2, Filter, Sun, Palette, Blend, Stamp, Type as TypeIcon, Search, Pipette, Droplets, Zap, Image as ImageIcon,
+  // PDF
+  SplitSquareHorizontal, FileMinus, FileOutput, FileLock2, LockOpen, PenTool, FileDigit, FileText as PdfFile, FileWarning,
+  // Dev
+  Braces, ListTree, Database, KeyRound, Link, Regex, Hash, CheckCircle2, Minimize2, Code, ShieldCheck, Bug, BoxSelect,
+  // Calculators
+  Calculator, Landmark, TrendingUp, Banknote, CalendarClock, Activity, Tag, Percent, Fuel, Zap as ZapIcon, Coins, LineChart, Wallet,
+  // SEO
+  Globe2, Waypoints, BotMessageSquare, BarChart2, ScanSearch, LineChart as ChartLine, MonitorSmartphone,
+  // Text
+  BookType, CaseSensitive, ArrowDownAZ, WrapText, MailSearch, TextQuote, SpellCheck, RefreshCw, FileDiff,
+  // Unit Conversion
+  Ruler, Weight, Thermometer, SquareDashed, Beaker, Hourglass, Scale, Compass, Gauge,
+  // QR
+  QrCode, ScanLine, Wifi, Smartphone, Mail, Briefcase, Globe
 } from 'lucide-react';
 
 interface ToolIconProps {
   toolId: string;
-  className?: string;
+  className?: string; // e.g., 'w-12 h-12' for the container
   fallback?: React.ReactNode;
 }
 
-export function ToolIcon({ toolId, className = "w-14 h-14", fallback }: ToolIconProps) {
+export function ToolIcon({ toolId, className = "w-12 h-12", fallback }: ToolIconProps) {
   const id = toolId.toLowerCase();
 
-  // Mapping logic to determine Object and Modifier
-  let ObjectIcon = Code2;
-  let ModifierIcon: React.ElementType | null = null;
-  let categoryColor = "from-primary/20 to-primary/5 dark:from-primary/30 dark:to-primary/10"; 
-  let badgeColor = "bg-primary text-background";
+  // Determine the single most relevant icon for the tool
+  let IconComponent: React.ElementType = Code;
 
-  // ==============================
-  // 1. Determine Object (The Noun)
-  // ==============================
-  if (id.includes('image') || id.includes('jpg') || id.includes('png') || id.includes('webp') || id.includes('svg')) {
-    ObjectIcon = ImageIcon;
-    categoryColor = "from-blue-500/20 to-blue-500/5 dark:from-blue-500/30 dark:to-blue-500/10";
-    badgeColor = "bg-blue-500 text-white";
-  } else if (id.includes('pdf')) {
-    ObjectIcon = FileText;
-    categoryColor = "from-red-500/20 to-red-500/5 dark:from-red-500/30 dark:to-red-500/10";
-    badgeColor = "bg-red-500 text-white";
-  } else if (id.includes('json') || id.includes('xml') || id.includes('yaml') || id.includes('sql') || id.includes('jwt') || id.includes('base64')) {
-    ObjectIcon = Database;
-    categoryColor = "from-purple-500/20 to-purple-500/5 dark:from-purple-500/30 dark:to-purple-500/10";
-    badgeColor = "bg-purple-500 text-white";
-  } else if (id.includes('calculator') || id.includes('emi') || id.includes('tax') || id.includes('bmi')) {
-    ObjectIcon = Calculator;
-    categoryColor = "from-orange-500/20 to-orange-500/5 dark:from-orange-500/30 dark:to-orange-500/10";
-    badgeColor = "bg-orange-500 text-white";
-  } else if (id.includes('seo') || id.includes('meta') || id.includes('sitemap') || id.includes('robot')) {
-    ObjectIcon = Search;
-    categoryColor = "from-green-500/20 to-green-500/5 dark:from-green-500/30 dark:to-green-500/10";
-    badgeColor = "bg-green-500 text-white";
-  } else if (id.includes('text') || id.includes('word') || id.includes('case') || id.includes('sort')) {
-    ObjectIcon = Type;
-    categoryColor = "from-slate-500/20 to-slate-500/5 dark:from-slate-500/30 dark:to-slate-500/10";
-    badgeColor = "bg-slate-700 dark:bg-slate-300 dark:text-slate-900 text-white";
-  } else if (id.includes('convert') || id.includes('length') || id.includes('weight')) {
-    ObjectIcon = Ruler;
-    categoryColor = "from-primary/20 to-primary/5 dark:from-primary/30 dark:to-primary/10";
-    badgeColor = "bg-primary text-primary-foreground";
-  } else if (id.includes('qr')) {
-    ObjectIcon = QrCode;
-    categoryColor = "from-indigo-500/20 to-indigo-500/5 dark:from-indigo-500/30 dark:to-indigo-500/10";
-    badgeColor = "bg-indigo-500 text-white";
+  // ==========================================
+  // IMAGE TOOLS
+  // ==========================================
+  if (id.includes('compressor') || id.includes('compress')) IconComponent = Minimize;
+  else if (id.includes('crop')) IconComponent = Crop;
+  else if (id.includes('resize')) IconComponent = Maximize;
+  else if (id.includes('rotate')) IconComponent = RotateCw;
+  else if (id.includes('flip')) IconComponent = FlipHorizontal;
+  else if (id.includes('upscaler') || id.includes('enhance')) IconComponent = Wand2;
+  else if (id.includes('blur')) IconComponent = Droplets;
+  else if (id.includes('sharpen')) IconComponent = Zap;
+  else if (id.includes('denoise') || id.includes('pixelate') || id.includes('filter')) IconComponent = Filter;
+  else if (id.includes('brightness')) IconComponent = Sun;
+  else if (id.includes('color-adjuster') || id.includes('palette')) IconComponent = Palette;
+  else if (id.includes('grayscale') || id.includes('black-and-white')) IconComponent = Blend;
+  else if (id.includes('watermark') || id.includes('stamp')) IconComponent = Stamp;
+  else if (id.includes('add-text')) IconComponent = TypeIcon;
+  else if (id.includes('metadata')) IconComponent = Search;
+  else if (id.includes('dimension')) IconComponent = BoxSelect;
+  else if (id.includes('color-picker')) IconComponent = Pipette;
+  else if (id.includes('to-pdf')) IconComponent = PdfFile;
+  else if (id.includes('to-jpg') || id.includes('to-png') || id.includes('to-webp')) IconComponent = FileImage;
+  else if (id.includes('to-svg')) IconComponent = FileCode2;
+  else if (id.includes('to-text')) IconComponent = FileText;
+  else if (id.includes('base64')) IconComponent = Binary;
+
+  // ==========================================
+  // PDF TOOLS
+  // ==========================================
+  else if (id.includes('pdf')) {
+    if (id === 'merge-pdf') IconComponent = Combine;
+    else if (id === 'split-pdf') IconComponent = SplitSquareHorizontal;
+    else if (id === 'rotate-pdf') IconComponent = RotateCw;
+    else if (id === 'delete-pdf-pages') IconComponent = FileMinus;
+    else if (id === 'rearrange-pdf-pages') IconComponent = ArrowRightLeft;
+    else if (id === 'extract-pdf-pages') IconComponent = FileOutput;
+    else if (id === 'compress-pdf') IconComponent = Minimize;
+    else if (id === 'protect-pdf') IconComponent = FileLock2;
+    else if (id === 'unlock-pdf') IconComponent = LockOpen;
+    else if (id === 'sign-pdf') IconComponent = PenTool;
+    else if (id === 'watermark-pdf') IconComponent = Stamp;
+    else if (id === 'metadata-viewer') IconComponent = Search;
+    else if (id === 'page-counter') IconComponent = FileDigit;
+    else IconComponent = PdfFile;
+  }
+  
+  // ==========================================
+  // DEVELOPER TOOLS
+  // ==========================================
+  else if (id.includes('dev') || id.includes('json') || id.includes('xml') || id.includes('sql') || id.includes('jwt') || id.includes('yaml') || id.includes('hash')) {
+    if (id.includes('json')) IconComponent = Braces;
+    else if (id.includes('xml')) IconComponent = CodeXml;
+    else if (id.includes('yaml')) IconComponent = ListTree;
+    else if (id.includes('sql')) IconComponent = Database;
+    else if (id.includes('jwt')) IconComponent = KeyRound;
+    else if (id.includes('url')) IconComponent = Link;
+    else if (id.includes('regex')) IconComponent = Regex;
+    else if (id.includes('hash') || id.includes('md5') || id.includes('sha')) IconComponent = Hash;
+    else if (id.includes('format') || id.includes('validator') || id.includes('lint')) IconComponent = CheckCircle2;
+    else if (id.includes('minify')) IconComponent = Minimize2;
+    else IconComponent = Code;
   }
 
-  // ==============================
-  // 2. Determine Modifier (The Verb)
-  // ==============================
-  if (id.includes('compress')) ModifierIcon = Minimize2;
-  else if (id.includes('to-') || id.includes('convert')) ModifierIcon = ArrowRightLeft;
-  else if (id.includes('crop') || id.includes('split') || id.includes('remove')) ModifierIcon = Scissors;
-  else if (id.includes('resize') || id.includes('upscale')) ModifierIcon = Maximize;
-  else if (id.includes('rotate')) ModifierIcon = RotateCw;
-  else if (id.includes('enhance') || id.includes('wand')) ModifierIcon = Wand2;
-  else if (id.includes('filter') || id.includes('blur')) ModifierIcon = Filter;
-  else if (id.includes('color') || id.includes('palette')) ModifierIcon = Palette;
-  else if (id.includes('watermark') || id.includes('stamp')) ModifierIcon = Stamp;
-  else if (id.includes('protect') || id.includes('lock')) ModifierIcon = Lock;
-  else if (id.includes('unlock') || id.includes('decode')) ModifierIcon = Unlock;
-  else if (id.includes('validate') || id.includes('check')) ModifierIcon = CheckCircle2;
-  else if (id.includes('encode') || id.includes('jwt')) ModifierIcon = KeyRound;
-  else if (id.includes('base64')) ModifierIcon = Binary;
-  else if (id.includes('url')) ModifierIcon = Link;
-  else if (id.includes('replace') || id.includes('reverse')) ModifierIcon = Replace;
-  else if (id.includes('email') || id.includes('mail')) ModifierIcon = Mail;
-  else if (id.includes('meta') || id.includes('globe')) ModifierIcon = Globe;
-  else if (id.includes('investment') || id.includes('sip')) ModifierIcon = TrendingUp;
-  else if (id.includes('health') || id.includes('bmi')) ModifierIcon = Activity;
-  else if (id.includes('power') || id.includes('electricity')) ModifierIcon = Zap;
+  // ==========================================
+  // CALCULATORS
+  // ==========================================
+  else if (id.includes('calculator') || id.includes('emi') || id.includes('tax') || id.includes('sip') || id.includes('bmi')) {
+    if (id.includes('age') || id.includes('date') || id.includes('time')) IconComponent = CalendarClock;
+    else if (id.includes('bmi') || id.includes('health') || id.includes('calorie')) IconComponent = Activity;
+    else if (id.includes('margin') || id.includes('discount')) IconComponent = Tag;
+    else if (id.includes('sip') || id.includes('investment') || id.includes('compound')) IconComponent = TrendingUp;
+    else if (id.includes('emi') || id.includes('loan') || id.includes('mortgage')) IconComponent = Landmark;
+    else if (id.includes('salary') || id.includes('tax') || id.includes('gst')) IconComponent = Banknote;
+    else if (id.includes('electricity') || id.includes('power')) IconComponent = ZapIcon;
+    else if (id.includes('fuel') || id.includes('mileage')) IconComponent = Fuel;
+    else if (id.includes('percentage') || id.includes('profit')) IconComponent = Percent;
+    else IconComponent = Calculator;
+  }
 
-  // Render logic
-  const isLarge = className.includes('w-16') || className.includes('w-20') || className.includes('w-24');
-  const mainIconSize = isLarge ? 32 : 24;
-  const modifierSize = isLarge ? 16 : 12;
+  // ==========================================
+  // SEO TOOLS
+  // ==========================================
+  else if (id.includes('seo') || id.includes('meta') || id.includes('sitemap') || id.includes('robot')) {
+    if (id.includes('meta')) IconComponent = Globe2;
+    else if (id.includes('sitemap')) IconComponent = Waypoints;
+    else if (id.includes('robot')) IconComponent = BotMessageSquare;
+    else if (id.includes('keyword')) IconComponent = BarChart2;
+    else if (id.includes('checker') || id.includes('audit')) IconComponent = ScanSearch;
+    else IconComponent = Globe2;
+  }
 
+  // ==========================================
+  // TEXT TOOLS
+  // ==========================================
+  else if (id.includes('text') || id.includes('word') || id.includes('case') || id.includes('sort') || id.includes('lorem')) {
+    if (id.includes('count')) IconComponent = BookType;
+    else if (id.includes('case')) IconComponent = CaseSensitive;
+    else if (id.includes('sort')) IconComponent = ArrowDownAZ;
+    else if (id.includes('reverse')) IconComponent = RefreshCw;
+    else if (id.includes('remove') || id.includes('line')) IconComponent = WrapText;
+    else if (id.includes('email') || id.includes('extract')) IconComponent = MailSearch;
+    else if (id.includes('replace')) IconComponent = Replace;
+    else if (id.includes('compare') || id.includes('diff')) IconComponent = FileDiff;
+    else if (id.includes('lorem')) IconComponent = TextQuote;
+    else IconComponent = TypeIcon;
+  }
+
+  // ==========================================
+  // UNIT CONVERTERS
+  // ==========================================
+  else if (id.includes('convert') || id.includes('length') || id.includes('weight')) {
+    if (id.includes('length') || id.includes('distance')) IconComponent = Ruler;
+    else if (id.includes('weight') || id.includes('mass')) IconComponent = Weight;
+    else if (id.includes('temperature')) IconComponent = Thermometer;
+    else if (id.includes('area')) IconComponent = SquareDashed;
+    else if (id.includes('volume')) IconComponent = Beaker;
+    else if (id.includes('time')) IconComponent = Hourglass;
+    else if (id.includes('speed')) IconComponent = Gauge;
+    else IconComponent = Scale;
+  }
+
+  // ==========================================
+  // QR TOOLS
+  // ==========================================
+  else if (id.includes('qr-code') || id.includes('qr')) {
+    if (id.includes('scanner')) IconComponent = ScanLine;
+    else if (id.includes('wifi')) IconComponent = Wifi;
+    else if (id.includes('vcard') || id.includes('contact')) IconComponent = Briefcase;
+    else if (id.includes('phone') || id.includes('sms')) IconComponent = Smartphone;
+    else if (id.includes('email')) IconComponent = Mail;
+    else if (id.includes('url')) IconComponent = Globe;
+    else IconComponent = QrCode;
+  }
+
+  // Fallback
+  if (!IconComponent) IconComponent = Code;
+
+  // Premium, ultra-clean aesthetic (Vercel/Linear style)
   return (
-    <div className={`relative ${className} flex items-center justify-center group perspective`}>
+    <div className={`relative flex items-center justify-center ${className} bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all duration-300`}>
+      {/* Icon */}
+      <IconComponent className="w-5 h-5 text-primary" strokeWidth={2} />
       
-      {/* Dynamic Background Blob / Glass Layer */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${categoryColor} rounded-2xl transform group-hover:scale-105 group-hover:rotate-1 transition-all duration-500 ease-out border border-white/10 dark:border-white/5 shadow-sm`}>
-        {/* Subtle grid pattern overlay for premium feel */}
-        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.08] rounded-2xl" 
-             style={{ backgroundImage: 'radial-gradient(currentColor 1px, transparent 1px)', backgroundSize: '6px 6px' }}>
-        </div>
-      </div>
-
-      {/* Main Object Icon (The Noun) - Slightly lifted to create 3D isometric feel */}
-      <div className="relative z-10 transform -translate-y-0.5 group-hover:-translate-y-1 transition-transform duration-500 ease-out drop-shadow-sm text-slate-800 dark:text-slate-100">
-        <ObjectIcon size={mainIconSize} strokeWidth={1.5} />
-      </div>
-
-      {/* Action Modifier Badge (The Verb) - Floats in bottom right */}
-      {ModifierIcon && (
-        <div className={`absolute bottom-0.5 right-0.5 z-20 ${badgeColor} p-1 rounded-full shadow-md border-[1.5px] border-white dark:border-slate-900 transform translate-y-[15%] translate-x-[15%] group-hover:scale-110 transition-transform duration-500 ease-out`}>
-          <ModifierIcon size={modifierSize} strokeWidth={2.5} />
-        </div>
-      )}
-      
-      {/* Magic Sparkles on Hover for extra premium delight */}
-      <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none overflow-hidden rounded-2xl">
-         <Sparkles className="absolute top-1 left-1 text-yellow-400/50 w-2.5 h-2.5 animate-pulse" />
-         <Sparkles className="absolute bottom-1 right-5 text-blue-400/50 w-3 h-3 animate-pulse delay-150" />
-      </div>
-
+      {/* Soft Glow Ring on Hover */}
+      <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 ring-1 ring-primary/20 dark:ring-primary/30 transition-opacity duration-300 pointer-events-none" />
     </div>
   );
 }
