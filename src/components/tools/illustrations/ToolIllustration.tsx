@@ -8,19 +8,18 @@ import {
   TrendingUp, Activity, Zap
 } from 'lucide-react';
 
-interface ToolIconProps {
+interface ToolIllustrationProps {
   toolId: string;
   className?: string;
-  fallback?: React.ReactNode;
 }
 
-export function ToolIcon({ toolId, className = "w-14 h-14", fallback }: ToolIconProps) {
+export function ToolIllustration({ toolId, className = "w-16 h-16" }: ToolIllustrationProps) {
   const id = toolId.toLowerCase();
 
   // Mapping logic to determine Object and Modifier
   let ObjectIcon = Code2;
   let ModifierIcon: React.ElementType | null = null;
-  let categoryColor = "from-primary/20 to-primary/5 dark:from-primary/30 dark:to-primary/10"; 
+  let categoryColor = "from-primary/20 to-primary/5"; // default subtle gradient
   let badgeColor = "bg-primary text-background";
 
   // ==============================
@@ -85,38 +84,33 @@ export function ToolIcon({ toolId, className = "w-14 h-14", fallback }: ToolIcon
   else if (id.includes('health') || id.includes('bmi')) ModifierIcon = Activity;
   else if (id.includes('power') || id.includes('electricity')) ModifierIcon = Zap;
 
-  // Render logic
-  const isLarge = className.includes('w-16') || className.includes('w-20') || className.includes('w-24');
-  const mainIconSize = isLarge ? 32 : 24;
-  const modifierSize = isLarge ? 16 : 12;
-
   return (
     <div className={`relative ${className} flex items-center justify-center group perspective`}>
       
       {/* Dynamic Background Blob / Glass Layer */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${categoryColor} rounded-2xl transform group-hover:scale-105 group-hover:rotate-1 transition-all duration-500 ease-out border border-white/10 dark:border-white/5 shadow-sm`}>
+      <div className={`absolute inset-0 bg-gradient-to-br ${categoryColor} rounded-[2rem] transform group-hover:scale-105 group-hover:rotate-1 transition-all duration-500 ease-out border border-white/10 dark:border-white/5 shadow-inner`}>
         {/* Subtle grid pattern overlay for premium feel */}
-        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.08] rounded-2xl" 
-             style={{ backgroundImage: 'radial-gradient(currentColor 1px, transparent 1px)', backgroundSize: '6px 6px' }}>
+        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.08]" 
+             style={{ backgroundImage: 'radial-gradient(currentColor 1px, transparent 1px)', backgroundSize: '8px 8px' }}>
         </div>
       </div>
 
       {/* Main Object Icon (The Noun) - Slightly lifted to create 3D isometric feel */}
-      <div className="relative z-10 transform -translate-y-0.5 group-hover:-translate-y-1 transition-transform duration-500 ease-out drop-shadow-sm text-slate-800 dark:text-slate-100">
-        <ObjectIcon size={mainIconSize} strokeWidth={1.5} />
+      <div className="relative z-10 transform -translate-y-1 group-hover:-translate-y-2 transition-transform duration-500 ease-out drop-shadow-md text-slate-800 dark:text-slate-100">
+        <ObjectIcon size={className.includes('w-20') || className.includes('w-24') ? 36 : 28} strokeWidth={1.5} />
       </div>
 
       {/* Action Modifier Badge (The Verb) - Floats in bottom right */}
       {ModifierIcon && (
-        <div className={`absolute bottom-0.5 right-0.5 z-20 ${badgeColor} p-1 rounded-full shadow-md border-[1.5px] border-white dark:border-slate-900 transform translate-y-[15%] translate-x-[15%] group-hover:scale-110 transition-transform duration-500 ease-out`}>
-          <ModifierIcon size={modifierSize} strokeWidth={2.5} />
+        <div className={`absolute bottom-1 right-1 z-20 ${badgeColor} p-1.5 rounded-full shadow-lg border-2 border-white dark:border-slate-900 transform translate-y-1/4 translate-x-1/4 group-hover:scale-110 transition-transform duration-500 ease-out`}>
+          <ModifierIcon size={className.includes('w-20') || className.includes('w-24') ? 16 : 14} strokeWidth={2.5} />
         </div>
       )}
       
       {/* Magic Sparkles on Hover for extra premium delight */}
-      <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none overflow-hidden rounded-2xl">
-         <Sparkles className="absolute top-1 left-1 text-yellow-400/50 w-2.5 h-2.5 animate-pulse" />
-         <Sparkles className="absolute bottom-1 right-5 text-blue-400/50 w-3 h-3 animate-pulse delay-150" />
+      <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none overflow-hidden rounded-[2rem]">
+         <Sparkles className="absolute top-1 left-2 text-yellow-400/50 w-3 h-3 animate-pulse" />
+         <Sparkles className="absolute bottom-2 right-6 text-blue-400/50 w-4 h-4 animate-pulse delay-150" />
       </div>
 
     </div>
