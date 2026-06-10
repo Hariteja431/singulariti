@@ -183,7 +183,7 @@ export function ToolIcon({ toolId, className = "w-14 h-14" }: ToolIconProps) {
       {/* Background QR code watermark for QR tools */}
       {isQrTool && (
         <QrCode 
-          className="absolute inset-0 w-full h-full p-2 text-primary opacity-20 dark:opacity-20 z-0 pointer-events-none" 
+          className="absolute inset-0 w-full h-full p-2 text-primary opacity-30 dark:opacity-30 z-0 pointer-events-none" 
           strokeWidth={1.5}
         />
       )}
