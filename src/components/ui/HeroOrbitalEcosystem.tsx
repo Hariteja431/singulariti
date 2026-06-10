@@ -137,18 +137,18 @@ export default function HeroOrbitalEcosystem() {
       const svgCx = svgRect.left - stageRect.left + svgRect.width / 2;
       const svgCy = svgRect.top - stageRect.top + svgRect.height / 2;
 
-      // The Bulb is exactly at SVG coordinate (180, 175) in a 360x360 viewBox
+      // The true 3D center of the extruded prism (Bulb Location) is at 180, 148
       const scaleX = svgRect.width / 360;
       const scaleY = svgRect.height / 360;
       const bulbX = svgCx + (180 - 180) * scaleX; 
-      const bulbY = svgCy + (175 - 180) * scaleY;
+      const bulbY = svgCy + (148 - 180) * scaleY;
 
       // ── Canvas: Concentric Energy Ripples Emitting from Core ─────────────────
       const numRipples = 3;
       for (let r = 0; r < numRipples; r++) {
         const rippleT = (t * 0.8 + r / numRipples) % 1; // 0 to 1
-        const rippleRadius = 30 + Math.pow(rippleT, 1.5) * 160;
-        const rippleAlpha = (1 - rippleT) * 0.4;
+        const rippleRadius = 30 + Math.pow(rippleT, 1.5) * 180; // Expand further
+        const rippleAlpha = (1 - rippleT) * 0.35;
         
         ctx.beginPath();
         ctx.arc(bulbX, bulbY, rippleRadius, 0, Math.PI * 2);
@@ -157,9 +157,9 @@ export default function HeroOrbitalEcosystem() {
         ctx.stroke();
       }
 
-      // Responsive orbit radius based on screen size
+      // Responsive orbit radius based on screen size (Made larger)
       const isMobile = W < 640;
-      const R = Math.min(W, H) * (isMobile ? 0.38 : 0.42);
+      const R = Math.min(W, H) * (isMobile ? 0.38 : 0.44);
 
       nodes.forEach((node, i) => {
         const a = orbitAngle + (i / nodes.length) * Math.PI * 2;
@@ -229,12 +229,12 @@ export default function HeroOrbitalEcosystem() {
 
         // ── Canvas: Node Aura / Glow underneath the DOM element ─────────────────
         if (isActive || flareAlpha > 0.2) {
-          const auraR = isActive ? 50 : 35;
+          const auraR = isActive ? 55 : 35;
           ctx.save();
           ctx.beginPath();
           ctx.arc(nx, ny, auraR, 0, Math.PI * 2);
           const aura = ctx.createRadialGradient(nx, ny, 0, nx, ny, auraR);
-          const a0 = isActive ? 0.5 : flareAlpha * 0.45;
+          const a0 = isActive ? 0.6 : flareAlpha * 0.45;
           aura.addColorStop(0, `rgba(${PRIMARY_RGB}, ${a0})`);
           aura.addColorStop(1, `rgba(${PRIMARY_RGB}, 0)`);
           ctx.fillStyle = aura;
@@ -248,14 +248,14 @@ export default function HeroOrbitalEcosystem() {
           // depth ranges from 0 (back) to 1 (front)
           const depth = (Math.sin(a) + 1) / 2;
           // Scale nodes down when they go to the back for true 3D perspective
-          const scale = isActive ? 1.15 : 0.7 + depth * 0.3;
-          const nodeSize = isMobile ? 50 : 60; // Base size
+          const scale = isActive ? 1.15 : 0.75 + depth * 0.35;
+          const nodeSize = isMobile ? 55 : 65; // Base size (Made larger)
           const offset = nodeSize / 2;
           
           el.style.transform = `translate(${nx - offset}px, ${ny - offset}px) scale(${scale})`;
           el.style.zIndex = String(isActive ? 300 : Math.round(10 + depth * 40));
           // Dim opacity for nodes in the background
-          el.style.opacity = String(isActive ? 1 : 0.4 + depth * 0.6);
+          el.style.opacity = String(isActive ? 1 : 0.5 + depth * 0.5);
         }
       });
 
@@ -265,7 +265,7 @@ export default function HeroOrbitalEcosystem() {
       const innerHex = svgEl.querySelector<SVGGElement>("#inner-hex");
       if (ring1) ring1.setAttribute("transform", `rotate(${(t * 15 * 180) / Math.PI}, 180, 200)`);
       if (ring2) ring2.setAttribute("transform", `rotate(${(-t * 20 * 180) / Math.PI}, 180, 195)`);
-      if (innerHex) innerHex.setAttribute("transform", `rotate(${(t * 5 * 180) / Math.PI}, 180, 175)`);
+      if (innerHex) innerHex.setAttribute("transform", `rotate(${(t * 5 * 180) / Math.PI}, 180, 148)`);
 
       animRef.current = requestAnimationFrame(loop);
     }
@@ -286,27 +286,32 @@ export default function HeroOrbitalEcosystem() {
 
   // ─── SSR Placeholder ─────────────────────────────────────────────────────────
   if (!mounted) {
-    return <div className="relative w-full h-[500px] sm:h-[600px] opacity-0" />;
+    return <div className="relative w-full min-h-[550px] lg:min-h-[700px] opacity-0" />;
   }
 
   return (
     <div
       ref={stageRef}
-      className="relative w-full h-[500px] sm:h-[600px] select-none mt-8 sm:mt-0"
+      className="relative w-full h-[550px] lg:h-[700px] select-none mt-4 lg:mt-[-3rem]"
       onClick={() => setActiveId(null)}
     >
+      {/* Deep Ambient Stage Glow to ground the ecosystem and prevent floating */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[-1]">
+        <div className="w-[80%] h-[80%] max-w-[600px] max-h-[600px] rounded-full bg-primary/5 dark:bg-primary/10 blur-[100px]"></div>
+      </div>
+
       {/* High Performance Canvas for dynamic laser flares, sparks, and ripples */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full pointer-events-none z-0"
       />
 
-      {/* Central 3D Prism Engine — Absolutely Centered */}
+      {/* Central True 3D Extruded Prism Engine — Absolutely Centered */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
         <svg
           ref={svgRef}
           viewBox="0 0 360 360"
-          className="w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] overflow-visible drop-shadow-[0_0_20px_rgba(20,184,166,0.4)]"
+          className="w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[480px] lg:h-[480px] overflow-visible drop-shadow-[0_0_20px_rgba(20,184,166,0.3)]"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -316,7 +321,7 @@ export default function HeroOrbitalEcosystem() {
               <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0" />
             </radialGradient>
             <filter id="sg-edge-glow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feGaussianBlur stdDeviation="3" result="blur" />
               <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
             </filter>
             <filter id="sg-bulb-glow" x="-80%" y="-80%" width="260%" height="260%">
@@ -326,67 +331,69 @@ export default function HeroOrbitalEcosystem() {
           </defs>
 
           {/* Ambient Radiance */}
-          <circle cx="180" cy="200" r="110" fill="url(#sg-core-glow)" />
+          <circle cx="180" cy="180" r="130" fill="url(#sg-core-glow)" />
 
-          {/* Back/Inner Hollow Wireframe Faces */}
-          <polygon points="180,42 90,225 270,225"
-            stroke="var(--color-primary)" strokeWidth="1" strokeOpacity="0.15" fill="var(--color-primary)" fillOpacity="0.02" />
-          <polygon points="180,72 108,210 252,210"
-            stroke="var(--color-primary)" strokeWidth="0.8" strokeOpacity="0.2" fill="var(--color-primary)" fillOpacity="0.04" />
+          {/* 
+            TRUE 3D HOLLOW PRISM EXTRUSION
+            Back Face is scaled down and offset up.
+            Front Face is the actual Singulariti Logo geometry.
+          */}
 
-          {/* Depth Pillars connecting back and front */}
-          <line x1="180" y1="42" x2="180" y2="72" stroke="var(--color-primary)" strokeOpacity="0.3" strokeWidth="1" />
-          <line x1="90" y1="225" x2="108" y2="210" stroke="var(--color-primary)" strokeOpacity="0.3" strokeWidth="1" />
-          <line x1="270" y1="225" x2="252" y2="210" stroke="var(--color-primary)" strokeOpacity="0.3" strokeWidth="1" />
+          {/* Depth Extrusions (Connecting Back to Front) */}
+          <line x1="180" y1="40" x2="180" y2="80" stroke="var(--color-primary)" strokeOpacity="0.3" strokeWidth="1.5" />
+          <line x1="120" y1="136" x2="80" y2="240" stroke="var(--color-primary)" strokeOpacity="0.3" strokeWidth="1.5" />
+          <line x1="240" y1="136" x2="280" y2="240" stroke="var(--color-primary)" strokeOpacity="0.3" strokeWidth="1.5" />
+          <line x1="180" y1="106" x2="180" y2="190" stroke="var(--color-primary)" strokeOpacity="0.5" strokeWidth="2" strokeDasharray="4,4" />
 
-          {/* Outer Front Wireframe Glow Pass */}
-          <polygon points="180,42 90,225 270,225"
-            stroke="var(--color-primary)" strokeWidth="2.5" fill="none"
-            filter="url(#sg-edge-glow)" opacity="0.6" />
+          {/* Back Face (Dimmed) */}
+          <polygon points="180,40 120,136 240,136" stroke="var(--color-primary)" strokeOpacity="0.2" strokeWidth="1" fill="none" />
+          <line x1="180" y1="40" x2="180" y2="106" stroke="var(--color-primary)" strokeOpacity="0.25" strokeWidth="1" />
+          <line x1="120" y1="136" x2="180" y2="106" stroke="var(--color-primary)" strokeOpacity="0.25" strokeWidth="1" />
+          <line x1="240" y1="136" x2="180" y2="106" stroke="var(--color-primary)" strokeOpacity="0.25" strokeWidth="1" />
+          <polygon points="120,136 240,136 180,106" fill="var(--color-primary)" fillOpacity="0.03" />
 
-          {/* Outer Front Wireframe Sharp Edge */}
-          <polygon points="180,42 90,225 270,225" stroke="var(--color-primary)" strokeWidth="2" fill="none" />
+          {/* Front Face Outer Edge (Bright) */}
+          <polygon points="180,80 80,240 280,240" stroke="var(--color-primary)" strokeWidth="2.5" fill="none" filter="url(#sg-edge-glow)" opacity="0.8" />
+          <polygon points="180,80 80,240 280,240" stroke="var(--color-primary)" strokeWidth="2" fill="none" />
+          
+          {/* Front Face Inner Converging Lines (Singulariti Logo structure) */}
+          <line x1="180" y1="80" x2="180" y2="190" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="80" y1="240" x2="180" y2="190" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="280" y1="240" x2="180" y2="190" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" />
+          
+          {/* Front Inner Floor Fill */}
+          <polygon points="80,240 280,240 180,190" fill="var(--color-primary)" fillOpacity="0.06" />
 
-          {/* Inner Converging Geometry to Bulb */}
-          <line x1="180" y1="42" x2="180" y2="175" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" />
-          <line x1="90" y1="225" x2="180" y2="175" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" />
-          <line x1="270" y1="225" x2="180" y2="175" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" />
-
-          {/* Inner Floor Fill */}
-          <polygon points="90,225 270,225 180,175" fill="var(--color-primary)" fillOpacity="0.08" />
-
-          {/* Sci-Fi Tesseract Dashed Cross-Section */}
-          <line x1="180" y1="42" x2="108" y2="210" stroke="var(--color-primary)" strokeOpacity="0.25" strokeWidth="1.5" strokeDasharray="4,4" />
-          <line x1="180" y1="42" x2="252" y2="210" stroke="var(--color-primary)" strokeOpacity="0.25" strokeWidth="1.5" strokeDasharray="4,4" />
-          <line x1="90" y1="225" x2="252" y2="210" stroke="var(--color-primary)" strokeOpacity="0.2" strokeWidth="1.5" strokeDasharray="4,4" />
-          <line x1="270" y1="225" x2="108" y2="210" stroke="var(--color-primary)" strokeOpacity="0.2" strokeWidth="1.5" strokeDasharray="4,4" />
-
-          {/* The Energy Bulb (Exactly at Vertex 180, 175) */}
-          <circle cx="180" cy="175" r="30" fill="url(#sg-core-glow)" />
+          {/* 
+            THE ENERGY BULB
+            Suspended exactly in the 3D center between the front (190) and back (106) inner vertices 
+            Center Y = (190 + 106) / 2 = 148
+          */}
+          <circle cx="180" cy="148" r="35" fill="url(#sg-core-glow)" />
           
           {/* Inner mechanical rotating hexagon inside the bulb */}
-          <g id="inner-hex" stroke="var(--color-primary)" strokeWidth="1" strokeOpacity="0.5" fill="none">
-            <polygon points="180,160 193,167.5 193,182.5 180,190 167,182.5 167,167.5" />
+          <g id="inner-hex" stroke="var(--color-primary)" strokeWidth="1" strokeOpacity="0.6" fill="none">
+            <polygon points="180,133 193,140.5 193,155.5 180,163 167,155.5 167,140.5" />
           </g>
 
-          <circle cx="180" cy="175" r="16" fill="var(--color-primary)" fillOpacity="0.6" filter="url(#sg-bulb-glow)">
-            <animate attributeName="r" values="14;18;14" dur="3s" repeatCount="indefinite" />
+          <circle cx="180" cy="148" r="16" fill="var(--color-primary)" fillOpacity="0.65" filter="url(#sg-bulb-glow)">
+            <animate attributeName="r" values="14;19;14" dur="3s" repeatCount="indefinite" />
             <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite" />
           </circle>
-          <circle cx="180" cy="175" r="8" fill="#ffffff" filter="url(#sg-bulb-glow)">
-            <animate attributeName="r" values="7;10;7" dur="1.5s" repeatCount="indefinite" />
+          <circle cx="180" cy="148" r="8" fill="#ffffff" filter="url(#sg-bulb-glow)">
+            <animate attributeName="r" values="7;11;7" dur="1.5s" repeatCount="indefinite" />
           </circle>
-          <circle cx="180" cy="175" r="4" fill="#ffffff">
+          <circle cx="180" cy="148" r="4" fill="#ffffff">
             <animate attributeName="opacity" values="0.8;1;0.8" dur="0.75s" repeatCount="indefinite" />
           </circle>
 
           {/* Rotating Halo Rings (Isometric perspective) */}
           <g id="halo-ring1" opacity="0.3">
-            <ellipse cx="180" cy="200" rx="140" ry="35"
+            <ellipse cx="180" cy="180" rx="155" ry="40"
               stroke="var(--color-primary)" strokeWidth="1.5" fill="none" strokeDasharray="12,12" />
           </g>
           <g id="halo-ring2" opacity="0.2">
-            <ellipse cx="180" cy="195" rx="165" ry="25"
+            <ellipse cx="180" cy="175" rx="180" ry="30"
               stroke="var(--color-primary)" strokeWidth="1" fill="none" strokeDasharray="6,8" />
           </g>
         </svg>
@@ -396,13 +403,19 @@ export default function HeroOrbitalEcosystem() {
       {nodes.map((node, i) => {
         const Icon = node.Icon;
         const isActive = activeId === node.id;
+        const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+        const nodeSize = isMobile ? 55 : 65;
         
         return (
           <div
             key={node.id}
             id={`orbit-node-${node.id}`}
-            className="absolute top-0 left-0 w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] cursor-pointer group"
-            style={{ willChange: "transform, opacity" }}
+            className="absolute top-0 left-0 cursor-pointer group"
+            style={{ 
+              width: `${nodeSize}px`, 
+              height: `${nodeSize}px`, 
+              willChange: "transform, opacity" 
+            }}
             onClick={e => { e.stopPropagation(); toggle(node.id); }}
           >
             {/* Ping Ring */}
@@ -421,7 +434,7 @@ export default function HeroOrbitalEcosystem() {
             ].join(" ")}>
               {/* Teal Icons for all states */}
               <Icon
-                size={isActive ? 24 : 22}
+                size={isActive ? 26 : 24}
                 strokeWidth={isActive ? 2.5 : 2}
                 className={[
                   "transition-all duration-500 relative z-10",
