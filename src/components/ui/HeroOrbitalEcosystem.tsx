@@ -159,7 +159,7 @@ export default function HeroOrbitalEcosystem() {
 
       // Responsive orbit radius based on screen size
       const isMobile = W < 640;
-      const R = Math.min(W, H) * (isMobile ? 0.38 : 0.42);
+      const R = Math.min(W, H) * (isMobile ? 0.38 : 0.43);
 
       nodes.forEach((node, i) => {
         const a = orbitAngle + (i / nodes.length) * Math.PI * 2;
@@ -248,14 +248,14 @@ export default function HeroOrbitalEcosystem() {
           // depth ranges from 0 (back) to 1 (front)
           const depth = (Math.sin(a) + 1) / 2;
           // Scale nodes down when they go to the back for true 3D perspective
-          const scale = isActive ? 1.15 : 0.7 + depth * 0.3;
-          const nodeSize = isMobile ? 50 : 60; // Base size
+          const scale = isActive ? 1.2 : 0.75 + depth * 0.35;
+          const nodeSize = isMobile ? 48 : 64; // Base size
           const offset = nodeSize / 2;
           
           el.style.transform = `translate(${nx - offset}px, ${ny - offset}px) scale(${scale})`;
           el.style.zIndex = String(isActive ? 300 : Math.round(10 + depth * 40));
           // Dim opacity for nodes in the background
-          el.style.opacity = String(isActive ? 1 : 0.4 + depth * 0.6);
+          el.style.opacity = String(isActive ? 1 : 0.5 + depth * 0.5);
         }
       });
 
@@ -286,13 +286,13 @@ export default function HeroOrbitalEcosystem() {
 
   // ─── SSR Placeholder ─────────────────────────────────────────────────────────
   if (!mounted) {
-    return <div className="relative w-full h-[500px] sm:h-[600px] opacity-0" />;
+    return <div className="relative w-full h-[400px] sm:h-[500px] lg:h-full lg:min-h-[600px] opacity-0" />;
   }
 
   return (
     <div
       ref={stageRef}
-      className="relative w-full h-[500px] sm:h-[600px] select-none mt-8 sm:mt-0"
+      className="relative w-full h-[400px] sm:h-[500px] lg:h-full lg:min-h-[600px] select-none mt-2 sm:mt-0"
       onClick={() => setActiveId(null)}
     >
       {/* High Performance Canvas for dynamic laser flares, sparks, and ripples */}
@@ -306,7 +306,7 @@ export default function HeroOrbitalEcosystem() {
         <svg
           ref={svgRef}
           viewBox="0 0 360 360"
-          className="w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] overflow-visible drop-shadow-[0_0_20px_rgba(20,184,166,0.4)]"
+          className="w-[200px] h-[200px] sm:w-[280px] sm:h-[280px] lg:w-[420px] lg:h-[420px] overflow-visible drop-shadow-[0_0_20px_rgba(20,184,166,0.4)]"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
