@@ -84,7 +84,7 @@ export default function Home() {
               </h1>
               
               <p className="font-sans text-base sm:text-lg md:text-xl text-slate max-w-xl mb-8 sm:mb-10 leading-relaxed px-2 sm:px-0">
-                Fast, secure, browser-based utility tools designed for creators, developers, students, and professionals. Experience <span className="text-slate-900 dark:text-white font-medium">zero server uploads</span> and <span className="text-slate-900 dark:text-white font-medium">instant processing</span>.
+                Fast, secure, browser-based utility tools designed for creators, developers, students, and professionals. Experience <span className="text-ink font-semibold">zero server uploads</span> and <span className="text-ink font-semibold">instant processing</span>.
               </p>
               
               <div className="flex flex-row flex-wrap items-center justify-center lg:justify-start gap-4">
