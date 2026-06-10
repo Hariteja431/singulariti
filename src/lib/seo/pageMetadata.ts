@@ -24,12 +24,12 @@ export type PageSEO = {
 export const pageMetadataRegistry: Record<string, PageSEO> = {
   "home": {
     title: "Free PDF, Image, Text, Developer, SEO & More Tools | Singulariti",
-    description: "All-in-one collection of free utility tools for PDF, images, text, code, SEO and productivity.Fast, privacy-friendly and works directly in your browser. No signup required.",
+    description: "All-in-one collection of free utility tools for PDF, images, text, code, SEO and productivity. Fast, privacy-friendly and works directly in your browser. No signup required.",
     path: "/",
     robots: { index: true, follow: true },
     openGraph: {
       title: "Free PDF, Image, Text, Developer, SEO & More Tools | Singulariti",
-      description: "All-in-one collection of free utility tools for PDF, images, text, code, SEO and productivity.Fast, privacy-friendly and works directly in your browser. No signup required.",
+      description: "All-in-one collection of free utility tools for PDF, images, text, code, SEO and productivity. Fast, privacy-friendly and works directly in your browser. No signup required.",
       url: "https://singulariti.in",
       type: "website",
       image: "https://singulariti.in/og-fallback.png"
@@ -37,7 +37,7 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
     twitter: {
       card: "summary_large_image",
       title: "Free PDF, Image, Text, Developer, SEO & More Tools | Singulariti",
-      description: "All-in-one collection of free utility tools for PDF, images, text, code, SEO and productivity.Fast, privacy-friendly and works directly in your browser. No signup required.",
+      description: "All-in-one collection of free utility tools for PDF, images, text, code, SEO and productivity. Fast, privacy-friendly and works directly in your browser. No signup required.",
       image: "https://singulariti.in/og-fallback.png"
     }
   },
