@@ -19,7 +19,7 @@ import {
   Zap as ZapIcon, Fuel, Receipt, CalendarClock, Activity, Scale,
   // SEO & Text (Updated)
   Globe2, Waypoints, BotMessageSquare, BarChart2, 
-  BookType, SpellCheck, ArrowLeftRight, WrapText, MailSearch,
+  BookType, SpellCheck, ArrowLeftRight, WrapText, MailSearch, ArrowDownAZ,
   // Unit Conversion (Updated)
   Ruler, Thermometer, SquareDashed, Beaker, Hourglass, Weight,
   // QR
