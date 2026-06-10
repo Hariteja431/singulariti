@@ -49,43 +49,7 @@ export default function Home() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "name": "Singulariti",
-          "alternateName": ["Singulariti Tools", "Singulariti Utility Tools", "Singulariti Web Tools"],
-          "url": "https://singulariti.in",
-          "description": "Free browser-based utility tools for PDF, image, text, developer, SEO, and calculator tasks.",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "https://singulariti.in/tools?q={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-        })}}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": "Singulariti",
-          "url": "https://singulariti.in",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://singulariti.in/og-fallback.png",
-            "width": 1200,
-            "height": 630
-          },
-          "description": "Singulariti offers free browser-based utility tools for PDF management, image compression, text formatting, developer encoding, and calculator tasks — all processed locally with zero uploads.",
-          "foundingDate": "2026-06-06",
-          "sameAs": []
-        })}}
-      />
+
       <Header />
       <main className="flex-1 w-full flex flex-col items-center pt-24 pb-12">
         {/* Hero Section */}
