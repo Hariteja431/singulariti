@@ -361,7 +361,7 @@ export default function OnlineWhiteboardClient() {
 
   const content = (
     <div className={isMaximized 
-      ? "fixed inset-0 z-[150] bg-slate-50 dark:bg-zinc-950 flex flex-col p-4 gap-4 w-screen h-screen overflow-hidden animate-in fade-in duration-200" 
+      ? "fixed inset-0 z-[150] bg-slate-50 dark:bg-zinc-950 flex flex-col p-4 gap-4 w-[100dvw] h-[100dvh] overflow-hidden animate-in fade-in duration-200" 
       : "space-y-6 w-full max-w-7xl mx-auto"
     }>
       {/* Whiteboard Specific Privacy Notice (Required) */}
