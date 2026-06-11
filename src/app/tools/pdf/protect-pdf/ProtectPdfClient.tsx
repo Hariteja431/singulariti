@@ -44,7 +44,7 @@ export function ProtectPdfClient() {
         return;
       }
       setFile(selectedFile);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     }
@@ -66,7 +66,7 @@ export function ProtectPdfClient() {
       const blob = new Blob([encryptedBytes as any], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       setResultBlobUrl(url);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     } finally {

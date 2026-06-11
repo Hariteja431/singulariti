@@ -64,7 +64,7 @@ export function PageThumbnail({
           setLoading(false);
           if (onRenderSuccess) onRenderSuccess();
         }
-      } catch (err: any) {
+      } catch (e) { const err = e as Error;
         if (err && err.name === 'RenderingCancelledException') {
           return;
         }

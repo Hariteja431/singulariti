@@ -273,7 +273,7 @@ export function ConvertToolContainer({ toolId, toolName, toolDescription }: Conv
         const converted = baseValue / toFactor;
         setResult(converted.toFixed(6).replace(/\.?0+$/, ''));
       }
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       setError(err.message || 'Error occurred.');
       setResult('');
     }

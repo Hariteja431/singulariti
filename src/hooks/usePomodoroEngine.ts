@@ -41,7 +41,7 @@ export function usePomodoroEngine() {
     try {
       const storedStats = localStorage.getItem('singulariti_pomodoro_stats');
       if (storedStats) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+         
         setStats(JSON.parse(storedStats));
       }
       const storedTasks = localStorage.getItem('singulariti_pomodoro_tasks');

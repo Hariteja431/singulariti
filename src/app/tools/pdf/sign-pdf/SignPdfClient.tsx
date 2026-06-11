@@ -112,7 +112,7 @@ export function SignPdfClient() {
       const doc = await loadPdfDocument(selectedFile);
       setPdfDoc(doc);
       setSelectedPage(1);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     }
@@ -227,7 +227,7 @@ export function SignPdfClient() {
       const blob = new Blob([signedPdfBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       setResultBlobUrl(url);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     } finally {

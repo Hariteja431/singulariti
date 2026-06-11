@@ -343,7 +343,7 @@ export default function OnlineWhiteboardClient() {
         exportToSVG(canvas, fileName);
       }
       setSuccessMsg(`Exported successfully as ${format.toUpperCase()}!`);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       if (err.message === 'EMPTY_BOARD') {
         setError("Cannot export an empty board. Please draw or add shapes first.");
       } else {

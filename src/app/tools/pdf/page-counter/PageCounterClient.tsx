@@ -40,7 +40,7 @@ export function PageCounterClient() {
           return;
         }
         validFiles.push(file);
-      } catch (err: any) {
+      } catch (e) { const err = e as Error;
         setError(`File "${file.name}": ${getPdfErrorMessage(err)}`);
         setIsProcessing(false);
         return;
@@ -62,7 +62,7 @@ export function PageCounterClient() {
       const result = await countPDFPages(updatedFiles);
       setFileCounts(result.counts);
       setTotalCount(result.total);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     } finally {

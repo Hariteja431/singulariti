@@ -51,7 +51,7 @@ export function CompressPdfClient() {
       setFile(selectedFile);
       const doc = await loadPdfDocument(selectedFile);
       setPdfDoc(doc);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     }
@@ -74,7 +74,7 @@ export function CompressPdfClient() {
         originalSize: file.size,
         newSize: blob.size
       });
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     } finally {

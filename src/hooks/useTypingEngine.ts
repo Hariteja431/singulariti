@@ -75,7 +75,7 @@ export function useTypingEngine() {
   // Set default words on mount
   useEffect(() => {
     // Run once on mount to populate initial words
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     initializeTest(state.mode, state.timeLimit, state.wordLimit, state.difficulty);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initializeTest]);

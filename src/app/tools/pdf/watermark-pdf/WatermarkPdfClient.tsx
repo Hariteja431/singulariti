@@ -124,7 +124,7 @@ export function WatermarkPdfClient() {
       const page = await doc.getPage(1);
       const viewport = page.getViewport({ scale: 1 });
       setPdfPageSize({ width: viewport.width, height: viewport.height });
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     }
@@ -326,7 +326,7 @@ export function WatermarkPdfClient() {
       const blob = new Blob([watermarkedBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       setResultBlobUrl(url);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     } finally {

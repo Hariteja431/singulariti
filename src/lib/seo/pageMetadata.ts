@@ -117,6 +117,25 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       image: "https://singulariti.in/og-fallback.png"
     }
   },
+  "cookie-policy": {
+    title: "Cookie Policy - Singulariti",
+    description: "Read our cookie policy to understand how we use cookies for analytics, advertising (Google AdSense), and website functionality.",
+    path: "/cookie-policy",
+    robots: { index: true, follow: true },
+    openGraph: {
+      title: "Cookie Policy - Singulariti",
+      description: "Read our cookie policy to understand how we use cookies for analytics, advertising (Google AdSense), and website functionality.",
+      url: "https://singulariti.in/cookie-policy",
+      type: "website",
+      image: "https://singulariti.in/og-fallback.png"
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Cookie Policy - Singulariti",
+      description: "Read our cookie policy to understand how we use cookies for analytics, advertising (Google AdSense), and website functionality.",
+      image: "https://singulariti.in/og-fallback.png"
+    }
+  },
   "terms": {
     title: "Terms and Conditions - Online Utility Tools",
     description: "Read usage terms for online utilities, output limitations, user responsibilities and general website conditions.",

@@ -85,7 +85,7 @@ export function ScientificCalculatorView({ toolId, title, description }: Scienti
           inputRef.current.setSelectionRange(expression.length, expression.length);
         }
       }, 0);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       setError(err.message || 'Invalid expression');
       setResult('Error');
     }

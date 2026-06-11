@@ -52,7 +52,7 @@ export function DeletePdfPagesClient() {
       setFile(selectedFile);
       const doc = await loadPdfDocument(selectedFile);
       setPdfDoc(doc);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     }
@@ -92,7 +92,7 @@ export function DeletePdfPagesClient() {
       const blob = new Blob([bytes.buffer as ArrayBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       setResultBlobUrl(url);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     } finally {

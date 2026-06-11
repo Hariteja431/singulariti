@@ -472,7 +472,7 @@ export function ImageEditorClient() {
         format: params.format,
         quality: params.quality
       });
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(err.message || 'Failed to download image.');
     } finally {

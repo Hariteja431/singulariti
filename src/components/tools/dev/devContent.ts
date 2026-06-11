@@ -207,6 +207,101 @@ const contentMap: Record<string, DevContent> = {
       { question: "Does it support GitHub Flavored Markdown (GFM)?", answer: "Yes, it supports standard markdown along with tables, strikethroughs, and task lists." },
       { question: "Can I export the rendered HTML?", answer: "Currently, this tool is built for visual previewing, but you can inspect the DOM to extract the raw HTML." }
     ]
+  },
+  'cron-generator': {
+    howToUse: [
+      "Select a preset or build a schedule using the visual inputs.",
+      "Observe the plain-English explanation generated in real-time.",
+      "Review the next scheduled execution times.",
+      "Copy the CRON expression for your server configuration."
+    ],
+    faqs: [
+      { question: "Are these expressions compatible with Linux crontab?", answer: "Yes, they generate standard 5-part POSIX cron expressions compatible with Linux, Unix, and most task schedulers." },
+      { question: "Why is the generated time different from my server?", answer: "CRON expressions themselves are timezone-agnostic. The execution time depends entirely on the timezone configured on the server running the cron daemon." }
+    ]
+  },
+  'password-generator': {
+    howToUse: [
+      "Select the desired password length.",
+      "Toggle character options: uppercase, lowercase, numbers, and symbols.",
+      "Click 'Generate' to create a new password.",
+      "Copy the securely generated password."
+    ],
+    faqs: [
+      { question: "Is this password generator secure?", answer: "Yes, it uses the browser's native window.crypto.getRandomValues() which provides cryptographically strong random values." },
+      { question: "Do you store the generated passwords?", answer: "No, passwords are generated locally in your browser and are never sent to any server." }
+    ]
+  },
+  'bcrypt-generator': {
+    howToUse: [
+      "To hash: enter a plain text password, adjust salt rounds, and click Hash.",
+      "To verify: enter a plain text password and an existing hash, then click Verify.",
+      "Copy the generated hash or check the verification result."
+    ],
+    faqs: [
+      { question: "Why is bcrypt so slow?", answer: "Bcrypt is intentionally slow by design to protect against brute-force and rainbow table attacks. Increasing salt rounds exponentially increases the time taken." },
+      { question: "Is it safe to hash passwords here?", answer: "Yes, the hashing and verification processes are executed entirely within your browser. No data leaves your machine." }
+    ]
+  },
+  'css-gradient-generator': {
+    howToUse: [
+      "Select the gradient type (Linear, Radial, Conic).",
+      "Adjust the angle (for linear) or position.",
+      "Add, remove, and drag color stops to design your gradient.",
+      "Copy the generated CSS code."
+    ],
+    faqs: [
+      { question: "Is the generated CSS cross-browser compatible?", answer: "Yes, the tool generates standard CSS3 gradients supported by all modern browsers." },
+      { question: "Can I use rgba colors for transparency?", answer: "Yes, you can use any valid CSS color format including hex, rgb, and rgba to create transparent gradients." }
+    ]
+  },
+  'css-box-shadow': {
+    howToUse: [
+      "Use sliders to adjust horizontal and vertical offsets.",
+      "Change blur and spread radius for desired softness and size.",
+      "Pick a shadow color and toggle the inset option if needed.",
+      "Copy the final CSS rule."
+    ],
+    faqs: [
+      { question: "Can I add multiple shadows?", answer: "The current tool allows generating single complex shadows. You can combine multiple outputs manually in your CSS by comma-separating them." },
+      { question: "What is an inset shadow?", answer: "An inset shadow appears inside the element's box rather than outside, creating an embossed or depressed effect." }
+    ]
+  },
+  'color-contrast-checker': {
+    howToUse: [
+      "Enter a foreground (text) color and a background color.",
+      "Check the real-time contrast ratio.",
+      "Review the WCAG AA and AAA pass/fail status for different text sizes.",
+      "Adjust colors until they meet accessibility standards."
+    ],
+    faqs: [
+      { question: "What is a good contrast ratio?", answer: "WCAG 2.1 requires a minimum ratio of 4.5:1 for normal text (AA) and 7:1 for enhanced contrast (AAA)." },
+      { question: "Why does contrast matter?", answer: "High contrast ensures that text is readable for users with visual impairments, including color blindness, and improves general usability." }
+    ]
+  },
+  'svg-optimizer': {
+    howToUse: [
+      "Paste your raw SVG code into the input area.",
+      "The tool instantly minifies the SVG by removing unnecessary attributes and formatting.",
+      "Compare the original and optimized file sizes.",
+      "Copy the clean SVG code for use in your project."
+    ],
+    faqs: [
+      { question: "Will optimizing change how my SVG looks?", answer: "No, the optimization process is safe and only removes invisible metadata, comments, and redundant formatting." },
+      { question: "Can I use the optimized SVG directly in HTML?", answer: "Yes, the minified SVG code is perfect for inline use in HTML documents or React components." }
+    ]
+  },
+  'pdf-image-extractor': {
+    howToUse: [
+      "Upload a PDF document from your device.",
+      "Wait for the tool to scan and extract all embedded images.",
+      "Preview the extracted images.",
+      "Download them individually or as a ZIP archive."
+    ],
+    faqs: [
+      { question: "Is my PDF uploaded to a server?", answer: "No, all extraction is done locally in your browser using PDF.js. Your document remains private." },
+      { question: "Why are some images missing or low quality?", answer: "The tool extracts the exact raw images embedded in the PDF. Sometimes vector graphics or text rendered as images are not standard bitmaps." }
+    ]
   }
 };
 

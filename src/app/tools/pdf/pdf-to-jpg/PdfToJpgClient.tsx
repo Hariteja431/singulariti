@@ -51,7 +51,7 @@ export function PdfToJpgClient() {
       setFile(selectedFile);
       const doc = await loadPdfDocument(selectedFile);
       setPdfDoc(doc);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     }
@@ -72,7 +72,7 @@ export function PdfToJpgClient() {
       const blob = dataUrlToBlob(dataUrl);
       const baseName = file.name.replace(/\.[^/.]+$/, "");
       downloadBlob(blob, `${baseName}_page_${pageNum}.jpg`);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError('Failed to convert this page to image.');
     } finally {
@@ -101,7 +101,7 @@ export function PdfToJpgClient() {
       }
 
       await downloadAllAsZip(images, `${baseName}_images`);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError('An error occurred during bulk conversion.');
     } finally {

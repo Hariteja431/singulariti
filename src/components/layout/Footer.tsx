@@ -57,7 +57,7 @@ export function Footer() {
           
           <div>
             <h4 className="font-display font-bold text-[15px] text-ink mb-4">Ecosystem</h4>
-            <ul className="space-y-2 flex flex-col">
+            <nav className="space-y-2 flex flex-col" aria-label="Ecosystem">
               <Link href="/tools/pdf" className="text-[13px] text-slate hover:text-primary transition-colors">PDF Tools</Link>
               <Link href="/image" className="text-[13px] text-slate hover:text-primary transition-colors">Image Tools</Link>
               <Link href="/tools/text" className="text-[13px] text-slate hover:text-primary transition-colors">Text Tools</Link>
@@ -68,25 +68,27 @@ export function Footer() {
               <Link href="/tools/seo" className="text-[13px] text-slate hover:text-primary transition-colors">SEO Tools</Link>
               <Link href="/pomodoro-timer" className="text-[13px] text-slate hover:text-primary transition-colors">Pomodoro Timer</Link>
               <Link href="/typing-speed-test" className="text-[13px] text-slate hover:text-primary transition-colors">Typing Speed Test</Link>
-            </ul>
+            </nav>
           </div>
           
           <div>
             <h4 className="font-display font-bold text-[15px] text-ink mb-4">Company</h4>
-            <ul className="space-y-2 flex flex-col">
+            <nav className="space-y-2 flex flex-col" aria-label="Company">
               <Link href="/about" className="text-[13px] text-slate hover:text-primary transition-colors">About</Link>
               <Link href="/blog" className="text-[13px] text-slate hover:text-primary transition-colors">Blog</Link>
               <Link href="/contact" className="text-[13px] text-slate hover:text-primary transition-colors">Contact</Link>
               <Link href="/feedback" className="text-[13px] text-slate hover:text-primary transition-colors">Feedback & Requests</Link>
-            </ul>
+              <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="text-[13px] text-slate hover:text-primary transition-colors">Sitemap</a>
+            </nav>
           </div>
           
           <div>
             <h4 className="font-display font-bold text-[15px] text-ink mb-4">Legal</h4>
-            <ul className="space-y-2 flex flex-col">
+            <nav className="space-y-2 flex flex-col" aria-label="Legal">
               <Link href="/privacy" className="text-[13px] text-slate hover:text-primary transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="text-[13px] text-slate hover:text-primary transition-colors">Terms of Service</Link>
-            </ul>
+              <Link href="/cookie-policy" className="text-[13px] text-slate hover:text-primary transition-colors">Cookie Policy</Link>
+            </nav>
           </div>
         </div>
         

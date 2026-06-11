@@ -46,7 +46,7 @@ export function MetadataViewerClient() {
       }
       const data = await viewPDFMetadata(selectedFile);
       setMetadata(data);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     } finally {

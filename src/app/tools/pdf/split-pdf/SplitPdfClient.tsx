@@ -48,7 +48,7 @@ export function SplitPdfClient() {
       const { counts } = await countPDFPages([selectedFile]);
       setPageCount(counts[0].pages);
       setRangeInput(`1-${counts[0].pages}`);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     }
@@ -72,7 +72,7 @@ export function SplitPdfClient() {
       const blob = new Blob([splitBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       setSplitBlobUrl(url);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(err.message && (err.message.includes('Page number') || err.message.includes('bounds')) ? err.message : getPdfErrorMessage(err));
     } finally {

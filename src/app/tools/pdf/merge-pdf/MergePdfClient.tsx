@@ -40,7 +40,7 @@ export function MergePdfClient() {
           return;
         }
         validFiles.push(file);
-      } catch (err: any) {
+      } catch (e) { const err = e as Error;
         setError(`File "${file.name}": ${getPdfErrorMessage(err)}`);
         return;
       }
@@ -112,7 +112,7 @@ export function MergePdfClient() {
       const blob = new Blob([mergedBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       setMergedBlobUrl(url);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     } finally {

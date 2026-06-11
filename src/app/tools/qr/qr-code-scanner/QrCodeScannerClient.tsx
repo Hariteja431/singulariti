@@ -98,7 +98,7 @@ export function QrCodeScannerClient() {
         }
       );
       setCameraActive(true);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       if (err.message && err.message.includes('Permission')) {
         setError('Camera permission was denied. Please grant permission in browser settings.');
@@ -185,7 +185,7 @@ export function QrCodeScannerClient() {
       const decodedText = await html5QrCode.scanFile(file, false);
       const parsed = detectQRResultType(decodedText);
       setScanResult(parsed);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.warn(err);
       setWarning('No QR code detected in the uploaded image.');
     } finally {
@@ -267,7 +267,7 @@ export function QrCodeScannerClient() {
       }
 
       try { html5QrCode.clear(); } catch {}
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     } finally {

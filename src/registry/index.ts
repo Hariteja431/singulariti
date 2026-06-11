@@ -314,6 +314,34 @@ export const registry: EcosystemRegistry = {
               options: { action: 'frombase64' }
             }
           ]
+        },
+        {
+          id: 'animation',
+          name: 'Animation Tools',
+          description: 'Create animated GIFs and other animated image formats from multiple images.',
+          seoTitle: 'Image Animation Tools — GIF Maker Online Free | Singulariti',
+          seoDescription: 'Free online image animation tools. Create animated GIFs from multiple images directly in your browser.',
+          path: '/image/animation',
+          tools: [
+            {
+              id: 'gif-maker',
+              name: 'GIF Maker',
+              description: 'Create animated GIFs by combining multiple images with custom frame delays and loop settings.',
+              seoTitle: 'GIF Maker Online Free – Create Animated GIFs | Singulariti',
+              seoDescription: 'Create animated GIFs from multiple images for free. Set frame delays, loop count, and resize frames. Entirely browser-based.',
+              engine: 'developer',
+              path: '/image/animation/gif-maker'
+            },
+            {
+              id: 'heic-to-jpg',
+              name: 'HEIC to JPG',
+              description: 'Convert Apple iPhone HEIC photos to universally supported JPG format instantly.',
+              seoTitle: 'HEIC to JPG Converter Online Free | Singulariti',
+              seoDescription: 'Convert Apple HEIC photos to JPG format instantly in your browser. No upload required, completely private.',
+              engine: 'conversion',
+              path: '/image/animation/heic-to-jpg'
+            }
+          ]
         }
       ]
     },
@@ -1232,7 +1260,25 @@ export const registry: EcosystemRegistry = {
             { id: 'unix-time-converter', name: 'Unix Time Converter', description: 'Show current Unix epoch time in seconds and milliseconds.', seoTitle: 'Unix Time Converter — Live Epoch Time | Singulariti', seoDescription: 'Show current Unix epoch time in seconds and milliseconds.', engine: 'developer', path: '/tools/dev/unix-time-converter' },
             { id: 'markdown-previewer', name: 'Markdown Previewer', description: 'Compose Markdown formatting and render HTML preview live.', seoTitle: 'Markdown Previewer — Live Markdown Rendering | Singulariti', seoDescription: 'Compose Markdown formatting and render HTML preview live.', engine: 'developer', path: '/tools/dev/markdown-previewer' },
             { id: 'html-previewer', name: 'HTML Previewer', description: 'Render raw HTML code elements live in a safe frame.', seoTitle: 'HTML Previewer — Live HTML Rendering | Singulariti', seoDescription: 'Render raw HTML code elements live in a safe frame.', engine: 'developer', path: '/tools/dev/html-previewer' },
-            { id: 'web-compiler', name: 'Web Compiler', description: 'Write HTML, CSS, and JavaScript and see the results instantly in your browser.', seoTitle: 'HTML/CSS/JS Web Compiler | Singulariti', seoDescription: 'Write HTML, CSS, and JavaScript and see the results instantly in your browser.', engine: 'developer', path: '/tools/dev/web-compiler' }
+            { id: 'web-compiler', name: 'Web Compiler', description: 'Write HTML, CSS, and JavaScript and see the results instantly in your browser.', seoTitle: 'HTML/CSS/JS Web Compiler | Singulariti', seoDescription: 'Write HTML, CSS, and JavaScript and see the results instantly in your browser.', engine: 'developer', path: '/tools/dev/web-compiler' },
+            { id: 'cron-generator', name: 'CRON Expression Generator', description: 'Build and decode CRON schedule expressions with a visual generator and plain-English explanation.', seoTitle: 'CRON Expression Generator — Build Schedules Online | Singulariti', seoDescription: 'Build CRON expressions visually and decode them into human-readable schedules instantly.', engine: 'developer', path: '/tools/dev/cron-generator' },
+            { id: 'password-generator', name: 'Password Generator', description: 'Generate cryptographically secure passwords with custom length and character set options.', seoTitle: 'Password Generator — Secure Passwords Online | Singulariti', seoDescription: 'Generate strong, cryptographically secure passwords using window.crypto directly in your browser.', engine: 'developer', path: '/tools/dev/password-generator' },
+            { id: 'bcrypt-generator', name: 'Bcrypt Hash Generator', description: 'Hash and verify passwords using the bcrypt algorithm entirely in your browser.', seoTitle: 'Bcrypt Hash Generator — Hash Passwords Online | Singulariti', seoDescription: 'Generate and verify bcrypt password hashes with custom salt rounds. Runs entirely in your browser.', engine: 'developer', path: '/tools/dev/bcrypt-generator' },
+            { id: 'css-gradient-generator', name: 'CSS Gradient Generator', description: 'Create beautiful linear, radial, and conic CSS gradients visually with live preview.', seoTitle: 'CSS Gradient Generator — Create CSS Gradients Online | Singulariti', seoDescription: 'Design linear, radial, and conic CSS gradients visually and copy the CSS code instantly.', engine: 'developer', path: '/tools/dev/css-gradient-generator' },
+            { id: 'css-box-shadow', name: 'CSS Box Shadow Generator', description: 'Design CSS box shadows visually with sliders for offset, blur, spread, and color.', seoTitle: 'CSS Box Shadow Generator — Design Shadows Online | Singulariti', seoDescription: 'Create custom CSS box shadows with a visual editor. Adjust blur, spread, offset, and color with live preview.', engine: 'developer', path: '/tools/dev/css-box-shadow' },
+            { id: 'color-contrast-checker', name: 'WCAG Color Contrast Checker', description: 'Check if foreground and background color combinations pass WCAG AA and AAA accessibility standards.', seoTitle: 'WCAG Color Contrast Checker — Accessibility Tool | Singulariti', seoDescription: 'Verify your color combinations meet WCAG 2.1 AA and AAA contrast ratio requirements for web accessibility.', engine: 'developer', path: '/tools/dev/color-contrast-checker' }
+          ]
+        },
+        {
+          id: 'dev-media',
+          name: 'Media & File Utilities',
+          description: 'Optimize and process media files directly in the browser.',
+          seoTitle: 'Media & File Utilities | Singulariti',
+          seoDescription: 'Optimize and process media files directly in the browser.',
+          path: '/tools/dev',
+          tools: [
+            { id: 'svg-optimizer', name: 'SVG Optimizer', description: 'Clean, optimize and minify SVG files removing metadata, comments, and redundant attributes.', seoTitle: 'SVG Optimizer — Optimize SVG Files Online Free | Singulariti', seoDescription: 'Optimize SVG files by removing unnecessary attributes, metadata, and whitespace. See before/after size reduction instantly.', engine: 'developer', path: '/tools/dev/svg-optimizer' },
+            { id: 'pdf-image-extractor', name: 'PDF Image Extractor', description: 'Extract and download all images embedded inside a PDF document instantly.', seoTitle: 'PDF Image Extractor — Extract Images from PDF | Singulariti', seoDescription: 'Extract all images embedded in a PDF document and download them. Fast, free, and runs entirely in your browser.', engine: 'developer', path: '/tools/dev/pdf-image-extractor' }
           ]
         }
       ]

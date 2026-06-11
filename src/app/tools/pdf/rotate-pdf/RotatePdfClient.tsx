@@ -58,7 +58,7 @@ export function RotatePdfClient() {
         initialRotations[i] = 0;
       }
       setPageRotations(initialRotations);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     }
@@ -103,7 +103,7 @@ export function RotatePdfClient() {
       const blob = new Blob([rotatedBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       setRotatedBlobUrl(url);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     } finally {

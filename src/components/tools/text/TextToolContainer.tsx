@@ -135,7 +135,7 @@ export function TextToolContainer({ toolId, toolName, toolDescription }: TextToo
         default:
           break;
       }
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       setError(err.message || 'An error occurred during processing.');
     }
   }, [input, toolId]);
@@ -316,7 +316,7 @@ export function TextToolContainer({ toolId, toolName, toolDescription }: TextToo
         }
         setOutput(res);
       }
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       setError(err.message || 'Processing failed.');
     }
   };

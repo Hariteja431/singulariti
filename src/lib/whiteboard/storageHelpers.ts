@@ -15,7 +15,7 @@ export function saveBoardToStorage(canvas: fabric.Canvas): { success: boolean; e
     // Attempt to store in localStorage
     localStorage.setItem(STORAGE_KEY, canvasJson);
     return { success: true };
-  } catch (error: any) {
+  } catch (e) { const error = e as Error;
     console.error("Failed to save board locally:", error);
     
     let errorMsg = "Failed to save whiteboard.";
@@ -58,7 +58,7 @@ export function loadBoardFromStorage(canvas: fabric.Canvas): Promise<{ success: 
         canvas.requestRenderAll();
         resolve({ success: true });
       });
-    } catch (error: any) {
+    } catch (e) { const error = e as Error;
       console.error("Failed to load saved board:", error);
       resolve({ success: false, error: "The saved board data is corrupted or could not be loaded." });
     }

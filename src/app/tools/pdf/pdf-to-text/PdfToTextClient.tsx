@@ -57,7 +57,7 @@ export function PdfToTextClient() {
       });
 
       setExtractedText(text);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     } finally {

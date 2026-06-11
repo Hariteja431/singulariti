@@ -56,7 +56,7 @@ export function RearrangePdfPagesClient() {
       // Initialize order array [0, 1, 2, ..., numPages - 1]
       const order = Array.from({ length: doc.numPages }, (_, i) => i);
       setPageOrder(order);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     }
@@ -111,7 +111,7 @@ export function RearrangePdfPagesClient() {
       const blob = new Blob([bytes.buffer as ArrayBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       setResultBlobUrl(url);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(getPdfErrorMessage(err));
     } finally {

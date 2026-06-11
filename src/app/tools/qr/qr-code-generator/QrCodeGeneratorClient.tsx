@@ -187,7 +187,7 @@ export function QrCodeGeneratorClient({
       const svgText = await generateQRSVG(getPayload(), settings);
       const blob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
       downloadBlob(blob, `${fileName}.svg`);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError('Failed to generate SVG download.');
     } finally {
@@ -209,7 +209,7 @@ export function QrCodeGeneratorClient({
       
       const pdfBlob = await exportQRToPDF(generatedPngUrl, pdfExportSettings);
       downloadBlob(pdfBlob, `${fileName}.pdf`);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError('Failed to export QR code to PDF.');
     } finally {

@@ -384,7 +384,7 @@ export function SeoToolContainer({ toolId, toolName, toolDescription }: SeoToolC
         });
 
         setOutput(outputReport.trim());
-      } catch (err: any) {
+      } catch (e) { const err = e as Error;
         setError('Failed to parse pasted HTML. Make sure it is valid HTML markup.');
       }
     }

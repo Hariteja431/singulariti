@@ -53,7 +53,7 @@ export async function checkPdfPasswordProtected(arrayBuffer: ArrayBuffer): Promi
   try {
     await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
     return false;
-  } catch (error: any) {
+  } catch (e) { const error = e as Error;
     const message = (error?.message || '').toLowerCase();
     if (
       message.includes('password') || 

@@ -35,7 +35,7 @@ export function QRPreview({ value, settings, onDataUrlGenerated }: QRPreviewProp
             onDataUrlGenerated(url);
           }
         }
-      } catch (err: any) {
+      } catch (e) { const err = e as Error;
         console.error('Error generating QR preview: ', err);
         if (active) {
           setError('Failed to generate QR');

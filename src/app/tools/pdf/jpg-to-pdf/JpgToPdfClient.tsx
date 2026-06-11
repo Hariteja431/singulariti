@@ -83,7 +83,7 @@ export function JpgToPdfClient() {
       const blob = new Blob([pdfBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       setResultBlobUrl(url);
-    } catch (err: any) {
+    } catch (e) { const err = e as Error;
       console.error(err);
       setError(err.message || 'An error occurred while converting images to PDF.');
     } finally {
