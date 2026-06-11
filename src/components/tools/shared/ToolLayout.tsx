@@ -24,6 +24,7 @@ interface ToolLayoutProps {
   privacyLabel?: string;
   children: React.ReactNode;
   relatedTools?: { name: string; url: string; description: string }[];
+  article?: string;
 }
 
 export function ToolLayout({
@@ -36,7 +37,8 @@ export function ToolLayout({
   faqs,
   privacyLabel,
   children,
-  relatedTools
+  relatedTools,
+  article
 }: ToolLayoutProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -191,6 +193,15 @@ export function ToolLayout({
             </div>
           )}
         </section>
+        {/* Article / Educational Content */}
+        {article && (
+          <section className="container mx-auto px-4 max-w-4xl mt-6 mb-8">
+            <div className="bg-surface/50 border border-border/60 rounded-2xl p-6 md:p-8">
+              <h2 className="font-display font-bold text-xl text-ink mb-6">About This Tool</h2>
+              <div className="font-sans text-sm text-slate leading-relaxed space-y-4 whitespace-pre-wrap">{article}</div>
+            </div>
+          </section>
+        )}
         {/* Related Tools Cross-linking */}
         {relatedTools && relatedTools.length > 0 && (
           <section className="container mx-auto px-4 max-w-6xl mt-12 mb-6 w-full">

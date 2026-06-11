@@ -19,6 +19,7 @@ interface DevToolContainerProps {
   toolId: string;
   toolName: string;
   toolDescription: string;
+  article?: string;
 }
 
 // Color conversion helpers
@@ -1363,9 +1364,11 @@ export function DevToolContainer({ toolId, toolName, toolDescription, article }:
       utilityId={toolId}
       title={toolName}
       description={toolDescription}
+      categoryName="Developer Tools"
+      categoryPath="/tools/dev"
       howToUse={content.howToUse}
       faqs={content.faqs}
-      article={article || content.article}
+      article={article}
     >
       <div className="space-y-6">
         {/* Custom Actions */}

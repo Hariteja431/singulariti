@@ -9,6 +9,7 @@ import { Header } from '../layout/Header';
 import { Footer } from '../layout/Footer';
 import { SeoSchema } from './shared/SeoSchema';
 import { getUtilitySEO } from '@/lib/seo/utilityMetadata';
+import { RelatedTools } from '../layout/RelatedTools';
 
 interface ToolLayoutProps {
   utilityId?: string;
@@ -115,12 +116,20 @@ export function ToolLayout({
       <main className="flex-1 w-full flex flex-col items-center pt-24 pb-16">
         {/* Breadcrumbs */}
         <div className="container mx-auto px-4 md:px-6 max-w-7xl mb-8">
-          <nav className="flex text-[13px] font-sans text-slate">
-            <Link href="/" className="hover:text-ink transition-colors">Home</Link>
-            <span className="mx-2">/</span>
-            <Link href={categoryHref} className="hover:text-ink transition-colors">{categoryName}</Link>
-            <span className="mx-2">/</span>
-            <span className="text-ink font-medium">{title}</span>
+          <nav aria-label="Breadcrumb" className="flex text-[13px] font-sans text-slate">
+            <ol className="flex items-center space-x-2">
+              <li>
+                <Link href="/" className="hover:text-ink transition-colors">Home</Link>
+              </li>
+              <li className="flex items-center space-x-2">
+                <span className="mx-2 text-border">/</span>
+                <Link href={categoryHref} className="hover:text-ink transition-colors">{categoryName}</Link>
+              </li>
+              <li className="flex items-center space-x-2">
+                <span className="mx-2 text-border">/</span>
+                <span className="text-ink font-medium" aria-current="page">{title}</span>
+              </li>
+            </ol>
           </nav>
         </div>
 
@@ -251,19 +260,7 @@ export function ToolLayout({
         </section>
 
         {/* Related Tools Cross-linking */}
-        {relatedTools && relatedTools.length > 0 && (
-          <section className="container mx-auto px-4 md:px-6 max-w-6xl mt-12 mb-6 w-full">
-            <h2 className="font-display font-bold text-2xl text-ink mb-6 text-center">Related Tools</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedTools.map((tool, i) => (
-                <Link key={i} href={tool.url} className="group block bg-surface border border-border rounded-xl p-5 hover:border-primary/50 hover:shadow-sm transition-all duration-300">
-                  <h3 className="font-display font-bold text-[17px] text-ink group-hover:text-primary transition-colors mb-2">{tool.name}</h3>
-                  <p className="font-sans text-[14px] text-slate leading-relaxed">{tool.description}</p>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
+        {utilityId && <RelatedTools currentToolId={utilityId} />}
       </main>
 
       <Footer />

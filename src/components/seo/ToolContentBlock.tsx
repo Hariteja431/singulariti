@@ -22,11 +22,48 @@ export function ToolContentBlock({ utilityId, article }: ToolContentBlockProps) 
       <DynamicFAQSchema faqs={content.faqs} />
 
       {article && (
-        <div className="bg-surface/50 border border-border/60 rounded-2xl p-6 md:p-8 prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-bold prose-p:font-sans prose-p:leading-relaxed prose-a:text-primary hover:prose-a:text-primary/80">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {article}
-          </ReactMarkdown>
-        </div>
+        <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": `How to use the ${content.h2Title.replace('What is ', '').replace('?', '')}`,
+                "author": {
+                  "@type": "Organization",
+                  "name": "Singulariti Editorial Team",
+                  "url": "https://singulariti.in/editorial-policy"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Singulariti Labs",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://singulariti.in/og-fallback.png"
+                  }
+                },
+                "datePublished": "2026-06-06",
+                "dateModified": new Date().toISOString().split('T')[0]
+              })
+            }}
+          />
+          <div className="bg-surface/50 border border-border/60 rounded-2xl p-6 md:p-8">
+            <div className="flex items-center gap-4 mb-6 pb-6 border-b border-border/50 text-sm text-slate">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">S</div>
+                <span className="font-medium text-ink">Singulariti Editorial Team</span>
+              </div>
+              <span>•</span>
+              <span>Updated {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+            </div>
+            <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-bold prose-p:font-sans prose-p:leading-relaxed prose-a:text-primary hover:prose-a:text-primary/80">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {article}
+              </ReactMarkdown>
+            </div>
+          </div>
+        </>
       )}
       
       {/* Introduction Section */}

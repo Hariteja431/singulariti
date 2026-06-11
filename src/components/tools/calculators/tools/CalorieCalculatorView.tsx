@@ -9,11 +9,14 @@ import { calculateCalories } from '@/lib/calculators/healthCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 import { CalorieResult } from '@/lib/calculators/calculatorTypes';
 
-
+interface CalorieCalculatorViewProps {
+  toolId: string;
+  title: string;
+  description: string;
   article?: string;
 }
 
-} : 
+export function CalorieCalculatorView({toolId, title, description, article }: CalorieCalculatorViewProps) {
   const [gender, setGender] = useState<'male' | 'female'>('male');
   const [age, setAge] = useState<number>(25);
   const [height, setHeight] = useState<number>(175);
@@ -151,8 +154,10 @@ import { CalorieResult } from '@/lib/calculators/calculatorTypes';
   );
 
   return (
-    
-      article={article}
+    <CalculatorLayout
+      toolId={toolId}
+      title={title}
+      description={description}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

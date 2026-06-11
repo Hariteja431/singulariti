@@ -75,6 +75,7 @@ export function Footer() {
             <h4 className="font-display font-bold text-[15px] text-ink mb-4">Company</h4>
             <nav className="space-y-2 flex flex-col" aria-label="Company">
               <Link href="/about" className="text-[13px] text-slate hover:text-primary transition-colors">About</Link>
+              <Link href="/editorial-policy" className="text-[13px] text-slate hover:text-primary transition-colors">Editorial Policy</Link>
               <Link href="/blog" className="text-[13px] text-slate hover:text-primary transition-colors">Blog</Link>
               <Link href="/contact" className="text-[13px] text-slate hover:text-primary transition-colors">Contact</Link>
               <Link href="/feedback" className="text-[13px] text-slate hover:text-primary transition-colors">Feedback & Requests</Link>

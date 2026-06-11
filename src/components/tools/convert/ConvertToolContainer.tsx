@@ -9,6 +9,7 @@ interface ConvertToolContainerProps {
   toolId: string;
   toolName: string;
   toolDescription: string;
+  article?: string;
 }
 
 interface UnitOption {
@@ -17,7 +18,7 @@ interface UnitOption {
   factor: number; // Multiplier to convert to base unit
 }
 
-export function ConvertToolContainer({ toolId, toolName, toolDescription }: ConvertToolContainerProps) {
+export function ConvertToolContainer({ toolId, toolName, toolDescription, article }: ConvertToolContainerProps) {
   const [inputValue, setInputValue] = useState('1');
   const [fromUnit, setFromUnit] = useState('');
   const [toUnit, setToUnit] = useState('');
@@ -302,6 +303,7 @@ export function ConvertToolContainer({ toolId, toolName, toolDescription }: Conv
       categoryPath="/tools/convert"
       howToUse={content.howToUse}
       faqs={content.faqs}
+      article={article}
     >
       <div className="space-y-6 max-w-2xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">

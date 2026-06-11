@@ -1,3 +1,5 @@
+import path from 'path';
+import fs from 'fs';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { getUtilitySEO } from '@/lib/seo/utilityMetadata';
 import React from 'react';

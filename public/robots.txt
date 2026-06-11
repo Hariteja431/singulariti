@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://singulariti.in
+
+# Sitemaps
+Sitemap: https://singulariti.in/sitemap.xml
+Sitemap: https://singulariti.in/server-sitemap.xml

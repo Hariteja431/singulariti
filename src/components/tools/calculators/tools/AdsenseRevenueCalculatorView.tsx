@@ -7,11 +7,14 @@ import { CalculatorResult } from '../CalculatorResult';
 import { calculateAdSenseRevenue } from '@/lib/calculators/revenueCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-
+interface AdsenseRevenueCalculatorViewProps {
+  toolId: string;
+  title: string;
+  description: string;
   article?: string;
 }
 
-} : 
+export function AdsenseRevenueCalculatorView({toolId, title, description, article }: AdsenseRevenueCalculatorViewProps) {
   const [pageViews, setPageViews] = useState<number>(50000);
   const [ctr, setCtr] = useState<number>(2.5);
   const [cpc, setCpc] = useState<number>(0.5);
@@ -140,8 +143,10 @@ import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
   );
 
   return (
-    
-      article={article}
+    <CalculatorLayout
+      toolId={toolId}
+      title={title}
+      description={description}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

@@ -6,11 +6,14 @@ import { CalculatorInput } from '../CalculatorInput';
 import { CalculatorResult } from '../CalculatorResult';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-
+interface ProfitCalculatorViewProps {
+  toolId: string;
+  title: string;
+  description: string;
   article?: string;
 }
 
-} : 
+export function ProfitCalculatorView({toolId, title, description, article }: ProfitCalculatorViewProps) {
   const [costPrice, setCostPrice] = useState<number>(500);
   const [sellingPrice, setSellingPrice] = useState<number>(650);
   const [quantity, setQuantity] = useState<number>(10);
@@ -124,8 +127,10 @@ import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
   );
 
   return (
-    
-      article={article}
+    <CalculatorLayout
+      toolId={toolId}
+      title={title}
+      description={description}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

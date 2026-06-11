@@ -12,9 +12,10 @@ interface TextToolContainerProps {
   toolId: string;
   toolName: string;
   toolDescription: string;
+  article?: string;
 }
 
-export function TextToolContainer({ toolId, toolName, toolDescription }: TextToolContainerProps) {
+export function TextToolContainer({ toolId, toolName, toolDescription, article }: TextToolContainerProps) {
   const [input, setInput] = useState('');
   const [input2, setInput2] = useState(''); // Used for compare/diff
   const [output, setOutput] = useState('');
@@ -342,6 +343,7 @@ export function TextToolContainer({ toolId, toolName, toolDescription }: TextToo
       categoryPath="/tools/text"
       howToUse={content.howToUse}
       faqs={content.faqs}
+      article={article}
     >
       <div className="space-y-6">
         {/* Generators Controls */}

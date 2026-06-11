@@ -7,11 +7,14 @@ import { CalculatorResult } from '../CalculatorResult';
 import { calculateSip } from '@/lib/calculators/financialCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-
+interface SipCalculatorViewProps {
+  toolId: string;
+  title: string;
+  description: string;
   article?: string;
 }
 
-} : 
+export function SipCalculatorView({toolId, title, description, article }: SipCalculatorViewProps) {
   const [monthlyInvestment, setMonthlyInvestment] = useState<number>(5000);
   const [expectedReturnRate, setExpectedReturnRate] = useState<number>(12);
   const [years, setYears] = useState<number>(10);
@@ -120,8 +123,10 @@ import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
   );
 
   return (
-    
-      article={article}
+    <CalculatorLayout
+      toolId={toolId}
+      title={title}
+      description={description}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

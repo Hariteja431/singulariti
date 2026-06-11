@@ -7,11 +7,14 @@ import { CalculatorResult } from '../CalculatorResult';
 import { calculateMortgage } from '@/lib/calculators/financialCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-
+interface MortgageCalculatorViewProps {
+  toolId: string;
+  title: string;
+  description: string;
   article?: string;
 }
 
-} : 
+export function MortgageCalculatorView({toolId, title, description, article }: MortgageCalculatorViewProps) {
   const [homePrice, setHomePrice] = useState<number>(5000000);
   const [downPayment, setDownPayment] = useState<number>(1000000);
   const [loanAmount, setLoanAmount] = useState<number>(4000000);
@@ -193,8 +196,10 @@ import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
   );
 
   return (
-    
-      article={article}
+    <CalculatorLayout
+      toolId={toolId}
+      title={title}
+      description={description}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

@@ -9,11 +9,14 @@ import { calculateFd } from '@/lib/calculators/financialCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 import { InterestResult } from '@/lib/calculators/calculatorTypes';
 
-
+interface FdCalculatorViewProps {
+  toolId: string;
+  title: string;
+  description: string;
   article?: string;
 }
 
-} : 
+export function FdCalculatorView({toolId, title, description, article }: FdCalculatorViewProps) {
   const [depositAmount, setDepositAmount] = useState<number>(100000);
   const [interestRate, setInterestRate] = useState<number>(7.1);
   const [tenure, setTenure] = useState<number>(1);
@@ -146,8 +149,10 @@ import { InterestResult } from '@/lib/calculators/calculatorTypes';
   );
 
   return (
-    
-      article={article}
+    <CalculatorLayout
+      toolId={toolId}
+      title={title}
+      description={description}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

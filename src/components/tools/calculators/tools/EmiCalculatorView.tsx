@@ -9,11 +9,14 @@ import { calculateEmi } from '@/lib/calculators/financialCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 import { InterestResult } from '@/lib/calculators/calculatorTypes';
 
-
+interface EmiCalculatorViewProps {
+  toolId: string;
+  title: string;
+  description: string;
   article?: string;
 }
 
-} : 
+export function EmiCalculatorView({toolId, title, description, article }: EmiCalculatorViewProps) {
   const [loanAmount, setLoanAmount] = useState<number>(1000000);
   const [interestRate, setInterestRate] = useState<number>(8.5);
   const [tenure, setTenure] = useState<number>(5);
@@ -134,8 +137,10 @@ import { InterestResult } from '@/lib/calculators/calculatorTypes';
   );
 
   return (
-    
-      article={article}
+    <CalculatorLayout
+      toolId={toolId}
+      title={title}
+      description={description}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

@@ -5,11 +5,14 @@ import { CalculatorLayout } from '../CalculatorLayout';
 import { CalculatorSelect } from '../CalculatorSelect';
 import { CalculatorResult } from '../CalculatorResult';
 
-
+interface TimeDurationCalculatorViewProps {
+  toolId: string;
+  title: string;
+  description: string;
   article?: string;
 }
 
-} : 
+export function TimeDurationCalculatorView({toolId, title, description, article }: TimeDurationCalculatorViewProps) {
   const [startTime, setStartTime] = useState('09:00');
   const [endTime, setEndTime] = useState('17:00');
   const [isNextDay, setIsNextDay] = useState(false);
@@ -137,8 +140,10 @@ import { CalculatorResult } from '../CalculatorResult';
   );
 
   return (
-    
-      article={article}
+    <CalculatorLayout
+      toolId={toolId}
+      title={title}
+      description={description}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

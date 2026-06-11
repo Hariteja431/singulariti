@@ -11,9 +11,10 @@ interface SeoToolContainerProps {
   toolId: string;
   toolName: string;
   toolDescription: string;
+  article?: string;
 }
 
-export function SeoToolContainer({ toolId, toolName, toolDescription }: SeoToolContainerProps) {
+export function SeoToolContainer({ toolId, toolName, toolDescription, article }: SeoToolContainerProps) {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [error, setError] = useState('');
@@ -902,6 +903,7 @@ export function SeoToolContainer({ toolId, toolName, toolDescription }: SeoToolC
       categoryPath="/tools/seo"
       howToUse={content.howToUse}
       faqs={content.faqs}
+      article={article}
     >
       <div className="space-y-6">
         {/* If Form-based, render form then output */}

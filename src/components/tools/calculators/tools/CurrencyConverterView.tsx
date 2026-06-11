@@ -7,7 +7,10 @@ import { CalculatorSelect } from '../CalculatorSelect';
 import { CalculatorResult } from '../CalculatorResult';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-
+interface CurrencyConverterViewProps {
+  toolId: string;
+  title: string;
+  description: string;
   article?: string;
 }
 
@@ -37,7 +40,7 @@ const CURRENCY_LABELS: Record<string, string> = {
   CNY: 'CNY - Chinese Yuan (¥)'
 };
 
-} : 
+export function CurrencyConverterView({toolId, title, description, article }: CurrencyConverterViewProps) {
   const [amount, setAmount] = useState<number>(100);
   const [fromCurrency, setFromCurrency] = useState<string>('USD');
   const [toCurrency, setToCurrency] = useState<string>('INR');
@@ -200,8 +203,10 @@ const CURRENCY_LABELS: Record<string, string> = {
   );
 
   return (
-    
-      article={article}
+    <CalculatorLayout
+      toolId={toolId}
+      title={title}
+      description={description}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

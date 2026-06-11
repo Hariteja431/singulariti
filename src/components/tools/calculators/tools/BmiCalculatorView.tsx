@@ -9,11 +9,14 @@ import { calculateBmi } from '@/lib/calculators/healthCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 import { BmiResult } from '@/lib/calculators/calculatorTypes';
 
-
+interface BmiCalculatorViewProps {
+  toolId: string;
+  title: string;
+  description: string;
   article?: string;
 }
 
-} : 
+export function BmiCalculatorView({toolId, title, description, article }: BmiCalculatorViewProps) {
   const [heightUnit, setHeightUnit] = useState<'cm' | 'm' | 'ft-in'>('cm');
   const [height, setHeight] = useState<number>(170);
   const [feet, setFeet] = useState<number>(5);
@@ -167,8 +170,10 @@ import { BmiResult } from '@/lib/calculators/calculatorTypes';
   );
 
   return (
-    
-      article={article}
+    <CalculatorLayout
+      toolId={toolId}
+      title={title}
+      description={description}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

@@ -9,7 +9,10 @@ import { calculateCgpa } from '@/lib/calculators/mathCalculators';
 import { Button } from '@/components/ui/Button';
 import { Plus, Trash2 } from 'lucide-react';
 
-
+interface CgpaCalculatorViewProps {
+  toolId: string;
+  title: string;
+  description: string;
   article?: string;
 }
 
@@ -18,7 +21,7 @@ interface SemesterRow {
   credits: number;
 }
 
-} : 
+export function CgpaCalculatorView({toolId, title, description, article }: CgpaCalculatorViewProps) {
   const [scale, setScale] = useState<'10' | '4'>('10');
   const [semesters, setSemesters] = useState<SemesterRow[]>([
     { gpa: 8.0, credits: 20 },
@@ -179,8 +182,10 @@ interface SemesterRow {
   );
 
   return (
-    
-      article={article}
+    <CalculatorLayout
+      toolId={toolId}
+      title={title}
+      description={description}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

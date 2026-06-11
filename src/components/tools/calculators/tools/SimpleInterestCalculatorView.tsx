@@ -7,11 +7,14 @@ import { CalculatorSelect } from '../CalculatorSelect';
 import { CalculatorResult } from '../CalculatorResult';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-
+interface SimpleInterestCalculatorViewProps {
+  toolId: string;
+  title: string;
+  description: string;
   article?: string;
 }
 
-} : 
+export function SimpleInterestCalculatorView({toolId, title, description, article }: SimpleInterestCalculatorViewProps) {
   const [solveFor, setSolveFor] = useState<'interest' | 'principal' | 'rate' | 'time'>('interest');
   const [principal, setPrincipal] = useState<number>(50000);
   const [rate, setRate] = useState<number>(6.5);
@@ -204,8 +207,10 @@ import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
   );
 
   return (
-    
-      article={article}
+    <CalculatorLayout
+      toolId={toolId}
+      title={title}
+      description={description}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

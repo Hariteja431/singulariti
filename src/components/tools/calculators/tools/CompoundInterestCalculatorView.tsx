@@ -8,11 +8,14 @@ import { CalculatorResult } from '../CalculatorResult';
 import { calculateCompoundInterest } from '@/lib/calculators/financialCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-
+interface CompoundInterestCalculatorViewProps {
+  toolId: string;
+  title: string;
+  description: string;
   article?: string;
 }
 
-} : 
+export function CompoundInterestCalculatorView({toolId, title, description, article }: CompoundInterestCalculatorViewProps) {
   const [principal, setPrincipal] = useState<number>(100000);
   const [interestRate, setInterestRate] = useState<number>(6.5);
   const [timePeriod, setTimePeriod] = useState<number>(5);
@@ -134,8 +137,10 @@ import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
   );
 
   return (
-    
-      article={article}
+    <CalculatorLayout
+      toolId={toolId}
+      title={title}
+      description={description}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

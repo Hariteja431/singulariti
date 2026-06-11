@@ -40,7 +40,7 @@ export function CalculatorLayout({
     <ToolLayout
       howToUse={content.howToUse}
       faqs={content.faqs}
-      article={article || content.article}
+      article={article}
       
       utilityId={toolId}
       title={title}
@@ -98,8 +98,7 @@ export function CalculatorLayout({
           </div>
         </div>
 
-        {/* Related tools navigation */}
-        <RelatedCalculators currentToolId={toolId} />
+        {/* Related tools navigation handled by ToolLayout */}
       </div>
     </ToolLayout>
   );
