@@ -15,9 +15,9 @@ export default function SearchResultsPage() {
   return (
     <>
       <Header />
-      <main className="flex-1 w-full bg-background pt-24 pb-16">
+      <main className="flex-1 w-full bg-white text-slate-900 dark:bg-slate-950 dark:text-white pt-24 pb-16">
         <Suspense fallback={
-          <div className="container mx-auto px-4 max-w-7xl text-center py-20 font-sans text-slate">
+          <div className="container mx-auto px-4 max-w-7xl text-center py-20 font-sans text-slate-500 dark:text-slate-400">
             Loading search results...
           </div>
         }>

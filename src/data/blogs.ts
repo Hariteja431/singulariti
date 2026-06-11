@@ -30,6 +30,7 @@ export type BlogPost = {
     question: string;
     answer: string;
   }[];
+  keyTakeaways?: string[];
 };
 
 export type BlogCategory = {
@@ -95,6 +96,13 @@ export const BLOG_POSTS: BlogPost[] = [
     contentLevel: "detailed",
     wordCountTarget: "1,200 to 1,800 words",
     lineCountTarget: "150 to 220 lines",
+    keyTakeaways: [
+      "Large files often fail because upload platforms set file size limits.",
+      "PDF compression is usually the fastest fix.",
+      "Splitting a PDF helps when compression is not enough.",
+      "Image resizing can reduce file size quickly.",
+      "Always check the final file before submitting it."
+    ],
     sections: [
       {
         id: "intro",
@@ -228,8 +236,15 @@ export const BLOG_POSTS: BlogPost[] = [
     secondaryKeywords: ["shrink photo size", "image size reducer", "png compressor"],
     readTime: "5 min read",
     contentLevel: "detailed",
-    wordCountTarget: "1,200 to 1,800 words",
-    lineCountTarget: "150 to 220 lines",
+    wordCountTarget: "1,100 to 1,700 words",
+    lineCountTarget: "140 to 210 lines",
+    keyTakeaways: [
+      "Raw graphics can clog websites and slow down emails.",
+      "Strip out unused color details and metadata to optimize sizes.",
+      "Convert PNG to WebP or adjust JPEG quality ratios for the best balance.",
+      "Processing is executed strictly inside your local browser sandbox.",
+      "Review the compressed image details to check clarity before downloading."
+    ],
     sections: [
       {
         id: "intro",
@@ -365,6 +380,13 @@ export const BLOG_POSTS: BlogPost[] = [
     contentLevel: "medium",
     wordCountTarget: "800 to 1,200 words",
     lineCountTarget: "100 to 150 lines",
+    keyTakeaways: [
+      "Minified JSON is unreadable for developers during debugging.",
+      "Beautifying introduces spacing, indentation, and clean line breaks.",
+      "Validating checks structures against official JSON standards.",
+      "Local formatting protects API keys and sensitive payloads from remote leakages.",
+      "Fix syntax bugs like trailing commas or missing quotes instantly."
+    ],
     sections: [
       {
         id: "intro",

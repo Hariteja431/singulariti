@@ -1,35 +1,38 @@
-import React from 'react';
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 
-interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: 'default' | 'pro' | 'outline' | 'pill' | 'pill-active';
-  children: React.ReactNode;
-}
+import { cn } from "@/lib/utils"
 
-export function Badge({ variant = 'default', className = '', children, ...props }: BadgeProps) {
-  const baseStyle = "inline-flex items-center justify-center font-sans text-[11px] font-medium leading-none";
-  let variantStyle = "";
+const badgeVariants = cva(
+  "inline-flex items-center justify-center font-sans leading-none transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary/10 text-primary px-2 py-1 rounded-[4px] text-[11px] font-medium",
+        pro: "bg-accent/10 text-accent px-2 py-1 rounded-[4px] text-[11px] font-medium",
+        outline: "border border-border text-slate px-2 py-1 rounded-[4px] text-[11px] font-medium",
+        pill: "bg-surface border border-border text-slate px-4 py-2 rounded-pill hover:border-slate transition-colors text-[11px] font-medium",
+        "pill-active": "bg-ink text-surface px-4 py-2 rounded-pill text-[11px] font-medium",
+        secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-full px-2.5 py-0.5 text-xs font-semibold",
+        destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80 rounded-full px-2.5 py-0.5 text-xs font-semibold",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+)
 
-  switch (variant) {
-    case 'default':
-      variantStyle = "bg-primary/10 text-primary px-2 py-1 rounded-[4px]"; // e.g. Free, Browser-based
-      break;
-    case 'pro':
-      variantStyle = "bg-accent/10 text-accent px-2 py-1 rounded-[4px]"; // Pro
-      break;
-    case 'outline':
-      variantStyle = "border border-border text-slate px-2 py-1 rounded-[4px]"; // No sign-up, Secure
-      break;
-    case 'pill':
-      variantStyle = "bg-surface border border-border text-slate px-4 py-2 rounded-pill hover:border-slate transition-colors"; // Category pill
-      break;
-    case 'pill-active':
-      variantStyle = "bg-ink text-surface px-4 py-2 rounded-pill"; // Active Category pill
-      break;
-  }
+export interface BadgeProps
+  extends React.HTMLAttributes<HTMLSpanElement>,
+    VariantProps<typeof badgeVariants> {}
 
+function Badge({ className, variant, ...props }: BadgeProps) {
+  // If variant is 'pill' or 'pill-active', render as span for backward compatibility
+  const Comp = "span"
   return (
-    <span className={`${baseStyle} ${variantStyle} ${className}`} {...props}>
-      {children}
-    </span>
-  );
+    <Comp className={cn(badgeVariants({ variant }), className)} {...props} />
+  )
 }
+
+export { Badge, badgeVariants }

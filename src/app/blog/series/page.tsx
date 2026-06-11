@@ -1,11 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import type { Metadata } from 'next';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { blogSeriesList, toolRegistry } from '@/content/tools/toolRegistry';
 import { SimilarTopicsSidebar } from '@/components/blog/SimilarTopicsSidebar';
-import { ArrowLeft, Compass, Layers } from 'lucide-react';
+import { ArrowLeft, Compass } from 'lucide-react';
 import { constructMetadata } from '@/lib/seo/metadata';
 
 export const metadata = constructMetadata({
@@ -20,28 +19,28 @@ export default function SeriesDirectoryPage() {
   return (
     <>
       <Header />
-      <main className="flex-1 w-full bg-background pt-24 pb-16">
+      <main className="flex-1 w-full bg-white text-slate-900 dark:bg-slate-950 dark:text-white pt-24 pb-16">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl space-y-12">
           
           {/* Breadcrumbs */}
-          <div className="flex items-center gap-2 text-xs font-sans text-slate">
-            <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+          <div className="flex items-center gap-2 text-xs font-sans text-slate-500 dark:text-slate-400">
+            <Link href="/" className="hover:text-teal-700 dark:hover:text-teal-300 transition-colors">Home</Link>
             <span>/</span>
-            <Link href="/blog" className="hover:text-primary transition-colors">Blog</Link>
+            <Link href="/blog" className="hover:text-teal-700 dark:hover:text-teal-300 transition-colors">Blog</Link>
             <span>/</span>
-            <span className="text-ink font-semibold">Series</span>
+            <span className="text-slate-900 dark:text-white font-semibold">Series</span>
           </div>
 
           {/* Title & Introduction */}
-          <header className="max-w-4xl border-b border-border pb-8 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[12px] font-sans font-semibold">
+          <header className="max-w-4xl border-b border-slate-200 dark:border-slate-800 pb-8 space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-100 text-teal-700 dark:bg-teal-950/40 dark:border-teal-900 dark:text-teal-300 text-[12px] font-sans font-semibold">
               <Compass className="w-3.5 h-3.5" />
               <span>Guide Series Category Index</span>
             </div>
-            <h1 className="font-display font-bold text-3xl md:text-5xl text-ink tracking-tight">
+            <h1 className="font-display font-bold text-3xl md:text-5xl text-slate-950 dark:text-white tracking-tight">
               Utility Guide Series
             </h1>
-            <p className="font-sans text-sm text-slate leading-relaxed">
+            <p className="font-sans text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
               Explore the available utility tools grouped by their functional categories. Each series provides targeted sub-sections covering specialized actions such as compression, layout modification, mathematical checks, and format validations.
             </p>
           </header>
@@ -55,7 +54,7 @@ export default function SeriesDirectoryPage() {
 
             {/* Main Content */}
             <div className="lg:col-span-3 space-y-8">
-              <div className="flex justify-between items-center text-xs font-sans text-slate border-b border-border/60 pb-3">
+              <div className="flex justify-between items-center text-xs font-sans text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800 pb-3">
                 <span>Total Series: {blogSeriesList.length}</span>
                 <span>Total Utilities: {totalTools}</span>
               </div>
@@ -78,30 +77,30 @@ export default function SeriesDirectoryPage() {
                   return (
                     <div 
                       key={series.id} 
-                      className="bg-surface border border-border rounded-2xl flex flex-col justify-between overflow-hidden hover:border-primary/60 transition-colors shadow-sm"
+                      className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col justify-between overflow-hidden hover:border-teal-500 dark:hover:border-teal-800 transition-colors shadow-sm"
                     >
                       {/* Gradient Header Block */}
-                      <div className={`h-16 bg-gradient-to-r ${gradient} border-b flex items-center px-6`}>
-                        <span className="font-mono text-[10px] font-bold tracking-wider uppercase bg-white/80 px-2 py-0.5 rounded text-ink">
+                      <div className={`h-16 bg-gradient-to-r ${gradient} border-b border-slate-200 dark:border-slate-800 flex items-center px-6`}>
+                        <span className="font-mono text-[10px] font-bold tracking-wider uppercase bg-white/80 px-2 py-0.5 rounded text-slate-950">
                           Series {idx + 1}
                         </span>
                       </div>
                       
                       <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                         <div className="space-y-2">
-                          <h3 className="font-display font-bold text-base text-ink">
+                          <h3 className="font-display font-bold text-base text-slate-950 dark:text-white">
                             {series.name} Guides
                           </h3>
-                          <p className="text-xs text-slate leading-relaxed line-clamp-3">
+                          <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3">
                             {series.description}
                           </p>
                         </div>
 
-                        <div className="pt-4 border-t border-border/40 flex justify-between items-center text-[11px] text-slate font-sans">
+                        <div className="pt-4 border-t border-slate-200 dark:border-slate-800/40 flex justify-between items-center text-[11px] text-slate-500 dark:text-slate-400 font-sans">
                           <span className="font-semibold">{count} Utilities Included</span>
                           <Link 
                             href={`/blog/series/${series.slug}`}
-                            className="inline-flex items-center gap-1 py-2 px-4 bg-primary hover:bg-primary/95 text-white rounded-xl font-sans font-semibold transition-all shadow-xs"
+                            className="inline-flex items-center gap-1 py-2 px-4 bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-xl font-sans font-semibold transition-all shadow-xs"
                           >
                             View Guide Series
                           </Link>
@@ -116,10 +115,10 @@ export default function SeriesDirectoryPage() {
           </div>
 
           {/* Back Action Link */}
-          <div className="pt-4 border-t border-border/60">
+          <div className="pt-4 border-t border-slate-200 dark:border-slate-800/60">
             <Link 
               href="/blog" 
-              className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-slate hover:text-primary transition-colors group"
+              className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-slate-600 hover:text-teal-700 dark:text-slate-400 dark:hover:text-teal-300 transition-colors group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               Back to Blog Home

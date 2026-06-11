@@ -207,7 +207,7 @@ export default function OnlineWhiteboardClient() {
     } else if (text.color === '#FFFFFF' && !isDark) {
       setText(prev => ({ ...prev, color: '#000000' }));
     }
-  }, [canvasTheme]);
+  }, [canvasTheme, brush.color, shape.strokeColor, text.color]);
 
 
   // Handle Tool selection changes
@@ -236,26 +236,40 @@ export default function OnlineWhiteboardClient() {
     const activeObj = canvas.getActiveObject();
     if (!activeObj) return;
 
+    const isDark = canvasTheme === 'dark';
+    const adjustedProps = { ...newProps };
+
+    // Invert colors to prevent invisible elements on the canvas theme
+    if (isDark) {
+      if (adjustedProps.stroke === '#000000') adjustedProps.stroke = '#FFFFFF';
+      if (adjustedProps.fill === '#000000') adjustedProps.fill = '#FFFFFF';
+      if (adjustedProps.color === '#000000') adjustedProps.color = '#FFFFFF';
+    } else {
+      if (adjustedProps.stroke === '#FFFFFF') adjustedProps.stroke = '#000000';
+      if (adjustedProps.fill === '#FFFFFF') adjustedProps.fill = '#000000';
+      if (adjustedProps.color === '#FFFFFF') adjustedProps.color = '#000000';
+    }
+
     // Check if there is an undo/redo modification trigger inside canvas.
     // To enable proper undo, we manually push current state before making properties changes
     // But we only want to do this if the value actually changes
     let changed = false;
-    Object.keys(newProps).forEach(key => {
-      if ((activeObj as any)[key] !== newProps[key]) {
+    Object.keys(adjustedProps).forEach(key => {
+      if ((activeObj as any)[key] !== adjustedProps[key]) {
         changed = true;
       }
     });
 
     if (changed) {
       // Direct update
-      activeObj.set(newProps);
+      activeObj.set(adjustedProps);
       activeObj.setCoords();
       canvas.requestRenderAll();
 
       // Update sidebar props state
       setSelectedObjectProps((prev: any) => ({
         ...prev,
-        ...newProps
+        ...adjustedProps
       }));
     }
   };
@@ -332,7 +346,7 @@ export default function OnlineWhiteboardClient() {
 
     try {
       setError(null);
-      const exportBgColor = canvasTheme === 'dark' ? '#09090B' : '#FFFFFF';
+      const exportBgColor = canvasTheme === 'dark' ? '#000000' : '#FFFFFF';
       if (format === 'png') {
         exportToImage(canvas, 'png', 1, fileName, exportBgColor);
       } else if (format === 'jpg') {
@@ -361,7 +375,7 @@ export default function OnlineWhiteboardClient() {
 
   const content = (
     <div className={isMaximized 
-      ? "fixed inset-0 z-[150] bg-slate-50 dark:bg-zinc-950 flex flex-col p-4 gap-4 w-screen h-screen overflow-hidden animate-in fade-in duration-200" 
+      ? `fixed inset-0 z-[150] ${canvasTheme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'} flex flex-col p-4 gap-4 w-screen h-screen overflow-hidden animate-in fade-in duration-200` 
       : "space-y-6 w-full max-w-7xl mx-auto"
     }>
       {/* Whiteboard Specific Privacy Notice (Required) */}

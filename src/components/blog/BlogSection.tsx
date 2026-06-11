@@ -38,8 +38,8 @@ export function BlogSection({ section }: BlogSectionProps) {
   }
 
   return (
-    <section id={id} className="space-y-4 pt-6 border-t border-border/40 first:border-0 first:pt-0">
-      <h2 className="font-display font-bold text-xl text-ink tracking-tight flex items-center gap-2">
+    <section id={id} className="space-y-4 pt-6 border-t border-slate-200 dark:border-slate-800/40 first:border-0 first:pt-0">
+      <h2 className="font-display font-bold text-xl text-slate-950 dark:text-white tracking-tight flex items-center gap-2">
         {type === "steps" ? (
           <ListChecks className="w-5 h-5 text-primary" />
         ) : type === "bullets" ? (
@@ -50,7 +50,7 @@ export function BlogSection({ section }: BlogSectionProps) {
         {heading}
       </h2>
 
-      <p className="text-sm leading-relaxed text-slate">{content}</p>
+      <p className="text-sm leading-relaxed text-slate-650 dark:text-slate-300">{content}</p>
 
       {type === "steps" && items.length > 0 && (
         <ol className="space-y-3 list-none pl-0 pt-2">
@@ -59,7 +59,7 @@ export function BlogSection({ section }: BlogSectionProps) {
               <span className="w-6 h-6 rounded-full bg-primary/10 border border-primary/20 text-primary flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                 {idx + 1}
               </span>
-              <span className="leading-relaxed text-slate pt-0.5">{cleanStepText(item)}</span>
+              <span className="leading-relaxed text-slate-650 dark:text-slate-300 pt-0.5">{cleanStepText(item)}</span>
             </li>
           ))}
         </ol>
@@ -70,7 +70,7 @@ export function BlogSection({ section }: BlogSectionProps) {
           {items.map((item, idx) => (
             <li key={idx} className="flex items-start gap-2 text-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-              <span className="leading-relaxed text-slate">{cleanListItem(item)}</span>
+              <span className="leading-relaxed text-slate-650 dark:text-slate-300">{cleanListItem(item)}</span>
             </li>
           ))}
         </ul>

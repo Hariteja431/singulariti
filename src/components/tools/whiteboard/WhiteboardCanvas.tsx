@@ -230,7 +230,7 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
 
     saveHistoryState();
     canvas.clear();
-    canvas.backgroundColor = '#FFFFFF';
+    canvas.backgroundColor = 'transparent';
     canvas.requestRenderAll();
     saveHistoryState();
   };
@@ -729,7 +729,7 @@ export const WhiteboardCanvas = forwardRef<WhiteboardCanvasRef, WhiteboardCanvas
   };
 
   const isDark = canvasTheme === 'dark';
-  const themeClasses = isDark ? 'bg-zinc-950 text-white border-zinc-800' : 'bg-white text-black border-border';
+  const themeClasses = isDark ? 'bg-black text-white border-zinc-800' : 'bg-white text-black border-border';
   const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
   const dotColor = isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.15)';
 

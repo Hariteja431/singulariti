@@ -36,7 +36,7 @@ export default async function SeriesDetailsPage({ params }: PageProps) {
   return (
     <>
       <Header />
-      <main className="flex-1 w-full bg-background pt-24 pb-16">
+      <main className="flex-1 w-full bg-white text-slate-900 dark:bg-slate-950 dark:text-white pt-24 pb-16">
         <Suspense fallback={null}>
           <SeriesDetailsContent seriesSlug={seriesSlug} />
         </Suspense>

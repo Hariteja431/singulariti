@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --color-primary: #00C4B4;
   --color-dark: #0B0B0F;
@@ -25,7 +27,7 @@
 }
 
 :root, .light {
-  --bg-color: #F8F8FC;
+  --bg-color: #FFFFFF;
   --surface-color: #FFFFFF;
   --ink-color: #0F0F18;
   --slate-color: #6B6B80;
@@ -33,7 +35,7 @@
 }
 
 .dark {
-  --bg-color: #0B0B0F;
+  --bg-color: #000000;
   --surface-color: #121218;
   --ink-color: #F8F8FC;
   --slate-color: #A0A0B0;
