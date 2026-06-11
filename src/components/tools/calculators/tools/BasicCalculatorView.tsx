@@ -4,13 +4,11 @@ import React, { useState } from 'react';
 import { CalculatorLayout } from '../CalculatorLayout';
 import { Button } from '@/components/ui/Button';
 
-interface BasicCalculatorViewProps {
-  toolId: string;
-  title: string;
-  description: string;
+
+  article?: string;
 }
 
-export function BasicCalculatorView({ toolId, title, description }: BasicCalculatorViewProps) {
+} : 
   const [display, setDisplay] = useState('0');
   const [equation, setEquation] = useState('');
   const [isFinished, setIsFinished] = useState(false);
@@ -147,10 +145,8 @@ export function BasicCalculatorView({ toolId, title, description }: BasicCalcula
   ];
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={(e) => e.preventDefault()}
       onReset={handleClear}
       formula="Basic arithmetic follows algebraic precedence: Addition (+), Subtraction (-), Multiplication (×), and Division (÷)."

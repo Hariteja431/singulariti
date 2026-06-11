@@ -40,13 +40,16 @@
     "react-dom": "19.2.4",
     "react-dropzone": "^15.0.0",
     "react-image-crop": "^11.0.10",
+    "react-markdown": "^10.1.0",
     "react-resizable-panels": "^4.11.2",
     "recharts": "^3.8.1",
+    "remark-gfm": "^4.0.1",
     "sql-formatter": "^15.8.0",
     "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "^0.5.20",
     "@types/bcryptjs": "^2.4.6",
     "@types/busboy": "^1.5.4",
     "@types/colorthief": "^2.6.1",

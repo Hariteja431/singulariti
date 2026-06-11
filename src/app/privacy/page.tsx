@@ -81,8 +81,13 @@ export default function PrivacyPage() {
 
           <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">7. Contact</h2>
           <p className="mb-4 leading-relaxed">
-            For questions or feedback regarding this policy or the privacy practices of the utility tools, the website owner can be contacted directly.
+            For questions or feedback regarding this policy or the privacy practices of the utility tools, please contact Singulariti Labs:
           </p>
+          <div className="bg-surface border border-border rounded-xl p-6 mt-6 mb-8">
+            <h3 className="font-display font-bold text-lg text-ink mb-4">Singulariti Labs</h3>
+            <p className="mb-2 text-[15px]"><strong>Email:</strong> <a href="mailto:singulariti.contact@gmail.com" className="text-primary hover:underline">singulariti.contact@gmail.com</a></p>
+            <p className="text-[15px]"><strong>Address:</strong> Vishakapatnam, Andhra Pradesh, India</p>
+          </div>
         </section>
       </main>
       <Footer />

@@ -7,13 +7,11 @@ import { CalculatorSelect } from '../CalculatorSelect';
 import { CalculatorResult } from '../CalculatorResult';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-interface SalaryCalculatorViewProps {
-  toolId: string;
-  title: string;
-  description: string;
+
+  article?: string;
 }
 
-export function SalaryCalculatorView({ toolId, title, description }: SalaryCalculatorViewProps) {
+} : 
   const [amount, setAmount] = useState<number>(50000);
   const [period, setPeriod] = useState<'hourly' | 'daily' | 'weekly' | 'monthly' | 'annual'>('annual');
   const [hoursPerWeek, setHoursPerWeek] = useState<number>(40);
@@ -152,10 +150,8 @@ export function SalaryCalculatorView({ toolId, title, description }: SalaryCalcu
   );
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

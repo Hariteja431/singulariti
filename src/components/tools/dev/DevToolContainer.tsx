@@ -905,7 +905,7 @@ function PdfImageExtractorUI() {
   );
 }
 
-export function DevToolContainer({ toolId, toolName, toolDescription }: DevToolContainerProps) {
+export function DevToolContainer({ toolId, toolName, toolDescription, article }: DevToolContainerProps) {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [error, setError] = useState('');
@@ -1359,15 +1359,13 @@ export function DevToolContainer({ toolId, toolName, toolDescription }: DevToolC
   };
   const content = getDevContent(toolId);
 
-  return (
-    <ToolLayout
+  return (    <ToolLayout
       utilityId={toolId}
       title={toolName}
       description={toolDescription}
-      categoryName="Developer Tools"
-      categoryPath="/tools/dev"
       howToUse={content.howToUse}
       faqs={content.faqs}
+      article={article || content.article}
     >
       <div className="space-y-6">
         {/* Custom Actions */}

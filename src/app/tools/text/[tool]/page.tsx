@@ -21,11 +21,23 @@ export default async function TextToolPage(props: { params: Promise<{ tool: stri
 
   if (!tool) return notFound();
 
+  let article = '';
+  try {
+    const articlePath = path.join(process.cwd(), 'src', 'content', 'articles', `${tool.id}.md`);
+    if (fs.existsSync(articlePath)) {
+      article = fs.readFileSync(articlePath, 'utf8');
+    }
+  } catch (e) {
+    // Ignore if not found
+  }
+
+
   return (
     <TextToolContainer 
       toolId={tool.id}
       toolName={tool.name}
       toolDescription={tool.description}
+      article={article || undefined}
     />
   );
 }

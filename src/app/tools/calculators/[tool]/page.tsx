@@ -4,6 +4,8 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import { getCategoryById } from '@/registry';
 import { CalculatorClientContainer } from '@/components/tools/calculators/CalculatorClientContainer';
+import fs from 'fs';
+import path from 'path';
 
 export default async function CalculatorToolPage(props: { params: Promise<{ tool: string }> }) {
   const params = await props.params;
@@ -22,11 +24,22 @@ export default async function CalculatorToolPage(props: { params: Promise<{ tool
 
   if (!tool) return notFound();
 
+  let article = '';
+  try {
+    const articlePath = path.join(process.cwd(), 'src', 'content', 'articles', `${tool.id}.md`);
+    if (fs.existsSync(articlePath)) {
+      article = fs.readFileSync(articlePath, 'utf8');
+    }
+  } catch (e) {
+    // Ignore if not found
+  }
+
   return (
     <CalculatorClientContainer 
       toolId={tool.id}
       toolName={tool.name}
       toolDescription={tool.description}
+      article={article || undefined}
     />
   );
 }

@@ -35,70 +35,72 @@ interface CalculatorClientContainerProps {
   toolId: string;
   toolName: string;
   toolDescription: string;
+  article?: string;
 }
 
 export function CalculatorClientContainer({
   toolId,
   toolName,
-  toolDescription
+  toolDescription,
+  article
 }: CalculatorClientContainerProps) {
   switch (toolId) {
     case 'age-calculator':
-      return <AgeCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <AgeCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'emi-calculator':
-      return <EmiCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <EmiCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'sip-calculator':
-      return <SipCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <SipCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'compound-interest-calculator':
-      return <CompoundInterestCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <CompoundInterestCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'cagr-calculator':
-      return <CagrCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <CagrCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'fd-calculator':
-      return <FdCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <FdCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'income-tax-calculator':
-      return <IncomeTaxCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <IncomeTaxCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'gst-calculator':
-      return <GstCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <GstCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'bmi-calculator':
-      return <BmiCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <BmiCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'calorie-calculator':
-      return <CalorieCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <CalorieCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'percentage-calculator':
-      return <PercentageCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <PercentageCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'cgpa-calculator':
-      return <CgpaCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <CgpaCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'date-difference-calculator':
-      return <DateDifferenceCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <DateDifferenceCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'scientific-calculator':
-      return <ScientificCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <ScientificCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'discount-calculator':
-      return <DiscountCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <DiscountCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'profit-calculator':
-      return <ProfitCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <ProfitCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'roi-calculator':
-      return <RoiCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <RoiCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'currency-converter':
-      return <CurrencyConverterView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <CurrencyConverterView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'youtube-earnings-calculator':
-      return <YoutubeEarningsCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <YoutubeEarningsCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'adsense-revenue-calculator':
-      return <AdsenseRevenueCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <AdsenseRevenueCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'mortgage-calculator':
-      return <MortgageCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <MortgageCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     
     // New calculators
     case 'basic-calculator':
-      return <BasicCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <BasicCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'loan-calculator':
-      return <LoanCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <LoanCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'simple-interest-calculator':
-      return <SimpleInterestCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <SimpleInterestCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'salary-calculator':
-      return <SalaryCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <SalaryCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'tip-calculator':
-      return <TipCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <TipCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'time-duration-calculator':
-      return <TimeDurationCalculatorView toolId={toolId} title={toolName} description={toolDescription} />;
+      return <TimeDurationCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
 
     default:
       return (

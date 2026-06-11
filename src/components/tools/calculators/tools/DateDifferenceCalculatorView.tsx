@@ -7,13 +7,11 @@ import { CalculatorResult } from '../CalculatorResult';
 import { calculateDateDifference } from '@/lib/calculators/dateCalculators';
 import { validateDateDifference } from '@/lib/calculators/calculatorValidation';
 
-interface DateDifferenceCalculatorViewProps {
-  toolId: string;
-  title: string;
-  description: string;
+
+  article?: string;
 }
 
-export function DateDifferenceCalculatorView({ toolId, title, description }: DateDifferenceCalculatorViewProps) {
+} : 
   const todayStr = new Date().toISOString().split('T')[0];
   const [startDate, setStartDate] = useState<string>(todayStr);
   const [endDate, setEndDate] = useState<string>(todayStr);
@@ -115,10 +113,8 @@ export function DateDifferenceCalculatorView({ toolId, title, description }: Dat
   );
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

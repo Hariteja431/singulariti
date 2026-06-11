@@ -1,6 +1,7 @@
 export interface CalculatorContent {
   howToUse: string[];
   faqs: { question: string; answer: string; }[];
+  article?: string;
 }
 
 const contentMap: Record<string, CalculatorContent> = {

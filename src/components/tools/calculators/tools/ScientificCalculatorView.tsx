@@ -10,9 +10,15 @@ interface ScientificCalculatorViewProps {
   toolId: string;
   title: string;
   description: string;
+  article?: string;
 }
 
-export function ScientificCalculatorView({ toolId, title, description }: ScientificCalculatorViewProps) {
+
+
+  article?: string;
+}
+
+} : 
   const [expression, setExpression] = useState<string>('');
   const [result, setResult] = useState<string>('');
   const [history, setHistory] = useState<string[]>([]);
@@ -286,10 +292,8 @@ export function ScientificCalculatorView({ toolId, title, description }: Scienti
   const example = "Example evaluations:\n2 + 3 × 4 = 14\n(5 + 5) / 2 = 5\nsin(pi / 2) = 1\n2^10 = 1024\n5! = 120";
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={evaluate}
       onReset={() => {
         setExpression('');

@@ -7,13 +7,11 @@ import { CalculatorResult } from '../CalculatorResult';
 import { calculateRoi } from '@/lib/calculators/financialCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-interface RoiCalculatorViewProps {
-  toolId: string;
-  title: string;
-  description: string;
+
+  article?: string;
 }
 
-export function RoiCalculatorView({ toolId, title, description }: RoiCalculatorViewProps) {
+} : 
   const [initialInvestment, setInitialInvestment] = useState<number>(100000);
   const [finalValue, setFinalValue] = useState<number>(150000);
   const [additionalCosts, setAdditionalCosts] = useState<number>(0);
@@ -136,10 +134,8 @@ export function RoiCalculatorView({ toolId, title, description }: RoiCalculatorV
   );
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

@@ -7,10 +7,8 @@ import { CalculatorSelect } from '../CalculatorSelect';
 import { CalculatorResult } from '../CalculatorResult';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-interface LoanCalculatorViewProps {
-  toolId: string;
-  title: string;
-  description: string;
+
+  article?: string;
 }
 
 interface AmortizationRow {
@@ -21,7 +19,7 @@ interface AmortizationRow {
   remaining: number;
 }
 
-export function LoanCalculatorView({ toolId, title, description }: LoanCalculatorViewProps) {
+} : 
   const [amount, setAmount] = useState<number>(500000);
   const [rate, setRate] = useState<number>(7.5);
   const [tenure, setTenure] = useState<number>(3);
@@ -208,10 +206,8 @@ export function LoanCalculatorView({ toolId, title, description }: LoanCalculato
   );
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

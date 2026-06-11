@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ShieldCheck, AlertTriangle, AlertCircle } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { Header } from '../layout/Header';
 import { Footer } from '../layout/Footer';
 import { SeoSchema } from './shared/SeoSchema';
@@ -22,6 +24,7 @@ interface ToolLayoutProps {
   howToUse?: string[];
   faqs?: { question: string; answer: string }[];
   relatedTools?: { name: string; url: string; description: string }[];
+  article?: string;
 }
 
 export function ToolLayout({
@@ -37,7 +40,8 @@ export function ToolLayout({
   children,
   howToUse,
   faqs,
-  relatedTools
+  relatedTools,
+  article
 }: ToolLayoutProps) {
   const [mounted, setMounted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -192,6 +196,15 @@ export function ToolLayout({
 
         {/* Details & FAQ Area */}
         <section className="container mx-auto px-4 md:px-6 max-w-4xl mt-12 space-y-12">
+          {/* Article / Comprehensive Content */}
+          {article && (
+            <div className="bg-surface/50 border border-border/60 rounded-2xl p-6 md:p-8 prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-bold prose-p:font-sans prose-p:leading-relaxed prose-a:text-primary hover:prose-a:text-primary/80">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {article}
+              </ReactMarkdown>
+            </div>
+          )}
+
           {/* How to Use */}
           {howToUse && howToUse.length > 0 && (
             <div className="bg-surface/50 border border-border/60 rounded-2xl p-6 md:p-8">

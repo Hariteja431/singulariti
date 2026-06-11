@@ -7,13 +7,11 @@ import { CalculatorResult } from '../CalculatorResult';
 import { calculateYoutubeEarnings } from '@/lib/calculators/revenueCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-interface YoutubeEarningsCalculatorViewProps {
-  toolId: string;
-  title: string;
-  description: string;
+
+  article?: string;
 }
 
-export function YoutubeEarningsCalculatorView({ toolId, title, description }: YoutubeEarningsCalculatorViewProps) {
+} : 
   const [dailyViews, setDailyViews] = useState<number>(20000);
   const [cpm, setCpm] = useState<number>(4);
   const [rpm, setRpm] = useState<number>(2.5);
@@ -148,10 +146,8 @@ export function YoutubeEarningsCalculatorView({ toolId, title, description }: Yo
   );
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

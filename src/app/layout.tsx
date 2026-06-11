@@ -4,6 +4,7 @@ import { Syne, Outfit, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import "./globals.css";
 import { DynamicStructuredData } from "@/components/seo/DynamicStructuredData";
+import { CookieConsent } from "@/components/layout/CookieConsent";
 
 const syne = Syne({
   variable: "--font-syne",
@@ -114,6 +115,7 @@ export default function RootLayout({
       <body suppressHydrationWarning className="min-h-full flex flex-col font-sans bg-background text-foreground transition-colors duration-300">
         <ThemeProvider>
           {children}
+          <CookieConsent />
         </ThemeProvider>
       </body>
     </html>

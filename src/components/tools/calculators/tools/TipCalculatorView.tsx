@@ -7,13 +7,11 @@ import { CalculatorSelect } from '../CalculatorSelect';
 import { CalculatorResult } from '../CalculatorResult';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-interface TipCalculatorViewProps {
-  toolId: string;
-  title: string;
-  description: string;
+
+  article?: string;
 }
 
-export function TipCalculatorView({ toolId, title, description }: TipCalculatorViewProps) {
+} : 
   const [bill, setBill] = useState<number>(1500);
   const [tipPercent, setTipPercent] = useState<number>(10);
   const [people, setPeople] = useState<number>(3);
@@ -125,10 +123,8 @@ export function TipCalculatorView({ toolId, title, description }: TipCalculatorV
   );
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

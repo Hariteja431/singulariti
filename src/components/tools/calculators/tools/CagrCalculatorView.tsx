@@ -7,13 +7,11 @@ import { CalculatorResult } from '../CalculatorResult';
 import { calculateCagr } from '@/lib/calculators/financialCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-interface CagrCalculatorViewProps {
-  toolId: string;
-  title: string;
-  description: string;
+
+  article?: string;
 }
 
-export function CagrCalculatorView({ toolId, title, description }: CagrCalculatorViewProps) {
+} : 
   const [initialValue, setInitialValue] = useState<number>(100000);
   const [finalValue, setFinalValue] = useState<number>(250000);
   const [years, setYears] = useState<number>(5);
@@ -121,10 +119,8 @@ export function CagrCalculatorView({ toolId, title, description }: CagrCalculato
   );
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

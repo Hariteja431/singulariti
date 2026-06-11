@@ -8,13 +8,11 @@ import { CalculatorResult } from '../CalculatorResult';
 import { calculateGst } from '@/lib/calculators/taxCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-interface GstCalculatorViewProps {
-  toolId: string;
-  title: string;
-  description: string;
+
+  article?: string;
 }
 
-export function GstCalculatorView({ toolId, title, description }: GstCalculatorViewProps) {
+} : 
   const [amount, setAmount] = useState<number>(1000);
   const [rate, setRate] = useState<number>(18);
   const [calcType, setCalcType] = useState<'add' | 'remove'>('add');
@@ -120,10 +118,8 @@ export function GstCalculatorView({ toolId, title, description }: GstCalculatorV
   );
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

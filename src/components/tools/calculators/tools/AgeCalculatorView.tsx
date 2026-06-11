@@ -8,13 +8,11 @@ import { calculateAge } from '@/lib/calculators/dateCalculators';
 import { validateDateOfBirth } from '@/lib/calculators/calculatorValidation';
 import { AgeResult } from '@/lib/calculators/calculatorTypes';
 
-interface AgeCalculatorViewProps {
-  toolId: string;
-  title: string;
-  description: string;
+
+  article?: string;
 }
 
-export function AgeCalculatorView({ toolId, title, description }: AgeCalculatorViewProps) {
+} : 
   const todayStr = new Date().toISOString().split('T')[0];
   const [dob, setDob] = useState<string>('');
   const [currentDate, setCurrentDate] = useState<string>(todayStr);
@@ -91,10 +89,8 @@ export function AgeCalculatorView({ toolId, title, description }: AgeCalculatorV
   );
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

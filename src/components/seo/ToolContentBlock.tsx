@@ -5,9 +5,13 @@ import { CheckCircle2, ChevronDown } from 'lucide-react';
 
 interface ToolContentBlockProps {
   utilityId: string;
+  article?: string;
 }
 
-export function ToolContentBlock({ utilityId }: ToolContentBlockProps) {
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
+export function ToolContentBlock({ utilityId, article }: ToolContentBlockProps) {
   const content = seoContentRegistry[utilityId];
 
   // If no content is defined for this tool yet, return null
@@ -16,6 +20,14 @@ export function ToolContentBlock({ utilityId }: ToolContentBlockProps) {
   return (
     <div className="w-full max-w-4xl mx-auto mt-20 mb-12 px-4 space-y-16">
       <DynamicFAQSchema faqs={content.faqs} />
+
+      {article && (
+        <div className="bg-surface/50 border border-border/60 rounded-2xl p-6 md:p-8 prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-bold prose-p:font-sans prose-p:leading-relaxed prose-a:text-primary hover:prose-a:text-primary/80">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {article}
+          </ReactMarkdown>
+        </div>
+      )}
       
       {/* Introduction Section */}
       <section className="space-y-6">

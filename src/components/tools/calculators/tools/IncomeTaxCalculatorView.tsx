@@ -9,13 +9,11 @@ import { calculateIncomeTax } from '@/lib/calculators/taxCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 import { TaxResult } from '@/lib/calculators/calculatorTypes';
 
-interface IncomeTaxCalculatorViewProps {
-  toolId: string;
-  title: string;
-  description: string;
+
+  article?: string;
 }
 
-export function IncomeTaxCalculatorView({ toolId, title, description }: IncomeTaxCalculatorViewProps) {
+} : 
   const [income, setIncome] = useState<number>(1000000);
   const [regime, setRegime] = useState<'old' | 'new'>('new');
   const [deductions, setDeductions] = useState<number>(150000);
@@ -133,10 +131,8 @@ export function IncomeTaxCalculatorView({ toolId, title, description }: IncomeTa
   );
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

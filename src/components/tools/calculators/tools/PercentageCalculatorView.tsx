@@ -8,13 +8,11 @@ import { CalculatorResult } from '../CalculatorResult';
 import { calculatePercentage } from '@/lib/calculators/mathCalculators';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-interface PercentageCalculatorViewProps {
-  toolId: string;
-  title: string;
-  description: string;
+
+  article?: string;
 }
 
-export function PercentageCalculatorView({ toolId, title, description }: PercentageCalculatorViewProps) {
+} : 
   const [mode, setMode] = useState<'of' | 'what-percent' | 'increase' | 'decrease'>('of');
   const [val1, setVal1] = useState<number>(10);
   const [val2, setVal2] = useState<number>(200);
@@ -141,10 +139,8 @@ export function PercentageCalculatorView({ toolId, title, description }: Percent
   );
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

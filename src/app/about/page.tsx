@@ -42,7 +42,13 @@ export default function AboutPage() {
           
           <p className="mb-6 leading-relaxed">That's why many of our tools run directly in your browser using modern web technologies, ensuring faster performance while keeping your data under your control.</p>
           
-          <p className="leading-relaxed">With a focus on simplicity, speed, and reliability, Singulariti is building the ultimate destination for creators, developers, students, professionals, and anyone looking to get things done more efficiently.</p>
+          <p className="leading-relaxed mb-10">With a focus on simplicity, speed, and reliability, Singulariti is building the ultimate destination for creators, developers, students, professionals, and anyone looking to get things done more efficiently.</p>
+          
+          <div className="bg-surface border border-border rounded-xl p-6 mb-8">
+            <h2 className="font-display font-bold text-xl text-ink mb-4">Contact Information</h2>
+            <p className="mb-2"><strong>Email:</strong> <a href="mailto:singulariti.contact@gmail.com" className="text-primary hover:underline">singulariti.contact@gmail.com</a></p>
+            <p><strong>Address:</strong> Vishakapatnam, Andhra Pradesh, India</p>
+          </div>
         </section>
       </main>
       <Footer />

@@ -70,6 +70,16 @@ export default function TermsPage() {
           <p className="mb-4 leading-relaxed">
             The right is reserved to modify these Terms of Service at any time. Continued use of the website following changes signifies acceptance of the updated terms.
           </p>
+          
+          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">7. Contact</h2>
+          <p className="mb-4 leading-relaxed">
+            For questions or feedback regarding these terms, please contact Singulariti Labs:
+          </p>
+          <div className="bg-surface border border-border rounded-xl p-6 mt-6 mb-8">
+            <h3 className="font-display font-bold text-lg text-ink mb-4">Singulariti Labs</h3>
+            <p className="mb-2 text-[15px]"><strong>Email:</strong> <a href="mailto:singulariti.contact@gmail.com" className="text-primary hover:underline">singulariti.contact@gmail.com</a></p>
+            <p className="text-[15px]"><strong>Address:</strong> Vishakapatnam, Andhra Pradesh, India</p>
+          </div>
         </section>
       </main>
       <Footer />

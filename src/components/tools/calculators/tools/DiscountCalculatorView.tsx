@@ -6,13 +6,11 @@ import { CalculatorInput } from '../CalculatorInput';
 import { CalculatorResult } from '../CalculatorResult';
 import { validatePositiveNumber } from '@/lib/calculators/calculatorValidation';
 
-interface DiscountCalculatorViewProps {
-  toolId: string;
-  title: string;
-  description: string;
+
+  article?: string;
 }
 
-export function DiscountCalculatorView({ toolId, title, description }: DiscountCalculatorViewProps) {
+} : 
   const [originalPrice, setOriginalPrice] = useState<number>(1000);
   const [discountPercent, setDiscountPercent] = useState<number>(20);
   const [additionalDiscount, setAdditionalDiscount] = useState<number>(0);
@@ -124,10 +122,8 @@ export function DiscountCalculatorView({ toolId, title, description }: DiscountC
   );
 
   return (
-    <CalculatorLayout
-      toolId={toolId}
-      title={title}
-      description={description}
+    
+      article={article}
       onCalculate={handleCalculate}
       onReset={handleReset}
       inputs={inputs}

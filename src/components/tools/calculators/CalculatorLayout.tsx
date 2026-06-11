@@ -18,6 +18,7 @@ interface CalculatorLayoutProps {
   results: React.ReactNode;
   formula: string | React.ReactNode;
   example: string | React.ReactNode;
+  article?: string;
 }
 
 export function CalculatorLayout({
@@ -30,7 +31,8 @@ export function CalculatorLayout({
   onCalculate,
   onReset,
   inputs,
-  results
+  results,
+  article
 }: CalculatorLayoutProps) {
   const content = getCalculatorContent(toolId);
 
@@ -38,6 +40,7 @@ export function CalculatorLayout({
     <ToolLayout
       howToUse={content.howToUse}
       faqs={content.faqs}
+      article={article || content.article}
       
       utilityId={toolId}
       title={title}
