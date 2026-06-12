@@ -48,6 +48,9 @@ export const metadata: Metadata = {
     title: "Online Utility Tools for PDF, Image, Text, Code, SEO and Calculations | Singulariti",
     description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals.",
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+  },
 };
 
 export default function RootLayout({
