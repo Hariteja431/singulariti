@@ -9,6 +9,7 @@ import { EditingEngine } from '@/components/tool/EditingEngine';
 import { UtilityEngine } from '@/components/tool/UtilityEngine';
 import { DeveloperEngine } from '@/components/tool/DeveloperEngine';
 import { SingleFeatureEditorClient } from '@/components/tools/image-editor/SingleFeatureEditorClient';
+import { AnimationEngine } from '@/components/tool/AnimationEngine';
 import { getToolByPath, getCategoryById } from '@/registry';
 import { SeoSchema } from '@/components/tools/shared/SeoSchema';
 import { getUtilitySEO } from '@/lib/seo/utilityMetadata';
@@ -19,7 +20,8 @@ const EngineMap: Record<string, React.ElementType> = {
   editing: EditingEngine,
   utility: UtilityEngine,
   developer: DeveloperEngine,
-  'single-editing': SingleFeatureEditorClient
+  'single-editing': SingleFeatureEditorClient,
+  animation: AnimationEngine
 };
 
 export default async function ToolPage(props: { params: Promise<{ collection: string; tool: string }> }) {

@@ -279,7 +279,8 @@ export function SignPdfClient() {
       {!file ? (
         <FileUploader
           onFilesSelected={handleFileSelected}
-          multiple={false}
+          multiple={}
+          accept={{ 'application/pdf': ['.pdf'] }}
           title="Upload a PDF file to sign"
           subtitle="Choose the PDF document you want to add signature to"
         />

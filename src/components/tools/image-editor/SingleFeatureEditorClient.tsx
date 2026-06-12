@@ -981,7 +981,7 @@ export function SingleFeatureEditorClient({ tool }: Props) {
         <FileUploader
           onFilesSelected={handleFileSelected}
           multiple={false}
-          accept={{ 'image/*': ['.png', '.jpg', '.jpeg', '.webp', '.svg'] }}
+          accept={{ 'image/jpeg': ['.jpg', '.jpeg'], 'image/png': ['.png'], 'image/webp': ['.webp'], 'image/svg+xml': ['.svg'] }}
           title={`Upload an image to ${tool.name.toLowerCase()}`}
           subtitle="Supports JPG, JPEG, PNG, or WEBP formats up to 15MB"
         />

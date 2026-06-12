@@ -121,7 +121,8 @@ export function CompressPdfClient() {
       {!file ? (
         <FileUploader
           onFilesSelected={handleFileSelected}
-          multiple={false}
+          multiple={}
+          accept={{ 'application/pdf': ['.pdf'] }}
           title="Upload a PDF file to compress"
           subtitle="Choose the PDF document you want to optimize"
         />

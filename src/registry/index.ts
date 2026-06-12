@@ -329,7 +329,7 @@ export const registry: EcosystemRegistry = {
               description: 'Create animated GIFs by combining multiple images with custom frame delays and loop settings.',
               seoTitle: 'GIF Maker Online Free – Create Animated GIFs | Singulariti',
               seoDescription: 'Create animated GIFs from multiple images for free. Set frame delays, loop count, and resize frames. Entirely browser-based.',
-              engine: 'developer',
+              engine: 'animation',
               path: '/image/animation/gif-maker'
             },
             {

@@ -201,6 +201,7 @@ export function UtilityEngine({ tool }: UtilityEngineProps) {
         <Dropzone 
           onFileSelect={processFile} 
           title="Drop image to analyze"
+          accept="image/jpeg, image/png, image/webp, image/svg+xml, image/gif, image/tiff, image/x-icon, .jpg, .jpeg, .png, .webp, .svg, .gif, .tiff, .ico"
         />
       ) : (
         <div className="bg-surface border border-border rounded-xl p-6 md:p-8 shadow-sm">

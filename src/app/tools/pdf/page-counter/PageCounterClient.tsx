@@ -107,7 +107,8 @@ export function PageCounterClient() {
       {files.length === 0 ? (
         <FileUploader
           onFilesSelected={handleFilesSelected}
-          multiple={true}
+          multiple={}
+          accept={{ 'application/pdf': ['.pdf'] }}
           title="Upload PDF files to count pages"
           subtitle="Drag one or multiple PDF documents here"
         />

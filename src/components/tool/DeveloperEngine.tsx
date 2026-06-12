@@ -113,6 +113,7 @@ export function DeveloperEngine({ tool }: DeveloperEngineProps) {
               onFileSelect={processFileToBase64} 
               title="Drop image to encode"
               subtitle="Get the Base64 data URI string"
+              accept="image/jpeg, image/png, image/webp, image/svg+xml, .jpg, .jpeg, .png, .webp, .svg"
             />
           ) : (
             <div className="bg-surface border border-border rounded-xl p-6 md:p-8 shadow-sm">

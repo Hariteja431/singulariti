@@ -350,6 +350,7 @@ export function EditingEngine({ tool }: EditingEngineProps) {
         <Dropzone 
           onFileSelect={processFile} 
           title="Drop image to edit"
+          accept="image/jpeg, image/png, image/webp, .jpg, .jpeg, .png, .webp"
         />
       ) : (
         <div className="bg-surface border border-border rounded-xl p-5 md:p-6 shadow-sm">

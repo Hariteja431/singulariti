@@ -394,7 +394,7 @@ export function QrCodeScannerClient() {
                   <FileUploader
                     onFilesSelected={handleImageSelected}
                     multiple={false}
-                    accept={{ 'image/*': ['.png', '.jpg', '.jpeg', '.webp'] }}
+                    accept={{ 'image/jpeg': ['.jpg', '.jpeg'], 'image/png': ['.png'], 'image/webp': ['.webp'] }}
                     title="Upload QR Code image"
                     subtitle="PNG, JPG, JPEG, or WEBP image files containing a QR code"
                   />
@@ -424,6 +424,7 @@ export function QrCodeScannerClient() {
                   <FileUploader
                     onFilesSelected={handlePdfSelected}
                     multiple={false}
+                    accept={{ 'application/pdf': ['.pdf'] }}
                     title="Upload PDF document to scan"
                     subtitle="We render pages into canvases and scan them page-by-page locally"
                   />

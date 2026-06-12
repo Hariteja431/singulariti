@@ -118,13 +118,43 @@ export function ToolEngine({ tool }: ToolEngineProps) {
     else return (bytes / 1048576).toFixed(2) + ' MB';
   };
 
+  const getAcceptString = () => {
+    switch (tool.id) {
+      case 'heic-to-jpg':
+      case 'heic-to-png':
+        return "image/heic, image/heif, .heic, .heif";
+      case 'png-to-jpg':
+      case 'png-to-webp':
+        return "image/png, .png";
+      case 'jpg-to-png':
+      case 'jpg-to-webp':
+        return "image/jpeg, .jpg, .jpeg";
+      case 'webp-to-jpg':
+      case 'webp-to-png':
+        return "image/webp, .webp";
+      case 'svg-to-png':
+      case 'svg-to-jpg':
+        return "image/svg+xml, .svg";
+      case 'compress-jpeg':
+        return "image/jpeg, .jpg, .jpeg";
+      case 'compress-png':
+        return "image/png, .png";
+      case 'compress-webp':
+        return "image/webp, .webp";
+      case 'compress-svg':
+        return "image/svg+xml, .svg";
+      default:
+        return "image/*, .svg";
+    }
+  };
+
   return (
     <div className="w-full max-w-5xl mx-auto my-12">
       {!file ? (
         <Dropzone 
           onFileSelect={processFile} 
           title={`Drop ${tool.engine === 'compression' ? 'image' : 'file'} here`}
-          accept="image/*, .svg"
+          accept={getAcceptString()}
         />
       ) : (
         <div className="bg-surface border border-border rounded-xl p-6 md:p-8 shadow-sm">

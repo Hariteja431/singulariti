@@ -117,7 +117,8 @@ export function PdfToTextClient() {
       {!file ? (
         <FileUploader
           onFilesSelected={handleFileSelected}
-          multiple={false}
+          multiple={}
+          accept={{ 'application/pdf': ['.pdf'] }}
           title="Upload a PDF file to extract text"
           subtitle="Choose the PDF document you want to extract text from"
         />

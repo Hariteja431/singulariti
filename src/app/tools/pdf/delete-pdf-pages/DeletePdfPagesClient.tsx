@@ -139,7 +139,8 @@ export function DeletePdfPagesClient() {
       {!file ? (
         <FileUploader
           onFilesSelected={handleFileSelected}
-          multiple={false}
+          multiple={}
+          accept={{ 'application/pdf': ['.pdf'] }}
           title="Upload a PDF file to edit"
           subtitle="Choose the PDF document you want to remove pages from"
         />
