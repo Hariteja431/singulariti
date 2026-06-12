@@ -6,16 +6,26 @@ import { registry } from '@/registry';
 
 export function DynamicStructuredData() {
   const pathname = usePathname();
-  
-  // We only want to inject this for tool pages like /tools/...
-  if (!pathname || !pathname.startsWith('/tools/')) return null;
+  if (!pathname) return null;
 
-  // Extract the slug: /tools/category/tool
   const parts = pathname.split('/').filter(Boolean);
-  if (parts.length < 3) return null; // Not a specific tool page
+  if (parts.length < 3) return null;
 
-  const categoryId = parts[1];
-  const toolId = parts[2];
+  let categoryId = '';
+  let toolId = '';
+
+  if (parts[0] === 'tools') {
+    categoryId = parts[1];
+    toolId = parts[2];
+  } else if (parts[0] === 'image') {
+    categoryId = 'image';
+    toolId = parts[2];
+  } else if (parts[0] === 'editing') {
+    categoryId = 'editing';
+    toolId = parts[2];
+  } else {
+    return null;
+  }
 
   const category = registry.categories.find(c => c.id === categoryId);
   if (!category) return null;
@@ -33,8 +43,8 @@ export function DynamicStructuredData() {
 
   const breadcrumbs = [
     { name: "Tools", item: "/tools" },
-    { name: category.name, item: `/tools/${category.id}` },
-    { name: tool.name, item: `/tools/${category.id}/${tool.id}` }
+    { name: category.name, item: category.path || `/tools/${category.id}` },
+    { name: tool.name, item: tool.path || `/tools/${category.id}/${tool.id}` }
   ];
 
   return (
