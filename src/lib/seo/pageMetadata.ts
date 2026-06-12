@@ -569,7 +569,7 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       image: "https://singulariti.in/og-fallback.png"
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: "Disclaimer | Singulariti",
       description: "Read the disclaimer and limitations of liability for the tools, content, and calculators provided by Singulariti.",
       image: "https://singulariti.in/og-fallback.png"
