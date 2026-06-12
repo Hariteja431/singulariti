@@ -1745,7 +1745,7 @@ export function DevToolContainer({ toolId, toolName, toolDescription, article }:
                 <label className="text-[13px] font-sans font-semibold text-ink uppercase tracking-wider">Markdown Output Preview</label>
                 <div 
                   dangerouslySetInnerHTML={{ __html: sanitizeHtml(output) }}
-                  className="w-full p-4 border border-border bg-surface rounded-xl prose max-w-none text-ink font-sans"
+                  className="w-full p-4 border border-border bg-surface rounded-xl prose dark:prose-invert max-w-none text-ink font-sans prose-headings:text-ink prose-strong:text-ink"
                 />
               </div>
             )}

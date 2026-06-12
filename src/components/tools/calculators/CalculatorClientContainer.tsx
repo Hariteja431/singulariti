@@ -31,6 +31,8 @@ import { SalaryCalculatorView } from './tools/SalaryCalculatorView';
 import { TipCalculatorView } from './tools/TipCalculatorView';
 import { TimeDurationCalculatorView } from './tools/TimeDurationCalculatorView';
 
+import { CalculatorArticleContext } from './CalculatorContext';
+
 interface CalculatorClientContainerProps {
   toolId: string;
   toolName: string;
@@ -44,7 +46,8 @@ export function CalculatorClientContainer({
   toolDescription,
   article
 }: CalculatorClientContainerProps) {
-  switch (toolId) {
+  const view = (() => {
+    switch (toolId) {
     case 'age-calculator':
       return <AgeCalculatorView toolId={toolId} title={toolName} description={toolDescription} article={article} />;
     case 'emi-calculator':
@@ -108,5 +111,12 @@ export function CalculatorClientContainer({
           Calculator with ID "{toolId}" was not found or is not yet implemented.
         </div>
       );
-  }
+    }
+  })();
+
+  return (
+    <CalculatorArticleContext.Provider value={article}>
+      {view}
+    </CalculatorArticleContext.Provider>
+  );
 }

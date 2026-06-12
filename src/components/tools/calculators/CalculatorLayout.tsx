@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ToolLayout } from '@/components/tools/ToolLayout';
 import { Button } from '@/components/ui/Button';
 import { RelatedCalculators } from './RelatedCalculators';
 import { RefreshCw, Play } from 'lucide-react';
 import { getCalculatorContent } from './calculatorContent';
+import { CalculatorArticleContext } from './CalculatorContext';
 
 interface CalculatorLayoutProps {
   toolId: string;
@@ -32,8 +33,10 @@ export function CalculatorLayout({
   onReset,
   inputs,
   results,
-  article
+  article: propArticle
 }: CalculatorLayoutProps) {
+  const contextArticle = useContext(CalculatorArticleContext);
+  const article = propArticle || contextArticle;
   const content = getCalculatorContent(toolId);
 
   return (

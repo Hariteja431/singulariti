@@ -2,7 +2,7 @@ import React from 'react';
 
 export function TypingSeoContent() {
   return (
-    <article className="max-w-4xl mx-auto mt-24 prose prose-slate dark:prose-invert font-sans">
+    <article className="max-w-4xl mx-auto mt-24 prose prose-slate dark:prose-invert font-sans text-slate prose-headings:text-ink prose-strong:text-ink">
       <h2 className="text-3xl font-display font-bold">About the Typing Speed Test</h2>
       <p>
         Welcome to the most advanced, privacy-first typing speed test on the web. Our platform is designed to help you accurately measure your typing speed (WPM), improve your accuracy, and build muscle memory through intelligent mistake analysis—all entirely within your browser. 
