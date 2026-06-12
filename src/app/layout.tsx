@@ -7,6 +7,7 @@ import "./globals.css";
 import { DynamicStructuredData } from "@/components/seo/DynamicStructuredData";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { AdsenseScript } from "@/components/seo/AdsenseScript";
+import { Analytics } from "@vercel/analytics/next";
 
 const syne = Syne({
   variable: "--font-syne",
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
     description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals.",
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+    google: "pP-iBJEuqbqGuEA8zoxRm675DyStL_AVhrFuJrhSJWk",
   },
 };
 
@@ -137,6 +138,7 @@ export default function RootLayout({
         <ThemeProvider>
           {children}
           <CookieConsent />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
