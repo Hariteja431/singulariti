@@ -19,14 +19,18 @@ const contentMap: Record<string, CalculatorContent> = {
   },
   'emi-calculator': {
     howToUse: [
-      "Enter the total loan amount you wish to borrow.",
-      "Input the annual interest rate.",
-      "Specify the loan tenure in years or months.",
-      "Review the interactive chart showing the breakdown of principal versus interest."
+      "Input the total principal loan amount you intend to borrow from the financial institution.",
+      "Enter the specific annual interest rate (e.g., 8.5) quoted by your lender.",
+      "Select your loan tenure and specify whether the duration is in years or months.",
+      "The calculator will instantly compute your Equated Monthly Installment (EMI).",
+      "Review the visual pie chart to understand the exact ratio of total interest payable versus your principal amount.",
+      "Adjust the sliders or inputs to immediately see how different rates or tenures affect your monthly budget."
     ],
     faqs: [
-      { question: "Is this calculation exact?", answer: "The calculator uses standard financial formulas for EMI. However, banks may have slight variations based on processing fees and compounding schedules." },
-      { question: "Is my financial data secure?", answer: "Yes, because the calculations run 100% locally on your device without communicating with a server." }
+      { question: "Is the calculated EMI amount perfectly exact?", answer: "The calculator strictly follows the universal mathematical formula for EMI amortization. However, the final amount charged by your bank may differ slightly due to administrative processing fees, GST on charges, or specific daily-reducing balance calculation methods." },
+      { question: "Are my financial inputs tracked or saved?", answer: "Absolutely not. This calculator executes the complex amortization math natively inside your browser's memory using JavaScript. Your loan numbers never leave your device, ensuring complete financial privacy." },
+      { question: "Can I use this for car loans and personal loans?", answer: "Yes. The underlying mathematics for fixed-rate amortized loans is identical whether it's a home mortgage, an auto loan, or a personal loan. Just ensure you enter the correct annual interest rate." },
+      { question: "How does loan tenure affect my total interest?", answer: "A longer loan tenure drastically reduces your monthly EMI, making it easier on your monthly cash flow. However, because you are holding the debt longer, the total cumulative interest you pay over the life of the loan will be significantly higher." }
     ]
   },
   'sip-calculator': {

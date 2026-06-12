@@ -74,19 +74,19 @@ export default async function BlogHomePage() {
     },
     {
       title: "How Browser-Side Utilities Process Files Locally",
-      slug: "why-online-utility-tools-are-useful", // Anchor to privacy section
+      slug: "how-browser-side-utilities-process-files-locally",
       description: "Explore the internal processing flow using Web Workers and client memory canvas sandboxes where files can be processed locally without being uploaded to a server.",
       icon: Lock
     },
     {
       title: "What Happens When a File is Uploaded for Processing",
-      slug: "why-online-utility-tools-are-useful",
+      slug: "what-happens-when-a-file-is-uploaded-for-processing",
       description: "Learn the security differences between client-side HTML5 engines and server-side processing pipelines that require document transport.",
       icon: ShieldCheck
     },
     {
       title: "How to Use Document Utilities Safely online",
-      slug: "why-online-utility-tools-are-useful",
+      slug: "how-to-use-document-utilities-safely-online",
       description: "Key rules for checking file size limits, validating credentials, and removing metadata before distributing output documents.",
       icon: Eye
     }

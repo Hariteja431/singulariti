@@ -4484,10 +4484,7 @@ export function getToolGuideTitle(tool: { id: string; name: string; operationTyp
 
 export const blogGuidesList: BlogGuide[] = toolRegistry.map(tool => {
   const title = getToolGuideTitle(tool);
-  let metaTitle = `${title} | Singulariti`;
-  if (metaTitle.length > 60) {
-    metaTitle = title.slice(0, 60);
-  }
+  const metaTitle = `${title} | Singulariti`;
   
   const desc = `Step-by-step guide on how to use ${tool.name.toLowerCase()} safely in your browser. Learn how it works, inputs required, outputs produced, and privacy rules.`;
   const metaDescription = desc.length > 155 ? desc.slice(0, 152) + "..." : desc;

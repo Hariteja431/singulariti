@@ -1309,7 +1309,7 @@ function getExtraContent(name: string, category: string, level: 'short' | 'mediu
   } else {
     return {
       intro: `
-        <p>Designed for fast and lightweight operations, the ${name} tool allows you to perform conversions, formatting, or calculations locally. This provides instant results directly inside your browser window.</p>
+        <p>Singulariti's browser-based tools are designed for fast and lightweight operations. You can perform conversions, formatting, or calculations entirely locally — no installation required, and no data ever leaves your device.</p>
       `,
       conclusion: `
         <p>Using client-side tools is a smart way to maintain productivity while keeping your system clean and your personal files private.</p>
@@ -1387,10 +1387,7 @@ export function normalizePost(post: BlogPost): BlogPost {
     sections.conclusion = sections.conclusion + extraHTML.conclusion;
   }
 
-  let metaTitle = `${title} | Singulariti`;
-  if (metaTitle.length > 60) {
-    metaTitle = title.slice(0, 60);
-  }
+  const metaTitle = `${title} | Singulariti`;
   
   const rawDesc = post.metaDescription || `Step-by-step guide on how to use ${title.toLowerCase()} safely in your browser. Learn how it works, inputs required, outputs produced, and privacy rules.`;
   const cleanDesc = cleanPrivacy(rawDesc);

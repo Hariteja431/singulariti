@@ -13,6 +13,10 @@ import { AnimationEngine } from '@/components/tool/AnimationEngine';
 import { getToolByPath, getCategoryById } from '@/registry';
 import { SeoSchema } from '@/components/tools/shared/SeoSchema';
 import { getUtilitySEO } from '@/lib/seo/utilityMetadata';
+import fs from 'fs';
+import path from 'path';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const EngineMap: Record<string, React.ElementType> = {
   compression: ToolEngine,
@@ -36,6 +40,14 @@ export default async function ToolPage(props: { params: Promise<{ collection: st
   if (!tool) return notFound();
 
   const seo = getUtilitySEO(tool.id);
+
+  let articleContent = '';
+  try {
+    const articlePath = path.join(process.cwd(), 'src', 'content', 'articles', `${tool.id}.md`);
+    if (fs.existsSync(articlePath)) {
+      articleContent = fs.readFileSync(articlePath, 'utf8');
+    }
+  } catch (e) {}
 
   return (
     <>
@@ -70,24 +82,34 @@ export default async function ToolPage(props: { params: Promise<{ collection: st
         </section>
 
         {/* SEO / Content Section */}
-        <section className="container mx-auto px-4 max-w-3xl mt-16 text-slate font-sans">
-          <article className="prose prose-slate dark:prose-invert max-w-none">
-            <h2 className="text-2xl font-bold font-display text-ink mb-4">About {tool.name}</h2>
-            <p className="mb-6">
-              Welcome to this online {tool.name}. The utility is designed to be fast, secure, and run entirely within the web browser. This means that files are never uploaded to servers, ensuring data remains completely private.
-            </p>
-            <h3 className="text-xl font-bold font-display text-ink mb-3">How it Works</h3>
-            <p className="mb-6">
-              Singulariti uses advanced WebAssembly and browser APIs like Web Workers and OffscreenCanvas to process images efficiently. When you select a file, the processing occurs locally using your device's resources. This eliminates upload/download times and provides instantaneous results.
-            </p>
-            <h3 className="text-xl font-bold font-display text-ink mb-3">Benefits of Browser-based Tools</h3>
-            <ul className="list-disc pl-6 mb-6">
-              <li className="mb-2"><strong>Zero Privacy Risks:</strong> Your files never leave your device.</li>
-              <li className="mb-2"><strong>No File Size Limits:</strong> Because there is no server upload, you aren't restricted by arbitrary server constraints.</li>
-              <li className="mb-2"><strong>Instant Execution:</strong> Processing starts immediately.</li>
-            </ul>
-          </article>
-        </section>
+        {articleContent ? (
+          <section className="container mx-auto px-4 max-w-3xl mt-16 text-slate font-sans">
+            <article className="prose prose-slate dark:prose-invert max-w-none">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {articleContent}
+              </ReactMarkdown>
+            </article>
+          </section>
+        ) : (
+          <section className="container mx-auto px-4 max-w-3xl mt-16 text-slate font-sans">
+            <article className="prose prose-slate dark:prose-invert max-w-none">
+              <h2 className="text-2xl font-bold font-display text-ink mb-4">About {tool.name}</h2>
+              <p className="mb-6">
+                Welcome to this online {tool.name}. The utility is designed to be fast, secure, and run entirely within the web browser. This means that files are never uploaded to servers, ensuring data remains completely private.
+              </p>
+              <h3 className="text-xl font-bold font-display text-ink mb-3">How it Works</h3>
+              <p className="mb-6">
+                Singulariti uses advanced WebAssembly and browser APIs like Web Workers and OffscreenCanvas to process images efficiently. When you select a file, the processing occurs locally using your device's resources. This eliminates upload/download times and provides instantaneous results.
+              </p>
+              <h3 className="text-xl font-bold font-display text-ink mb-3">Benefits of Browser-based Tools</h3>
+              <ul className="list-disc pl-6 mb-6">
+                <li className="mb-2"><strong>Zero Privacy Risks:</strong> Your files never leave your device.</li>
+                <li className="mb-2"><strong>No File Size Limits:</strong> Because there is no server upload, you aren't restricted by arbitrary server constraints.</li>
+                <li className="mb-2"><strong>Instant Execution:</strong> Processing starts immediately.</li>
+              </ul>
+            </article>
+          </section>
+        )}
 
         {/* Schema Markup */}
         {seo && (
