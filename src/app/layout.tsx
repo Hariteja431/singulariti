@@ -6,6 +6,7 @@ import Script from "next/script";
 import "./globals.css";
 import { DynamicStructuredData } from "@/components/seo/DynamicStructuredData";
 import { CookieConsent } from "@/components/layout/CookieConsent";
+import { AdsenseScript } from "@/components/seo/AdsenseScript";
 
 const syne = Syne({
   variable: "--font-syne",
@@ -112,6 +113,7 @@ export default function RootLayout({
           })}}
         />
         <DynamicStructuredData />
+        <AdsenseScript />
       </head>
       <body suppressHydrationWarning className="min-h-full flex flex-col font-sans bg-background text-foreground transition-colors duration-300">
         {/* Google Analytics 4 */}
