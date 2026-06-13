@@ -166,6 +166,29 @@ export function RandomNumber({ tool }: RandomNumberProps) {
             )}
           </div>
         </div>
+
+        {/* SEO Content Section */}
+        <div className="mt-20 max-w-4xl mx-auto prose prose-slate dark:prose-invert">
+          <h2 className="text-2xl font-display font-bold text-ink mb-4">How to Use the Random Number Generator</h2>
+          <p className="text-slate mb-6">
+            Generating secure, truly random numbers is essential for statistical sampling, lotteries, and secure password generation. Our Random Number Generator provides instant, client-side randomization.
+          </p>
+          
+          <div className="space-y-4">
+            <details className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+              <summary className="font-semibold cursor-pointer text-slate-800 dark:text-slate-200">How do I generate unique numbers without duplicates?</summary>
+              <div className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                Simply check the "Allow Duplicates" toggle in the settings so that it is turned off. The generator will mathematically ensure that every single number drawn is completely unique.
+              </div>
+            </details>
+            <details className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+              <summary className="font-semibold cursor-pointer text-slate-800 dark:text-slate-200">Are the generated numbers truly random?</summary>
+              <div className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                Yes! The tool leverages your browser's native Math.random() API to produce high-quality pseudo-random numbers. Since it runs 100% locally in your browser, your results are never sent to a server.
+              </div>
+            </details>
+          </div>
+        </div>
       </div>
     </ToolLayout>
   );

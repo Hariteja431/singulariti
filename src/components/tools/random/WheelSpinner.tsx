@@ -237,6 +237,29 @@ export function WheelSpinner({ tool }: WheelSpinnerProps) {
           </div>
           
         </div>
+
+        {/* SEO Content Section */}
+        <div className="mt-20 max-w-4xl mx-auto prose prose-slate dark:prose-invert">
+          <h2 className="text-2xl font-display font-bold text-ink mb-4">How to Use the Wheel Spinner</h2>
+          <p className="text-slate mb-6">
+            A virtual wheel spinner is the easiest way to make a random choice. Whether you are picking a winner for a giveaway, deciding what to eat for dinner, or gamifying a classroom activity, this free tool helps you make unbiased decisions instantly.
+          </p>
+          
+          <div className="space-y-4">
+            <details className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+              <summary className="font-semibold cursor-pointer text-slate-800 dark:text-slate-200">Is the wheel spinner truly random?</summary>
+              <div className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                Yes. The spinner utilizes a secure, cryptographic random number generator built into your browser. This ensures that every spin has a completely equal mathematical probability of landing on any slice.
+              </div>
+            </details>
+            <details className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+              <summary className="font-semibold cursor-pointer text-slate-800 dark:text-slate-200">Can I customize the options on the wheel?</summary>
+              <div className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                Absolutely! You can add, edit, or remove as many slices as you need using the entries sidebar. We automatically assign distinct, high-contrast colors to each option to make your wheel look great.
+              </div>
+            </details>
+          </div>
+        </div>
       </div>
     </ToolLayout>
   );

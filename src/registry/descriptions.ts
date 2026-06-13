@@ -6,6 +6,8 @@ import { pdfDetailsDb } from '../lib/tool-content/details/pdfDb';
 import { qrDetailsDb } from '../lib/tool-content/details/qrDb';
 import { seoDetailsDb } from '../lib/tool-content/details/seoDb';
 import { textDetailsDb } from '../lib/tool-content/details/textDb';
+import { randomDb } from '../lib/tool-content/details/randomDb';
+import { mediaDb } from '../lib/tool-content/details/mediaDb';
 
 const allDetailsDb: Record<string, { whyNeed: string; howWorks: string; whenToUse: string }> = {
   ...calculatorsDetailsDb,
@@ -15,7 +17,9 @@ const allDetailsDb: Record<string, { whyNeed: string; howWorks: string; whenToUs
   ...pdfDetailsDb,
   ...qrDetailsDb,
   ...seoDetailsDb,
-  ...textDetailsDb
+  ...textDetailsDb,
+  ...randomDb,
+  ...mediaDb
 };
 
 function cleanMarkdown(str: string): string {

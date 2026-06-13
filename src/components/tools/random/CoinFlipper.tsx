@@ -75,6 +75,29 @@ export function CoinFlipper({ tool }: Props) {
             </div>
           </div>
         </div>
+
+        {/* SEO Content Section */}
+        <div className="mt-20 max-w-4xl mx-auto prose prose-slate dark:prose-invert">
+          <h2 className="text-2xl font-display font-bold text-ink mb-4">How to Use the Online Coin Flipper</h2>
+          <p className="text-slate mb-6">
+            Our virtual coin flipper is the easiest way to settle a 50/50 dispute or make a quick random decision without needing a physical coin in your pocket. The tool provides a satisfying 3D spinning animation and an instant, mathematically unbiased result.
+          </p>
+          
+          <div className="space-y-4">
+            <details className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+              <summary className="font-semibold cursor-pointer text-slate-800 dark:text-slate-200">Are the coin flips guaranteed to be 50/50?</summary>
+              <div className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                Yes! The underlying code uses a strict boolean randomization algorithm. On every flip, the computer calculates a precise 50% probability for Heads and 50% for Tails, meaning the results are completely fair.
+              </div>
+            </details>
+            <details className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+              <summary className="font-semibold cursor-pointer text-slate-800 dark:text-slate-200">Is my data safe when using this tool?</summary>
+              <div className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                Absolutely. Our coin flipper runs entirely in your local web browser. No data, flip results, or tracking information is ever sent back to our servers.
+              </div>
+            </details>
+          </div>
+        </div>
       </div>
     </ToolLayout>
   );

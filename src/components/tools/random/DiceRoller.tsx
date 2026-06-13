@@ -113,6 +113,29 @@ export function DiceRoller({ tool }: DiceRollerProps) {
               </div>
           </div>
         </div>
+
+        {/* SEO Content Section */}
+        <div className="mt-20 max-w-4xl mx-auto prose prose-slate dark:prose-invert">
+          <h2 className="text-2xl font-display font-bold text-ink mb-4">How to Use the Online Dice Roller</h2>
+          <p className="text-slate mb-6">
+            Our free 3D virtual dice roller is the perfect backup when you misplace your physical dice. Whether you are playing a tabletop board game, teaching probability in a math class, or just need to roll some dice on the go, this tool provides instant and mathematically fair rolls.
+          </p>
+          
+          <div className="space-y-4">
+            <details className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+              <summary className="font-semibold cursor-pointer text-slate-800 dark:text-slate-200">How many dice can I roll at once?</summary>
+              <div className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                You can configure the dice roller to roll up to 100 dice simultaneously. The tool will automatically calculate and display the total sum of all the dice rolled, making it extremely easy to manage large rolls for roleplaying games.
+              </div>
+            </details>
+            <details className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+              <summary className="font-semibold cursor-pointer text-slate-800 dark:text-slate-200">Is this dice roller fair and unbiased?</summary>
+              <div className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                Yes. Our virtual dice rely on your browser's internal pseudo-random number generator, ensuring a completely unbiased 1-in-6 probability for every face on every single roll.
+              </div>
+            </details>
+          </div>
+        </div>
       </div>
     </ToolLayout>
   );

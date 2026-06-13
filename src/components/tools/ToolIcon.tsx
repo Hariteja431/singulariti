@@ -21,7 +21,7 @@ import {
   // QR
   QrCode, ScanLine, Wifi, Smartphone, Mail, Briefcase, Globe,
   // Media & Random
-  Mic, Monitor, Camera, Video, PlaySquare, Volume2, Gamepad2, Shuffle, Dice5, Focus, Sparkles
+  Mic, Monitor, Camera, Video, PlaySquare, Volume2, Gamepad2, Shuffle, Dice5, Focus, Sparkles, LifeBuoy
 } from 'lucide-react';
 
 interface ToolIconProps {
@@ -187,7 +187,8 @@ export function ToolIcon({ toolId, className = "w-14 h-14" }: ToolIconProps) {
   // ==========================================
   else if (id.includes('random') || id.includes('dice') || id.includes('coin') || id.includes('wheel') || id.includes('generator')) {
     if (id.includes('dice') || id.includes('coin')) IconComponent = Dice5;
-    else if (id.includes('wheel') || id.includes('picker')) IconComponent = Focus;
+    else if (id.includes('wheel') || id.includes('picker')) IconComponent = LifeBuoy;
+    else if (id.includes('random-number') || id.includes('number')) IconComponent = Hash;
     else if (id.includes('zalgo') || id.includes('glitch')) IconComponent = Sparkles;
     else IconComponent = Shuffle;
   }
