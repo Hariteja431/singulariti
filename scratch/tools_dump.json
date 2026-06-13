@@ -1,0 +1,887 @@
+[
+  {
+    "id": "image-compressor",
+    "name": "Image Compressor",
+    "sectionId": "image"
+  },
+  {
+    "id": "jpg-compressor",
+    "name": "JPG Compressor",
+    "sectionId": "image"
+  },
+  {
+    "id": "jpeg-compressor",
+    "name": "JPEG Compressor",
+    "sectionId": "image"
+  },
+  {
+    "id": "png-compressor",
+    "name": "PNG Compressor",
+    "sectionId": "image"
+  },
+  {
+    "id": "webp-compressor",
+    "name": "WebP Compressor",
+    "sectionId": "image"
+  },
+  {
+    "id": "svg-compressor",
+    "name": "SVG Compressor",
+    "sectionId": "image"
+  },
+  {
+    "id": "jpg-to-png",
+    "name": "JPG to PNG",
+    "sectionId": "image"
+  },
+  {
+    "id": "png-to-jpg",
+    "name": "PNG to JPG",
+    "sectionId": "image"
+  },
+  {
+    "id": "jpg-to-webp",
+    "name": "JPG to WebP",
+    "sectionId": "image"
+  },
+  {
+    "id": "png-to-webp",
+    "name": "PNG to WebP",
+    "sectionId": "image"
+  },
+  {
+    "id": "webp-to-jpg",
+    "name": "WebP to JPG",
+    "sectionId": "image"
+  },
+  {
+    "id": "webp-to-png",
+    "name": "WebP to PNG",
+    "sectionId": "image"
+  },
+  {
+    "id": "jpg-to-jpeg",
+    "name": "JPG to JPEG",
+    "sectionId": "image"
+  },
+  {
+    "id": "jpeg-to-jpg",
+    "name": "JPEG to JPG",
+    "sectionId": "image"
+  },
+  {
+    "id": "svg-to-png",
+    "name": "SVG to PNG",
+    "sectionId": "image"
+  },
+  {
+    "id": "svg-to-jpg",
+    "name": "SVG to JPG",
+    "sectionId": "image"
+  },
+  {
+    "id": "svg-to-webp",
+    "name": "SVG to WebP",
+    "sectionId": "image"
+  },
+  {
+    "id": "png-to-svg",
+    "name": "PNG to SVG",
+    "sectionId": "image"
+  },
+  {
+    "id": "jpg-to-svg",
+    "name": "JPG to SVG",
+    "sectionId": "image"
+  },
+  {
+    "id": "webp-to-svg",
+    "name": "WebP to SVG",
+    "sectionId": "image"
+  },
+  {
+    "id": "image-metadata-viewer",
+    "name": "Image Metadata Viewer",
+    "sectionId": "image"
+  },
+  {
+    "id": "image-dimension-checker",
+    "name": "Image Dimension Checker",
+    "sectionId": "image"
+  },
+  {
+    "id": "image-format-detector",
+    "name": "Image Format Detector",
+    "sectionId": "image"
+  },
+  {
+    "id": "color-picker-from-image",
+    "name": "Color Picker From Image",
+    "sectionId": "image"
+  },
+  {
+    "id": "image-color-palette-extractor",
+    "name": "Image Color Palette Extractor",
+    "sectionId": "image"
+  },
+  {
+    "id": "image-to-base64",
+    "name": "Image to Base64",
+    "sectionId": "image"
+  },
+  {
+    "id": "base64-to-image",
+    "name": "Base64 to Image",
+    "sectionId": "image"
+  },
+  {
+    "id": "crop-image",
+    "name": "Crop Image",
+    "sectionId": "editing"
+  },
+  {
+    "id": "image-resizer",
+    "name": "Image Resizer",
+    "sectionId": "editing"
+  },
+  {
+    "id": "rotate-image",
+    "name": "Rotate Image",
+    "sectionId": "editing"
+  },
+  {
+    "id": "flip-image",
+    "name": "Flip Image",
+    "sectionId": "editing"
+  },
+  {
+    "id": "image-upscaler",
+    "name": "Image Upscaler",
+    "sectionId": "editing"
+  },
+  {
+    "id": "image-enhancer",
+    "name": "Image Enhancer",
+    "sectionId": "editing"
+  },
+  {
+    "id": "image-sharpen",
+    "name": "Sharpen Image",
+    "sectionId": "editing"
+  },
+  {
+    "id": "image-denoiser",
+    "name": "Denoise Image",
+    "sectionId": "editing"
+  },
+  {
+    "id": "brightness-and-contrast-adjuster",
+    "name": "Brightness & Contrast",
+    "sectionId": "editing"
+  },
+  {
+    "id": "color-adjuster",
+    "name": "Color Adjuster",
+    "sectionId": "editing"
+  },
+  {
+    "id": "grayscale",
+    "name": "Grayscale Converter",
+    "sectionId": "editing"
+  },
+  {
+    "id": "color-to-black-and-white",
+    "name": "Color to Black & White",
+    "sectionId": "editing"
+  },
+  {
+    "id": "black-and-white-to-color",
+    "name": "Black & White to Color",
+    "sectionId": "editing"
+  },
+  {
+    "id": "blur-image",
+    "name": "Blur Image",
+    "sectionId": "editing"
+  },
+  {
+    "id": "pixelate-image",
+    "name": "Pixelate Image",
+    "sectionId": "editing"
+  },
+  {
+    "id": "add-watermark-to-image",
+    "name": "Add Watermark",
+    "sectionId": "editing"
+  },
+  {
+    "id": "add-text-on-image",
+    "name": "Add Text",
+    "sectionId": "editing"
+  },
+  {
+    "id": "add-logo-overlay",
+    "name": "Add Logo Overlay",
+    "sectionId": "editing"
+  },
+  {
+    "id": "merge-pdf",
+    "name": "Merge PDF",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "split-pdf",
+    "name": "Split PDF",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "rotate-pdf",
+    "name": "Rotate PDF",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "delete-pdf-pages",
+    "name": "Delete PDF Pages",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "rearrange-pdf-pages",
+    "name": "Rearrange PDF Pages",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "extract-pdf-pages",
+    "name": "Extract PDF Pages",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "jpg-to-pdf",
+    "name": "JPG to PDF",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "pdf-to-jpg",
+    "name": "PDF to JPG",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "compress-pdf",
+    "name": "Compress PDF",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "sign-pdf",
+    "name": "Sign PDF",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "watermark-pdf",
+    "name": "Add Watermark to PDF",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "protect-pdf",
+    "name": "Protect PDF",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "metadata-viewer",
+    "name": "PDF Metadata Viewer",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "page-counter",
+    "name": "PDF Page Counter",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "pdf-to-text",
+    "name": "PDF to Text",
+    "sectionId": "pdf"
+  },
+  {
+    "id": "qr-code-generator",
+    "name": "QR Code Generator",
+    "sectionId": "qr"
+  },
+  {
+    "id": "qr-code-scanner",
+    "name": "QR Code Scanner",
+    "sectionId": "qr"
+  },
+  {
+    "id": "url-qr-code-generator",
+    "name": "URL QR Code Generator",
+    "sectionId": "qr"
+  },
+  {
+    "id": "text-qr-code-generator",
+    "name": "Text QR Code Generator",
+    "sectionId": "qr"
+  },
+  {
+    "id": "wifi-qr-code-generator",
+    "name": "Wi-Fi QR Code Generator",
+    "sectionId": "qr"
+  },
+  {
+    "id": "vcard-qr-code-generator",
+    "name": "vCard QR Code Generator",
+    "sectionId": "qr"
+  },
+  {
+    "id": "email-qr-code-generator",
+    "name": "Email QR Code Generator",
+    "sectionId": "qr"
+  },
+  {
+    "id": "phone-number-qr-code-generator",
+    "name": "Phone Number QR Code Generator",
+    "sectionId": "qr"
+  },
+  {
+    "id": "sms-qr-code-generator",
+    "name": "SMS QR Code Generator",
+    "sectionId": "qr"
+  },
+  {
+    "id": "upi-qr-code-generator",
+    "name": "UPI QR Code Generator",
+    "sectionId": "qr"
+  },
+  {
+    "id": "emi-calculator",
+    "name": "EMI Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "sip-calculator",
+    "name": "SIP Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "compound-interest-calculator",
+    "name": "Compound Interest Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "cagr-calculator",
+    "name": "CAGR Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "fd-calculator",
+    "name": "FD Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "roi-calculator",
+    "name": "ROI Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "currency-converter",
+    "name": "Currency Converter",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "mortgage-calculator",
+    "name": "Mortgage Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "loan-calculator",
+    "name": "Loan Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "income-tax-calculator",
+    "name": "Income Tax Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "gst-calculator",
+    "name": "GST Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "discount-calculator",
+    "name": "Discount Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "profit-calculator",
+    "name": "Profit Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "youtube-earnings-calculator",
+    "name": "YouTube Earnings Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "adsense-revenue-calculator",
+    "name": "AdSense Revenue Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "simple-interest-calculator",
+    "name": "Simple Interest Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "salary-calculator",
+    "name": "Salary Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "percentage-calculator",
+    "name": "Percentage Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "cgpa-calculator",
+    "name": "CGPA Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "scientific-calculator",
+    "name": "Scientific Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "basic-calculator",
+    "name": "Basic Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "age-calculator",
+    "name": "Age Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "date-difference-calculator",
+    "name": "Date Difference Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "bmi-calculator",
+    "name": "BMI Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "calorie-calculator",
+    "name": "Calorie Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "tip-calculator",
+    "name": "Tip Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "time-duration-calculator",
+    "name": "Time Duration Calculator",
+    "sectionId": "calculators"
+  },
+  {
+    "id": "word-counter",
+    "name": "Word Counter",
+    "sectionId": "text"
+  },
+  {
+    "id": "character-counter",
+    "name": "Character Counter",
+    "sectionId": "text"
+  },
+  {
+    "id": "case-converter",
+    "name": "Case Converter",
+    "sectionId": "text"
+  },
+  {
+    "id": "remove-duplicate-lines",
+    "name": "Remove Duplicate Lines",
+    "sectionId": "text"
+  },
+  {
+    "id": "text-sorter",
+    "name": "Text Sorter",
+    "sectionId": "text"
+  },
+  {
+    "id": "text-compare",
+    "name": "Text Compare",
+    "sectionId": "text"
+  },
+  {
+    "id": "text-diff",
+    "name": "Text Diff Checker",
+    "sectionId": "text"
+  },
+  {
+    "id": "remove-extra-spaces",
+    "name": "Remove Extra Spaces",
+    "sectionId": "text"
+  },
+  {
+    "id": "line-counter",
+    "name": "Line Counter",
+    "sectionId": "text"
+  },
+  {
+    "id": "sentence-counter",
+    "name": "Sentence Counter",
+    "sectionId": "text"
+  },
+  {
+    "id": "paragraph-counter",
+    "name": "Paragraph Counter",
+    "sectionId": "text"
+  },
+  {
+    "id": "text-reverser",
+    "name": "Text Reverser",
+    "sectionId": "text"
+  },
+  {
+    "id": "slug-generator",
+    "name": "Slug Generator",
+    "sectionId": "text"
+  },
+  {
+    "id": "find-replace",
+    "name": "Find and Replace Text",
+    "sectionId": "text"
+  },
+  {
+    "id": "text-uppercase",
+    "name": "Text to Uppercase",
+    "sectionId": "text"
+  },
+  {
+    "id": "text-lowercase",
+    "name": "Text to Lowercase",
+    "sectionId": "text"
+  },
+  {
+    "id": "capitalize-text",
+    "name": "Capitalize Text",
+    "sectionId": "text"
+  },
+  {
+    "id": "title-case",
+    "name": "Title Case Converter",
+    "sectionId": "text"
+  },
+  {
+    "id": "lorem-ipsum",
+    "name": "Lorem Ipsum Generator",
+    "sectionId": "text"
+  },
+  {
+    "id": "random-text",
+    "name": "Random Text Generator",
+    "sectionId": "text"
+  },
+  {
+    "id": "json-formatter",
+    "name": "JSON Formatter",
+    "sectionId": "dev"
+  },
+  {
+    "id": "json-validator",
+    "name": "JSON Validator",
+    "sectionId": "dev"
+  },
+  {
+    "id": "xml-formatter",
+    "name": "XML Formatter",
+    "sectionId": "dev"
+  },
+  {
+    "id": "yaml-formatter",
+    "name": "YAML Formatter",
+    "sectionId": "dev"
+  },
+  {
+    "id": "sql-formatter",
+    "name": "SQL Formatter",
+    "sectionId": "dev"
+  },
+  {
+    "id": "code-beautifier",
+    "name": "Code Beautifier",
+    "sectionId": "dev"
+  },
+  {
+    "id": "base64-encoder-decoder",
+    "name": "Base64 Encoder/Decoder",
+    "sectionId": "dev"
+  },
+  {
+    "id": "url-encoder-decoder",
+    "name": "URL Encoder/Decoder",
+    "sectionId": "dev"
+  },
+  {
+    "id": "jwt-decoder",
+    "name": "JWT Decoder",
+    "sectionId": "dev"
+  },
+  {
+    "id": "html-encoder-decoder",
+    "name": "HTML Encoder/Decoder",
+    "sectionId": "dev"
+  },
+  {
+    "id": "html-minifier",
+    "name": "HTML Minifier",
+    "sectionId": "dev"
+  },
+  {
+    "id": "css-minifier",
+    "name": "CSS Minifier",
+    "sectionId": "dev"
+  },
+  {
+    "id": "js-minifier",
+    "name": "JS Minifier",
+    "sectionId": "dev"
+  },
+  {
+    "id": "regex-tester",
+    "name": "Regex Tester",
+    "sectionId": "dev"
+  },
+  {
+    "id": "uuid-generator",
+    "name": "UUID Generator",
+    "sectionId": "dev"
+  },
+  {
+    "id": "hash-generator",
+    "name": "Hash Generator",
+    "sectionId": "dev"
+  },
+  {
+    "id": "color-picker-tool",
+    "name": "Color Picker",
+    "sectionId": "dev"
+  },
+  {
+    "id": "hex-to-rgb",
+    "name": "HEX to RGB Converter",
+    "sectionId": "dev"
+  },
+  {
+    "id": "rgb-to-hex",
+    "name": "RGB to HEX Converter",
+    "sectionId": "dev"
+  },
+  {
+    "id": "timestamp-converter",
+    "name": "Timestamp Converter",
+    "sectionId": "dev"
+  },
+  {
+    "id": "unix-time-converter",
+    "name": "Unix Time Converter",
+    "sectionId": "dev"
+  },
+  {
+    "id": "markdown-previewer",
+    "name": "Markdown Previewer",
+    "sectionId": "dev"
+  },
+  {
+    "id": "html-previewer",
+    "name": "HTML Previewer",
+    "sectionId": "dev"
+  },
+  {
+    "id": "web-compiler",
+    "name": "Web Compiler",
+    "sectionId": "dev"
+  },
+  {
+    "id": "length-converter",
+    "name": "Length Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "weight-converter",
+    "name": "Weight Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "temperature-converter",
+    "name": "Temperature Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "area-converter",
+    "name": "Area Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "volume-converter",
+    "name": "Volume Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "speed-converter",
+    "name": "Speed Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "time-converter",
+    "name": "Time Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "data-storage-converter",
+    "name": "Data Storage Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "fuel-efficiency-converter",
+    "name": "Fuel Efficiency Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "angle-converter",
+    "name": "Angle Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "pressure-converter",
+    "name": "Pressure Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "energy-converter",
+    "name": "Energy Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "power-converter",
+    "name": "Power Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "frequency-converter",
+    "name": "Frequency Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "number-base-converter",
+    "name": "Number Base Converter",
+    "sectionId": "convert"
+  },
+  {
+    "id": "meta-tag-generator",
+    "name": "Meta Tag Generator",
+    "sectionId": "seo"
+  },
+  {
+    "id": "meta-title-checker",
+    "name": "Meta Title Length Checker",
+    "sectionId": "seo"
+  },
+  {
+    "id": "meta-description-checker",
+    "name": "Meta Description Length Checker",
+    "sectionId": "seo"
+  },
+  {
+    "id": "seo-keyword-density",
+    "name": "Keyword Density Checker",
+    "sectionId": "seo"
+  },
+  {
+    "id": "seo-slug-generator",
+    "name": "Slug Generator",
+    "sectionId": "seo"
+  },
+  {
+    "id": "robots-txt-generator",
+    "name": "Robots.txt Generator",
+    "sectionId": "seo"
+  },
+  {
+    "id": "sitemap-xml-generator",
+    "name": "Sitemap XML Generator",
+    "sectionId": "seo"
+  },
+  {
+    "id": "open-graph-generator",
+    "name": "Open Graph Tag Generator",
+    "sectionId": "seo"
+  },
+  {
+    "id": "twitter-card-generator",
+    "name": "Twitter Card Generator",
+    "sectionId": "seo"
+  },
+  {
+    "id": "seo-word-count",
+    "name": "Word Count for SEO",
+    "sectionId": "seo"
+  },
+  {
+    "id": "heading-structure-checker",
+    "name": "Heading Structure Checker",
+    "sectionId": "seo"
+  },
+  {
+    "id": "gif-maker",
+    "name": "GIF Maker",
+    "sectionId": "image"
+  },
+  {
+    "id": "heic-to-jpg",
+    "name": "HEIC to JPG",
+    "sectionId": "image"
+  },
+  {
+    "id": "cron-generator",
+    "name": "CRON Expression Generator",
+    "sectionId": "dev"
+  },
+  {
+    "id": "password-generator",
+    "name": "Password Generator",
+    "sectionId": "dev"
+  },
+  {
+    "id": "bcrypt-generator",
+    "name": "Bcrypt Hash Generator",
+    "sectionId": "dev"
+  },
+  {
+    "id": "css-gradient-generator",
+    "name": "CSS Gradient Generator",
+    "sectionId": "dev"
+  },
+  {
+    "id": "css-box-shadow",
+    "name": "CSS Box Shadow Generator",
+    "sectionId": "dev"
+  },
+  {
+    "id": "color-contrast-checker",
+    "name": "WCAG Color Contrast Checker",
+    "sectionId": "dev"
+  },
+  {
+    "id": "svg-optimizer",
+    "name": "SVG Optimizer",
+    "sectionId": "dev"
+  },
+  {
+    "id": "pdf-image-extractor",
+    "name": "PDF Image Extractor",
+    "sectionId": "dev"
+  }
+]

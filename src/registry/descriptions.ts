@@ -1,10 +1,40 @@
-// Deterministic DJB2 hash helper
-function getHash(str: string): number {
-  let hash = 5381;
-  for (let i = 0; i < str.length; i++) {
-    hash = (hash * 33) ^ str.charCodeAt(i);
+import { calculatorsDetailsDb } from '../lib/tool-content/details/calculatorsDb';
+import { convertDetailsDb } from '../lib/tool-content/details/convertDb';
+import { devDetailsDb } from '../lib/tool-content/details/devDb';
+import { imageDetailsDb } from '../lib/tool-content/details/imageDb';
+import { pdfDetailsDb } from '../lib/tool-content/details/pdfDb';
+import { qrDetailsDb } from '../lib/tool-content/details/qrDb';
+import { seoDetailsDb } from '../lib/tool-content/details/seoDb';
+import { textDetailsDb } from '../lib/tool-content/details/textDb';
+
+const allDetailsDb: Record<string, { whyNeed: string; howWorks: string; whenToUse: string }> = {
+  ...calculatorsDetailsDb,
+  ...convertDetailsDb,
+  ...devDetailsDb,
+  ...imageDetailsDb,
+  ...pdfDetailsDb,
+  ...qrDetailsDb,
+  ...seoDetailsDb,
+  ...textDetailsDb
+};
+
+function cleanMarkdown(str: string): string {
+  if (!str) return '';
+  return str
+    .replace(/\*\*/g, '')
+    .replace(/\*/g, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .trim();
+}
+
+function cleanHowWorks(str: string): string {
+  let clean = cleanMarkdown(str);
+  clean = clean.replace(/^The browser-based application reads parameters in-memory\.\s*/i, '');
+  clean = clean.replace(/^Specifically,\s*/i, '');
+  if (clean.length > 0) {
+    clean = clean[0].toUpperCase() + clean.slice(1);
   }
-  return Math.abs(hash);
+  return clean;
 }
 
 // Map format abbreviations to full descriptive terms
@@ -156,28 +186,6 @@ const toolActions: Record<string, string> = {
   'upi-qr-code-generator': 'Generate secure UPI payment QR codes pre-configured with merchant VPA IDs and amounts'
 };
 
-// Generic sentence template sets to build structural variation
-const processVerbs = [
-  'Executes locally on your CPU using HTML5 APIs for rapid loading.',
-  'Works fully inside your client web tab without data transmission delays.',
-  'Runs client-side in your browser cache to ensure high-speed operation.',
-  'Processes parameters entirely in-memory for instant feedback loops.'
-];
-
-const safetyGuarantees = [
-  'Your inputs are never uploaded to any remote server, guaranteeing 100% data safety.',
-  'Keeps your files and parameters completely private with zero server logging.',
-  'Guarantees absolute data privacy, leaving no digital footprint on third-party networks.',
-  'Provides a highly secure, sandboxed workspace that respects your confidentiality.'
-];
-
-const userBenefits = [
-  'Perfect for developers, students, and professionals looking for secure utility tools.',
-  'Provides a lightweight, ad-free, and signup-free utility workspace.',
-  'Enables instant operation without software installation or account setup.',
-  'A fast and reliable browser-based utility that respects your time and data.'
-];
-
 export function getDynamicToolDescription(
   toolId: string,
   toolName: string,
@@ -185,59 +193,56 @@ export function getDynamicToolDescription(
   collectionId: string,
   type: 'description' | 'seoDescription'
 ): string {
-  const hash = getHash(toolId);
-  const offset = type === 'seoDescription' ? 1 : 0;
-
-  // Determine structural indices
-  const verbIdx = (hash + offset) % processVerbs.length;
-  const safetyIdx = ((hash >> 2) + offset) % safetyGuarantees.length;
-  const benefitIdx = ((hash >> 4) + offset) % userBenefits.length;
-
-  let primarySentence = '';
+  let actionText = '';
 
   // 1. Check if tool has an explicit action description
   if (toolActions[toolId]) {
-    primarySentence = toolActions[toolId] + '.';
+    actionText = toolActions[toolId] + '.';
   } else {
     // Fallback parsing based on common pattern names
     if (toolId.includes('-to-')) {
       const parts = toolId.split('-to-');
       const from = getFormatName(parts[0]);
       const to = getFormatName(parts[1].replace('-guide', ''));
-      primarySentence = `Convert ${from} files into ${to} formats instantly.`;
+      actionText = `Convert ${from} files into ${to} formats instantly.`;
     } else if (toolId.includes('compress')) {
       const label = toolId.replace('-compressor', '').replace('compress-', '');
       const format = getFormatName(label);
-      primarySentence = `Reduce the file size and compress ${format} assets while preserving quality.`;
+      actionText = `Reduce the file size and compress ${format} assets while preserving quality.`;
     } else if (toolId.includes('generator') || toolId.includes('maker')) {
-      primarySentence = `Generate customized ${toolName.toLowerCase()} assets using local browser configurations.`;
+      actionText = `Generate customized ${toolName.toLowerCase()} assets using local browser configurations.`;
     } else if (toolId.includes('scanner') || toolId.includes('picker') || toolId.includes('detector')) {
-      primarySentence = `Analyze and extract information from your files using the local ${toolName.toLowerCase()} script.`;
+      actionText = `Analyze and extract information from your files using the local ${toolName.toLowerCase()} script.`;
     } else {
       // General fallback based on category
       if (categoryId === 'image') {
-        primarySentence = `Process, optimize, and analyze ${toolName.toLowerCase()} parameters in your browser.`;
+        actionText = `Process, optimize, and analyze ${toolName.toLowerCase()} parameters in your browser.`;
       } else if (categoryId === 'pdf') {
-        primarySentence = `Manage, edit, and adjust ${toolName.toLowerCase()} files locally without downloads.`;
+        actionText = `Manage, edit, and adjust ${toolName.toLowerCase()} files locally without downloads.`;
       } else if (categoryId === 'calculators') {
-        primarySentence = `Evaluate numerical equations and verify results with the online ${toolName.toLowerCase()}.`;
+        actionText = `Evaluate numerical equations and verify results with the online ${toolName.toLowerCase()}.`;
       } else if (categoryId === 'convert') {
-        primarySentence = `Convert measurements and calculate units with the ${toolName.toLowerCase()} module.`;
+        actionText = `Convert measurements and calculate units with the ${toolName.toLowerCase()} module.`;
       } else {
-        primarySentence = `Free online ${toolName.toLowerCase()} utility to help format and inspect parameters.`;
+        actionText = `Free online ${toolName.toLowerCase()} utility to help format and inspect parameters.`;
       }
     }
   }
 
-  // 2. Select secondary and tertiary sentences based on type
-  if (type === 'description') {
-    // Brief, actionable description (max 2 sentences, ideal for cards and grids)
-    const secondary = processVerbs[verbIdx];
-    return `${primarySentence} ${secondary}`;
-  } else {
-    // Riper SEO description (ideal for page metadata)
-    const secondary = safetyGuarantees[safetyIdx];
-    const tertiary = userBenefits[benefitIdx];
-    return `${primarySentence} ${secondary} ${tertiary}`;
+  // 2. Map descriptions from details database
+  const entry = allDetailsDb[toolId];
+  if (entry) {
+    const why = cleanMarkdown(entry.whyNeed);
+    const how = cleanHowWorks(entry.howWorks);
+
+    if (type === 'description') {
+      // Brief, actionable description (2 sentences: specific action + specific whyNeed)
+      return `${actionText} ${why}`;
+    } else {
+      // Rich SEO description (3 sentences: action + whyNeed + howWorks)
+      return `${actionText} ${why} ${how}`;
+    }
   }
+
+  return actionText;
 }

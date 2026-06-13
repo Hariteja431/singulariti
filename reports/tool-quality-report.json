@@ -1,0 +1,6362 @@
+[
+  {
+    "slug": "add-logo-overlay",
+    "title": "Add Logo Overlay",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "add-text-on-image",
+    "title": "Add Text On Image",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "add-watermark-to-image",
+    "title": "Add Watermark To Image",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "adsense-revenue-calculator",
+    "title": "Adsense Revenue Calculator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "profit-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "salary-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "simple-interest-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "youtube-earnings-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "angle-converter",
+    "title": "Angle Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "area-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "data-storage-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "energy-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fuel-efficiency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "length-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "number-base-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "power-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "speed-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "volume-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "area-converter",
+    "title": "Area Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "angle-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "data-storage-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "energy-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fuel-efficiency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "length-converter",
+        "similarityScore": 0.6,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "number-base-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "power-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "speed-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "volume-converter",
+        "similarityScore": 0.6,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "volume-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "black-and-white-to-color",
+    "title": "Black And White To Color",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "blur-image",
+    "title": "Blur Image",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "brightness-and-contrast-adjuster",
+    "title": "Brightness And Contrast Adjuster",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "cagr-calculator",
+    "title": "Cagr Calculator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "currency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fd-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "loan-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "mortgage-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "roi-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "calorie-calculator",
+    "title": "Calorie Calculator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "time-duration-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "tip-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "capitalize-text",
+    "title": "Capitalize Text",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "find-replace",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "line-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "lorem-ipsum",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "paragraph-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "random-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-duplicate-lines",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-extra-spaces",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sentence-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-diff",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-lowercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-reverser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-sorter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-uppercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "title-case",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "case-converter",
+    "title": "Case Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "character-counter",
+    "title": "Character Counter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "code-beautifier",
+    "title": "Code Beautifier",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sql-formatter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "yaml-formatter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "color-adjuster",
+    "title": "Color Adjuster",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "color-picker-from-image",
+    "title": "Color Picker From Image",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-color-palette-extractor",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "color-picker-tool",
+    "title": "Color Picker Tool",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "cron-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "color-to-black-and-white",
+    "title": "Color To Black And White",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "currency-converter",
+    "title": "Currency Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "cagr-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fd-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "loan-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "mortgage-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "roi-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "data-storage-converter",
+    "title": "Data Storage Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "angle-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "area-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "energy-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fuel-efficiency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "number-base-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "power-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "speed-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "volume-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "delete-pdf-pages",
+    "title": "Delete Pdf Pages",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "extract-pdf-pages",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-pdf",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pdf-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "rearrange-pdf-pages",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "email-qr-code-generator",
+    "title": "Email Qr Code Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "phone-number-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sms-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "upi-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "vcard-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "wifi-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "emi-calculator",
+    "title": "Emi Calculator",
+    "issues": [
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "sip-calculator",
+        "similarityScore": 0.42857142857142855,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      }
+    ]
+  },
+  {
+    "slug": "energy-converter",
+    "title": "Energy Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "angle-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "area-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "data-storage-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fuel-efficiency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "number-base-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "power-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "power-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "speed-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "speed-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "time-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "volume-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "extract-pdf-pages",
+    "title": "Extract Pdf Pages",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "delete-pdf-pages",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-pdf",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pdf-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "rearrange-pdf-pages",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "fd-calculator",
+    "title": "Fd Calculator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "cagr-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "currency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "loan-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "mortgage-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "roi-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "find-replace",
+    "title": "Find Replace",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "capitalize-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "line-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "lorem-ipsum",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "paragraph-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "random-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-duplicate-lines",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-extra-spaces",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sentence-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-diff",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-lowercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-reverser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-sorter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-uppercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "title-case",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "flip-image",
+    "title": "Flip Image",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "frequency-converter",
+    "title": "Frequency Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "angle-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "area-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "data-storage-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "energy-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "energy-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fuel-efficiency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "number-base-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "power-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "power-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "speed-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "speed-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "time-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "volume-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "fuel-efficiency-converter",
+    "title": "Fuel Efficiency Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "angle-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "area-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "data-storage-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "energy-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "number-base-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "power-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "speed-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "volume-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "grayscale",
+    "title": "Grayscale",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "hash-generator",
+    "title": "Hash Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "cron-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "heading-structure-checker",
+    "title": "Heading Structure Checker",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "open-graph-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "robots-txt-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-keyword-density",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-word-count",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sitemap-xml-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "twitter-card-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "hex-to-rgb",
+    "title": "Hex To Rgb",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "cron-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "markdown-previewer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "rgb-to-hex",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "timestamp-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "unix-time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "image-color-palette-extractor",
+    "title": "Image Color Palette Extractor",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-picker-from-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "image-denoiser",
+    "title": "Image Denoiser",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "image-enhancer",
+    "title": "Image Enhancer",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "image-sharpen",
+    "title": "Image Sharpen",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "image-upscaler",
+    "title": "Image Upscaler",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pixelate-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "jpeg-compressor",
+    "title": "Jpeg Compressor",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "heic-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "jpeg-to-jpg",
+    "title": "Jpeg To Jpg",
+    "issues": [
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "jpg-to-jpeg",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-jpeg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "jpg-compressor",
+    "title": "Jpg Compressor",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "heic-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "jpg-to-jpeg",
+    "title": "Jpg To Jpeg",
+    "issues": [
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "jpeg-to-jpg",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpeg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "jpg-to-svg",
+    "title": "Jpg To Svg",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpeg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-jpeg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "length-converter",
+    "title": "Length Converter",
+    "issues": [
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "angle-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "area-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "volume-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      }
+    ]
+  },
+  {
+    "slug": "line-counter",
+    "title": "Line Counter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "capitalize-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "find-replace",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "lorem-ipsum",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "paragraph-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "random-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-duplicate-lines",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-extra-spaces",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sentence-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-diff",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-lowercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-reverser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-sorter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-uppercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "title-case",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "loan-calculator",
+    "title": "Loan Calculator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "cagr-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "currency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fd-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "mortgage-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "roi-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "markdown-previewer",
+    "title": "Markdown Previewer",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "cron-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "hex-to-rgb",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "rgb-to-hex",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "timestamp-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "unix-time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "merge-pdf",
+    "title": "Merge Pdf",
+    "issues": [
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "sign-pdf",
+        "similarityScore": 0.42857142857142855,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "split-pdf",
+        "similarityScore": 0.42857142857142855,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      }
+    ]
+  },
+  {
+    "slug": "metadata-viewer",
+    "title": "Metadata Viewer",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "page-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "protect-pdf",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "mortgage-calculator",
+    "title": "Mortgage Calculator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "cagr-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "currency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fd-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "loan-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "roi-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "number-base-converter",
+    "title": "Number Base Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "angle-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "area-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "data-storage-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "energy-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fuel-efficiency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "power-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "speed-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "volume-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "open-graph-generator",
+    "title": "Open Graph Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "heading-structure-checker",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "robots-txt-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-keyword-density",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-word-count",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sitemap-xml-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "twitter-card-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "page-counter",
+    "title": "Page Counter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "metadata-viewer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "protect-pdf",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "phone-number-qr-code-generator",
+    "title": "Phone Number Qr Code Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "email-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "sms-qr-code-generator",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sms-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "upi-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "vcard-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "wifi-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "pixelate-image",
+    "title": "Pixelate Image",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-logo-overlay",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-text-on-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "add-watermark-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "black-and-white-to-color",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "blur-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "brightness-and-contrast-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-adjuster",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "color-to-black-and-white",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "flip-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "grayscale",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-denoiser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-enhancer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-sharpen",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-upscaler",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "png-compressor",
+    "title": "Png Compressor",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "base64-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "gif-maker",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "heic-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-to-base64",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-compressor",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-compressor",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "png-to-svg",
+    "title": "Png To Svg",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpeg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-jpeg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "png-to-webp",
+    "title": "Png To Webp",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpeg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-jpeg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "power-converter",
+    "title": "Power Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "angle-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "area-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "data-storage-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "energy-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "energy-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fuel-efficiency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "number-base-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "speed-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "speed-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "time-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "volume-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "pressure-converter",
+    "title": "Pressure Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "angle-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "area-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "data-storage-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "energy-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "energy-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fuel-efficiency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "number-base-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "power-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "power-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "speed-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "speed-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "time-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "volume-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "profit-calculator",
+    "title": "Profit Calculator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "adsense-revenue-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "salary-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "simple-interest-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "youtube-earnings-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "protect-pdf",
+    "title": "Protect Pdf",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "metadata-viewer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "page-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "qr-code-generator",
+    "title": "Qr Code Generator",
+    "issues": [
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "robots-txt-generator",
+        "similarityScore": 0.42857142857142855,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      }
+    ]
+  },
+  {
+    "slug": "rearrange-pdf-pages",
+    "title": "Rearrange Pdf Pages",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "delete-pdf-pages",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "extract-pdf-pages",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-pdf",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pdf-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "remove-duplicate-lines",
+    "title": "Remove Duplicate Lines",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "capitalize-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "find-replace",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "line-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "lorem-ipsum",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "paragraph-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "random-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-extra-spaces",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sentence-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-diff",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-lowercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-reverser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-sorter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-uppercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "title-case",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "remove-extra-spaces",
+    "title": "Remove Extra Spaces",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "capitalize-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "find-replace",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "line-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "lorem-ipsum",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "paragraph-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "random-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-duplicate-lines",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sentence-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-diff",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-lowercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-reverser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-sorter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-uppercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "title-case",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "rgb-to-hex",
+    "title": "Rgb To Hex",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "cron-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "hex-to-rgb",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "markdown-previewer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "timestamp-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "unix-time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "robots-txt-generator",
+    "title": "Robots Txt Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "heading-structure-checker",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "open-graph-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "qr-code-generator",
+        "similarityScore": 0.42857142857142855,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-keyword-density",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-word-count",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "sitemap-xml-generator",
+        "similarityScore": 0.42857142857142855,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sitemap-xml-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "twitter-card-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "roi-calculator",
+    "title": "Roi Calculator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "cagr-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "currency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fd-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "loan-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "mortgage-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "salary-calculator",
+    "title": "Salary Calculator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "adsense-revenue-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "profit-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "simple-interest-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "youtube-earnings-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "sentence-counter",
+    "title": "Sentence Counter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "capitalize-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "find-replace",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "line-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "lorem-ipsum",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "paragraph-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "random-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-duplicate-lines",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-extra-spaces",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-diff",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-lowercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-reverser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-sorter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-uppercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "title-case",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "seo-keyword-density",
+    "title": "Seo Keyword Density",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "heading-structure-checker",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "open-graph-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "robots-txt-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-word-count",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sitemap-xml-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "twitter-card-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "seo-slug-generator",
+    "title": "Seo Slug Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "heading-structure-checker",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "open-graph-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "robots-txt-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-keyword-density",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-word-count",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sitemap-xml-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "twitter-card-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "seo-word-count",
+    "title": "Seo Word Count",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "heading-structure-checker",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "open-graph-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "robots-txt-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-keyword-density",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sitemap-xml-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "twitter-card-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "sign-pdf",
+    "title": "Sign Pdf",
+    "issues": [
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "merge-pdf",
+        "similarityScore": 0.42857142857142855,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "split-pdf",
+        "similarityScore": 0.42857142857142855,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      }
+    ]
+  },
+  {
+    "slug": "simple-interest-calculator",
+    "title": "Simple Interest Calculator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "adsense-revenue-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "profit-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "salary-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "youtube-earnings-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "sip-calculator",
+    "title": "Sip Calculator",
+    "issues": [
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "emi-calculator",
+        "similarityScore": 0.42857142857142855,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      }
+    ]
+  },
+  {
+    "slug": "sitemap-xml-generator",
+    "title": "Sitemap Xml Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "heading-structure-checker",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "open-graph-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "robots-txt-generator",
+        "similarityScore": 0.42857142857142855,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "robots-txt-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-keyword-density",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-word-count",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "twitter-card-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "slug-generator",
+    "title": "Slug Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "capitalize-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "find-replace",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "line-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "lorem-ipsum",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "paragraph-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "random-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-duplicate-lines",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-extra-spaces",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sentence-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-diff",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-lowercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-reverser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-sorter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-uppercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "title-case",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "sms-qr-code-generator",
+    "title": "Sms Qr Code Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "email-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "phone-number-qr-code-generator",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "phone-number-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "upi-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "vcard-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "wifi-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "speed-converter",
+    "title": "Speed Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "angle-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "area-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "data-storage-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "energy-converter",
+        "similarityScore": 0.6,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "energy-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 0.6,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fuel-efficiency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "number-base-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "power-converter",
+        "similarityScore": 0.6,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "power-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 0.6,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "time-converter",
+        "similarityScore": 0.6,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "volume-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "split-pdf",
+    "title": "Split Pdf",
+    "issues": [
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "merge-pdf",
+        "similarityScore": 0.42857142857142855,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "sign-pdf",
+        "similarityScore": 0.42857142857142855,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      }
+    ]
+  },
+  {
+    "slug": "sql-formatter",
+    "title": "Sql Formatter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "code-beautifier",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "yaml-formatter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "svg-compressor",
+    "title": "Svg Compressor",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "base64-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "gif-maker",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "heic-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-to-base64",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-compressor",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-compressor",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "svg-to-jpg",
+    "title": "Svg To Jpg",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpeg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-jpeg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "svg-to-png",
+    "title": "Svg To Png",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpeg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-jpeg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "svg-to-webp",
+    "title": "Svg To Webp",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpeg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-jpeg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "text-diff",
+    "title": "Text Diff",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "capitalize-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "find-replace",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "line-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "lorem-ipsum",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "paragraph-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "random-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-duplicate-lines",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-extra-spaces",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sentence-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-lowercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-reverser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-sorter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-uppercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "title-case",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "text-lowercase",
+    "title": "Text Lowercase",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "capitalize-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "find-replace",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "line-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "lorem-ipsum",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "paragraph-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "random-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-duplicate-lines",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-extra-spaces",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sentence-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-diff",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-reverser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-sorter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-uppercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "title-case",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "text-qr-code-generator",
+    "title": "Text Qr Code Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "email-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "phone-number-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sms-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "upi-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "vcard-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "wifi-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "text-reverser",
+    "title": "Text Reverser",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "capitalize-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "find-replace",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "line-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "lorem-ipsum",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "paragraph-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "random-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-duplicate-lines",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-extra-spaces",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sentence-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-diff",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-lowercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-sorter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-uppercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "title-case",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "text-sorter",
+    "title": "Text Sorter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "capitalize-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "find-replace",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "line-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "lorem-ipsum",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "paragraph-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "random-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-duplicate-lines",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-extra-spaces",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sentence-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-diff",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-lowercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-reverser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-uppercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "title-case",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "text-uppercase",
+    "title": "Text Uppercase",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "capitalize-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "find-replace",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "line-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "lorem-ipsum",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "paragraph-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "random-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-duplicate-lines",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-extra-spaces",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sentence-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-diff",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-lowercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-reverser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-sorter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "title-case",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "time-converter",
+    "title": "Time Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "angle-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "area-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "data-storage-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "energy-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "energy-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fuel-efficiency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "number-base-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "power-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "power-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "speed-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "speed-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "volume-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "time-duration-calculator",
+    "title": "Time Duration Calculator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "calorie-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "tip-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "timestamp-converter",
+    "title": "Timestamp Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "cron-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "hex-to-rgb",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "markdown-previewer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "rgb-to-hex",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "unix-time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "tip-calculator",
+    "title": "Tip Calculator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "calorie-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "time-duration-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "title-case",
+    "title": "Title Case",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "capitalize-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "find-replace",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "line-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "lorem-ipsum",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "paragraph-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "random-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-duplicate-lines",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "remove-extra-spaces",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sentence-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-diff",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-lowercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-reverser",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-sorter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-uppercase",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "twitter-card-generator",
+    "title": "Twitter Card Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "heading-structure-checker",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "open-graph-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "robots-txt-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-keyword-density",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-slug-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "seo-word-count",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sitemap-xml-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "unix-time-converter",
+    "title": "Unix Time Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "cron-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "hex-to-rgb",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "markdown-previewer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "rgb-to-hex",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "timestamp-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "upi-qr-code-generator",
+    "title": "Upi Qr Code Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "email-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "phone-number-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sms-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "vcard-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "wifi-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "uuid-generator",
+    "title": "Uuid Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "cron-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "password-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "vcard-qr-code-generator",
+    "title": "Vcard Qr Code Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "email-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "phone-number-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sms-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "upi-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "wifi-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "volume-converter",
+    "title": "Volume Converter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "angle-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "area-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "area-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "data-storage-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "energy-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "frequency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "fuel-efficiency-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "length-converter",
+        "similarityScore": 0.5,
+        "message": "Found 3 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "number-base-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "power-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pressure-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "speed-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "time-converter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "webp-compressor",
+    "title": "Webp Compressor",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "base64-to-image",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "gif-maker",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "heic-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "image-to-base64",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-compressor",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-compressor",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "webp-to-jpg",
+    "title": "Webp To Jpg",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpeg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-jpeg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "webp-to-png",
+    "title": "Webp To Png",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpeg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-jpeg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "webp-to-svg",
+    "title": "Webp To Svg",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpeg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-jpeg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "jpg-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-svg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "png-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "svg-to-webp",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-jpg",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "webp-to-png",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "wifi-qr-code-generator",
+    "title": "Wifi Qr Code Generator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "email-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "phone-number-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sms-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "upi-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "vcard-qr-code-generator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "word-counter",
+    "title": "Word Counter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "text-compare",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "yaml-formatter",
+    "title": "Yaml Formatter",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "code-beautifier",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "sql-formatter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "youtube-earnings-calculator",
+    "title": "Youtube Earnings Calculator",
+    "issues": [
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "adsense-revenue-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "profit-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "salary-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "simple-interest-calculator",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      }
+    ]
+  }
+]
