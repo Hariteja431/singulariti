@@ -1187,7 +1187,9 @@ export const registry: EcosystemRegistry = {
           path: '/tools/text',
           tools: [
             { id: 'lorem-ipsum', name: 'Lorem Ipsum Generator', description: 'Generate dummy Lorem Ipsum paragraphs for design layouts.', seoTitle: 'Lorem Ipsum Generator — Create Placeholder Text | Singulariti', seoDescription: 'Generate dummy Lorem Ipsum paragraphs for design layouts.', engine: 'text-tool', path: '/tools/text/lorem-ipsum' },
-            { id: 'random-text', name: 'Random Text Generator', description: 'Generate random strings, passwords, or alphanumeric lists.', seoTitle: 'Random Text Generator — Create Strings Online | Singulariti', seoDescription: 'Generate random strings, passwords, or alphanumeric lists instantly.', engine: 'text-tool', path: '/tools/text/random-text' }
+            { id: 'random-text', name: 'Random Text Generator', description: 'Generate random strings, passwords, or alphanumeric lists.', seoTitle: 'Random Text Generator — Create Strings Online | Singulariti', seoDescription: 'Generate random strings, passwords, or alphanumeric lists instantly.', engine: 'text-tool', path: '/tools/text/random-text' },
+            { id: 'zalgo-text', name: 'Zalgo Text Generator', description: 'Generate creepy cursed glitch text instantly.', seoTitle: 'Zalgo Text Generator — Glitch Text Online | Singulariti', seoDescription: 'Generate creepy cursed glitch text (Zalgo) instantly. Free online copy and paste glitch text generator.', engine: 'text-tool', path: '/tools/text/zalgo-text' },
+            { id: 'morse-code', name: 'Morse Code Translator', description: 'Translate text to Morse code and play the audio.', seoTitle: 'Morse Code Translator & Audio Player | Singulariti', seoDescription: 'Translate text to Morse code and listen to the audio beeps. Free online Morse code translator.', engine: 'text-tool', path: '/tools/text/morse-code' }
           ]
         }
       ]
@@ -1346,6 +1348,66 @@ export const registry: EcosystemRegistry = {
             { id: 'twitter-card-generator', name: 'Twitter Card Generator', description: 'Generate summary cards tags for Twitter formatting previews.', seoTitle: 'Twitter Card Generator — Create Twitter Tags | Singulariti', seoDescription: 'Generate summary cards tags for Twitter formatting previews.', engine: 'seo-tool', path: '/tools/seo/twitter-card-generator' },
             { id: 'seo-word-count', name: 'Word Count for SEO', description: 'Measure keyword presence and total read lengths for articles.', seoTitle: 'Word Count for SEO — Analyze Content Online | Singulariti', seoDescription: 'Measure keyword presence and total read lengths for articles.', engine: 'seo-tool', path: '/tools/seo/seo-word-count' },
             { id: 'heading-structure-checker', name: 'Heading Structure Checker', description: 'Analyze hierarchy structures (H1-H6 tags) of pasted code.', seoTitle: 'Heading Structure Checker — Analyze HTML Online | Singulariti', seoDescription: 'Analyze hierarchy structures (H1-H6 tags) of pasted code.', engine: 'seo-tool', path: '/tools/seo/heading-structure-checker' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'media',
+      name: 'Audio & Video Tools',
+      description: 'Free online tools to record audio, capture your screen, and process media directly in your browser.',
+      seoTitle: 'Audio & Video Tools — Record & Process Media | Singulariti',
+      seoDescription: 'Free online audio and video tools. Record your voice, capture your screen, and trim audio completely in the browser without uploading any files.',
+      path: '/media',
+      collections: [
+        {
+          id: 'audio',
+          name: 'Audio Tools',
+          description: 'Record and process audio files instantly.',
+          seoTitle: 'Audio Tools | Singulariti',
+          seoDescription: 'Free online audio tools like Voice Recorder and Audio Trimmer.',
+          path: '/media/audio',
+          tools: [
+            { id: 'online-voice-recorder', name: 'Online Voice Recorder', description: 'Record microphone audio and download as WebM.', seoTitle: 'Online Voice Recorder — Record Audio Free | Singulariti', seoDescription: 'Record microphone audio directly in your browser without any software.', engine: 'media', path: '/media/audio/online-voice-recorder' },
+            { id: 'audio-trimmer', name: 'Audio Trimmer', description: 'Cut specific parts of an audio file online.', seoTitle: 'Audio Trimmer — Cut Audio Online | Singulariti', seoDescription: 'Trim and cut audio files quickly in your browser.', engine: 'media', path: '/media/audio/audio-trimmer' },
+            { id: 'text-to-speech', name: 'Text to Speech (TTS)', description: 'Read text aloud using natural voices.', seoTitle: 'Text to Speech Reader — Free TTS Online | Singulariti', seoDescription: 'Convert written text into spoken words instantly using your browser native Text to Speech.', engine: 'media', path: '/media/audio/text-to-speech' },
+            { id: 'speech-to-text', name: 'Speech to Text', description: 'Dictate text using your microphone in real-time.', seoTitle: 'Speech to Text Dictation — Voice Typing | Singulariti', seoDescription: 'Convert your spoken words into written text instantly with our free online Voice Typing tool.', engine: 'media', path: '/media/audio/speech-to-text' }
+          ]
+        },
+        {
+          id: 'video',
+          name: 'Video Tools',
+          description: 'Record your screen or webcam.',
+          seoTitle: 'Video Tools | Singulariti',
+          seoDescription: 'Free online screen recorder and webcam recorder.',
+          path: '/media/video',
+          tools: [
+            { id: 'screen-recorder', name: 'Screen Recorder', description: 'Record your screen or browser tab and download as WebM.', seoTitle: 'Screen Recorder — Record Screen Online | Singulariti', seoDescription: 'Free online screen recorder. Capture your screen, window or tab easily.', engine: 'media', path: '/media/video/screen-recorder' },
+            { id: 'webcam-recorder', name: 'Webcam Snapshot & Recorder', description: 'Take photos or record video directly from your webcam.', seoTitle: 'Webcam Recorder — Take Photos Online | Singulariti', seoDescription: 'Take webcam snapshots or record video right from your browser securely.', engine: 'media', path: '/media/video/webcam-recorder' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'random',
+      name: 'Random Tools',
+      description: 'Free online tools to generate random numbers, spin wheels, and flip coins securely in your browser.',
+      seoTitle: 'Random Generators & Pickers | Singulariti',
+      seoDescription: 'Free online random tools. Use our wheel spinner, random number generator, and dice roller entirely in your browser.',
+      path: '/random',
+      collections: [
+        {
+          id: 'generators',
+          name: 'Random Generators',
+          description: 'Generate random outcomes securely and fairly.',
+          seoTitle: 'Random Generators | Singulariti',
+          seoDescription: 'Free online random number generator, wheel spinner, and dice roller.',
+          path: '/random/generators',
+          tools: [
+            { id: 'wheel-spinner', name: 'Wheel Spinner', description: 'A visual spinning wheel for making choices or picking winners.', seoTitle: 'Wheel Spinner — Random Picker | Singulariti', seoDescription: 'Spin the wheel to make a random choice or pick a raffle winner. Free online wheel spinner.', engine: 'random', path: '/random/generators/wheel-spinner' },
+            { id: 'random-number', name: 'Random Number Generator', description: 'Generate random numbers within any range.', seoTitle: 'Random Number Generator — Pick Random Numbers | Singulariti', seoDescription: 'Generate random numbers within any range quickly and securely.', engine: 'random', path: '/random/generators/random-number' },
+            { id: 'dice-roller', name: 'Dice Roller', description: 'Roll virtual 6-sided dice instantly.', seoTitle: 'Dice Roller | Singulariti', seoDescription: 'Roll 6-sided dice online for free.', engine: 'random', path: '/random/generators/dice-roller' },
+            { id: 'coin-flipper', name: 'Coin Flipper', description: 'Flip a virtual coin instantly.', seoTitle: 'Coin Flipper | Singulariti', seoDescription: 'Flip a coin online for free.', engine: 'random', path: '/random/generators/coin-flipper' }
           ]
         }
       ]

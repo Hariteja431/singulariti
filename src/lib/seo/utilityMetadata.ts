@@ -4822,6 +4822,62 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "openGraph": { "title": "HEIC to JPG Converter Online Free \u2013 Convert iPhone Photos", "description": "Convert Apple iPhone HEIC photos to JPG instantly in your browser. Batch convert multiple HEIC files with quality control. No upload, no server \u2014 100% private.", "url": "https://singulariti.in/image/animation/heic-to-jpg", "type": "website", "image": "https://singulariti.in/og-fallback.png" },
     "twitter": { "card": "summary_large_image", "title": "HEIC to JPG Converter Online Free \u2013 Convert iPhone Photos", "description": "Convert Apple iPhone HEIC photos to JPG instantly in your browser. Batch convert multiple HEIC files with quality control. No upload, no server \u2014 100% private.", "image": "https://singulariti.in/og-fallback.png" },
     "schemaType": "WebApplication"
+  },
+  "online-voice-recorder": {
+    "utilityId": "online-voice-recorder",
+    "name": "Online Voice Recorder",
+    "section": "Audio & Video Tools",
+    "subSection": "Audio Tools",
+    "url": "/media/audio/online-voice-recorder",
+    "title": "Online Voice Recorder \u2013 Free Audio Recording in Browser",
+    "description": "Record microphone audio directly in your browser and download as WebM or MP3. No software to install, zero privacy risks, files are not uploaded to servers.",
+    "canonical": "https://singulariti.in/media/audio/online-voice-recorder",
+    "robots": { "index": true, "follow": true },
+    "openGraph": { "title": "Online Voice Recorder \u2013 Free Audio Recording in Browser", "description": "Record microphone audio directly in your browser and download as WebM or MP3. No software to install, zero privacy risks, files are not uploaded to servers.", "url": "https://singulariti.in/media/audio/online-voice-recorder", "type": "website", "image": "https://singulariti.in/og-fallback.png" },
+    "twitter": { "card": "summary_large_image", "title": "Online Voice Recorder \u2013 Free Audio Recording in Browser", "description": "Record microphone audio directly in your browser and download as WebM or MP3. No software to install, zero privacy risks, files are not uploaded to servers.", "image": "https://singulariti.in/og-fallback.png" },
+    "schemaType": "WebApplication"
+  },
+  "audio-trimmer": {
+    "utilityId": "audio-trimmer",
+    "name": "Audio Trimmer",
+    "section": "Audio & Video Tools",
+    "subSection": "Audio Tools",
+    "url": "/media/audio/audio-trimmer",
+    "title": "Audio Trimmer Online \u2013 Cut Audio Files for Free",
+    "description": "Trim and cut audio files quickly in your browser. Create ringtones, remove unwanted parts. Zero privacy risks, 100% client-side processing.",
+    "canonical": "https://singulariti.in/media/audio/audio-trimmer",
+    "robots": { "index": true, "follow": true },
+    "openGraph": { "title": "Audio Trimmer Online \u2013 Cut Audio Files for Free", "description": "Trim and cut audio files quickly in your browser. Create ringtones, remove unwanted parts. Zero privacy risks, 100% client-side processing.", "url": "https://singulariti.in/media/audio/audio-trimmer", "type": "website", "image": "https://singulariti.in/og-fallback.png" },
+    "twitter": { "card": "summary_large_image", "title": "Audio Trimmer Online \u2013 Cut Audio Files for Free", "description": "Trim and cut audio files quickly in your browser. Create ringtones, remove unwanted parts. Zero privacy risks, 100% client-side processing.", "image": "https://singulariti.in/og-fallback.png" },
+    "schemaType": "WebApplication"
+  },
+  "screen-recorder": {
+    "utilityId": "screen-recorder",
+    "name": "Screen Recorder",
+    "section": "Audio & Video Tools",
+    "subSection": "Video Tools",
+    "url": "/media/video/screen-recorder",
+    "title": "Free Online Screen Recorder \u2013 Capture Screen Easily",
+    "description": "Capture your screen, browser tab, or window for free online. Record screen and audio together and download as MP4/WebM. 100% private.",
+    "canonical": "https://singulariti.in/media/video/screen-recorder",
+    "robots": { "index": true, "follow": true },
+    "openGraph": { "title": "Free Online Screen Recorder \u2013 Capture Screen Easily", "description": "Capture your screen, browser tab, or window for free online. Record screen and audio together and download as MP4/WebM. 100% private.", "url": "https://singulariti.in/media/video/screen-recorder", "type": "website", "image": "https://singulariti.in/og-fallback.png" },
+    "twitter": { "card": "summary_large_image", "title": "Free Online Screen Recorder \u2013 Capture Screen Easily", "description": "Capture your screen, browser tab, or window for free online. Record screen and audio together and download as MP4/WebM. 100% private.", "image": "https://singulariti.in/og-fallback.png" },
+    "schemaType": "WebApplication"
+  },
+  "webcam-recorder": {
+    "utilityId": "webcam-recorder",
+    "name": "Webcam Recorder",
+    "section": "Audio & Video Tools",
+    "subSection": "Video Tools",
+    "url": "/media/video/webcam-recorder",
+    "title": "Webcam Recorder \u2013 Take Photos & Record Video Online",
+    "description": "Take webcam snapshots or record video right from your browser securely. Your webcam data never leaves your device.",
+    "canonical": "https://singulariti.in/media/video/webcam-recorder",
+    "robots": { "index": true, "follow": true },
+    "openGraph": { "title": "Webcam Recorder \u2013 Take Photos & Record Video Online", "description": "Take webcam snapshots or record video right from your browser securely. Your webcam data never leaves your device.", "url": "https://singulariti.in/media/video/webcam-recorder", "type": "website", "image": "https://singulariti.in/og-fallback.png" },
+    "twitter": { "card": "summary_large_image", "title": "Webcam Recorder \u2013 Take Photos & Record Video Online", "description": "Take webcam snapshots or record video right from your browser securely. Your webcam data never leaves your device.", "image": "https://singulariti.in/og-fallback.png" },
+    "schemaType": "WebApplication"
   }
 };
 

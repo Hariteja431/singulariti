@@ -6,6 +6,8 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import { getCategoryById } from '@/registry';
 import { TextToolContainer } from '@/components/tools/text/TextToolContainer';
+import { ZalgoTextGenerator } from '@/components/tools/text/ZalgoTextGenerator';
+import { MorseCodeTranslator } from '@/components/tools/text/MorseCodeTranslator';
 
 export default async function TextToolPage(props: { params: Promise<{ tool: string }> }) {
   const params = await props.params;
@@ -33,6 +35,13 @@ export default async function TextToolPage(props: { params: Promise<{ tool: stri
     // Ignore if not found
   }
 
+  if (tool.id === 'zalgo-text') {
+    return <ZalgoTextGenerator tool={tool} />;
+  }
+
+  if (tool.id === 'morse-code') {
+    return <MorseCodeTranslator tool={tool} />;
+  }
 
   return (
     <TextToolContainer 

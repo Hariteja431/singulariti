@@ -4,7 +4,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { ImageIcon, FileText, QrCode, Wand2, Calculator, Keyboard, Timer, Brush, Type, Code, Scale, Search } from 'lucide-react';
+import { ImageIcon, FileText, QrCode, Wand2, Calculator, Keyboard, Timer, Brush, Type, Code, Scale, Search, Shuffle, PlaySquare } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import { PremiumIconContainer } from '@/components/ui/PremiumIconContainer';
 import HeroOrbitalEcosystem from '@/components/ui/HeroOrbitalEcosystem';
@@ -49,6 +49,8 @@ export default function Home() {
   const devToolsCount = getToolCount('dev');
   const convertToolsCount = getToolCount('convert');
   const seoToolsCount = getToolCount('seo');
+  const mediaToolsCount = getToolCount('media');
+  const randomToolsCount = getToolCount('random');
 
   return (
     <>
@@ -141,6 +143,13 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <Card 
+              title="Media Tools"
+              description="Record audio, capture screen, and trim audio completely in the browser."
+              icon={<PremiumIconContainer><PlaySquare /></PremiumIconContainer>}
+              href="/media"
+              badge={{ text: `${mediaToolsCount} Tools`, variant: 'default' }}
+            />
+            <Card 
               title="Image Tools"
               description="Compress, convert, and resize images instantly in your browser."
               icon={<PremiumIconContainer><ImageIcon /></PremiumIconContainer>}
@@ -188,6 +197,13 @@ export default function Home() {
               icon={<PremiumIconContainer><Scale /></PremiumIconContainer>}
               href="/tools/convert"
               badge={{ text: `${convertToolsCount} Tools`, variant: 'default' }}
+            />
+            <Card 
+              title="Random Tools"
+              description="Spin wheels, flip coins, and generate random numbers securely."
+              icon={<PremiumIconContainer><Shuffle /></PremiumIconContainer>}
+              href="/random"
+              badge={{ text: `${randomToolsCount} Tools`, variant: 'default' }}
             />
             <Card 
               title="QR Tools"

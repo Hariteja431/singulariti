@@ -19,7 +19,9 @@ import {
   // Unit Conversion
   Ruler, Weight, Thermometer, SquareDashed, Beaker, Hourglass, Scale, Compass, Gauge,
   // QR
-  QrCode, ScanLine, Wifi, Smartphone, Mail, Briefcase, Globe
+  QrCode, ScanLine, Wifi, Smartphone, Mail, Briefcase, Globe,
+  // Media & Random
+  Mic, Monitor, Camera, Video, PlaySquare, Volume2, Gamepad2, Shuffle, Dice5, Focus, Sparkles
 } from 'lucide-react';
 
 interface ToolIconProps {
@@ -167,6 +169,32 @@ export function ToolIcon({ toolId, className = "w-14 h-14" }: ToolIconProps) {
     else if (id.includes('url')) IconComponent = Globe;
     else IconComponent = QrCode;
   }
+
+  // ==========================================
+  // MEDIA TOOLS
+  // ==========================================
+  else if (id.includes('media') || id.includes('audio') || id.includes('video') || id.includes('voice') || id.includes('speech') || id.includes('screen') || id.includes('webcam')) {
+    if (id.includes('voice') || id.includes('dictation') || id.includes('mic')) IconComponent = Mic;
+    else if (id.includes('screen')) IconComponent = Monitor;
+    else if (id.includes('webcam') || id.includes('camera')) IconComponent = Camera;
+    else if (id.includes('video')) IconComponent = Video;
+    else if (id.includes('speech') || id.includes('tts')) IconComponent = Volume2;
+    else IconComponent = PlaySquare;
+  }
+
+  // ==========================================
+  // RANDOM & CHANCE TOOLS
+  // ==========================================
+  else if (id.includes('random') || id.includes('dice') || id.includes('coin') || id.includes('wheel') || id.includes('generator')) {
+    if (id.includes('dice') || id.includes('coin')) IconComponent = Dice5;
+    else if (id.includes('wheel') || id.includes('picker')) IconComponent = Focus;
+    else if (id.includes('zalgo') || id.includes('glitch')) IconComponent = Sparkles;
+    else IconComponent = Shuffle;
+  }
+
+  // Fallback check for Morse and Zalgo
+  if (id.includes('morse')) IconComponent = Volume2;
+  if (id.includes('zalgo')) IconComponent = Sparkles;
 
   // Pure Teal Aesthetic (Simple, crisp, no fog)
   return (

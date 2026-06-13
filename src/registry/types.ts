@@ -1,4 +1,4 @@
-export type EngineType = 'compression' | 'conversion' | 'editing' | 'utility' | 'developer' | 'single-editing' | 'qr-standalone' | 'text-tool' | 'unit-converter' | 'seo-tool' | 'animation';
+export type EngineType = 'compression' | 'conversion' | 'editing' | 'utility' | 'developer' | 'single-editing' | 'qr-standalone' | 'text-tool' | 'unit-converter' | 'seo-tool' | 'animation' | 'media' | 'random';
 
 export interface ToolRegistryItem {
   id: string;

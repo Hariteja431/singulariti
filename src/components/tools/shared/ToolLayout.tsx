@@ -20,10 +20,10 @@ interface ToolLayoutProps {
   utilityId?: string;
   title: string;
   description: string;
-  categoryName: string;
-  categoryPath: string;
-  howToUse: string[];
-  faqs: FaqItem[];
+  categoryName?: string;
+  categoryPath?: string;
+  howToUse?: string[];
+  faqs?: FaqItem[];
   privacyLabel?: string;
   children: React.ReactNode;
   relatedTools?: { name: string; url: string; description: string }[];
@@ -102,8 +102,12 @@ export function ToolLayout({
             <Link href="/" className="hover:text-primary transition-colors">Home</Link>
             <span className="mx-2">/</span>
             <Link href="/tools" className="hover:text-primary transition-colors">Tools</Link>
-            <span className="mx-2">/</span>
-            <Link href={categoryPath} className="hover:text-primary transition-colors">{categoryName}</Link>
+            {categoryPath && categoryName && (
+              <>
+                <span className="mx-2">/</span>
+                <Link href={categoryPath} className="hover:text-primary transition-colors">{categoryName}</Link>
+              </>
+            )}
             <span className="mx-2">/</span>
             <span className="text-ink font-medium">{title}</span>
           </nav>
