@@ -108,7 +108,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const faqSchema = post.faqs && post.faqs.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": post.faqs.map(faq => ({
+    "mainEntity": post.faqs.map((faq: any) => ({
       "@type": "Question",
       "name": faq.question,
       "acceptedAnswer": {
@@ -137,43 +137,43 @@ export default async function BlogPostPage({ params }: PageProps) {
       )}
 
       <Header />
-      <main className="flex-1 w-full bg-background pt-24 pb-16">
+      <main className="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-white pt-24 pb-16">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           
           {/* Breadcrumb Navigation */}
-          <nav className="flex items-center gap-1.5 text-[13px] font-sans text-slate mb-8 overflow-x-auto whitespace-nowrap">
-            <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+          <nav className="flex items-center gap-1.5 text-[13px] font-sans text-slate-500 dark:text-slate-400 mb-8 overflow-x-auto whitespace-nowrap">
+            <Link href="/" className="hover:text-teal-700 dark:hover:text-teal-350 transition-colors">Home</Link>
             <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />
-            <Link href="/blog" className="hover:text-primary transition-colors">Blog</Link>
+            <Link href="/blog" className="hover:text-teal-700 dark:hover:text-teal-350 transition-colors">Blog</Link>
             <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />
-            <span className="text-ink font-semibold truncate max-w-[200px] sm:max-w-sm">{post.title}</span>
+            <span className="text-slate-900 dark:text-white font-semibold truncate max-w-[200px] sm:max-w-sm">{post.title}</span>
           </nav>
 
           {/* Article Header */}
           <header className="max-w-4xl mb-12">
             <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className="text-[11px] font-sans font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+              <span className="text-[11px] font-sans font-bold uppercase tracking-wider text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-950/40 px-2.5 py-1 rounded-full">
                 {post.category}
               </span>
             </div>
 
-            <h1 className="font-display font-bold text-3xl md:text-5xl text-ink leading-tight tracking-tight mb-6">
+            <h1 className="font-display font-bold text-3xl md:text-5xl text-slate-950 dark:text-white leading-tight tracking-tight mb-6">
               {post.title}
             </h1>
 
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-border/60 text-slate text-[13px] font-sans">
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-350 text-[13px] font-sans">
               <div className="flex items-center gap-6">
                 {post.updatedAt && (
                   <span className="flex items-center gap-1.5">
-                    <Calendar className="w-4 h-4 text-primary" />
+                    <Calendar className="w-4 h-4 text-teal-600 dark:text-teal-400" />
                     Updated: <strong>{post.updatedAt}</strong>
                   </span>
                 )}
               </div>
               
               <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-primary" />
-                <span className="font-medium text-[12px] text-primary">Local Browser-Side Processing</span>
+                <Shield className="w-4 h-4 text-teal-650 dark:text-teal-300" />
+                <span className="font-medium text-[12px] text-teal-700 dark:text-teal-300">Local Browser-Side Processing</span>
               </div>
             </div>
           </header>
@@ -191,13 +191,13 @@ export default async function BlogPostPage({ params }: PageProps) {
               
               {/* Tool CTA Block */}
               {post.toolUrl && (
-                <div className="p-6 bg-primary/5 border border-primary/20 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div className="font-sans text-sm text-slate text-center sm:text-left leading-relaxed">
+                <div className="p-6 bg-teal-50/40 border border-teal-100 dark:bg-teal-950/20 dark:border-teal-900/60 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="font-sans text-sm text-slate-700 dark:text-slate-300 text-center sm:text-left leading-relaxed">
                     Use this utility: <strong>{post.toolUrl}</strong>. Run calculations and formatting locally with absolute privacy.
                   </div>
                   <Link 
                     href={post.toolUrl}
-                    className="inline-flex items-center justify-center px-5 py-3 bg-primary hover:bg-primary/95 text-white font-sans font-bold text-xs rounded-xl transition-all shadow-sm flex-shrink-0"
+                    className="inline-flex items-center justify-center px-5 py-3 bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-sans font-bold text-xs rounded-xl transition-all shadow-sm flex-shrink-0"
                   >
                     Open Utility
                   </Link>
@@ -214,10 +214,10 @@ export default async function BlogPostPage({ params }: PageProps) {
               <RelatedTools tools={post.relatedTools} />
 
               {/* Back to Blog Button */}
-              <div className="pt-6 border-t border-border/40 flex flex-wrap gap-4 text-xs font-sans font-semibold">
+              <div className="pt-6 border-t border-slate-200 dark:border-slate-800/80 flex flex-wrap gap-4 text-xs font-sans font-semibold">
                 <Link 
                   href="/blog" 
-                  className="inline-flex items-center gap-2 text-slate hover:text-primary transition-colors group"
+                  className="inline-flex items-center gap-2 text-slate-600 hover:text-teal-700 dark:text-slate-350 dark:hover:text-teal-300 transition-colors group"
                 >
                   <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                   Back to Blog Home

@@ -1,4 +1,8 @@
 import { toolRegistry, sectionRegistry, subSectionRegistry, UtilityRegistryItem, getToolGuideTitle } from '@/content/tools/toolRegistry';
+import { buildToolContentProfile, ToolContentProfile } from './blog/toolProfiles';
+import { getStrategyContent } from './blog/contentStrategies';
+import * as sectionGen from './blog/sectionGenerators';
+import { validateArticleUniqueness, validateAllGeneratedArticles } from './blog/contentQuality';
 
 export interface RelatedTool {
   name: string;
@@ -1139,177 +1143,203 @@ Compressed Image Download
   }
 ];
 
-// Fallback generator for a utility tool guide post
+// Fallback generator for a utility tool guide post using layered ToolContentProfile system
 export function getFallbackPost(tool: UtilityRegistryItem): BlogPost {
   const name = tool.name;
   const sectionName = sectionRegistry.find(s => s.id === tool.sectionId)?.name || "Utilities";
   const subSectionName = subSectionRegistry.find(ss => ss.id === tool.subSectionId)?.name || "Tools";
 
-  const inputs = tool.inputType.length > 0 ? tool.inputType[0] : "Input";
-  const outputs = tool.outputType.length > 0 ? tool.outputType[0] : "Output";
-  const metaTitle = `How the ${name} Works: ${inputs}, ${outputs} and Operation Flow`;
-  const metaDescription = `Learn how the ${name.toLowerCase()} works, what input it needs, what output it produces, how the operation happens and what limitations users should know.`;
+  // 1. Build profile
+  const profile = buildToolContentProfile(tool);
+
+  // 2. Get strategy content
+  const strategy = getStrategyContent(profile);
+
+  // 3. Map strategies and properties to custom section components
+  const sections: any = {
+    introduction: sectionGen.generateIntro(profile, strategy),
+    whatThisToolDoes: sectionGen.generateWhatItDoes(profile, strategy),
+    whyIncluded: sectionGen.generateWhyUsersNeedIt(profile, strategy),
+    whoCanUse: profile.primaryAudience,
+    inputsRequired: tool.inputType,
+    outputProduced: tool.outputType,
+    howToUse: strategy.steps,
+    userOperationFlow: strategy.steps.join(" → "),
+    operationWorks: strategy.steps,
+    internalProcessingFlow: [
+      `Read user input parameter: ${profile.inputType}`,
+      profile.actualTransformation,
+      `Compile output formatting: ${profile.outputType}`
+    ],
+    operationDiagram: `
+Input (${profile.inputType})
+      ↓
+${profile.actualTransformation}
+      ↓
+Output (${profile.outputType})
+    `,
+    formulaOrLogic: tool.hasFormula
+      ? "Calculates values using standard algebraic and mathematical models."
+      : "Runs string-matching operations and structural checks.",
+    buttonActions: (() => {
+      if (tool.sectionId === "calculators" || tool.sectionId === "finance" || tool.sectionId === "health") {
+        return [
+          { button: "Calculate", action: `Evaluates the ${profile.toolName} mathematical formula instantly.` },
+          { button: "Clear", action: "Resets the numeric form fields and clears result panels." },
+          { button: "Copy", action: "Saves the calculated breakdown schedule directly to your clipboard." }
+        ];
+      } else if (tool.sectionId === "pdf" || tool.sectionId === "image" || tool.sectionId === "editing") {
+        const isPdf = tool.sectionId === "pdf";
+        const label = isPdf ? "PDF Document" : "Image File";
+        return [
+          { button: isPdf ? "Convert / Process" : "Apply Filter", action: `Executes local browser rendering for ${profile.toolName}.` },
+          { button: "Clear", action: `Purges the loaded ${label.toLowerCase()} bytes from active tab RAM.` },
+          { button: "Download", action: `Saves the processed output ${label.toLowerCase()} back to your device storage.` }
+        ];
+      } else {
+        return [
+          { button: "Format / Clean", action: `Parses character structures to apply uniform layouts.` },
+          { button: "Clear", action: "Resets the text inputs and clears all output panes." },
+          { button: "Copy", action: "Copies the updated text to your system clipboard." }
+        ];
+      }
+    })(),
+    majorUses: profile.practicalUseCases.slice(0, 2),
+    minorUses: profile.practicalUseCases.slice(2, 4),
+    commonMistakes: profile.commonMistakes,
+    invalidInputHandling: (() => {
+      if (tool.sectionId === "calculators" || tool.sectionId === "finance" || tool.sectionId === "health") {
+        return [
+          "If input values are empty or contain alphabetic characters, the tool stays in standby mode.",
+          "Parameters outside valid mathematical ranges display warning indicators and clear outputs."
+        ];
+      } else if (tool.sectionId === "pdf" || tool.sectionId === "image" || tool.sectionId === "editing") {
+        const isPdf = tool.sectionId === "pdf";
+        const label = isPdf ? "PDF Document" : "Image File";
+        return [
+          `If the uploaded ${label.toLowerCase()} is corrupted, local parsing fails and a format warning is displayed.`,
+          "Providing password-protected or unsupported file structures halts processing."
+        ];
+      } else {
+        return [
+          "Pasting empty strings or invalid schemas keeps the output area clear.",
+          "Syntax errors or unescaped characters trigger immediate parsing warning banners."
+        ];
+      }
+    })(),
+    limitations: profile.limitations,
+    privacyNote: sectionGen.generatePrivacyNote(profile, strategy),
+    conclusion: sectionGen.generateSummary(profile, strategy),
+    technicalExplanation: strategy.explanation,
+    packagesUsed: ["React", "Lucide Icons", "Tailwind CSS"],
+    codeSnippets: [
+      (() => {
+        if (tool.sectionId === "calculators" || tool.sectionId === "finance" || tool.sectionId === "health") {
+          return {
+            title: "Local Calculation Routine",
+            language: "javascript",
+            code: `// Local calculation routine\nfunction executeCalculation(params) {\n  const { value, rate, term } = params;\n  if (value <= 0 || rate <= 0) return 0;\n  // Apply compounding or standard formula locally\n  const result = evaluateFormula(value, rate, term);\n  return Number(result.toFixed(2));\n}`
+          };
+        } else if (tool.sectionId === "pdf" || tool.sectionId === "image" || tool.sectionId === "editing") {
+          return {
+            title: "Local Buffer Handler",
+            language: "javascript",
+            code: `// Local client-side file handler\nasync function processFileBuffer(file) {\n  const arrayBuffer = await file.arrayBuffer();\n  const context = await parseLocalBuffer(arrayBuffer);\n  // Process pixels or document tags in-memory\n  const outputBlob = await compileOutput(context);\n  return URL.createObjectURL(outputBlob);\n}`
+          };
+        } else {
+          return {
+            title: "Client-Side Parser",
+            language: "javascript",
+            code: `// Client-side text parser\nfunction processString(input) {\n  if (!input) return "";\n  // Run local regex cleaning or format routines\n  const formatted = cleanInputString(input);\n  return formatted.trim();\n}`
+          };
+        }
+      })()
+    ]
+  };
+
+  // Build unique related tools list
+  const allTools = toolRegistry.map(t => buildToolContentProfile(t));
+  const relatedTools = sectionGen.generateRelatedTools(profile, allTools);
+
+  // Generate unique excerpt constraint: 120-160 characters
+  let excerpt = `Learn how to use ${name.toLowerCase()} safely in your browser. ${profile.userProblem}`;
+  if (excerpt.length > 160) {
+    excerpt = excerpt.substring(0, 157) + "...";
+  } else if (excerpt.length < 120) {
+    excerpt = (excerpt + ` Perform ${profile.inputType.toLowerCase()} to ${profile.outputType.toLowerCase()} transformations instantly.`).substring(0, 157) + "...";
+  }
 
   return {
-    title: `How the ${name} Works: Operation Flow, Logic, and Limits`,
+    title: getToolGuideTitle(tool),
     slug: tool.guideSlug,
-    metaTitle,
-    metaDescription,
+    metaTitle: `${getToolGuideTitle(tool)} | Singulariti`,
+    metaDescription: excerpt,
     category: sectionName,
     tags: [sectionName, subSectionName],
     toolUrl: tool.utilityUrl,
-    publishedAt: "2026-06-04",
-    updatedAt: "2026-06-04",
-    relatedTools: (tool.relatedToolIds || []).map(id => {
-      const relTool = toolRegistry.find(t => t.id === id);
-      return {
-        name: relTool?.name || id,
-        url: relTool?.utilityUrl || `/blog/guides/${id}-guide`,
-        reason: `Related ${name.toLowerCase()} utility.`
-      };
-    }),
-    sections: {
-      introduction: `
-        <p>The ${name} is a browser-side utility designed to handle ${name.toLowerCase()} operations instantly. In digital workflows, processing files or configurations quickly is essential. This tool provides a dedicated, direct user interface to complete these tasks without server latency or software installation.</p>
-      `,
-      whatThisToolDoes: `This utility operates entirely inside the client browser. It parses user-supplied inputs, performs validation checks against standard formatting rules, executes the required operations, and outputs the results immediately.`,
-      whyIncluded: `Adherence to specific syntax standards or format structures is required for many tasks. Doing this manually is prone to human error. The ${name} is included to automate this process securely.`,
-      whoCanUse: [
-        "Professionals working with document and data formats",
-        "Students completing calculations or study reports",
-        "General users seeking secure digital operations"
-      ],
-      inputsRequired: tool.inputType,
-      outputProduced: tool.outputType,
-      howToUse: [
-        `Open the ${name} page on this website.`,
-        "Input or paste the required source parameters in the input container.",
-        "The system validates formatting rules and processes the input.",
-        "View the processed output result in the output panel.",
-        "Click Copy to save the result locally, or Clear to start over."
-      ],
-      userOperationFlow: `Input Value → Format Verification → Client Processing Engine → Output Display → Copy Action`,
-      operationWorks: [
-        "The user enters the required source parameters.",
-        "The browser runs validation routines on change.",
-        "The local scripting engine executes the operation in memory.",
-        "The page renders the formatted or processed output."
-      ],
-      internalProcessingFlow: [
-        "Accept character inputs or document streams.",
-        "Perform boundary value checks.",
-        "Execute standard mathematical or text algorithms.",
-        "Deliver output to browser DOM."
-      ],
-      operationDiagram: `
-Source Input
-     ↓
-Validation Checks
-     ↓
-Client Script Processing
-     ↓
-Formatted Output
-      `,
-      formulaOrLogic: tool.hasFormula
-        ? `The calculation is processed using standard client-side algebraic logic based on standard parameter rules.`
-        : `The logic processes values by iterating through the input structure, applying matching rules, and parsing formatting tags.`,
-      buttonActions: [
-        { button: "Process / Run", action: "Executes the main utility calculation or transformation." },
-        { button: "Clear", action: "Clears all input values and resets outputs to default." },
-        { button: "Copy", action: "Copies the output result to the local system clipboard." }
-      ],
-      majorUses: [
-        "Standard digital document operations",
-        "Format cleanup and validation"
-      ],
-      minorUses: [
-        "Quick checks",
-        "Educational experiments"
-      ],
-      commonMistakes: [
-        "Inputting values with incorrect formatting or invalid symbols",
-        "Exceeding standard boundary limits"
-      ],
-      invalidInputHandling: [
-        "If input values are empty or invalid, the system displays error reports.",
-        "Outputs are cleared to prevent incorrect calculations."
-      ],
-      limitations: [
-        "Calculations are handled locally in-browser; very large file inputs may experience rendering delay depending on device memory."
-      ],
-      privacyNote: "This tool is designed to work in the browser where possible. The input can be processed locally without needing to upload it. This guarantees complete confidentiality for personal files or text parameters.",
-      technicalExplanation: "This tool leverages native browser APIs and efficient JavaScript algorithms to perform calculations and data transformations directly on your device. By avoiding round-trips to a backend server, the application minimizes latency and ensures that your data remains securely within your local session.",
-      packagesUsed: ["Next.js", "React", "Tailwind CSS"],
-      conclusion: "Processing and inspecting values is made simple, safe, and immediate using the browser-side scripting engine."
-    },
-    faqs: [
-      {
-        question: `How does the ${name} protect my privacy?`,
-        answer: "No data is transmitted over the internet or saved to remote databases. All calculations and rendering occur locally within your browser tab."
-      }
-    ]
+    relatedTools,
+    sections,
+    faqs: sectionGen.generateFaqs(profile, strategy)
   };
 }
 
 const SAFER_PRIVACY_TEXT = "For tools that run fully in the browser, files can be processed locally without being uploaded to a server. Some advanced tools may require server-side processing depending on the operation. Avoid uploading highly sensitive files unless you understand how the tool processes them.";
 
 function getExtraContent(name: string, category: string, level: 'short' | 'medium' | 'detailed') {
+  const cleanCat = category.toLowerCase();
+  
   if (level === 'detailed') {
+    let categoryFocus = "efficient data operations";
+    let detailSection = "";
+    
+    if (cleanCat.includes("pdf")) {
+      categoryFocus = "document compression and formatting";
+      detailSection = "Using client-side PDF libraries allows you to reorganize page grids and flatten metadata objects directly in your browser. This reduces page rendering sizes without changing layouts.";
+    } else if (cleanCat.includes("image") || cleanCat.includes("edit")) {
+      categoryFocus = "raster image optimization";
+      detailSection = "Client canvas contexts let you scale pixel bounds, strip exif locations, and adjust compression factors without sending files over network threads.";
+    } else if (cleanCat.includes("dev")) {
+      categoryFocus = "code formatting and hash calculations";
+      detailSection = "Native parser engines pretty-print minified configurations and validate nesting parameters securely within the browser sandbox.";
+    } else if (cleanCat.includes("calc")) {
+      categoryFocus = "numerical equation parsing";
+      detailSection = "Javascript floating-point operations evaluate interest growth or metric parameters, outputting schedules instantly.";
+    } else if (cleanCat.includes("text")) {
+      categoryFocus = "text format formatting";
+      detailSection = "String tokenization splits drafts on spacing borders, converting character cases and counting tokens locally.";
+    } else if (cleanCat.includes("seo")) {
+      categoryFocus = "search tag compilation";
+      detailSection = "Template compilers format header markup and sitemap directories, validating length constraints before publication.";
+    }
+
     return {
       intro: `
-        <h3>Comprehensive Guide to ${name}</h3>
-        <p>When working with digital systems, data files, or online media, efficiency is a core requirement. The ${name} tool has been specifically developed as a high-performance solution to streamline operations without the friction associated with traditional software installations. It provides a browser-native environment that operates directly within your tab session.</p>
-        
-        <h3>Why Client-Side Performance Matters</h3>
-        <p>Most traditional converters and file utilities rely on server-side pipelines. When you upload a file, the server receives the data, processes it on remote CPUs, and sends the output back over the internet. This approach introduces significant latency and exposes your data to security vulnerabilities. By running calculations locally inside the browser using modern technologies like Web Workers and client Canvas contexts, the ${name} completes operations instantly, bypasses network delays, and protects your information.</p>
-        
-        <h3>Understanding the Underlying Technology</h3>
-        <p>The processing engine behind the ${name} leverages modern web standards. By utilizing client-side scripting and in-browser rendering contexts, the tool runs directly inside a sandbox environment. This architecture allows for rapid iteration of data sets and files. Rather than queueing your files on a crowded remote server, your local CPU performs the tasks in parallel threads. This not only increases performance but also significantly reduces the power and resources required to complete simple digital transactions, making it an eco-friendly choice.</p>
-        
-        <h3>Best Practices for Processing Files</h3>
-        <ul>
-          <li><strong>Verify File Formats:</strong> Always check that your input format matches the expected types (such as JPEG, PNG, or PDF) to avoid validation errors.</li>
-          <li><strong>Monitor File Size Limits:</strong> Although browser memory can handle large files, extremely large files (above 50MB) may trigger minor UI lag during canvas redraws.</li>
-          <li><strong>Ensure Correct Parameters:</strong> When adjusting sliders or options, start with standard values before selecting extreme values to get the best balance of quality and size.</li>
-        </ul>
+        <h3>Detailed Workflow Analysis</h3>
+        <p>Completing digital tasks efficiently is a main requirement. The <strong>${name}</strong> has been created as a lightweight browser-native tool to handle ${categoryFocus} without complex setup steps.</p>
+        <h3>Local Execution Flow</h3>
+        <p>Many traditional tools process data on remote servers. This introduces network delays and security risks. ${detailSection} By running operations client-side, Singulariti keeps your inputs secure on your local device.</p>
       `,
       conclusion: `
-        <h2>Advanced Tips for Integrating ${name} Into Your Workflow</h2>
-        <p>Using browser utilities is highly effective when you combine them into a larger workflow. For example, if you are preparing visual content for a web page, you can crop the image, resize its pixel dimensions, and compress the file stream using our dedicated tools in sequence. Because all these utilities operate in the same browser space, no files are transferred, keeping the processing chain clean and fast.</p>
-        
-        <h3>Optimizing for Mobile and Desktop Devices</h3>
-        <p>Our tools are designed to adapt to your environment. When you run them on a high-performance desktop computer, they take advantage of multi-core processors. On mobile devices, they optimize memory usage to prevent tab crashes. This cross-device compatibility ensures that you can complete your tasks whether you are working in an office, studying at a library, or traveling.</p>
-        
-        <h3>Common Issues and Quick Troubleshooting</h3>
-        <p>If you encounter unexpected results, check the following troubleshooting steps to quickly resolve the issue:</p>
-        <ul>
-          <li><strong>Unresponsive Interface:</strong> If the browser tab becomes sluggish, it might be due to low system memory. Try closing unused browser tabs and reloading the page to clear the cache.</li>
-          <li><strong>Validation Rejected:</strong> Ensure the file is not password-protected or corrupted. Try opening the file locally on your device to verify it opens correctly before selecting it.</li>
-          <li><strong>Output Missing:</strong> If the output doesn't display, double-check that all required fields are filled out. Missing parameters will prevent the processor from completing the execution flow.</li>
-        </ul>
-
-        <h3>Frequently Encountered Format Standards</h3>
-        <p>Different digital systems expect specific formats. When using tools in the ${category} category, pay close attention to output specifications. Standardizing your formats before uploading them to professional platforms prevents import errors and preserves structural formatting across different systems. Whether you are submitting a resume to an applicant tracking system, loading assets to a content delivery network, or compiling study notes for a research report, matching standard profiles is key to professional results.</p>
+        <h3>Workflow Tips</h3>
+        <p>You can combine the <strong>${name}</strong> with other Singulariti tools to create an efficient digital pipeline. For example, you can convert format layouts and check structure constraints sequentially in different browser tabs.</p>
+        <p>If the tool displays validation errors, double-check that your source inputs meet formatting rules and that file buffers are not corrupted. Processing files client-side ensures your company records stay private.</p>
       `
     };
   } else if (level === 'medium') {
     return {
       intro: `
         <h3>Optimizing Local Workflows</h3>
-        <p>By executing tasks locally within the browser, the ${name} tool removes the need for large downloads or software installations. This makes it easy to complete digital tasks on any device, whether you are using a mobile phone or a desktop computer, while maintaining a smooth and responsive experience.</p>
-        
-        <h3>Why Local Execution is Safer</h3>
-        <p>Processing files client-side means your data is loaded directly into browser memory. It is not written to disk on a remote cloud server or processed by automated scripts. This workflow provides a secure alternative to public uploads and minimizes security risks.</p>
+        <p>The <strong>${name}</strong> completes daily task routines without installing software or extensions. This provides a fast, browser-side workspace on both mobile and desktop screens.</p>
       `,
       conclusion: `
-        <h3>Building a More Efficient Workflow</h3>
-        <p>We encourage you to combine this tool with other browser-side utilities in our suite to build a seamless digital pipeline. For example, you can compress files, convert formats, and verify syntax sequentially—all within your browser without ever transferring files to external servers. This approach keeps your operations fast, unified, and highly secure.</p>
+        <h3>Integration Tips</h3>
+        <p>Using local browser-side tools protects personal files from online logging. Combine this utility with other converters or formatting helpers in our library to simplify your daily work.</p>
       `
     };
   } else {
     return {
       intro: `
-        <p>Singulariti's browser-based tools are designed for fast and lightweight operations. You can perform conversions, formatting, or calculations entirely locally — no installation required, and no data ever leaves your device.</p>
+        <p>Singulariti's browser-based tools are designed for fast and lightweight operations. You can perform calculations, formatting, or conversions entirely locally in your browser.</p>
       `,
       conclusion: `
         <p>Using client-side tools is a smart way to maintain productivity while keeping your system clean and your personal files private.</p>
@@ -1318,7 +1348,11 @@ function getExtraContent(name: string, category: string, level: 'short' | 'mediu
   }
 }
 
-export function normalizePost(post: BlogPost): BlogPost {
+import { BLOG_POSTS } from '@/data/blogs';
+import { AUDIENCE_ARTICLES, NormalizedBlogPost, BlogSection, BlogFaq, RelatedBlogItem } from '@/data/audienceArticles';
+import { getBlogImage } from '@/lib/blogImages';
+
+export function normalizePost(post: BlogPost): any {
   const tool = toolRegistry.find(t => t.guideSlug === post.slug || t.utilityUrl === post.toolUrl);
   
   let title = post.title;
@@ -1425,50 +1459,299 @@ export function normalizePost(post: BlogPost): BlogPost {
     answer: cleanPrivacy(faq.answer)
   }));
 
-  const targetFaqCount = level === 'detailed' ? 6 : (level === 'medium' ? 5 : 4);
-  
-  for (const defFaq of defaultFAQs) {
-    if (faqs.length >= targetFaqCount) break;
-    const isDuplicate = faqs.some(f => f.question.toLowerCase().includes(defFaq.question.toLowerCase().substring(0, 15)));
-    if (!isDuplicate) {
-      faqs.push(defFaq);
+  const isFallback = !blogPosts.some(p => p.slug === post.slug) && !BLOG_POSTS.some(p => p.slug === post.slug) && !AUDIENCE_ARTICLES.some(p => p.slug === post.slug);
+
+  if (!isFallback) {
+    const targetFaqCount = level === 'detailed' ? 6 : (level === 'medium' ? 5 : 4);
+    for (const defFaq of defaultFAQs) {
+      if (faqs.length >= targetFaqCount) break;
+      const isDuplicate = faqs.some(f => f.question.toLowerCase().includes(defFaq.question.toLowerCase().substring(0, 15)));
+      if (!isDuplicate) {
+        faqs.push(defFaq);
+      }
     }
   }
 
+  // Convert sections object to BlogSection[] array for NormalizedBlogPost compliance
+  const sectionsArray: BlogSection[] = [];
+  if (sections.introduction) {
+    sectionsArray.push({
+      id: "intro",
+      heading: "Introduction",
+      content: sections.introduction,
+      type: "paragraph"
+    });
+  }
+  if (sections.whatThisToolDoes) {
+    sectionsArray.push({
+      id: "what-is-it",
+      heading: "What This Tool Does",
+      content: sections.whatThisToolDoes,
+      type: "paragraph"
+    });
+  }
+  if (sections.whyIncluded) {
+    sectionsArray.push({
+      id: "why-use",
+      heading: "Why It Matters",
+      content: sections.whyIncluded,
+      type: "paragraph"
+    });
+  }
+  if (sections.whoCanUse && sections.whoCanUse.length > 0) {
+    sectionsArray.push({
+      id: "who-can-use",
+      heading: "Who Can Use This Tool",
+      content: "This utility is beneficial for various roles and tasks:",
+      type: "bullets",
+      items: sections.whoCanUse
+    });
+  }
+  if (sections.inputsRequired && sections.inputsRequired.length > 0) {
+    sectionsArray.push({
+      id: "inputs",
+      heading: "Inputs Required",
+      content: "To perform this operation, the tool requires the following inputs:",
+      type: "bullets",
+      items: sections.inputsRequired
+    });
+  }
+  if (sections.outputProduced && sections.outputProduced.length > 0) {
+    sectionsArray.push({
+      id: "outputs",
+      heading: "Output Produced",
+      content: "The tool generates the following processed outputs:",
+      type: "bullets",
+      items: sections.outputProduced
+    });
+  }
+  if (sections.howToUse && sections.howToUse.length > 0) {
+    sectionsArray.push({
+      id: "how-to-use",
+      heading: "How to Use This Tool",
+      content: "Follow these simple steps to execute the operation:",
+      type: "steps",
+      items: sections.howToUse
+    });
+  }
+  if (sections.workingExample) {
+    sectionsArray.push({
+      id: "example",
+      heading: "Practical Example",
+      content: `Here is a typical execution trace:\n- Input: ${sections.workingExample.input}\n- Output: ${sections.workingExample.output}`,
+      type: "example",
+      items: sections.workingExample.operation
+    });
+  }
+  if (sections.commonMistakes && sections.commonMistakes.length > 0) {
+    sectionsArray.push({
+      id: "mistakes",
+      heading: "Common Mistakes to Avoid",
+      content: "Keep these details in mind to prevent errors:",
+      type: "warning",
+      items: sections.commonMistakes
+    });
+  }
+  if (sections.privacyNote) {
+    sectionsArray.push({
+      id: "privacy-sec",
+      heading: "Safe Usage & Privacy Notice",
+      content: sections.privacyNote,
+      type: "tip"
+    });
+  }
+  if (sections.conclusion) {
+    sectionsArray.push({
+      id: "conclusion",
+      heading: "Summary",
+      content: sections.conclusion,
+      type: "paragraph"
+    });
+  }
+
+  const categorySlug = tool ? `${tool.sectionId}-tools` : "general";
+
+  // Create combined sections object that behaves as both array and object
+  const combinedSections: any = [...sectionsArray];
+  Object.assign(combinedSections, sections);
+
   return {
     ...post,
+    id: post.slug,
     title,
     metaTitle,
     metaDescription,
-    sections,
-    faqs
+    faqs,
+    // NormalizedBlogPost extensions
+    categorySlug,
+    excerpt: post.metaDescription,
+    published: post.publishedAt || "2026-06-01",
+    readTime: (post as any).readTime || "5 min read",
+    url: post.toolUrl ? `/blog/guides/${post.slug}` : `/blog/articles/${post.slug}`,
+    image: getBlogImage(post),
+    imageAlt: post.featuredImageAlt || `Illustration for ${post.title}`,
+    labels: post.tags || [],
+    contentLevel: level,
+    sections: combinedSections,
+    rawSections: sections,
+    relatedItems: post.relatedTools.map(t => ({ name: t.name, url: t.url, description: t.reason }))
   };
 }
 
-// Helper Query Methods
+// Convert a BLOG_POSTS post (from blogs.ts) to the unified BlogPost & NormalizedBlogPost format
+export function normalizeDataPost(post: any): any {
+  const sectionsObj: any = {};
+  const sectionsArray: BlogSection[] = post.sections || [];
 
-export function getAllPosts(): BlogPost[] {
-  return blogPosts.map(normalizePost);
+  // Map array sections back to fields for backwards compatibility
+  sectionsArray.forEach(sec => {
+    if (sec.id === 'intro') sectionsObj.introduction = sec.content;
+    else if (sec.id === 'what-is-it') sectionsObj.whatThisToolDoes = sec.content;
+    else if (sec.id === 'why-use') sectionsObj.whyIncluded = sec.content;
+    else if (sec.id === 'how-to-use') {
+      sectionsObj.howToUse = sec.items;
+      sectionsObj.introduction = (sectionsObj.introduction || '') + `\n<p>${sec.content}</p>`;
+    } else if (sec.id === 'example') {
+      sectionsObj.workingExample = {
+        input: sec.items?.[0] || '',
+        operation: sec.items || [],
+        output: sec.items?.[sec.items.length - 1] || ''
+      };
+    } else if (sec.id === 'mistakes') {
+      sectionsObj.commonMistakes = sec.items;
+    } else if (sec.id === 'conclusion') {
+      sectionsObj.conclusion = sec.content;
+    }
+  });
+
+  if (!sectionsObj.introduction) sectionsObj.introduction = post.excerpt;
+  if (!sectionsObj.conclusion) sectionsObj.conclusion = post.excerpt;
+
+  const labels = [post.mainKeyword, ...(post.secondaryKeywords || [])];
+
+  const combinedSections: any = [...sectionsArray];
+  Object.assign(combinedSections, sectionsObj);
+
+  return {
+    title: post.title,
+    slug: post.slug,
+    metaTitle: post.seoTitle || `${post.title} | Singulariti`,
+    metaDescription: post.metaDescription,
+    category: post.category,
+    tags: labels,
+    toolUrl: post.toolUrl,
+    relatedTools: (post.relatedTools || []).map((t: any) => ({ name: t.name, url: t.url, reason: t.description })),
+    faqs: post.faqs || [],
+    // NormalizedBlogPost extensions
+    id: post.slug,
+    categorySlug: post.categorySlug,
+    excerpt: post.excerpt,
+    published: "2026-06-03",
+    readTime: post.readTime || "5 min read",
+    url: `/blog/${post.categorySlug}/${post.slug}`, // maintain original category route for data posts
+    image: getBlogImage(post),
+    imageAlt: `Illustration for ${post.title}`,
+    labels,
+    contentLevel: post.contentLevel || "medium",
+    sections: combinedSections,
+    rawSections: sectionsObj,
+    relatedItems: (post.relatedTools || []).map((t: any) => ({ name: t.name, url: t.url, description: t.description }))
+  };
 }
 
-export function getPostBySlug(slug: string): BlogPost | undefined {
-  const found = blogPosts.find(post => post.slug === slug);
-  if (found) return normalizePost(found);
+let cachedBlogPosts: any[] | null = null;
 
-  const tool = toolRegistry.find(t => t.guideSlug === slug);
-  if (tool) {
-    return normalizePost(getFallbackPost(tool));
+export function getAllPostsCached(): any[] {
+  if (cachedBlogPosts) {
+    return cachedBlogPosts;
   }
-  return undefined;
+
+  const all: any[] = [];
+  const slugs = new Set<string>();
+
+  // 1. Add manual guides from blogPosts in this file
+  blogPosts.forEach(post => {
+    if (!slugs.has(post.slug)) {
+      all.push(normalizePost(post));
+      slugs.add(post.slug);
+    }
+  });
+
+  // 2. Add manual guides from BLOG_POSTS in blogs.ts
+  BLOG_POSTS.forEach(post => {
+    if (!slugs.has(post.slug)) {
+      all.push(normalizeDataPost(post));
+      slugs.add(post.slug);
+    }
+  });
+
+  // 3. Add audience articles from audienceArticles.ts
+  AUDIENCE_ARTICLES.forEach(post => {
+    if (!slugs.has(post.slug)) {
+      // Map to combined BlogPost and NormalizedBlogPost format
+      const sectionsObj: any = {
+        introduction: post.sections.find(s => s.id === 'intro')?.content || post.excerpt,
+        conclusion: post.sections.find(s => s.id === 'conclusion')?.content || post.excerpt
+      };
+      
+      const combinedSections: any = [...post.sections];
+      Object.assign(combinedSections, sectionsObj);
+
+      all.push({
+        ...post,
+        metaTitle: `${post.title} | Singulariti`,
+        metaDescription: post.description,
+        tags: post.labels,
+        relatedTools: (post.relatedItems || []).map(t => ({ name: t.name, url: t.url, reason: t.description || "" })),
+        sections: combinedSections,
+        faqs: post.faqs || [],
+        rawSections: sectionsObj,
+        publishedAt: post.published,
+        updatedAt: post.updatedAt
+      });
+      slugs.add(post.slug);
+    }
+  });
+
+  // 4. Add fallbacks for registry tools to ensure all tools have articles
+  toolRegistry.forEach(tool => {
+    if (!slugs.has(tool.guideSlug)) {
+      const fallback = normalizePost(getFallbackPost(tool));
+      all.push(fallback);
+      slugs.add(tool.guideSlug);
+    }
+  });
+
+  cachedBlogPosts = all;
+  return all;
 }
 
-export function getPostsByCategory(category: string): BlogPost[] {
+export function getAllPosts(): any[] {
+  return getAllPostsCached();
+}
+
+export function runQualityCheckOnly(): any[] {
+  const posts = getAllPostsCached();
+  return validateAllGeneratedArticles(posts);
+}
+
+export function getPostBySlug(slug: string): any {
+  // Check the compiled list of all posts first
+  const all = getAllPosts();
+  return all.find(p => p.slug === slug);
+}
+
+export function getPostsByCategory(category: string): any[] {
   const normalizedCategory = category.toLowerCase();
-  return blogPosts
-    .filter(post => post.category.toLowerCase().includes(normalizedCategory))
-    .map(normalizePost);
+  const all = getAllPosts();
+  return all.filter(post => 
+    post.category.toLowerCase().includes(normalizedCategory) || 
+    post.categorySlug.toLowerCase().includes(normalizedCategory)
+  );
 }
 
 export function getAllCategories(): string[] {
-  return Array.from(new Set(blogPosts.map(post => post.category)));
+  const all = getAllPosts();
+  return Array.from(new Set(all.map(post => post.category)));
 }
+

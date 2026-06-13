@@ -3,176 +3,136 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { blogSeriesList, blogGuidesList, toolRegistry, subSectionRegistry } from '@/content/tools/toolRegistry';
+import { blogSeriesList, toolRegistry } from '@/content/tools/toolRegistry';
 import { getAllPosts } from '@/lib/blog';
-import { constructMetadata } from '@/lib/seo/metadata';
-import { 
-  Search, 
-  Compass, 
-  ShieldCheck, 
-  Sparkles, 
-  BookOpen, 
-  Layers, 
-  ArrowRight,
-  Play,
-  Calendar,
-  Grid,
-  Lock,
-  Eye,
-  FileText
-} from 'lucide-react';
-import { BlogSearchAutocomplete } from '@/components/blog/BlogSearchAutocomplete';
-
 import { buildMetadata } from '@/lib/seo/metadata';
 import { getPageSEO } from '@/lib/seo/pageMetadata';
+import { BlogSearchAutocomplete } from '@/components/blog/BlogSearchAutocomplete';
+import WhoCanUseSingulariti from '@/components/blog/WhoCanUseSingulariti';
+import BlogListingClient from '@/components/blog/BlogListingClient';
+import { BookOpen, Layers, ArrowRight } from 'lucide-react';
 
 const seo = getPageSEO('blog')!;
 export const metadata = buildMetadata({
-  title: seo.title,
-  description: seo.description,
-  canonical: `https://singulariti.in${seo.path}`,
+  title: "Blog | Singulariti Tool Guides",
+  description: "Read simple Singulariti guides for PDF tools, image tools, developer utilities, SEO tools, calculators, converters, and everyday digital tasks.",
+  canonical: `https://singulariti.in/blog`,
   robots: seo.robots,
   openGraph: {
-    title: seo.openGraph.title,
-    description: seo.openGraph.description,
-    url: seo.openGraph.url,
-    type: seo.openGraph.type,
+    title: "Blog | Singulariti Tool Guides",
+    description: "Read simple Singulariti guides for PDF tools, image tools, developer utilities, SEO tools, calculators, converters, and everyday digital tasks.",
+    url: "https://singulariti.in/blog",
+    type: "website",
     image: seo.openGraph.image,
   },
   twitter: {
-    title: seo.twitter.title,
-    description: seo.twitter.description,
+    title: "Blog | Singulariti Tool Guides",
+    description: "Read simple Singulariti guides for PDF tools, image tools, developer utilities, SEO tools, calculators, converters, and everyday digital tasks.",
     image: seo.twitter.image,
   },
 });
 
 export default async function BlogHomePage() {
   const posts = getAllPosts();
-  
-  // Show 6 latest guides from our registry
-  const recentGuides = blogGuidesList.slice(0, 6);
-
-  // Operation types definition for the operation-based section
-  const opCategories = [
-    { name: "Formatter Guides", op: "formatter", desc: "Understand data beautification, code indentation, and styling." },
-    { name: "Converter Guides", op: "converter", desc: "Learn file transitions, character encoding, and numeric transformations." },
-    { name: "Compressor Guides", op: "compressor", desc: "Read about file size optimization, pixel density reductions, and quality ratios." },
-    { name: "Calculator Guides", op: "calculator", desc: "Inspect algebraic formulas, rate calculations, and calendar computations." },
-    { name: "Generator Guides", op: "generator", desc: "Discover how random strings, cryptographically secure keys, and templates are made." },
-    { name: "Checker Guides", op: "checker", desc: "Analyze markup validation rules, keyword percentages, and syntax checks." },
-    { name: "Editor Guides", op: "editor", desc: "Learn image cropping parameters, filters, and digital document sketch controls." },
-    { name: "Scanner Guides", op: "scanner", desc: "Understand camera matrix extraction, file decoding, and MIME detectors." }
-  ];
-
-  // Privacy / Educational static guides list matching requirements
-  const privacyArticles = [
-    {
-      title: "Why Online Utility Tools Are Useful for Everyday Digital Work",
-      slug: "why-online-utility-tools-are-useful",
-      description: "Understand why browser-based utility tools are essential for digital workflows, how they save time, and why local browser processing keeps files secure.",
-      icon: BookOpen
-    },
-    {
-      title: "How Browser-Side Utilities Process Files Locally",
-      slug: "how-browser-side-utilities-process-files-locally",
-      description: "Explore the internal processing flow using Web Workers and client memory canvas sandboxes where files can be processed locally without being uploaded to a server.",
-      icon: Lock
-    },
-    {
-      title: "What Happens When a File is Uploaded for Processing",
-      slug: "what-happens-when-a-file-is-uploaded-for-processing",
-      description: "Learn the security differences between client-side HTML5 engines and server-side processing pipelines that require document transport.",
-      icon: ShieldCheck
-    },
-    {
-      title: "How to Use Document Utilities Safely online",
-      slug: "how-to-use-document-utilities-safely-online",
-      description: "Key rules for checking file size limits, validating credentials, and removing metadata before distributing output documents.",
-      icon: Eye
-    }
-  ];
 
   return (
     <>
       <Header />
-      <main className="flex-1 w-full bg-background pt-24 pb-16">
-        <div className="container mx-auto px-4 md:px-8 max-w-7xl space-y-24">
+      <main className="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-white pt-24 pb-16">
+        <div className="w-full space-y-16">
           
-          {/* 1. Hero Section */}
-          <section className="max-w-4xl mx-auto text-center space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[13px] font-sans font-medium">
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>Singulariti Educational Library</span>
+          {/* 1. Blog hero & 2. Short blog introduction */}
+          <section className="w-full bg-gradient-to-b from-white via-slate-50 to-white text-slate-900 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-white py-12">
+            <div className="max-w-4xl mx-auto text-center px-4 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/40 border border-teal-100 dark:border-teal-900/60 text-teal-700 dark:text-teal-300 text-[13px] font-sans font-medium">
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Singulariti Educational Library</span>
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-slate-950 dark:text-white leading-tight">
+                Blog
+              </h1>
+              
+              <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl mx-auto">
+                Singulariti blog helps users understand tools, file workflows, formatting, conversion, compression, SEO, text utilities, calculators, and productivity tools.
+              </p>
             </div>
-            
-            <h1 className="font-display font-bold text-4xl md:text-6xl text-ink leading-tight tracking-tight">
-              Utility Guides and Usage Articles
-            </h1>
-            
-            <p className="font-sans text-base md:text-lg text-slate leading-relaxed max-w-3xl mx-auto">
-              Read clear guides that explain how each utility works, what input it needs, what output it produces, and how the operation happens step by step.
-            </p>
           </section>
 
-          {/* 2. Interactive Search Form Component */}
-          <section className="max-w-3xl mx-auto bg-surface border border-border p-8 rounded-3xl space-y-5 shadow-sm">
-            <h3 className="font-display font-bold text-xs text-slate uppercase tracking-wider">Search Utility Guides</h3>
-            <BlogSearchAutocomplete />
+          {/* 3. Search Bar Container */}
+          <section className="max-w-3xl mx-auto px-4">
+            <div className="bg-slate-50 border border-slate-200 dark:bg-slate-900 dark:border-slate-800/80 p-6 md:p-8 rounded-3xl space-y-4 shadow-sm">
+              <h3 className="font-display font-bold text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                Search Utility Guides
+              </h3>
+              <BlogSearchAutocomplete />
+            </div>
           </section>
 
-          {/* 3. Main Guide Series (Dashboard Layout) */}
-          <section className="space-y-10 max-w-6xl mx-auto">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-border pb-4">
+          {/* 4. “Who Can Use Singulariti?” compact section */}
+          <WhoCanUseSingulariti />
+
+          {/* 5, 6, 7. Featured Post, Category Filters, and Latest Blog Cards Grid */}
+          <section className="max-w-6xl mx-auto px-4">
+            <BlogListingClient posts={posts} />
+          </section>
+
+          {/* 8. Blog Series / Categories */}
+          <section className="max-w-6xl mx-auto px-4 space-y-10 pt-8">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800/80 pb-4">
               <div>
-                <h2 className="font-display font-bold text-2xl text-ink tracking-tight flex items-center gap-2">
-                  <Layers className="w-6 h-6 text-primary" /> Guide Series
+                <h2 className="font-display font-bold text-2xl text-slate-950 dark:text-white tracking-tight flex items-center gap-2">
+                  <Layers className="w-6 h-6 text-teal-600 dark:text-teal-400" /> Guide Series
                 </h2>
-                <p className="text-slate text-sm font-sans mt-1">
+                <p className="text-slate-600 dark:text-slate-300 text-sm font-sans mt-1">
                   Discover sub-sections and individual tools grouped by utility classes.
                 </p>
               </div>
               <Link 
                 href="/blog/series"
-                className="inline-flex items-center gap-1 font-semibold text-xs text-primary hover:underline"
+                className="inline-flex items-center gap-1 font-semibold text-xs text-teal-700 hover:text-teal-800 dark:text-teal-300 dark:hover:text-teal-200 transition-colors"
               >
                 View All Series <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {blogSeriesList.map((series, idx) => {
                 const count = toolRegistry.filter(t => t.sectionId === series.sectionId).length;
                 const gradients = [
-                  'from-blue-500/20 to-indigo-500/20 text-indigo-400 border-indigo-500/20',
-                  'from-emerald-500/20 to-teal-500/20 text-teal-400 border-teal-500/20',
-                  'from-rose-500/20 to-orange-500/20 text-rose-400 border-rose-500/20',
-                  'from-amber-500/20 to-yellow-500/20 text-amber-400 border-amber-500/20',
-                  'from-violet-500/20 to-fuchsia-500/20 text-violet-400 border-violet-500/20',
-                  'from-cyan-500/20 to-sky-500/20 text-cyan-400 border-cyan-500/20'
+                  'from-blue-500/10 to-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-200/40 dark:border-indigo-900/40',
+                  'from-emerald-500/10 to-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200/40 dark:border-teal-900/40',
+                  'from-rose-500/10 to-orange-500/10 text-rose-700 dark:text-rose-300 border-rose-200/40 dark:border-rose-900/40',
+                  'from-amber-500/10 to-yellow-500/10 text-amber-700 dark:text-amber-300 border-amber-200/40 dark:border-amber-900/40',
+                  'from-violet-500/10 to-fuchsia-500/10 text-violet-700 dark:text-violet-300 border-violet-200/40 dark:border-violet-900/40',
+                  'from-cyan-500/10 to-sky-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-200/40 dark:border-cyan-900/40'
                 ];
                 const gradient = gradients[idx % gradients.length];
                 
                 return (
-                  <div key={series.id} className="bg-surface border border-border rounded-2xl flex flex-col justify-between overflow-hidden hover:border-primary/60 transition-colors shadow-sm">
-                    <div className={`h-12 bg-gradient-to-r ${gradient} border-b flex items-center px-5`} />
-                    <div className="p-8 flex-1 flex flex-col justify-between space-y-6">
+                  <div 
+                    key={series.id} 
+                    className="bg-white border border-slate-200 dark:border-slate-800 dark:bg-slate-900 rounded-2xl flex flex-col justify-between overflow-hidden hover:border-teal-400 dark:hover:border-teal-700 transition-colors shadow-sm"
+                  >
+                    <div className={`h-12 bg-gradient-to-r ${gradient} border-b border-slate-100 dark:border-slate-800/40 flex items-center px-5`} />
+                    <div className="p-6 flex-1 flex flex-col justify-between space-y-6">
                       <div className="space-y-2">
                         <div className="flex justify-between items-center">
-                          <h3 className="font-display font-bold text-base text-ink">
+                          <h3 className="font-display font-bold text-base text-slate-990 dark:text-white">
                             {series.name}
                           </h3>
-                          <span className="text-[10px] font-mono text-slate bg-border/40 px-2.5 py-1 rounded-full font-semibold">
+                          <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-850 px-2.5 py-1 rounded-full font-semibold">
                             {count} utilities
                           </span>
                         </div>
-                        <p className="text-xs text-slate leading-relaxed line-clamp-3">
+                        <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3">
                           {series.description}
                         </p>
                       </div>
                       <div className="pt-2">
                         <Link 
                           href={`/blog/series/${series.slug}`}
-                          className="inline-flex w-full items-center justify-center py-2.5 bg-background border border-border hover:border-primary/60 hover:bg-primary/5 rounded-xl font-sans font-semibold text-xs text-ink hover:text-primary transition-all"
+                          className="inline-flex w-full items-center justify-center py-2.5 bg-slate-50 hover:bg-teal-50 hover:text-teal-700 dark:bg-slate-950 dark:hover:bg-teal-950/20 dark:hover:text-teal-300 border border-slate-200 dark:border-slate-800 rounded-xl font-sans font-semibold text-xs text-slate-700 dark:text-slate-300 transition-all"
                         >
                           View Guide Series
                         </Link>
@@ -184,158 +144,24 @@ export default async function BlogHomePage() {
             </div>
           </section>
 
-          {/* 4. Recent Guides Section */}
-          <section className="space-y-10 max-w-6xl mx-auto">
-            <div className="border-b border-border pb-4">
-              <h2 className="font-display font-bold text-2xl text-ink tracking-tight flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-primary" /> Recent Guides
-              </h2>
-              <p className="text-slate text-sm font-sans mt-1">
-                Deep dive tutorials describing calculations, operation flows, and logic structures.
+          {/* 9. Final CTA */}
+          <section className="max-w-6xl mx-auto px-4 pt-12">
+            <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-teal-50/40 via-white to-slate-50 p-8 dark:border-slate-800 dark:from-teal-950/20 dark:via-slate-900 dark:to-slate-950 text-center space-y-5 shadow-sm">
+              <h3 className="text-slate-950 dark:text-white font-display font-bold text-2xl">
+                Ready to Boost Your Digital Productivity?
+              </h3>
+              <p className="text-slate-600 dark:text-slate-300 text-sm max-w-xl mx-auto leading-relaxed">
+                Explore our full suite of 180+ browser-side utility tools. Shrink PDFs, optimize photos, format code payloads, calculate loan parameters, and manage files instantly.
               </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {recentGuides.map((guide) => {
-                const tool = toolRegistry.find(t => t.id === guide.utilityId);
-                const series = blogSeriesList.find(s => s.sectionId === guide.seriesId);
-                const sub = subSectionRegistry.find(ss => ss.id === guide.subSeriesId);
-                
-                return (
-                  <div key={guide.id} className="bg-surface border border-border rounded-3xl p-8 flex flex-col justify-between hover:border-primary/45 transition-colors shadow-sm">
-                    <div className="space-y-4">
-                      <div className="flex flex-wrap gap-1.5 text-[9px] font-sans font-bold uppercase tracking-wider">
-                        {series && (
-                          <span className="text-primary bg-primary/10 px-2 py-0.5 rounded">
-                            {series.name}
-                          </span>
-                        )}
-                        {sub && (
-                          <span className="text-slate bg-border/40 px-2 py-0.5 rounded">
-                            {sub.name}
-                          </span>
-                        )}
-                      </div>
-                      
-                      <h3 className="font-display font-bold text-sm text-ink leading-snug line-clamp-2">
-                        {guide.title}
-                      </h3>
-                      
-                      <p className="text-xs text-slate leading-relaxed line-clamp-3">
-                        {guide.metaDescription}
-                      </p>
-                    </div>
-
-                    <div className="flex gap-2 pt-6 mt-4 border-t border-border/40 text-[11px] font-sans font-semibold">
-                      {tool && (
-                        <Link 
-                          href={tool.utilityUrl}
-                          className="flex-1 text-center py-2 bg-primary hover:bg-primary/95 text-white rounded-lg transition-colors inline-flex items-center justify-center gap-0.5"
-                        >
-                          <Play className="w-2.5 h-2.5 fill-white" /> Use Utility
-                        </Link>
-                      )}
-                      <Link 
-                        href={`/blog/guides/${guide.slug}`}
-                        className="flex-1 text-center py-2 bg-background border border-border hover:border-primary hover:text-primary rounded-lg transition-all inline-flex items-center justify-center gap-0.5"
-                      >
-                        Read Guide <ArrowRight className="w-2.5 h-2.5" />
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-
-          {/* 5. Operation-Based Guides */}
-          <section className="space-y-6 max-w-6xl mx-auto">
-            <div className="border-b border-border pb-4">
-              <h2 className="font-display font-bold text-2xl text-ink tracking-tight flex items-center gap-2">
-                <Grid className="w-5 h-5 text-primary" /> Operation-Based Guides
-              </h2>
-              <p className="text-slate text-sm font-sans mt-1">
-                Browse guide articles filtered by specialized utility operation classes.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {opCategories.map((opCat) => (
-                <Link
-                  key={opCat.op}
-                  href={`/blog/search?op=${opCat.op}`}
-                  className="bg-surface border border-border p-5 rounded-2xl hover:border-primary/50 transition-all flex flex-col justify-between group"
+              <div className="pt-2">
+                <Link 
+                  href="/tools"
+                  className="inline-flex items-center rounded-full bg-teal-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 gap-2 shadow-md"
                 >
-                  <div className="space-y-1.5">
-                    <h4 className="font-display font-bold text-sm text-ink group-hover:text-primary transition-colors">
-                      {opCat.name}
-                    </h4>
-                    <p className="text-[11px] text-slate leading-relaxed font-sans">
-                      {opCat.desc}
-                    </p>
-                  </div>
-                  <span className="text-[10px] text-primary font-sans font-bold flex items-center gap-0.5 pt-4 mt-2">
-                    Browse Category <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                  </span>
+                  Browse All 180+ Tools <ArrowRight className="w-4 h-4" />
                 </Link>
-              ))}
+              </div>
             </div>
-          </section>
-
-          {/* 6. Privacy and Safe Usage Articles */}
-          <section className="space-y-6 max-w-6xl mx-auto">
-            <div className="border-b border-border pb-4">
-              <h2 className="font-display font-bold text-2xl text-ink tracking-tight flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-primary" /> Privacy and Safe Usage Articles
-              </h2>
-              <p className="text-slate text-sm font-sans mt-1">
-                Read educational articles explaining browser sandboxing, metadata logs, and security standards.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {privacyArticles.map((art, idx) => {
-                const Icon = art.icon;
-                return (
-                  <div key={idx} className="bg-surface border border-border rounded-2xl p-5 flex flex-col justify-between hover:border-primary/45 transition-colors shadow-sm">
-                    <div className="space-y-3">
-                      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-                        <Icon className="w-4 h-4" />
-                      </div>
-                      <h4 className="font-display font-bold text-xs text-ink leading-snug line-clamp-2">
-                        {art.title}
-                      </h4>
-                      <p className="text-[11px] text-slate leading-relaxed line-clamp-4 font-sans">
-                        {art.description}
-                      </p>
-                    </div>
-                    <div className="pt-4 border-t border-border/40 mt-4 text-xs font-semibold">
-                      <Link 
-                        href={`/blog/articles/${art.slug}`}
-                        className="text-primary hover:underline inline-flex items-center gap-0.5"
-                      >
-                        Read Article <ArrowRight className="w-3 h-3" />
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-
-          {/* 7. Directory Banner */}
-          <section className="max-w-6xl mx-auto bg-surface/50 border border-border p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-2 max-w-xl text-center md:text-left">
-              <h3 className="font-display font-bold text-lg text-ink">Full Tool Directory</h3>
-              <p className="text-xs text-slate leading-relaxed font-sans">
-                Looking for a structured list of all available tools? Access the directory index to browse the entire hierarchy tree grouped by categories and folder structures.
-              </p>
-            </div>
-            <Link 
-              href="/blog/utility-guides"
-              className="inline-flex items-center justify-center px-6 py-3 bg-primary hover:bg-primary/95 text-white font-sans font-bold text-xs rounded-xl transition-all shadow-sm flex-shrink-0"
-            >
-              Browse Full Directory
-            </Link>
           </section>
 
         </div>

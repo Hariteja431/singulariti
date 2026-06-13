@@ -2456,5 +2456,145 @@
       "Validation Rules Report"
     ],
     "operationType": "checker"
+  },
+  {
+    "id": "gif-maker",
+    "name": "GIF Maker",
+    "sectionId": "image",
+    "subSectionId": "image-utility",
+    "shortDescription": "Create animated GIF files from sequence of images locally.",
+    "inputType": [
+      "Multiple Image Files (PNG, JPG, WebP)"
+    ],
+    "outputType": [
+      "Animated GIF File"
+    ],
+    "operationType": "generator"
+  },
+  {
+    "id": "heic-to-jpg",
+    "name": "HEIC to JPG",
+    "sectionId": "image",
+    "subSectionId": "image-conversion",
+    "shortDescription": "Convert HEIC photos from iPhone/iPad to standard JPEG files locally.",
+    "inputType": [
+      "HEIC Photo File"
+    ],
+    "outputType": [
+      "JPEG Image File"
+    ],
+    "operationType": "converter"
+  },
+  {
+    "id": "cron-generator",
+    "name": "CRON Expression Generator",
+    "sectionId": "dev",
+    "subSectionId": "dev-dev-utilities",
+    "shortDescription": "Generate and decode CRON schedule expressions visually with plain English explanations.",
+    "inputType": [
+      "Visual schedule selections"
+    ],
+    "outputType": [
+      "CRON Expression String"
+    ],
+    "operationType": "generator"
+  },
+  {
+    "id": "password-generator",
+    "name": "Password Generator",
+    "sectionId": "dev",
+    "subSectionId": "dev-dev-utilities",
+    "shortDescription": "Generate strong, cryptographically secure passwords locally in your browser.",
+    "inputType": [
+      "Password length and character set options"
+    ],
+    "outputType": [
+      "Secure Plain Text Password"
+    ],
+    "operationType": "generator"
+  },
+  {
+    "id": "bcrypt-generator",
+    "name": "Bcrypt Hash Generator",
+    "sectionId": "dev",
+    "subSectionId": "dev-dev-utilities",
+    "shortDescription": "Generate and verify secure bcrypt password hashes locally in your browser.",
+    "inputType": [
+      "Plain text password and round parameters"
+    ],
+    "outputType": [
+      "Bcrypt Hash String"
+    ],
+    "operationType": "generator"
+  },
+  {
+    "id": "css-gradient-generator",
+    "name": "CSS Gradient Generator",
+    "sectionId": "dev",
+    "subSectionId": "dev-dev-utilities",
+    "shortDescription": "Create colorful CSS gradients and copy CSS code snippets instantly.",
+    "inputType": [
+      "Color stops and angle directions"
+    ],
+    "outputType": [
+      "CSS linear/radial gradient code"
+    ],
+    "operationType": "generator"
+  },
+  {
+    "id": "css-box-shadow",
+    "name": "CSS Box Shadow Generator",
+    "sectionId": "dev",
+    "subSectionId": "dev-dev-utilities",
+    "shortDescription": "Generate box-shadow CSS styles with interactive visual previews.",
+    "inputType": [
+      "Shadow offsets, blur, spread and color parameters"
+    ],
+    "outputType": [
+      "CSS box-shadow code snippet"
+    ],
+    "operationType": "generator"
+  },
+  {
+    "id": "color-contrast-checker",
+    "name": "WCAG Color Contrast Checker",
+    "sectionId": "dev",
+    "subSectionId": "dev-dev-utilities",
+    "shortDescription": "Check contrast ratio of text and background colors according to WCAG standards.",
+    "inputType": [
+      "Foreground and background HEX/RGB colors"
+    ],
+    "outputType": [
+      "Contrast ratio and WCAG compliance status"
+    ],
+    "operationType": "utility"
+  },
+  {
+    "id": "svg-optimizer",
+    "name": "SVG Optimizer",
+    "sectionId": "dev",
+    "subSectionId": "dev-dev-utilities",
+    "shortDescription": "Optimize and minify SVG files by removing metadata, comments, and redundant attributes.",
+    "inputType": [
+      "Raw SVG Image File / Code"
+    ],
+    "outputType": [
+      "Optimized Minified SVG Output"
+    ],
+    "operationType": "compressor"
+  },
+  {
+    "id": "pdf-image-extractor",
+    "name": "PDF Image Extractor",
+    "sectionId": "dev",
+    "subSectionId": "dev-dev-utilities",
+    "shortDescription": "Extract all embedded images from a PDF file locally in your browser.",
+    "inputType": [
+      "PDF Document (.pdf)"
+    ],
+    "outputType": [
+      "Extracted Image Files (PNG, JPG)"
+    ],
+    "operationType": "converter"
   }
 ]

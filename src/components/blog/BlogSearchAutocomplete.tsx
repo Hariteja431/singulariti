@@ -13,7 +13,6 @@ export function BlogSearchAutocomplete() {
   const router = useRouter();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
@@ -43,25 +42,26 @@ export function BlogSearchAutocomplete() {
       tool.name.toLowerCase().includes(query.toLowerCase()) || 
       tool.shortDescription.toLowerCase().includes(query.toLowerCase())
     )
-    .slice(0, 3); // Max 3 tools
+    .slice(0, 3);
 
   // Get matching manual blog posts
   const allPosts = getAllPosts();
   const matchingPosts = allPosts
     .filter(post => 
       post.title.toLowerCase().includes(query.toLowerCase()) || 
-      (post.metaDescription && post.metaDescription.toLowerCase().includes(query.toLowerCase()))
+      (post.description && post.description.toLowerCase().includes(query.toLowerCase())) ||
+      (post.excerpt && post.excerpt.toLowerCase().includes(query.toLowerCase()))
     )
-    .slice(0, 3); // Max 3 posts
+    .slice(0, 3);
 
   const hasResults = matchingTools.length > 0 || matchingPosts.length > 0;
 
   return (
     <div className="relative w-full" ref={wrapperRef}>
       <form onSubmit={handleSubmit} className="relative flex gap-3">
-        <div className="relative flex-1">
-          <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-            <Search className="h-4.5 w-4.5 text-slate" />
+        <div className="relative flex-1 flex items-center border border-slate-200 bg-white text-slate-900 shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:text-white rounded-xl px-3.5 py-1">
+          <span className="flex items-center pointer-events-none mr-2">
+            <Search className="h-4 w-4 text-slate-400 dark:text-slate-500" />
           </span>
           <input
             suppressHydrationWarning
@@ -70,16 +70,16 @@ export function BlogSearchAutocomplete() {
             value={query}
             onChange={handleInputChange}
             onFocus={() => { if (query.trim()) setIsOpen(true); }}
-            placeholder="Enter JSON, PDF, word counter, or calculation formulas..."
+            placeholder="Search JSON, PDF, word counter, or calculation formulas..."
             required
             autoComplete="off"
-            className="w-full font-sans text-xs text-ink bg-background border border-border rounded-xl pl-10 pr-4 py-3.5 focus:border-primary focus:outline-none transition-colors"
+            className="w-full font-sans text-sm py-2 bg-transparent text-slate-900 placeholder:text-slate-400 dark:text-white dark:placeholder:text-slate-500 focus:outline-none"
           />
         </div>
         <button
           suppressHydrationWarning
           type="submit"
-          className="bg-primary hover:bg-primary/95 text-white font-sans font-bold text-xs px-5 py-3.5 rounded-xl transition-colors shadow-sm"
+          className="bg-teal-600 text-white hover:bg-teal-700 dark:bg-teal-700 dark:hover:bg-teal-600 font-sans font-bold text-sm px-6 py-3 rounded-xl transition-colors shadow-sm flex-shrink-0"
         >
           Search
         </button>
@@ -87,27 +87,27 @@ export function BlogSearchAutocomplete() {
 
       {/* Autocomplete Dropdown */}
       {isOpen && query.trim() && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-surface border border-border rounded-2xl shadow-xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2">
+        <div className="absolute top-full left-0 right-0 mt-2 border border-slate-200 bg-white shadow-lg dark:border-slate-800 dark:bg-slate-900 rounded-2xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2">
           {hasResults ? (
             <div className="max-h-[300px] overflow-y-auto p-2">
               
               {matchingPosts.length > 0 && (
                 <div className="mb-2">
-                  <div className="px-3 py-1.5 text-[10px] font-bold text-slate uppercase tracking-wider">
+                  <div className="px-3 py-1.5 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     Manual Guides
                   </div>
                   {matchingPosts.map(post => (
                     <Link
                       key={post.slug}
-                      href={`/blog/guides/${post.slug}`}
+                      href={post.url}
                       onClick={() => setIsOpen(false)}
-                      className="block px-3 py-2.5 rounded-xl hover:bg-primary/5 hover:text-primary transition-colors"
+                      className="block px-3 py-2.5 rounded-xl hover:bg-teal-50 dark:hover:bg-teal-950/20 transition-colors"
                     >
-                      <div className="font-display font-bold text-[13px] text-ink mb-0.5">
+                      <div className="font-display font-bold text-[13px] text-slate-900 dark:text-white mb-0.5">
                         {post.title}
                       </div>
-                      <div className="font-sans text-[11px] text-slate line-clamp-1">
-                        {post.metaDescription}
+                      <div className="font-sans text-[11px] text-slate-600 dark:text-slate-300 line-clamp-1">
+                        {post.excerpt}
                       </div>
                     </Link>
                   ))}
@@ -116,7 +116,7 @@ export function BlogSearchAutocomplete() {
 
               {matchingTools.length > 0 && (
                 <div>
-                  <div className="px-3 py-1.5 text-[10px] font-bold text-slate uppercase tracking-wider">
+                  <div className="px-3 py-1.5 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     Utility Guides
                   </div>
                   {matchingTools.map(tool => (
@@ -124,13 +124,13 @@ export function BlogSearchAutocomplete() {
                       key={tool.id}
                       href={`/blog/guides/${tool.guideSlug}`}
                       onClick={() => setIsOpen(false)}
-                      className="block px-3 py-2.5 rounded-xl hover:bg-primary/5 hover:text-primary transition-colors"
+                      className="block px-3 py-2.5 rounded-xl hover:bg-teal-50 dark:hover:bg-teal-950/20 transition-colors"
                     >
-                      <div className="font-display font-bold text-[13px] text-ink mb-0.5 flex justify-between">
+                      <div className="font-display font-bold text-[13px] text-slate-900 dark:text-white mb-0.5 flex justify-between">
                         <span>{tool.name} Guide</span>
-                        <ArrowRight className="w-3.5 h-3.5 opacity-50" />
+                        <ArrowRight className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
                       </div>
-                      <div className="font-sans text-[11px] text-slate line-clamp-1">
+                      <div className="font-sans text-[11px] text-slate-600 dark:text-slate-300 line-clamp-1">
                         {tool.shortDescription}
                       </div>
                     </Link>
@@ -138,11 +138,11 @@ export function BlogSearchAutocomplete() {
                 </div>
               )}
 
-              <div className="pt-2 mt-2 border-t border-border/50">
+              <div className="pt-2 mt-2 border-t border-slate-100 dark:border-slate-800/60">
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  className="w-full px-3 py-2 text-center text-[12px] font-semibold text-primary hover:bg-primary/5 rounded-xl transition-colors"
+                  className="w-full px-3 py-2 text-center text-[12px] font-semibold text-teal-700 hover:text-teal-800 dark:text-teal-300 dark:hover:text-teal-200 transition-colors"
                 >
                   View all results for "{query}"
                 </button>
@@ -150,7 +150,7 @@ export function BlogSearchAutocomplete() {
 
             </div>
           ) : (
-            <div className="p-6 text-center text-slate text-xs font-sans">
+            <div className="p-6 text-center text-slate-500 dark:text-slate-400 text-xs font-sans">
               No matching guides found for "{query}".
             </div>
           )}

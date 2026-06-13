@@ -50,7 +50,7 @@ export function BlogSection({ section }: BlogSectionProps) {
         {heading}
       </h2>
 
-      <p className="text-sm leading-relaxed text-slate">{content}</p>
+      <div dangerouslySetInnerHTML={{ __html: content }} className="text-sm leading-relaxed text-slate prose max-w-none dark:prose-invert" />
 
       {type === "steps" && items.length > 0 && (
         <ol className="space-y-3 list-none pl-0 pt-2">

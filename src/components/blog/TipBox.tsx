@@ -18,7 +18,7 @@ export function TipBox({ heading, content, items }: TipBoxProps) {
       <h3 className="font-display font-bold text-sm text-indigo-600 dark:text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
         <Info className="w-4 h-4" /> {heading}
       </h3>
-      <p className="text-sm text-slate leading-relaxed">{content}</p>
+      <div dangerouslySetInnerHTML={{ __html: content }} className="text-sm text-slate leading-relaxed" />
       {items && items.length > 0 && (
         <ul className="space-y-1.5 text-xs pl-0 list-none">
           {items.map((item, idx) => (
