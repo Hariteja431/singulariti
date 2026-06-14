@@ -7,6 +7,7 @@ import {
 import { Badge } from "@/components/ui/Badge";
 import { registry } from "@/registry";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
 // ─── Constants ──────────────────────────────────────────────────────────────
 // The primary brand color in RGB for Canvas rendering
@@ -67,8 +68,12 @@ export default function HeroOrbitalEcosystem() {
   const angleRef = useRef(0);
   const activeRef = useRef<string | null>(null);
 
+  const { resolvedTheme } = useTheme();
+  const isDarkRef = useRef(false);
+
   // Keep ref in sync so the rAF loop reads current value without stale closure
   useEffect(() => { activeRef.current = activeId; }, [activeId]);
+  useEffect(() => { isDarkRef.current = resolvedTheme === "dark"; }, [resolvedTheme]);
 
   // ─── Build data from registry ───────────────────────────────────────────────
   const nodes: CategoryNode[] = registry.categories.map(cat => {
@@ -118,6 +123,7 @@ export default function HeroOrbitalEcosystem() {
       
       const t = tRef.current;
       const orbitAngle = angleRef.current;
+      const isDark = isDarkRef.current;
 
       // Handle Canvas Resizing (with High DPI / Retina Support for premium sharpness)
       const W = stage.offsetWidth;
@@ -222,9 +228,11 @@ export default function HeroOrbitalEcosystem() {
 
               ctx.beginPath();
               ctx.arc(px, py, isActive ? 2.5 : 1.5, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(255, 255, 255, ${isActive ? 1 : 0.7})`;
+              ctx.fillStyle = isDark 
+                ? `rgba(255, 255, 255, ${isActive ? 1 : 0.7})` 
+                : `rgba(13, 148, 136, ${isActive ? 1 : 0.8})`; // teal-600 in light mode
               ctx.shadowColor = `rgb(${PRIMARY_RGB})`;
-              ctx.shadowBlur = 15;
+              ctx.shadowBlur = isActive ? 15 : 8;
               ctx.fill();
             }
           }
@@ -238,7 +246,8 @@ export default function HeroOrbitalEcosystem() {
           ctx.beginPath();
           ctx.arc(nx, ny, auraR, 0, Math.PI * 2);
           const aura = ctx.createRadialGradient(nx, ny, 0, nx, ny, auraR);
-          const a0 = isActive ? 0.5 : flareAlpha * 0.45;
+          // In light mode, reduce the background smudge opacity
+          const a0 = isDark ? (isActive ? 0.5 : flareAlpha * 0.45) : (isActive ? 0.15 : flareAlpha * 0.1);
           aura.addColorStop(0, `rgba(${PRIMARY_RGB}, ${a0})`);
           aura.addColorStop(1, `rgba(${PRIMARY_RGB}, 0)`);
           ctx.fillStyle = aura;
@@ -310,7 +319,7 @@ export default function HeroOrbitalEcosystem() {
         <svg
           ref={svgRef}
           viewBox="0 0 360 360"
-          className="w-[340px] h-[340px] sm:w-[380px] sm:h-[380px] lg:w-[480px] lg:h-[480px] overflow-visible drop-shadow-[0_0_20px_rgba(20,184,166,0.4)]"
+          className="w-[340px] h-[340px] sm:w-[380px] sm:h-[380px] lg:w-[480px] lg:h-[480px] overflow-visible drop-shadow-[0_10px_20px_rgba(0,0,0,0.08)] dark:drop-shadow-[0_0_20px_rgba(20,184,166,0.4)]"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -367,7 +376,7 @@ export default function HeroOrbitalEcosystem() {
           <line x1="270" y1="225" x2="108" y2="210" stroke="var(--color-primary)" strokeOpacity="0.2" strokeWidth="1.5" strokeDasharray="4,4" />
 
           {/* Bolder, Logo-like Minimalist Solid Core */}
-          <circle cx="180" cy="175" r="12" fill="var(--color-primary)" style={{ filter: "drop-shadow(0px 0px 12px var(--color-primary))" }}>
+          <circle cx="180" cy="175" r="12" fill="var(--color-primary)" className="drop-shadow-[0_4px_10px_rgba(20,184,166,0.6)] dark:drop-shadow-[0_0_12px_var(--color-primary)]">
             <animate attributeName="r" values="10;14;10" dur="3s" repeatCount="indefinite" />
             <animate attributeName="opacity" values="0.85;1;0.85" dur="3s" repeatCount="indefinite" />
           </circle>
@@ -397,10 +406,10 @@ export default function HeroOrbitalEcosystem() {
             {/* Premium Glass Node Circle */}
             <div className={[
               "w-full h-full rounded-full flex items-center justify-center relative backdrop-blur-md",
-              "border-[1.5px] transition-all duration-500 shadow-sm",
+              "transition-all duration-500",
               isActive
-                ? "border-primary bg-primary shadow-[0_0_40px_rgba(20,184,166,0.6),0_0_15px_rgba(20,184,166,0.4)_inset] scale-110"
-                : "border-primary/40 bg-surface dark:bg-[#0a0a0a] group-hover:border-primary group-hover:bg-primary/10 dark:group-hover:bg-primary/20 group-hover:shadow-[0_0_25px_rgba(20,184,166,0.5),inset_0_0_10px_rgba(20,184,166,0.2)]",
+                ? "border-[1.5px] border-primary bg-primary shadow-[0_10px_25px_-5px_rgba(20,184,166,0.5)] dark:shadow-[0_0_40px_rgba(20,184,166,0.6),0_0_15px_rgba(20,184,166,0.4)_inset] scale-110"
+                : "border border-slate-200/60 dark:border-primary/40 bg-white/90 dark:bg-[#0a0a0a] shadow-sm hover:border-primary/50 dark:hover:border-primary hover:bg-primary/5 dark:group-hover:bg-primary/20 hover:shadow-md dark:group-hover:shadow-[0_0_25px_rgba(20,184,166,0.5),inset_0_0_10px_rgba(20,184,166,0.2)]",
             ].join(" ")}>
               {/* Teal Icons for all states */}
               <Icon
