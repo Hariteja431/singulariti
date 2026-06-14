@@ -63,13 +63,21 @@ export function CurrencyConverterView({toolId, title, description, article }: Cu
     const fetchRates = () => {
       setIsLoadingRates(true);
       fetch('https://open.er-api.com/v6/latest/USD')
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+          return res.json();
+        })
         .then(data => {
           if (data && data.rates) {
             setRates(data.rates);
           }
         })
-        .catch(err => console.error('Failed to fetch live currency rates:', err))
+        .catch(err => {
+          // Use console.warn instead of console.error to prevent triggering Next.js dev error overlay
+          console.warn('Failed to fetch live currency rates (using fallback rates):', err);
+        })
         .finally(() => setIsLoadingRates(false));
     };
 
