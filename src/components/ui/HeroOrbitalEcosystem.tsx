@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   ArrowRight, ImageIcon, FileText, QrCode, Wand2,
-  Calculator, Type, Code, Scale, Search, X
+  Calculator, Type, Code, Scale, Search, X, PlaySquare, Shuffle
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { registry } from "@/registry";
@@ -24,6 +24,8 @@ const iconMap: Record<string, React.ElementType> = {
   convert: Scale,
   dev: Code,
   seo: Search,
+  media: PlaySquare,
+  random: Shuffle,
 };
 
 // ─── Category path helper ─────────────────────────────────────────────────────
