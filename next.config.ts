@@ -38,6 +38,25 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/blog/guides/:slug',
+        destination: '/blog/:slug',
+        statusCode: 301,
+      },
+      {
+        source: '/blog/articles/:slug',
+        destination: '/blog/:slug',
+        statusCode: 301,
+      },
+      {
+        source: '/blog/:category(general|dev-tools|text-tools|seo-tools|pdf-tools|image-tools|developer-tools|qr-tools|media-tools|editing-tools|calculators-tools|convert-tools)/:slug',
+        destination: '/blog/:slug',
+        statusCode: 301,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

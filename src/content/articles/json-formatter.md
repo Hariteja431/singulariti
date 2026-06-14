@@ -34,18 +34,35 @@ For example, using the JSON Formatter to process minified, raw, or unreadable js
 
 Avoid pasting secrets, API keys, private tokens, or credentials into formatting, decoding, or testing tools unless you fully understand how the page processes the data.
 
+## Deep Dive & Technical Implementation
+
+The primary function of the JSON Formatter is to handle Code / Raw String and generate the corresponding Formatted / Indented Code through an optimized formatter pipeline. Specifically, the application reads the provided Code / Raw String, parses its components, and feeds them into the local browser-side execution matrix to output the precise Formatted / Indented Code. Because this runs entirely client-side, the computations are performed instantly in your browser tab using native JavaScript memory allocations, ensuring that no Code / Raw String data is ever sent to a remote server. This local execution model guarantees that the operations are completely private, making the JSON Formatter highly suitable for security-conscious developers, students, and professionals.
+
+Developer tools like JSON formatters or XML beautifiers rely on parsing text into structured trees. The engine parses the input string, builds an Abstract Syntax Tree (AST) in memory, and then walks the tree to reconstruct a beautifully indented output. This process also detects syntax errors, indicating the exact line and character where a mistake occurred.
+
+## Advanced Workflows & Optimization
+
+To achieve the best results with the JSON Formatter, users should ensure their source Code / Raw String is clean and correctly formatted. For complex workflows, you can process your target data here to get the Formatted / Indented Code, and then copy it directly into other utility tools in our suite to continue your operations. This modular design allows you to chain multiple browser-based operations together without any download or installation friction.
+
+For generating secure system passwords or hashes, run the generator tool in a private browsing window. This prevents browser extensions or keyloggers from monitoring the local fields, maximizing security.
+
 ## Related Tools
 
 Here are some other related utility tools you can explore to streamline your workflows:
 
-- [XML Formatter](/tools/dev/xml-formatter)
 - [YAML Formatter](/tools/dev/yaml-formatter)
+- [XML Formatter](/tools/dev/xml-formatter)
+- [JSON Validator](/tools/dev/json-validator)
 - [SQL Formatter](/tools/dev/sql-formatter)
-- [Code Beautifier](/tools/dev/code-beautifier)
-- [JWT Decoder](/tools/dev/jwt-decoder)
+- [Explore All Formatter Tools](/tools)
+
 
 ## FAQs
 
-### Can it format corrupted JSON?
+### Does the JSON validator show syntax errors?
 
-No. The input must be valid JSON; the tool will show you where the syntax error is located so you can fix it.
+Yes. If your JSON is invalid, the parser points to the exact line number and character column where the syntax error occurred.
+
+### Is it safe to format JSON containing API keys or passwords?
+
+Absolutely. Because all parsing and formatting are executed locally in your browser's JavaScript engine, no sensitive credentials are ever sent over the network.
