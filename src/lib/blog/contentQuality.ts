@@ -41,6 +41,18 @@ export function calculateJaccardSimilarity(a: string, b: string): number {
   return intersection.size / union.size;
 }
 
+function calculateJaccardForSets(wordsA: Set<string>, wordsB: Set<string>): number {
+  if (wordsA.size === 0 || wordsB.size === 0) return 0;
+  let intersectionSize = 0;
+  for (const w of wordsA) {
+    if (wordsB.has(w)) {
+      intersectionSize++;
+    }
+  }
+  const unionSize = wordsA.size + wordsB.size - intersectionSize;
+  return unionSize === 0 ? 0 : intersectionSize / unionSize;
+}
+
 export function detectKeywordSwapTemplate(contentA: string, contentB: string, keywords: string[] = []): boolean {
   if (!contentA || !contentB) return false;
 
@@ -61,6 +73,17 @@ export function detectKeywordSwapTemplate(contentA: string, contentB: string, ke
   const similarity = calculateJaccardSimilarity(normA, normB);
   // If template text is > 85% similar after removing core details, it's a template swap!
   return similarity > 0.85;
+}
+
+function getStrippedContentWords(content: string): Set<string> {
+  const norm = normalizeTextForSimilarity(content);
+  const stripKeywords = [
+    "pdf", "jpg", "jpeg", "png", "webp", "svg", "word", "docx", "converter", "compressor", 
+    "formatter", "beautifier", "calculator", "generator", "scanner", "text", "lorem", "ipsum"
+  ];
+  const regex = new RegExp(`\\b(${stripKeywords.join("|")})\\b`, "g");
+  const stripped = norm.replace(regex, "");
+  return new Set(stripped.split(" ").filter(Boolean));
 }
 
 export function validateArticleUniqueness(
@@ -150,12 +173,94 @@ export function validateAllGeneratedArticles(posts: any[]): { sourceSlug: string
     };
   });
 
-  allForQuality.forEach(p => {
-    const issues = validateArticleUniqueness(p, allForQuality);
+  // Precompute normalized Set structures for rapid similarity checks
+  const cached = allForQuality.map(p => {
+    const introWords = new Set(normalizeTextForSimilarity(p.intro).split(" ").filter(Boolean));
+    const summaryWords = new Set(normalizeTextForSimilarity(p.summary).split(" ").filter(Boolean));
+    const faqWords = p.faqs.map((f: any) => ({
+      qWords: new Set(normalizeTextForSimilarity(f.question).split(" ").filter(Boolean)),
+      aWords: new Set(normalizeTextForSimilarity(f.answer).split(" ").filter(Boolean))
+    }));
+    const strippedContentWords = getStrippedContentWords(p.content);
+
+    return {
+      slug: p.slug,
+      title: p.title,
+      introWords,
+      summaryWords,
+      faqWords,
+      strippedContentWords,
+      original: p
+    };
+  });
+
+  cached.forEach(art => {
+    const issues: QualityIssue[] = [];
+
+    for (const other of cached) {
+      if (other.slug === art.slug) continue;
+
+      // 1. Check Intro Jaccard similarity (limit 60%)
+      const introSim = calculateJaccardForSets(art.introWords, other.introWords);
+      if (introSim > 0.60) {
+        issues.push({
+          type: "intro-similarity",
+          targetSlug: other.slug,
+          similarityScore: introSim,
+          message: `Intro similarity (${(introSim * 100).toFixed(1)}%) is above the 60% limit compared to "${other.title}"`
+        });
+      }
+
+      // 2. Check Summary/Conclusion Jaccard similarity (limit 60%)
+      const summarySim = calculateJaccardForSets(art.summaryWords, other.summaryWords);
+      if (summarySim > 0.60) {
+        issues.push({
+          type: "summary-similarity",
+          targetSlug: other.slug,
+          similarityScore: summarySim,
+          message: `Summary similarity (${(summarySim * 100).toFixed(1)}%) is above the 60% limit compared to "${other.title}"`
+        });
+      }
+
+      // 3. Check FAQ similarity (limit 50%)
+      let faqMatchCount = 0;
+      const totalFaqs = Math.max(art.original.faqs.length, other.original.faqs.length);
+      
+      art.faqWords.forEach((f: any) => {
+        const match = other.faqWords.some((of: any) => {
+          const qSim = calculateJaccardForSets(f.qWords, of.qWords);
+          const aSim = calculateJaccardForSets(f.aWords, of.aWords);
+          return qSim > 0.60 && aSim > 0.50;
+        });
+        if (match) faqMatchCount++;
+      });
+
+      const faqSim = totalFaqs > 0 ? faqMatchCount / totalFaqs : 0;
+      if (faqSim > 0.50) {
+        issues.push({
+          type: "faq-similarity",
+          targetSlug: other.slug,
+          similarityScore: faqSim,
+          message: `FAQ similarity (${(faqSim * 100).toFixed(1)}%) is above the 50% limit compared to "${other.title}"`
+        });
+      }
+
+      // 4. Check for keyword-swapped templates
+      const isKeywordSwap = calculateJaccardForSets(art.strippedContentWords, other.strippedContentWords) > 0.85;
+      if (isKeywordSwap) {
+        issues.push({
+          type: "keyword-swapped-template",
+          targetSlug: other.slug,
+          similarityScore: 0.90,
+          message: `Keyword-swapped template layout detected compared to "${other.title}"`
+        });
+      }
+    }
+
     if (issues.length > 0) {
       allIssues.push({
-        sourceSlug: p.slug,
-        sourceTitle: p.title,
+        sourceSlug: art.slug,
+        sourceTitle: art.title,
         issues
       });
     }

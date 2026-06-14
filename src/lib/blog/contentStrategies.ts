@@ -1,5 +1,6 @@
 import { ToolContentProfile } from './toolProfiles';
 import { formatProfiles } from './formatMatrix';
+import { toolRegistry } from '@/content/tools/toolRegistry';
 
 export interface StrategyContent {
   intro: string;
@@ -36,85 +37,355 @@ function getSlugHash(slug: string): number {
   return Math.abs(hash);
 }
 
+function getSlugIndex(slug: string, mod: number, salt: number = 0): number {
+  let hash = 5381 + salt;
+  for (let i = 0; i < slug.length; i++) {
+    hash = (hash * 33) ^ slug.charCodeAt(i);
+  }
+  const charSum = slug.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  return Math.abs(hash + charSum * 17) % mod;
+}
+
+function getCategoryIndex(slug: string, category: string): number {
+  const categoryTools = toolRegistry
+    .filter(t => t.sectionId === category)
+    .map(t => t.guideSlug)
+    .sort();
+  const index = categoryTools.indexOf(slug);
+  return index >= 0 ? index : 0;
+}
+
 function getVariedIntro(profile: ToolContentProfile, customPart: string): string {
-  const hash = getSlugHash(profile.slug);
+  if (profile.slug.includes("jpg-compressor") || profile.slug.includes("jpeg-compressor")) {
+    return `<p>${customPart}</p>`;
+  }
   const cleanIntent = profile.userIntent.toLowerCase().replace(/\.$/, "").trim();
-  const cleanProblem = profile.userProblem.toLowerCase().replace(/\.$/, "").trim();
-  const input = profile.inputType.toLowerCase();
+  const cat = (profile.category || "").toLowerCase();
+  const hash = getSlugHash(profile.slug);
 
-  const templates = [
-    `<p>Executing workflows to <strong>${cleanIntent}</strong> is simplified using this secure client dashboard. If you face challenges where <em>${cleanProblem}</em>, this client-side utility offers a quick, browser-native solution.</p>`,
-    `<p>If your daily routines require you to <strong>${cleanIntent}</strong>, our offline-ready tool provides a robust workspace. By processing ${input} variables directly in active memory, it addresses the common bottleneck where <em>${cleanProblem}</em>.</p>`,
-    `<p>Optimizing tasks to <strong>${cleanIntent}</strong> is essential for modern web productivity. This responsive interface helps you bypass standard difficulties, specifically when <em>${cleanProblem}</em>, by executing entirely locally.</p>`,
-    `<p>This client-side application is built specifically to let you <strong>${cleanIntent}</strong> without server dependencies. It resolves regular user problems, particularly when <em>${cleanProblem}</em>, with zero signups required.</p>`,
-    `<p>When your active operations require you to <strong>${cleanIntent}</strong>, security and local sandbox execution are primary factors. The tool helps you handle scenarios where <em>${cleanProblem}</em> in milliseconds.</p>`,
-    `<p>Simplify your digital projects and <strong>${cleanIntent}</strong> directly from your active browser tab. This local utility ensures you do not struggle with situations where <em>${cleanProblem}</em>.</p>`
+  let categoryIntro = "";
+  if (cat.includes("pdf")) {
+    const templates = [
+      `Managing PDF document workflows is made simple with the <strong>${profile.toolName}</strong>.`,
+      `For digital paperwork, the <strong>${profile.toolName}</strong> provides a local workspace to edit files.`,
+      `The client-side <strong>${profile.toolName}</strong> is designed to streamline your PDF tasks.`,
+      `To handle documents securely on your CPU, use the browser-native <strong>${profile.toolName}</strong>.`
+    ];
+    categoryIntro = templates[hash % templates.length];
+  } else if (cat.includes("image") || cat.includes("editing")) {
+    const templates = [
+      `Optimizing visual graphics is simplified using the secure <strong>${profile.toolName}</strong>.`,
+      `For design assets and digital photographs, the <strong>${profile.toolName}</strong> offers a clean canvas workspace.`,
+      `The responsive <strong>${profile.toolName}</strong> executes editing operations directly in your browser.`,
+      `To adjust image files without network uploads, use the browser-side <strong>${profile.toolName}</strong>.`
+    ];
+    categoryIntro = templates[hash % templates.length];
+  } else if (cat.includes("calculator") || cat.includes("finance") || cat.includes("health")) {
+    const templates = [
+      `Running math calculations is simplified with the responsive <strong>${profile.toolName}</strong>.`,
+      `The <strong>${profile.toolName}</strong> provides a local numeric workspace to estimate parameters.`,
+      `To calculate metrics securely on your own device, use the client-side <strong>${profile.toolName}</strong>.`,
+      `Evaluate variables in real-time in your active browser window with the <strong>${profile.toolName}</strong>.`
+    ];
+    categoryIntro = templates[hash % templates.length];
+  } else if (cat.includes("dev")) {
+    const templates = [
+      `Working with developer code requires speed and privacy. The <strong>${profile.toolName}</strong> is built to format payloads.`,
+      `The <strong>${profile.toolName}</strong> provides a secure browser sandbox to inspect raw configurations.`,
+      `For pretty-printing and parsing script variables, the <strong>${profile.toolName}</strong> is highly optimized.`,
+      `Manage your code layouts client-side in volatile memory via the <strong>${profile.toolName}</strong>.`
+    ];
+    categoryIntro = templates[hash % templates.length];
+  } else if (cat.includes("text")) {
+    const templates = [
+      `Pasting text drafts into online systems poses security risks. The <strong>${profile.toolName}</strong> runs fully in-browser.`,
+      `The <strong>${profile.toolName}</strong> offers a secure text dashboard to format characters on your machine.`,
+      `To clean spacing or count limits without server logging, use the <strong>${profile.toolName}</strong>.`,
+      `Reformatting copy is straightforward with the client-side <strong>${profile.toolName}</strong>.`
+    ];
+    categoryIntro = templates[hash % templates.length];
+  } else {
+    const templates = [
+      `Executing daily workflows is simplified using the offline-ready <strong>${profile.toolName}</strong>.`,
+      `To perform tasks securely on your local computer, use the <strong>${profile.toolName}</strong>.`,
+      `This browser-native <strong>${profile.toolName}</strong> runs entirely inside your active session.`,
+      `Streamline your digital projects with the lightweight <strong>${profile.toolName}</strong> workspace.`
+    ];
+    categoryIntro = templates[hash % templates.length];
+  }
+
+  const sentences1 = [
+    `This panel is built specifically to let you <strong>${cleanIntent}</strong> without server dependencies.`,
+    `When you need to <strong>${cleanIntent}</strong>, this browser-native application handles the operation securely.`,
+    `Use this interface to <strong>${cleanIntent}</strong> in volatile browser RAM in seconds.`,
+    `It offers a local workspace to <strong>${cleanIntent}</strong> with complete data confidentiality.`,
+    `Bypass external network latency and <strong>${cleanIntent}</strong> directly on your own hardware.`,
+    `This responsive client panel makes it simple to <strong>${cleanIntent}</strong> with zero registry steps.`,
+    `If your daily routines require you to <strong>${cleanIntent}</strong>, Singulariti provides a secure sandbox.`,
+    `Simplify your active project pipeline and <strong>${cleanIntent}</strong> with complete peace of mind.`
   ];
+  const s1 = sentences1[(hash + 3) % sentences1.length];
 
-  const template = templates[hash % templates.length];
   return `
-    ${template}
+    <p>${categoryIntro} ${s1}</p>
     <p>${customPart}</p>
   `;
 }
 
 function getVariedProblem(profile: ToolContentProfile, customPart: string): string {
-  const hash = getSlugHash(profile.slug);
+  if (profile.slug.includes("jpg-compressor") || profile.slug.includes("jpeg-compressor")) {
+    return `<p>${customPart}</p>`;
+  }
   const cleanProblem = profile.userProblem.toLowerCase().replace(/\.$/, "").trim();
-  const cleanIntent = profile.userIntent.toLowerCase().replace(/\.$/, "").trim();
+  const cat = (profile.category || "").toLowerCase();
+  const hash = getSlugHash(profile.slug);
 
-  const templates = [
-    `<p>A frequent challenge in modern workflows is that <strong>${cleanProblem}</strong>. To resolve this, Singulariti provides a client-side environment designed to ${cleanIntent} in real-time.</p>`,
-    `<p>Many users experience operational friction because <strong>${cleanProblem}</strong>. This application removes these constraints by running offline-ready scripts to ${cleanIntent} on your device.</p>`,
-    `<p>Trying to manage these operations manually is slow and complex since <strong>${cleanProblem}</strong>. Our browser-based sandbox solves this issue, allowing you to ${cleanIntent} securely.</p>`,
-    `<p>Users often face security risks or payload limits when <strong>${cleanProblem}</strong>. The tool executes transformations directly in browser RAM to ${cleanIntent} with peace of mind.</p>`,
-    `<p>In professional environments, a major administrative bottleneck is that <strong>${cleanProblem}</strong>. This interface provides a lightweight, local workspace to ${cleanIntent}.</p>`
+  let categoryProblem = "";
+  if (cat.includes("pdf")) {
+    const templates = [
+      `Government sites, job portals, and email attachments have strict size or layout limits for documents.`,
+      `Uploading administrative PDFs with private signatures or fields to cloud portals exposes records.`,
+      `Proprietary document suites require expensive licenses and installations for simple page edits.`,
+      `Managing PDF assets over network portals exposes credentials and violates privacy policies.`
+    ];
+    categoryProblem = templates[hash % templates.length];
+  } else if (cat.includes("image") || cat.includes("editing")) {
+    const templates = [
+      `High-resolution photos taken with phone cameras consume excessive storage and bandwidth.`,
+      `Uploading graphic designs or screenshots to remote sites risks intellectual property monitoring.`,
+      `Editing visual assets typically requires installing heavy, bloated desktop programs.`,
+      `Online photo portals often add watermarks or compress image quality without your consent.`
+    ];
+    categoryProblem = templates[hash % templates.length];
+  } else if (cat.includes("calculator") || cat.includes("finance") || cat.includes("health")) {
+    const templates = [
+      `Solving complex equations manually requires referencing spreadsheets and is highly error-prone.`,
+      `Consulting static compound interest tables or compound rates is slow and inefficient.`,
+      `Traditional calculation websites reload the entire page and display intrusive advertisements.`,
+      `Tracking personal wellness metrics or compounding figures manually leads to math errors.`
+    ];
+    categoryProblem = templates[hash % templates.length];
+  } else if (cat.includes("dev")) {
+    const templates = [
+      `Pasting sensitive API response tokens or JSON configuration keys into external sites risks database leaks.`,
+      `Debugging minified code character streams manually is tedious and slows down development work.`,
+      `Installing command-line packages or extensions just to beautify scripts causes workspace clutter.`,
+      `API developers complain about data logging and network latency when auditing configs.`
+    ];
+    categoryProblem = templates[hash % templates.length];
+  } else if (cat.includes("text")) {
+    const templates = [
+      `Re-typing paragraph drafts or cleaning messy line breaks manually is slow and frustrating.`,
+      `Sharing unpublished writing content with public cloud portals can lead to scraping or indexing.`,
+      `Typical text editors lack built-in filters to compare lines or check character limits easily.`,
+      `Adhering to strict publishing or SEO metadata limits requires constant manual counting.`
+    ];
+    categoryProblem = templates[hash % templates.length];
+  } else {
+    const templates = [
+      `Standard web tools require uploading your private files and data to third-party databases.`,
+      `Many simple conversion and formatting tasks require installing bloated software programs.`,
+      `Offline tools often lack cross-platform compatibility, failing on mobile or legacy devices.`,
+      `Web-based utilities often force users through signup walls, payment screens, or advertisements.`
+    ];
+    categoryProblem = templates[hash % templates.length];
+  }
+
+  const sentences1 = [
+    `To resolve this, the <strong>${profile.toolName}</strong> provides a client-side environment designed to resolve issues where <em>${cleanProblem}</em> in real-time.`,
+    `Singulariti solves this problem by executing operations locally on your CPU to address the pain point where <em>${cleanProblem}</em>.`,
+    `Our browser-based sandbox removes this friction, allowing you to use the <strong>${profile.toolName}</strong> so you don't face issues where <em>${cleanProblem}</em>.`,
+    `The <strong>${profile.toolName}</strong> offers a secure, offline-ready panel that resolves the scenario where <em>${cleanProblem}</em>.`,
+    `By utilizing local-first browser APIs, the uploader helps you bypass difficulties, specifically when <em>${cleanProblem}</em>.`,
+    `This client-side uploader ensures you do not struggle with situations where <em>${cleanProblem}</em> by processing data locally.`,
+    `It directly targets the bottleneck where <em>${cleanProblem}</em>, running in volatile memory with no account required.`,
+    `The <strong>${profile.toolName}</strong> runs client-first scripts in your tab to handle tasks where <em>${cleanProblem}</em>.`
   ];
+  const s1 = sentences1[(hash + 5) % sentences1.length];
 
-  const template = templates[hash % templates.length];
   return `
-    ${template}
+    <p>${categoryProblem} ${s1}</p>
     <p>${customPart}</p>
   `;
 }
 
 function getVariedExplain(profile: ToolContentProfile, customPart: string): string {
-  const hash = getSlugHash(profile.slug);
+  if (profile.slug.includes("jpg-compressor") || profile.slug.includes("jpeg-compressor")) {
+    return `<p>${customPart}</p>`;
+  }
   const cleanTransformation = profile.actualTransformation.toLowerCase().replace(/\.$/, "").trim();
   const cleanBenefit = profile.keyBenefit.toLowerCase().replace(/\.$/, "").trim();
+  const cat = (profile.category || "").toLowerCase();
+  const hash = getSlugHash(profile.slug);
 
-  const templates = [
-    `<p>Under the hood, the browser engine evaluates your parameters and <strong>${cleanTransformation}</strong>. This local execution model ensures that it <em>${cleanBenefit}</em> in volatile memory.</p>`,
-    `<p>Conceptually, the system parses the inputs client-side and <strong>${cleanTransformation}</strong>. By avoiding external cloud servers, the utility <em>${cleanBenefit}</em> locally.</p>`,
-    `<p>The tool runs optimized scripts directly inside your browser tab where it <strong>${cleanTransformation}</strong>. This client-first processing structure <em>${cleanBenefit}</em> without network lag.</p>`,
-    `<p>By loading your configurations into the active browser sandbox, the processor <strong>${cleanTransformation}</strong>. Everything happens in-memory on your device CPU, which <em>${cleanBenefit}</em>.</p>`,
-    `<p>The application relies on native browser APIs to read coordinates or variables and <strong>${cleanTransformation}</strong>. This sandbox environment <em>${cleanBenefit}</em> securely.</p>`
+  let categoryExplain = "";
+  if (cat.includes("pdf")) {
+    const templates = [
+      `Under the hood, the PDF engine loads the binary file stream directly into volatile browser RAM.`,
+      `The local processor parses the document object tree, including fonts, graphics, and page catalogs.`,
+      `By reading document binary buffers client-side, the script modifies layout coordinates in-memory.`,
+      `The browser-native PDF handler updates internal cross-reference tables and page dictionaries.`
+    ];
+    categoryExplain = templates[hash % templates.length];
+  } else if (cat.includes("image") || cat.includes("editing")) {
+    const templates = [
+      `The canvas context draws your graphic onto an in-memory HTML5 grid to read pixel arrays.`,
+      `Under the hood, the uploader utilizes browser-native canvas drawing contexts to render pixels.`,
+      `The browser engine evaluates image metadata and routes coordinates through local rendering filters.`,
+      `By copying graphic file bytes onto a temporary client canvas, the code manipulates color vectors.`
+    ];
+    categoryExplain = templates[hash % templates.length];
+  } else if (cat.includes("calculator") || cat.includes("finance") || cat.includes("health")) {
+    const templates = [
+      `The local calculator evaluates algebraic formulas directly inside your active browser session.`,
+      `The Javascript engine handles metric equations, multiplying inputs by standard constants.`,
+      `By processing numeric variables client-side, the math module computes interest or scales.`,
+      `The calculation script runs compounding iterations on your device CPU in real-time.`
+    ];
+    categoryExplain = templates[hash % templates.length];
+  } else if (cat.includes("dev")) {
+    const templates = [
+      `The client-side DOM parser reads code strings, checking key-value mappings and nesting structures.`,
+      `The formatting script evaluates minified code structures and maps syntax indentation arrays.`,
+      `By processing developer payloads locally, the browser engine constructs clean HTML/XML nodes.`,
+      `The parser uses standard regular expressions and V8 runtime routines to inspect characters.`
+    ];
+    categoryExplain = templates[hash % templates.length];
+  } else if (cat.includes("text")) {
+    const templates = [
+      `The text processor parses string inputs, splitting text boundaries using whitespace delimiters.`,
+      `By utilizing browser string handlers, the tool evaluates characters, words, and lines offline.`,
+      `The local dashboard evaluates character bounds and updates token arrays inside volatile RAM.`,
+      `The script matches regex patterns against copy drafts to strip spaces or lines.`
+    ];
+    categoryExplain = templates[hash % templates.length];
+  } else {
+    const templates = [
+      `The application runs optimized scripts in your tab, parsing raw inputs client-side.`,
+      `Under the hood, browser-native modules evaluate input parameters in volatile cache.`,
+      `The execution engine parses loaded variables, utilizing modern browser capabilities.`,
+      `By processing data locally on your device CPU, the code runs offline scripts.`
+    ];
+    categoryExplain = templates[hash % templates.length];
+  }
+
+  const sentences1 = [
+    `Specifically, the <strong>${profile.toolName}</strong> <strong>${cleanTransformation}</strong>.`,
+    `In practice, the script loads your configuration parameters and <strong>${cleanTransformation}</strong>.`,
+    `Once loaded, the browser-side parser <strong>${cleanTransformation}</strong> to compile the output.`,
+    `The logic executes standard instructions client-side where it <strong>${cleanTransformation}</strong>.`,
+    `To render results, the local engine reads variables and <strong>${cleanTransformation}</strong>.`,
+    `The application executes sandbox code blocks where it <strong>${cleanTransformation}</strong>.`,
+    `It relies on client-first scripts to parse elements and <strong>${cleanTransformation}</strong>.`,
+    `This local design translates the inputs on your CPU and <strong>${cleanTransformation}</strong>.`
   ];
+  const s1 = sentences1[(hash + 7) % sentences1.length];
 
-  const template = templates[hash % templates.length];
+  const sentences2 = [
+    `This local processing model ensures that it <em>${cleanBenefit}</em> in volatile memory.`,
+    `By avoiding external server logs, the process <em>${cleanBenefit}</em> safely.`,
+    `This client-first architecture <em>${cleanBenefit}</em> with absolute data safety.`,
+    `Everything occurs in your active tab cache, which <em>${cleanBenefit}</em>.`,
+    `This sandbox structure <em>${cleanBenefit}</em> securely on your machine.`,
+    `Because it operates offline, the operation <em>${cleanBenefit}</em> in milliseconds.`,
+    `This design guarantees zero network lag and ensures it <em>${cleanBenefit}</em>.`,
+    `Your files and inputs remain confidential as it <em>${cleanBenefit}</em>.`
+  ];
+  const s2 = sentences2[(hash + 9) % sentences2.length];
+
   return `
-    ${template}
+    <p>${categoryExplain} ${s1} ${s2}</p>
     <p>${customPart}</p>
   `;
 }
 
 function getVariedSummary(profile: ToolContentProfile, customPart: string): string {
-  const hash = getSlugHash(profile.slug);
+  if (profile.slug.includes("jpg-compressor") || profile.slug.includes("jpeg-compressor")) {
+    return `<p>${customPart}</p>`;
+  }
   const cleanIntent = profile.userIntent.toLowerCase().replace(/\.$/, "").trim();
   const cleanBenefit = profile.keyBenefit.toLowerCase().replace(/\.$/, "").trim();
+  const cat = (profile.category || "").toLowerCase();
+  const hash = getSlugHash(profile.slug);
 
-  const templates = [
-    `<p>Boost your productivity by using Singulariti to <strong>${cleanIntent}</strong> securely. Running local operations in your browser <em>${cleanBenefit}</em> without remote databases.</p>`,
-    `<p>Using browser-native utility scripts is a safe and efficient way to <strong>${cleanIntent}</strong>. This ensures that it <em>${cleanBenefit}</em> with absolute file privacy.</p>`,
-    `<p>Simplify your digital workflows and <strong>${cleanIntent}</strong> instantly using this web sandbox. This setup ensures that it <em>${cleanBenefit}</em> on any desktop or mobile device.</p>`,
-    `<p>Explore our complete toolkit to <strong>${cleanIntent}</strong>. By processing your files locally, you can rest assured that it <em>${cleanBenefit}</em>.</p>`,
-    `<p>Keep your data secure and <strong>${cleanIntent}</strong> efficiently. Our local-first interface ensures that it <em>${cleanBenefit}</em> without setup delays.</p>`
+  let categorySummary = "";
+  if (cat.includes("pdf")) {
+    const templates = [
+      `Manage your document assets securely inside your browser tab with the <strong>${profile.toolName}</strong>.`,
+      `Optimize and structure PDF files locally using the <strong>${profile.toolName}</strong>.`,
+      `Use our secure, ad-free <strong>${profile.toolName}</strong> to modify document variables.`,
+      `Simplify your administrative PDF tasks with the <strong>${profile.toolName}</strong>.`
+    ];
+    categorySummary = templates[hash % templates.length];
+  } else if (cat.includes("image") || cat.includes("editing")) {
+    const templates = [
+      `Optimize and edit your visual graphics locally in your browser with the <strong>${profile.toolName}</strong>.`,
+      `Transform your digital photos locally with the <strong>${profile.toolName}</strong>.`,
+      `Use the secure, browser-native <strong>${profile.toolName}</strong> to adjust canvas variables.`,
+      `Simplify your visual editing and photo tasks with the <strong>${profile.toolName}</strong>.`
+    ];
+    categorySummary = templates[hash % templates.length];
+  } else if (cat.includes("calculator") || cat.includes("finance") || cat.includes("health")) {
+    const templates = [
+      `Estimate parameters and compound rates locally using the <strong>${profile.toolName}</strong>.`,
+      `Run personal calculations securely on your own device with the <strong>${profile.toolName}</strong>.`,
+      `Use the client-side <strong>${profile.toolName}</strong> for real-time mathematical outputs.`,
+      `Simplify numeric tracking tasks with the responsive <strong>${profile.toolName}</strong>.`
+    ];
+    categorySummary = templates[hash % templates.length];
+  } else if (cat.includes("dev")) {
+    const templates = [
+      `Pretty-print and parse developer configs securely in your browser with the <strong>${profile.toolName}</strong>.`,
+      `Format code layouts client-side with the local <strong>${profile.toolName}</strong> sandbox.`,
+      `Use the ad-free <strong>${profile.toolName}</strong> to beautify scripts without database logs.`,
+      `Simplify API payload validation using our offline-first <strong>${profile.toolName}</strong>.`
+    ];
+    categorySummary = templates[hash % templates.length];
+  } else if (cat.includes("text")) {
+    const templates = [
+      `Count words, clean spacing, and compare text layouts locally with the <strong>${profile.toolName}</strong>.`,
+      `Format character case structures securely using the local <strong>${profile.toolName}</strong>.`,
+      `Use the ad-free <strong>${profile.toolName}</strong> text sandbox to format drafts.`,
+      `Simplify writing and editing workflows with the responsive <strong>${profile.toolName}</strong>.`
+    ];
+    categorySummary = templates[hash % templates.length];
+  } else {
+    const templates = [
+      `Execute conversion and formatting tasks securely in your tab with the <strong>${profile.toolName}</strong>.`,
+      `Simplify digital project workflows locally using the responsive <strong>${profile.toolName}</strong>.`,
+      `Use the browser-native <strong>${profile.toolName}</strong> to run local scripts offline.`,
+      `Optimize your daily workflows with our client-side <strong>${profile.toolName}</strong>.`
+    ];
+    categorySummary = templates[hash % templates.length];
+  }
+
+  const sentences1 = [
+    `Boost your productivity by using the tool to <strong>${cleanIntent}</strong> securely.`,
+    `Using browser-native utility scripts is a safe and efficient way to <strong>${cleanIntent}</strong>.`,
+    `Simplify your digital workflows and <strong>${cleanIntent}</strong> instantly inside a secure session.`,
+    `Explore our complete toolkit containing the uploader to <strong>${cleanIntent}</strong>.`,
+    `Keep your data secure and <strong>${cleanIntent}</strong> efficiently with zero cloud logs.`,
+    `Maximize your efficiency by running tasks to <strong>${cleanIntent}</strong> with complete code privacy.`,
+    `Using this local utility is the safest way to <strong>${cleanIntent}</strong>.`,
+    `Streamline your digital pipeline and <strong>${cleanIntent}</strong> instantly with zero latency.`
   ];
+  const s1 = sentences1[(hash + 11) % sentences1.length];
 
-  const template = templates[hash % templates.length];
+  const sentences2 = [
+    `Running local operations ensures that the uploader <em>${cleanBenefit}</em> without remote databases.`,
+    `The application ensures that it <em>${cleanBenefit}</em> with absolute data safety.`,
+    `This offline-ready setup ensures that it <em>${cleanBenefit}</em> on any desktop or mobile device.`,
+    `By processing your files locally, you can rest assured that the script <em>${cleanBenefit}</em>.`,
+    `Our local-first interface ensures that it <em>${cleanBenefit}</em> without setup delays.`,
+    `Running local code blocks in your tab ensures that it <em>${cleanBenefit}</em>.`,
+    `This offline framework ensures that it <em>${cleanBenefit}</em> without remote storage.`,
+    `The client-side sandbox ensures that it <em>${cleanBenefit}</em> on any operating system.`
+  ];
+  const s2 = sentences2[(hash + 13) % sentences2.length];
+
   return `
     <p>${customPart}</p>
-    ${template}
+    <p>${categorySummary} ${s1} ${s2}</p>
   `;
 }
 
@@ -233,45 +504,185 @@ function getSimpleWordOverlap(a: string, b: string): number {
 }
 
 export function getProfileBasedFaqs(profile: ToolContentProfile): { question: string; answer: string }[] {
-  const hash = getSlugHash(profile.slug);
   const name = profile.toolName;
   const input = profile.inputType.toLowerCase();
   const output = profile.outputType.toLowerCase();
+  const cat = (profile.category || "").toLowerCase();
 
   const faqs: { question: string; answer: string }[] = [];
 
-  // FAQ 1: How does it work? (Specific to the actualTransformation)
-  const q1 = [
+  const hash1 = getSlugIndex(profile.slug, 1000, 50);
+  const hash2 = getSlugIndex(profile.slug, 1000, 51);
+  const hash3 = getSlugIndex(profile.slug, 1000, 52);
+  const hash4 = getSlugIndex(profile.slug, 1000, 53);
+  const hash5 = getSlugIndex(profile.slug, 1000, 54);
+
+  const prefixWord = [
+    "Securely,", "Locally,", "Confidentiality is key:", "Singulariti is designed so", "For maximum safety,", "Without network calls,"
+  ][getSlugIndex(profile.slug, 6, 55)];
+
+  const RAMWord = [
+    "browser RAM", "active sandbox window", "volatile browser memory", "client tab cache", "local device cache"
+  ][getSlugIndex(profile.slug, 5, 56)];
+
+  // Define Category-Specific Q&A Pools
+  let q1Templates = [
     `How does the local processing in the ${name} work?`,
     `What technical steps does the ${name} perform?`,
-    `Can you explain the mechanics behind the ${name}?`,
-    `How does Singulariti execute the ${name} operation?`,
-    `What happens behind the scenes during a ${name} task?`
-  ][hash % 5];
-  const a1 = [
-    `When you run the tool, it parses your ${input} and ${profile.actualTransformation}. This whole process runs directly in your browser tab.`,
-    `The application takes the loaded ${input} and processes it locally. Specifically, the script ${profile.actualTransformation} to compile your results.`,
-    `Using client-side execution, the utility reads your ${input} and ${profile.actualTransformation}. No external servers are involved.`,
-    `The local processor decodes the ${input} in active memory. It then ${profile.actualTransformation} and outputs the finished ${output}.`,
-    `By utilizing standard browser APIs, Singulariti loads the ${input} details and ${profile.actualTransformation} without latency.`
-  ][(hash + 1) % 5];
-  faqs.push({ question: q1, answer: a1 });
+    `Can you explain the mechanics behind the ${name}?`
+  ];
+  let a1Templates = [
+    `When you run the tool, it parses your ${input} and ${profile.actualTransformation}. This whole process runs directly in your browser tab in ${RAMWord}.`,
+    `The application takes the loaded ${input} and processes it locally. Specifically, the script ${profile.actualTransformation} in ${RAMWord}.`,
+    `Using client-side execution, the utility reads your ${input} and ${profile.actualTransformation}. No external servers are involved.`
+  ];
 
-  // FAQ 2: Security & Privacy (Specific to inputType and keyBenefit)
-  const q2 = [
+  let q2Templates = [
     `Is my ${input} safe when using the ${name}?`,
     `Does the ${name} send my private information to a server?`,
-    `What privacy protections are in place for the ${name}?`,
-    `Are the uploaded ${input} files stored on Singulariti?`,
-    `Who can access the data I process with the ${name}?`
-  ][(hash + 1) % 5];
-  const a2 = [
-    `Your data is completely secure. Because the tool runs locally, your ${input} stays in browser RAM, ensuring it ${profile.keyBenefit}.`,
-    `No files are ever uploaded. All operations are processed offline in your browser window, which ${profile.keyBenefit}.`,
-    `We use a client-side execution model. Everything is processed on your local device CPU, so it ${profile.keyBenefit}.`,
-    `Nothing is saved. The inputs and outputs exist only in your current browser session, meaning it ${profile.keyBenefit}.`,
-    `Only you have access to your files. The processing is done locally in your tab and all data is cleared when closed, so it ${profile.keyBenefit}.`
-  ][(hash + 2) % 5];
+    `What privacy protections are in place for the ${name}?`
+  ];
+  let a2Templates = [
+    `Your data is completely secure. Because the tool runs locally, your ${input} stays in ${RAMWord}, ensuring it ${profile.keyBenefit}.`,
+    `No files are ever uploaded. ${prefixWord} all operations are processed offline in your browser window, which ${profile.keyBenefit}.`,
+    `We use a client-side execution model. Everything is processed on your local device CPU in ${RAMWord}, so it ${profile.keyBenefit}.`
+  ];
+
+  if (cat.includes("pdf")) {
+    q1Templates = [
+      `How does the browser-side PDF engine in ${name} process files?`,
+      `What technical steps does the ${name} perform on PDF files?`,
+      `Can you explain the mechanics of PDF page modifications in the ${name}?`,
+      `How does Singulariti execute local PDF tasks via the ${name}?`
+    ];
+    a1Templates = [
+      `When you run the PDF tool, the script parses your ${input} and ${profile.actualTransformation} directly in your browser's volatile memory.`,
+      `The PDF application loads the ${input} locally, where the browser engine ${profile.actualTransformation} to compile the new document.`,
+      `Using client-side scripts, the utility parses the ${input} structure and ${profile.actualTransformation} with zero server calls.`,
+      `The local PDF processor decodes the ${input} in active memory, where it ${profile.actualTransformation} in ${RAMWord}.`
+    ];
+    q2Templates = [
+      `Are my uploaded PDF documents stored on Singulariti?`,
+      `Is it safe to process confidential PDF records with the ${name}?`,
+      `Who can access the PDF data I compile using the ${name}?`,
+      `How does Singulariti protect my loaded PDF files?`
+    ];
+    a2Templates = [
+      `No documents are ever uploaded. All operations are processed offline in your active browser window, which ${profile.keyBenefit}.`,
+      `Your documents are completely secure. Because the tool runs client-side, your ${input} stays in your browser cache, ensuring it ${profile.keyBenefit}.`,
+      `Only you have access. The processing is done locally and all file buffers are cleared when you close the tab, meaning it ${profile.keyBenefit}.`,
+      `By executing client-side on your own CPU, your PDF inputs remain secure in ${RAMWord} and it ${profile.keyBenefit}.`
+    ];
+  } else if (cat.includes("image") || cat.includes("editing")) {
+    q1Templates = [
+      `How does the local image canvas in the ${name} compress or edit files?`,
+      `What image formats can I process with the ${name}?`,
+      `Can you explain how the ${name} modifies graphic pixels?`,
+      `How does the browser render images in the ${name}?`
+    ];
+    a1Templates = [
+      `When you upload graphics, the tool draws the ${input} onto a client-side canvas, and ${profile.actualTransformation} in your active tab.`,
+      `The image utility loads your ${input} in memory. The canvas script then ${profile.actualTransformation} to output the finished graphics in ${RAMWord}.`,
+      `Using browser canvas contexts, the script reads your ${input} and ${profile.actualTransformation} in volatile memory.`,
+      `It executes standard canvas drawing operations, loading the ${input} to ${profile.actualTransformation} locally in ${RAMWord}.`
+    ];
+    q2Templates = [
+      `Are my photos or graphic files uploaded to a server by ${name}?`,
+      `Is data privacy guaranteed when optimizing images with the ${name}?`,
+      `Does using the ${name} expose my photos to search logs?`,
+      `How does Singulariti protect my loaded graphic designs?`
+    ];
+    a2Templates = [
+      `No. Your images are processed entirely on your local device CPU. The loaded ${input} stays in ${RAMWord}, ensuring it ${profile.keyBenefit}.`,
+      `Yes, because it operates fully in-memory, ensuring your ${input} files are never sent over the network, so it ${profile.keyBenefit}.`,
+      `No files are ever uploaded. ${prefixWord} all operations are processed offline in your browser window, which ${profile.keyBenefit}.`,
+      `Your inputs are not stored. ${prefixWord} all processing runs in volatile memory, which means it ${profile.keyBenefit}.`
+    ];
+  } else if (cat.includes("calculator") || cat.includes("finance") || cat.includes("health")) {
+    q1Templates = [
+      `How does the mathematical algorithm in the ${name} work?`,
+      `Are the calculation estimates in the ${name} 100% accurate?`,
+      `Does the ${name} run formula computations on a remote server?`,
+      `How does the browser calculate results in the ${name}?`
+    ];
+    a1Templates = [
+      `When you input parameters, the Javascript engine runs local equations and ${profile.actualTransformation} directly on your device CPU.`,
+      `Yes, it applies standard mathematical formulas. Specifically, it parses your ${input} and ${profile.actualTransformation} inside the browser tab.`,
+      `No, the calculations are executed entirely client-side. The script reads the ${input} and ${profile.actualTransformation} with zero server load.`,
+      `The tool's local math processor reads your ${input} and applies the transformation: ${profile.actualTransformation} in ${RAMWord}.`
+    ];
+    q2Templates = [
+      `Is my financial or health data safe when using the ${name}?`,
+      `Does the ${name} save my calculated parameters in a database?`,
+      `Who can see the numeric inputs I enter into the ${name}?`,
+      `How does Singulariti protect my loaded parameters?`
+    ];
+    a2Templates = [
+      `Your numeric variables are completely secure. Because the tool runs locally, your ${input} stays in ${RAMWord}, ensuring it ${profile.keyBenefit}.`,
+      `No calculations are logged. ${prefixWord} all operations are processed offline in your browser window, which ${profile.keyBenefit}.`,
+      `Everything is processed on your local device CPU in ${RAMWord}, so it ${profile.keyBenefit}. No data is sent over the network.`,
+      `All parameters exist only in your current ${RAMWord}, meaning it ${profile.keyBenefit}. Nothing is saved when you close the tab.`
+    ];
+  } else if (cat.includes("dev")) {
+    q1Templates = [
+      `How does the script parser in the ${name} validate syntax code?`,
+      `Can the ${name} format minified developer log files?`,
+      `Does using the ${name} require installing code dependencies?`,
+      `How does the browser run the developer script in the ${name}?`
+    ];
+    a1Templates = [
+      `When you paste code, the parser evaluates standard key-value hierarchies. Specifically, it ${profile.actualTransformation} in ${RAMWord}.`,
+      `Yes. The tool takes the loaded ${input} and processes it locally, where the script ${profile.actualTransformation} to format it.`,
+      `No setup is required. The utility runs locally in your browser, reading the ${input} and ${profile.actualTransformation} in ${RAMWord}.`,
+      `It executes standard formatting regex and native modules, loading the ${input} to ${profile.actualTransformation} client-side.`
+    ];
+    q2Templates = [
+      `Is it safe to format credentials and API keys with the ${name}?`,
+      `Does the ${name} send my developer configurations to a server?`,
+      `Are the pasted code strings or variables saved on Singulariti?`,
+      `Who can access the code I process with the ${name}?`
+    ];
+    a2Templates = [
+      `Yes. The formatting is executed client-side in your browser, so your ${input} stays in ${RAMWord}, ensuring it ${profile.keyBenefit}.`,
+      `No. ${prefixWord} all operations are processed offline in your browser window, which ${profile.keyBenefit}.`,
+      `Nothing is saved. All inputs exist only in your current ${RAMWord}, meaning it ${profile.keyBenefit}.`,
+      `Only you have access. The processing is done locally and all data is cleared when you close the tab, so it ${profile.keyBenefit}.`
+    ];
+  } else if (cat.includes("text")) {
+    q1Templates = [
+      `How does the text processor in the ${name} evaluate character strings?`,
+      `Does the ${name} support processing non-English character scripts?`,
+      `Can I copy-paste extremely long drafts into the ${name}?`,
+      `What formatting steps does the ${name} perform on text?`
+    ];
+    a1Templates = [
+      `When you input drafts, the tool parses characters client-side. Specifically, it ${profile.actualTransformation} in ${RAMWord}.`,
+      `Yes, it evaluates standard Unicode characters. The uploader reads the ${input} and ${profile.actualTransformation} in ${RAMWord}.`,
+      `Yes. Since the script executes on your own CPU, it handles large paragraphs where it ${profile.actualTransformation} locally.`,
+      `The local text processor parses the ${input} in active memory, where it ${profile.actualTransformation} in ${RAMWord}.`
+    ];
+    q2Templates = [
+      `Is my writing or text draft safe when using the ${name}?`,
+      `Does the ${name} store my document content or notes?`,
+      `Are the loaded text drafts sent to external clouds?`,
+      `Who can access the text I paste into the ${name}?`
+    ];
+    a2Templates = [
+      `Your copy is completely secure. Because the tool runs locally, your ${input} stays in ${RAMWord}, ensuring it ${profile.keyBenefit}.`,
+      `No text is ever saved. ${prefixWord} all operations are processed offline in your browser window, which ${profile.keyBenefit}.`,
+      `We use a client-side execution model. Everything is processed on your local device CPU in ${RAMWord}, so it ${profile.keyBenefit}.`,
+      `Only you have access to your text. The processing is done locally and all text is cleared when the tab is closed, so it ${profile.keyBenefit}.`
+    ];
+  }
+
+  // FAQ 1: How it works
+  const q1 = q1Templates[hash1 % q1Templates.length];
+  const a1 = a1Templates[(hash1 + 1) % a1Templates.length];
+  faqs.push({ question: q1, answer: a1 });
+
+  // FAQ 2: Security
+  const q2 = q2Templates[hash2 % q2Templates.length];
+  const a2 = a2Templates[(hash2 + 1) % a2Templates.length];
   faqs.push({ question: q2, answer: a2 });
 
   // FAQ 3: Advantages (Specific to advantages list)
@@ -281,34 +692,43 @@ export function getProfileBasedFaqs(profile: ToolContentProfile): { question: st
     `What are the primary benefits of using this ${name}?`,
     `Why should I use Singulariti for my ${input} tasks?`,
     `What advantages does this online ${name} provide?`,
-    `How does the ${name} improve my workflow?`
-  ][(hash + 2) % 5];
+    `How does the ${name} improve my workflow?`,
+    `Why should I choose the ${name} over online converters?`
+  ][hash3 % 6];
   const a3 = [
-    `It eliminates the need to install bloated programs. You get instant results because it ${adv[0]?.toLowerCase() || 'runs in browser'}.`,
-    `The main advantages are speed and safety. Specifically, it ${adv[0]?.toLowerCase() || 'runs locally'} and ${adv[1]?.toLowerCase() || 'requires no setup'}.`,
-    `Singulariti provides a local-first workspace. It helps because it ${adv[0]?.toLowerCase() || 'needs no account'} and processes ${input} instantly.`,
+    `It eliminates the need to install bloated programs. You get instant results in your ${RAMWord} because it ${adv[0]?.toLowerCase() || 'runs in browser'}.`,
+    `The main advantages are speed and safety. Specifically, ${prefixWord.toLowerCase()} it ${adv[0]?.toLowerCase() || 'runs locally'} and ${adv[1]?.toLowerCase() || 'requires no setup'}.`,
+    `Singulariti provides a local-first workspace. It helps because it ${adv[0]?.toLowerCase() || 'needs no account'} and processes ${input} instantly in ${RAMWord}.`,
     `This utility operates without subscriptions or limits. It stands out because it ${adv[1]?.toLowerCase() || 'safeguards your data'} and runs on client hardware.`,
-    `By executing inside your browser tab, it bypasses queues. It is highly optimized and ${adv[0]?.toLowerCase() || 'works instantly'}.`
-  ][(hash + 3) % 5];
+    `By executing inside your browser tab, it bypasses queues. It is highly optimized and ${adv[0]?.toLowerCase() || 'works instantly'} in ${RAMWord}.`,
+    `Unlike server-side tools, it performs the task in ${RAMWord}. This means it ${adv[0]?.toLowerCase() || 'needs no registration'} and runs offline.`
+  ][(hash3 + 1) % 6];
   faqs.push({ question: q3, answer: a3 });
 
   // FAQ 4: Limitations / Mistakes (Specific to limitations and mistakes list)
   const lims = profile.limitations || [];
-  const mistakes = profile.commonMistakes || [];
   const q4 = [
     `Are there any file size limits for the ${name}?`,
     `What restrictions should I keep in mind when running the ${name}?`,
     `Does the ${name} have any processing limits?`,
     `When might the ${name} run slowly?`,
-    `Are there any drawbacks to local processing in the ${name}?`
-  ][(hash + 3) % 5];
+    `Are there any drawbacks to local processing in the ${name}?`,
+    `What are the drawbacks of the ${name} client tool?`,
+    `Why would the ${name} display a rendering warning?`,
+    `Does the ${name} support batch processing of large files?`,
+    `What causes processing to halt in the ${name}?`
+  ][hash4 % 9];
   const a4 = [
-    `There are no server limits, but extremely large inputs may exceed browser memory caps. For example, ${lims[0]?.toLowerCase() || 'large files may lag'}.`,
-    `Performance depends on your device CPU and RAM. Keep in mind that ${lims[0]?.toLowerCase() || 'extremely large inputs might take longer'}.`,
+    `There are no server limits, but extremely large inputs may exceed browser memory caps in ${RAMWord}. For example, ${lims[0]?.toLowerCase() || 'large files may lag'}.`,
+    `Performance depends on your device CPU and RAM. Keep in mind that ${lims[0]?.toLowerCase() || 'extremely large inputs might take longer'} in your ${RAMWord}.`,
     `While there are no upload limits, browser sandbox limits apply. Specifically, ${lims[1]?.toLowerCase() || lims[0]?.toLowerCase() || 'high-memory inputs may lag browser tab'}.`,
-    `If you load complex items, the tab might pause. To avoid this, ${lims[0]?.toLowerCase() || 'process smaller batches'}.`,
-    `Since everything runs on your device, processing very large inputs is constrained by your browser memory. Specifically, ${lims[0]?.toLowerCase() || 'large file structures take more RAM'}.`
-  ][(hash + 4) % 5];
+    `If you load complex items, the tab might pause. To avoid this, ${lims[0]?.toLowerCase() || 'process smaller batches'} in ${RAMWord}.`,
+    `Since everything runs on your device, processing very large inputs is constrained by your browser memory. Specifically, ${lims[0]?.toLowerCase() || 'large file structures take more RAM'}.`,
+    `It is constrained by the browser sandbox; for example, ${lims[0]?.toLowerCase() || 'very large inputs may exceed tab memory'}.`,
+    `If file buffers are corrupted, local parsing fails. Specifically, ${lims[1]?.toLowerCase() || lims[0]?.toLowerCase() || 'corrupted items fail validation'}.`,
+    `Yes, but processing multiple items at once requires more RAM. Keep in mind that ${lims[0]?.toLowerCase() || 'large files should be run sequentially'}.`,
+    `Providing unsupported formats or encrypted data will stop the uploader; also ${lims[0]?.toLowerCase() || 'high-memory inputs can cause lags'}.`
+  ][(hash4 + 1) % 9];
   faqs.push({ question: q4, answer: a4 });
 
   // FAQ 5: Practical Use Cases & Audience (Specific to practicalUseCases and primaryAudience)
@@ -319,15 +739,19 @@ export function getProfileBasedFaqs(profile: ToolContentProfile): { question: st
     `In what scenarios is the ${name} most useful?`,
     `Who benefits most from using the ${name}?`,
     `What are some typical use cases for the ${name}?`,
-    `Can professionals use the ${name} for work?`
-  ][(hash + 4) % 5];
+    `Can professionals use the ${name} for work?`,
+    `Is the ${name} suitable for office workflows?`,
+    `Can designers use the ${name} in production?`
+  ][hash5 % 7];
   const a5 = [
     `It is built for ${aud[0]?.toLowerCase() || 'professionals'} who need to ${profile.userIntent.toLowerCase()}. A common use case is ${cases[0]?.toLowerCase() || 'daily tasks'}.`,
     `It is ideal when you need to resolve issues where ${profile.userProblem.toLowerCase()}. It is perfect for ${cases[0]?.toLowerCase() || 'daily operations'}.`,
     `Anyone looking to ${profile.userIntent.toLowerCase()} will benefit, especially ${aud[0]?.toLowerCase() || 'designers and developers'} working on ${cases[1]?.toLowerCase() || 'file workflows'}.`,
     `Common workflows include ${cases[0]?.toLowerCase() || 'daily formatting'} and ${cases[1]?.toLowerCase() || 'local processing'} for ${aud[0]?.toLowerCase() || 'users'}.`,
-    `Yes. It is trusted by ${aud[0]?.toLowerCase() || 'developers and administrators'} for tasks like ${cases[0]?.toLowerCase() || 'daily production tasks'} and ${cases[1]?.toLowerCase() || 'optimizations'}.`
-  ][hash % 5];
+    `Yes. It is trusted by ${aud[0]?.toLowerCase() || 'developers and administrators'} for tasks like ${cases[0]?.toLowerCase() || 'daily production tasks'} and ${cases[1]?.toLowerCase() || 'optimizations'}.`,
+    `Yes, it is highly trusted by ${aud[0]?.toLowerCase() || 'office professionals'} for tasks like ${cases[0]?.toLowerCase() || 'daily data preparation'}.`,
+    `Absolutely. It provides a clean, local workspace for ${aud[0]?.toLowerCase() || 'content creators'} working on ${cases[1]?.toLowerCase() || 'production assets'}.`
+  ][(hash5 + 1) % 7];
   faqs.push({ question: q5, answer: a5 });
 
   const depth = profile.articleDepth || 'medium';
@@ -406,14 +830,38 @@ export function generatePdfConversionArticle(profile: ToolContentProfile): Strat
     `Click export and save the converted ${targetUpper} files.`
   ];
 
+  const hash = getSlugHash(profile.slug);
+
+  const q1Templates = [
+    `Will the converted ${targetUpper} document keep formatting intact?`,
+    `Does the ${profile.toolName} preserve layout and formatting elements?`,
+    `Will page structures be altered when translating ${sourceUpper} to ${targetUpper}?`
+  ];
+  const a1Templates = [
+    `Yes. The ${profile.toolName} preserves layout grids, alignments, and scale factors when translating ${sourceUpper} files to ${targetUpper}. However, converting ${sourceUpper} flat-rasterizes characters.`,
+    `The conversion engine works to maintain spacing, font coordinates, and margins. Note that transforming ${sourceUpper} documents to ${targetUpper} format may lock text layers.`,
+    `No, the tool is designed to replicate the original layout on the canvas. Scale factors and placement are preserved during the ${sourceUpper} to ${targetUpper} translation.`
+  ];
+
+  const q2Templates = [
+    `Is my ${sourceUpper} file sent to any server for conversion?`,
+    `Where does the ${sourceUpper} to ${targetUpper} processing occur?`,
+    `Does Singulariti log or save my uploaded ${sourceUpper} documents?`
+  ];
+  const a2Templates = [
+    `No. The ${profile.toolName} conversion scripts compile locally in your browser memory, ensuring privacy for your ${sourceUpper} pages.`,
+    `All conversion scripting executes client-side inside your browser sandbox. No file buffers are transmitted over the web.`,
+    `Nothing is stored. The files exist only in the active cache of your browser session and are purged as soon as the tab is closed.`
+  ];
+
   const faqs = [
     {
-      question: `Will the converted ${targetUpper} document keep formatting intact?`,
-      answer: `Yes. The ${profile.toolName} preserves layout grids, alignments, and scale factors when translating ${sourceUpper} files to ${targetUpper}. However, converting ${sourceUpper} flat-rasterizes characters.`
+      question: q1Templates[hash % 3],
+      answer: a1Templates[hash % 3]
     },
     {
-      question: `Is my ${sourceUpper} file sent to any server for conversion?`,
-      answer: `No. The ${profile.toolName} conversion scripts compile locally in your browser memory, ensuring privacy for your ${sourceUpper} pages.`
+      question: q2Templates[(hash + 1) % 3],
+      answer: a2Templates[(hash + 1) % 3]
     }
   ];
 
@@ -497,16 +945,42 @@ export function generateImageConversionArticle(profile: ToolContentProfile): Str
     ]
   ][hash % 3];
 
+  const q1Templates = [
+    `Does converting ${source} to ${target} improve image resolution?`,
+    `Will the output quality increase when converting ${source} to ${target}?`,
+    `Does the ${profile.toolName} tool enhance the details of the converted ${target}?`
+  ];
+  const a1Templates = [
+    `No. The ${profile.toolName} conversion preserves the original ${source} details but cannot restore pixel quality lost in earlier compression.`,
+    `Converting format structures does not add new pixels. The output ${target} will match the source ${source} quality, but won't upscale resolution.`,
+    `No, the utility maintains the existing pixel grid. Transforming a ${source} file to ${target} format preserves original coordinates but cannot reconstruct lost detail.`
+  ];
+
+  const q2Templates = [
+    `What happens to transparency channels during the ${profile.toolName} process?`,
+    `Does the ${profile.toolName} preserve transparent backgrounds from ${source}?`,
+    `Will transparency layers of my ${source} be lost when saving to ${target}?`
+  ];
+  const a2Templates = [
+    target === "JPG" || target === "JPEG"
+      ? `Since the destination ${target} format does not support transparency, the ${profile.toolName} fills transparent layers with a solid backdrop color, defaulting to white.`
+      : `Transparency channels of your source ${source} are fully preserved in the resulting ${target} output.`,
+    target === "JPG" || target === "JPEG"
+      ? `No. Transparent regions in the original ${source} will be replaced with solid white background, as the ${target} format does not support transparency channels.`
+      : `Yes. The local conversion preserves transparent pixels and alpha layers from the source ${source} into the output ${target} container.`,
+    target === "JPG" || target === "JPEG"
+      ? `Yes, because the target ${target} standard lacks alpha transparency support. The tool rasterizes transparent areas onto a white background canvas.`
+      : `No, transparency layers are kept intact. The conversion module preserves transparent layers directly from the source ${source} to the output ${target}.`
+  ];
+
   const faqs = [
     {
-      question: `Does converting ${source} to ${target} improve image resolution?`,
-      answer: `No. The ${profile.toolName} conversion preserves the original ${source} details but cannot restore pixel quality lost in earlier compression.`
+      question: q1Templates[hash % 3],
+      answer: a1Templates[hash % 3]
     },
     {
-      question: `What happens to transparency channels during the ${profile.toolName} process?`,
-      answer: target === "JPG"
-        ? `Since the destination ${target} format does not support transparency, the ${profile.toolName} fills transparent layers with a solid backdrop color, defaulting to white.`
-        : `Transparency channels of your source ${source} are fully preserved in the resulting ${target} output.`
+      question: q2Templates[(hash + 1) % 3],
+      answer: a2Templates[(hash + 1) % 3]
     }
   ];
 
@@ -553,9 +1027,9 @@ export function generateImageCompressionArticle(profile: ToolContentProfile): St
     faqs = [{ question: "Is PNG compression lossless?", answer: "Yes, it uses lossless palette reduction, keeping transparent backdrops and sharp borders intact." }];
     summaryText = `Compress transparent PNG graphics securely and locally with the PNG Compressor.`;
   } else if (id === "jpg-compressor" || id === "jpeg-compressor") {
-    customIntro = `Reducing JPEG photograph weights is quick and easy with the <strong>JPG Compressor</strong>. Adjust quality to shrink files.`;
+    customIntro = `Reducing JPEG photograph weights is quick and easy with the JPG Compressor. Adjust quality to shrink files. Many users experience operational friction because government sites and job boards reject document uploads if the jpeg file weight exceeds strict kilobyte caps. The tool executes transformations directly in browser RAM to optimize standard jpeg documents, scans, and receipts for official portals with peace of mind.`;
     customProblem = `High-resolution camera photos are too large to email, upload, or host efficiently.`;
-    customExplain = `The engine adjusts DCT coefficient quantization matrices to discard unperceivable pixel details and shrink JPEGs.`;
+    customExplain = `Running computations on your own device ensures that you conforms strictly to official portal upload rules, preserving legibility of scanned text characters securely. It bypasses traditional server-side bottlenecks and keeps your records safe from third-party monitoring.`;
     faqs = [{ question: "Will my photos look blurry after compression?", answer: "Setting the quality slider to 70-80% reduces file size by 70% with almost no visible details loss." }];
     summaryText = `Compress JPG and JPEG photos securely in your browser with the JPG Compressor.`;
   } else if (id === "webp-compressor") {
@@ -619,10 +1093,39 @@ export function generatePdfManagementArticle(profile: ToolContentProfile): Strat
   const id = profile.slug.replace("-guide", "").toLowerCase();
   const action = profile.toolName.toLowerCase().replace("pdf", "").trim();
   
-  let customIntro = `Managing digital document workflows is made simple with the <strong>${profile.toolName}</strong>. This utility is built to ${profile.shortDescription.replace(/\.$/, "").toLowerCase()} securely inside your browser tab.`;
-  let customProblem = `When you need to organize or modify PDF sheets, using proprietary desktop suites is expensive, while online uploads risk exposing confidential file contents. The <strong>${profile.toolName}</strong> resolves this by running entirely in-browser.`;
-  let customExplain = `The tool parses the PDF document's internal cross-reference table and page directories locally. It updates coordinates and outputs a clean PDF buffer.`;
-  let summary = `Manage, split, merge, or rotate PDF page structures safely inside your browser tab with the ${profile.toolName}.`;
+  const hash = getSlugHash(profile.slug);
+  const len = profile.slug.length;
+  const char0 = profile.slug.charCodeAt(0) || 0;
+  const charMid = profile.slug.charCodeAt(Math.floor(len / 2)) || 0;
+  const charLast = profile.slug.charCodeAt(len - 1) || 0;
+
+  let customIntro = [
+    `Managing digital document workflows is made simple with the <strong>${profile.toolName}</strong>. This utility is built to ${profile.shortDescription.replace(/\.$/, "").toLowerCase()} securely inside your browser tab.`,
+    `Our client-side PDF toolbox offers the <strong>${profile.toolName}</strong> to let you ${profile.shortDescription.replace(/\.$/, "").toLowerCase()} locally in active memory.`,
+    `If you need to ${profile.shortDescription.replace(/\.$/, "").toLowerCase()}, the <strong>${profile.toolName}</strong> provides a secure browser workspace.`,
+    `Configure page parameters and process file bytes using the <strong>${profile.toolName}</strong>, running entirely client-side.`
+  ][(hash + char0 + len) % 4];
+
+  let customProblem = [
+    `When you need to organize or modify PDF sheets, using proprietary desktop suites is expensive, while online uploads risk exposing confidential file contents. The <strong>${profile.toolName}</strong> resolves this by running entirely in-browser.`,
+    `Uploading administrative records or files with personal info to public portals raises security issues. The <strong>${profile.toolName}</strong> processes PDF objects client-side to prevent problems where ${profile.userProblem.toLowerCase().replace(/\.$/, "")}.`,
+    `Many document tools require subscription registrations or install files on your system. This utility runs locally to solve bottlenecks where ${profile.userProblem.toLowerCase().replace(/\.$/, "")}.`,
+    `Typical document modification is slow and exposes data over public networks. The <strong>${profile.toolName}</strong> executes scripts offline to address issues where ${profile.userProblem.toLowerCase().replace(/\.$/, "")}.`
+  ][(hash + charMid + len * 2) % 4];
+
+  let customExplain = [
+    `The tool parses the PDF document's internal cross-reference table and page directories locally. It updates coordinates and outputs a clean PDF buffer.`,
+    `Under the hood, the client script reads page directories from the source file container and ${profile.actualTransformation.toLowerCase().replace(/\.$/, "")} client-side.`,
+    `Our local parser analyzes the PDF binary streams, updates page object dictionary offsets, and compiles the modified file in-memory.`,
+    `By executing calculations inside a secure sandbox tab, the tool runs in-memory operations to ${profile.actualTransformation.toLowerCase().replace(/\.$/, "")}.`
+  ][(hash + charLast + len * 3) % 4];
+
+  let summary = [
+    `Manage, split, merge, or rotate PDF page structures safely inside your browser tab with the ${profile.toolName}.`,
+    `Optimize and organize your PDF files locally using the <strong>${profile.toolName}</strong> to process page vectors in client memory.`,
+    `Use our secure, ad-free <strong>${profile.toolName}</strong> to modify document variables without server uploads or database logs.`,
+    `Simplify your administrative PDF tasks with the <strong>${profile.toolName}</strong>, built to run entirely inside your browser tab.`
+  ][(hash + char0 + len * 4) % 4];
 
   if (id === "merge-pdf") {
     customIntro = `Merging multiple PDF documents into a single file simplifies record-keeping and billing workflows. The Merge PDF tool lets you combine separate pages.`;
@@ -809,10 +1312,38 @@ export function generateImageEditingArticle(profile: ToolContentProfile): Strate
     explanation = `The tool runs a local box blur or Gaussian convolution filter over the canvas pixel array, blending adjacent colors.`;
     summary = `Apply blur to image files securely within your browser tab using the Blur Image tool.`;
   } else {
-    intro = `Editing and transforming images is straightforward using the <strong>${profile.toolName}</strong>. This client-side editor processes your files directly in your browser to ${profile.shortDescription.replace(/\.$/, "").toLowerCase()}.`;
-    problemSection = `A common difficulty in image editing workflows is that ${profile.userProblem.toLowerCase().replace(/\.$/, "")}. The <strong>${profile.toolName}</strong> resolves this by performing all edits locally in browser RAM.`;
-    explanation = `Under the hood, the browser engine draws your graphic onto an HTML5 canvas, executes pixel translations, and ${profile.actualTransformation.toLowerCase().replace(/\.$/, "")} client-side.`;
-    summary = `Access the <strong>${profile.toolName}</strong> to edit your graphics and ${profile.userIntent.toLowerCase().replace(/\.$/, "")} securely in your browser.`;
+    const len = profile.slug.length;
+    const char0 = profile.slug.charCodeAt(0) || 0;
+    const charMid = profile.slug.charCodeAt(Math.floor(len / 2)) || 0;
+    const charLast = profile.slug.charCodeAt(len - 1) || 0;
+
+    intro = [
+      `Editing and transforming images is straightforward using the <strong>${profile.toolName}</strong>. This client-side editor processes your files directly in your browser to ${profile.shortDescription.replace(/\.$/, "").toLowerCase()}.`,
+      `Adjust photo layouts and convert visual properties using the <strong>${profile.toolName}</strong>. This utility is built to ${profile.shortDescription.replace(/\.$/, "").toLowerCase()} in-browser.`,
+      `Our in-browser image studio lets you customize image pixels with the <strong>${profile.toolName}</strong>, built specifically to ${profile.shortDescription.replace(/\.$/, "").toLowerCase()}.`,
+      `For graphics tasks where you need to ${profile.shortDescription.replace(/\.$/, "").toLowerCase()}, the <strong>${profile.toolName}</strong> offers an interactive local workspace.`
+    ][(hash + char0 + len) % 4];
+
+    problemSection = [
+      `A common difficulty in image editing workflows is that ${profile.userProblem.toLowerCase().replace(/\.$/, "")}. The <strong>${profile.toolName}</strong> resolves this by performing all edits locally in browser RAM.`,
+      `Uploading graphic designs to web engines poses security hazards. The <strong>${profile.toolName}</strong> runs strictly locally in browser memory to solve problems where ${profile.userProblem.toLowerCase().replace(/\.$/, "")}.`,
+      `Many editors charge subscriptions or require heavy software to modify photos. This uploader handles edits locally to bypass bottlenecks where ${profile.userProblem.toLowerCase().replace(/\.$/, "")}.`,
+      `Typical digital workflows are delayed by heavy graphics processing. The <strong>${profile.toolName}</strong> executes canvas scripts in real-time because ${profile.userProblem.toLowerCase().replace(/\.$/, "")}.`
+    ][(hash + charMid + len * 2) % 4];
+
+    explanation = [
+      `Under the hood, the browser engine draws your graphic onto an HTML5 canvas, executes pixel translations, and ${profile.actualTransformation.toLowerCase().replace(/\.$/, "")} client-side.`,
+      `The graphics parser copies the source pixels onto an in-memory canvas grid and ${profile.actualTransformation.toLowerCase().replace(/\.$/, "")} client-side. No files leave your tab.`,
+      `Our editing logic utilizes local canvas contexts to read variables and ${profile.actualTransformation.toLowerCase().replace(/\.$/, "")}. The output is downloaded in one click.`,
+      `By processing your image file inside a client-side sandbox, the tool executes script operations to ${profile.actualTransformation.toLowerCase().replace(/\.$/, "")} securely.`
+    ][(hash + charLast + len * 3) % 4];
+
+    summary = [
+      `Access the <strong>${profile.toolName}</strong> to edit your graphics and ${profile.userIntent.toLowerCase().replace(/\.$/, "")} securely in your browser.`,
+      `Transform your digital photos locally with the <strong>${profile.toolName}</strong>, built to process image metrics in client-side RAM.`,
+      `Use our secure, ad-free <strong>${profile.toolName}</strong> to modify canvas variables without registry requirements or remote queues.`,
+      `Simplify your visual editing tasks with the <strong>${profile.toolName}</strong>, designed to update file bytes locally.`
+    ][(hash + char0 + len * 4) % 4];
   }
 
   const steps = [
@@ -892,10 +1423,38 @@ export function generateDeveloperToolArticle(profile: ToolContentProfile): Strat
     };
   }
 
-  const customIntro = `Working with developer tools requires speed and privacy. The <strong>${profile.toolName}</strong> is designed to help you ${profile.userIntent.toLowerCase().replace(/\.$/, "")} securely inside your browser tab.`;
-  const customProblem = `A common difficulty in development workflows is that ${profile.userProblem.toLowerCase().replace(/\.$/, "")}. The <strong>${profile.toolName}</strong> resolves this by running all operations locally in client memory.`;
-  const customExplain = `Under the hood, the browser engine executes optimized scripting routines where it ${profile.actualTransformation.toLowerCase().replace(/\.$/, "")}. The compiled output is pushed straight into your local buffer in volatile memory.`;
-  const summary = `Optimize your development workflow with the <strong>${profile.toolName}</strong>, built to ${profile.shortDescription.replace(/\.$/, "").toLowerCase()} client-side with absolute data privacy.`;
+  const len = profile.slug.length;
+  const char0 = profile.slug.charCodeAt(0) || 0;
+  const charMid = profile.slug.charCodeAt(Math.floor(len / 2)) || 0;
+  const charLast = profile.slug.charCodeAt(len - 1) || 0;
+
+  const customIntro = [
+    `Working with developer tools requires speed and privacy. The <strong>${profile.toolName}</strong> is designed to help you ${profile.userIntent.toLowerCase().replace(/\.$/, "")} securely inside your browser tab.`,
+    `Our client-side developer toolbox packages the <strong>${profile.toolName}</strong> to let you ${profile.userIntent.toLowerCase().replace(/\.$/, "")} with zero server dependencies.`,
+    `If you need to ${profile.userIntent.toLowerCase().replace(/\.$/, "")}, the <strong>${profile.toolName}</strong> provides a robust browser-based client dashboard.`,
+    `Manage your configuration blocks and code payloads with the <strong>${profile.toolName}</strong>, built to process data in-memory.`
+  ][(hash + char0 + len) % 4];
+
+  const customProblem = [
+    `A common difficulty in development workflows is that ${profile.userProblem.toLowerCase().replace(/\.$/, "")}. The <strong>${profile.toolName}</strong> resolves this by running all operations locally in client memory.`,
+    `Pasting programming tokens or config values into public checklists raises data leak risks. This tool processes variables in volatile RAM to address situations where ${profile.userProblem.toLowerCase().replace(/\.$/, "")}.`,
+    `Developers frequently struggle to inspect or format scripts because ${profile.userProblem.toLowerCase().replace(/\.$/, "")}. This uploader handles formatting offline.`,
+    `Typical dev environments mandate heavy extensions to troubleshoot issues. The <strong>${profile.toolName}</strong> solves the constraint where ${profile.userProblem.toLowerCase().replace(/\.$/, "")} instantly.`
+  ][(hash + charMid + len * 2) % 4];
+
+  const customExplain = [
+    `Under the hood, the browser engine executes optimized scripting routines where it ${profile.actualTransformation.toLowerCase().replace(/\.$/, "")}. The compiled output is pushed straight into your local buffer in volatile memory.`,
+    `The compiler evaluates standard programming schemas client-side to execute the logic: ${profile.actualTransformation.toLowerCase().replace(/\.$/, "")}. No external APIs are called.`,
+    `Our scripting sandbox handles character coordinates directly in active tab memory. It translates the inputs to ${profile.actualTransformation.toLowerCase().replace(/\.$/, "")} instantly.`,
+    `By loading variables in local sandbox cache, the processor runs parsing filters to ${profile.actualTransformation.toLowerCase().replace(/\.$/, "")} securely.`
+  ][(hash + charLast + len * 3) % 4];
+
+  const summary = [
+    `Optimize your development workflow with the <strong>${profile.toolName}</strong>, built to ${profile.shortDescription.replace(/\.$/, "").toLowerCase()} client-side with absolute data privacy.`,
+    `Format and audit code structures cleanly using the <strong>${profile.toolName}</strong>, designed to run in-memory on your device CPU.`,
+    `Access this secure, ad-free <strong>${profile.toolName}</strong> to process programming scripts without cloud logging or registry fees.`,
+    `Simplify your coding tasks with Singulariti, utilizing the <strong>${profile.toolName}</strong> to handle formats in volatile RAM.`
+  ][(hash + char0 + len * 4) % 4];
 
   const steps = [
     [
@@ -923,8 +1482,8 @@ export function generateDeveloperToolArticle(profile: ToolContentProfile): Strat
 
   const faqs = [
     {
-      question: `Can I use this developer tool safely?`,
-      answer: `Yes. All processing is executed client-side in your browser, keeping API keys, configurations, and user tokens secure on your device.`
+      question: `Can I use the ${profile.toolName} safely?`,
+      answer: `Yes. All processing in the ${profile.toolName} is executed client-side in your browser, keeping your credentials, keys, and tokens secure on your device.`
     }
   ];
 
@@ -1015,8 +1574,8 @@ export function generateSeoToolArticle(profile: ToolContentProfile): StrategyCon
 
   const faqs = [
     {
-      question: `Does this tool guarantee higher search rankings?`,
-      answer: `No. It helps you format meta tags and outline headings correctly. Search engine positions depend on broader ranking algorithms and content quality.`
+      question: `Does the ${profile.toolName} guarantee higher search rankings?`,
+      answer: `No. The ${profile.toolName} helps you format meta tags and outline headings correctly, but search engine positions depend on broader SEO algorithms and content quality.`
     }
   ];
 
@@ -1107,8 +1666,8 @@ export function generateTextToolArticle(profile: ToolContentProfile): StrategyCo
 
   const faqs = [
     {
-      question: `Is my text draft saved on the website?`,
-      answer: `No. Text strings are processed locally in your browser session and are not logged or saved on external servers.`
+      question: `Is my text draft in the ${profile.toolName} saved on the website?`,
+      answer: `No. The ${profile.toolName} processes text strings locally in your browser session, meaning inputs are not logged or saved on external servers.`
     }
   ];
 

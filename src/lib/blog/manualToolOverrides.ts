@@ -11,6 +11,8 @@ export interface ManualToolOverride {
   troubleshooting: string[];
   faqs: { question: string; answer: string }[];
   practicalUseCases: string[];
+  operationWorks?: string[];
+  internalProcessingFlow?: string[];
   keywordProfile?: {
     primaryKeyword: string;
     secondaryKeywords: string[];
@@ -189,6 +191,239 @@ export const manualToolOverrides: Record<string, ManualToolOverride> = {
         question: "Will my generated QR codes ever expire?",
         answer: "No. These are static QR codes that contain the direct data. Because there are no middleman redirect servers, they work permanently."
       }
+    ]
+  },
+  "random-text": {
+    id: "random-text",
+    toolName: "Random Text Generator",
+    userIntent: "Generate random placeholder sentences, paragraphs, or words for layout design.",
+    userProblem: "Designers and developers need clean dummy text to test typography and page structures, but copying standard lorem ipsum manually is slow.",
+    transformation: "Generates custom lengths of dummy text, mixing sentences and words client-side in browser memory.",
+    keyBenefit: "Delivers clean, customizable mockup copy instantly with zero external dependencies.",
+    advantages: [
+      "Generates sentences, words, or paragraphs dynamically",
+      "Copy results in one click",
+      "Completely local formatting"
+    ],
+    limitations: [
+      "Does not generate meaningful actual copy content",
+      "Memory capped for huge word quantities"
+    ],
+    commonMistakes: [
+      "Assuming the text is real readable translation",
+      "Expecting formatted markdown outputs"
+    ],
+    troubleshooting: [
+      "Adjust paragraph count sliders if layout needs more height.",
+      "Click generate again for a new randomized set of words."
+    ],
+    practicalUseCases: [
+      "Testing grid card heights in web page mockups",
+      "Filling print template designs with mockup text",
+      "Validating UI font sizing rules"
+    ],
+    faqs: [
+      {
+        question: "Is the generated text actual language?",
+        answer: "No. It compiles randomized words from a dictionary to create realistic-looking paragraphs."
+      }
+    ]
+  },
+  "slug-generator": {
+    id: "slug-generator",
+    toolName: "Slug Generator",
+    userIntent: "Convert raw titles and post names into clean, URL-friendly slug strings.",
+    userProblem: "Special characters, uppercase letters, and spaces in titles create broken or unreadable URLs that hurt SEO indexing.",
+    transformation: "Strips punctuation, converts characters to lowercase, replaces spaces with hyphens, and sanitizes character strings.",
+    keyBenefit: "Generates clean, search-engine-friendly URLs instantly to improve indexing and link readability.",
+    advantages: [
+      "Strips all invalid URI coordinates and symbols",
+      "Converts accents to standard ASCII characters",
+      "Processes strings instantly in browser tab cache"
+    ],
+    limitations: [
+      "Only processes text strings up to 5000 characters",
+      "Does not perform automatic redirects for old links"
+    ],
+    commonMistakes: [
+      "Including trailing hyphens or leading slashes manually",
+      "Assuming it modifies actual database records"
+    ],
+    troubleshooting: [
+      "Ensure input title is not empty.",
+      "Check option boxes if you want to preserve or strip standard stop-words."
+    ],
+    practicalUseCases: [
+      "Creating URL paths for blog guides and articles",
+      "Formatting clean file names for server uploads",
+      "Normalizing database string indexes"
+    ],
+    faqs: [
+      {
+        question: "What is an SEO slug?",
+        answer: "It is the part of a URL that identifies a page in a human-readable and search-engine-friendly format."
+      }
+    ]
+  },
+  "jpg-compressor": {
+    id: "jpg-compressor",
+    toolName: "JPG Compressor",
+    userIntent: "Reducing JPEG photograph weights is quick and easy with the JPG Compressor. Adjust quality to shrink files.",
+    userProblem: "Many users experience operational friction because government sites and job boards reject document uploads if the jpeg file weight exceeds strict kilobyte caps.",
+    transformation: "applies standard luminance scaling and block quantization parameters to rebuild compliant JPEG files",
+    keyBenefit: "The tool executes transformations directly in browser RAM to optimize standard jpeg documents, scans, and receipts for official portals with peace of mind. High-resolution camera photos are too large to email, upload, or host efficiently. Running computations on your own device ensures that you conforms strictly to official portal upload rules, preserving legibility of scanned text characters securely. It bypasses traditional server-side bottlenecks and keeps your records safe from third-party monitoring.",
+    advantages: ["Fast compression", "Adjustable quality settings", "Batch processing"],
+    limitations: ["Lossy compression may reduce image quality"],
+    commonMistakes: ["Using too low quality for important images"],
+    troubleshooting: ["If the image looks blurry, increase the quality setting."],
+    practicalUseCases: ["Website images", "Social media posts", "Email attachments"],
+    operationWorks: [
+      "Access the JPEG Compressor workspace in your active browser tab.",
+      "Select the JPEG file you wish to optimize.",
+      "Configure the target file size limits or quality constraints.",
+      "Wait a few milliseconds for the in-memory compression script to execute.",
+      "Save the compressed JPEG graphic to your device."
+    ],
+    internalProcessingFlow: [
+      "Read user input parameter: Image Graphic File",
+      "applies standard luminance scaling and block quantization parameters to rebuild compliant JPEG files",
+      "Compile output formatting: Processed Image Graphic"
+    ],
+    faqs: [
+      { question: "How much can I compress a JPG?", answer: "You can typically reduce file size by 50-80% with minimal quality loss." },
+      { question: "Can I compress multiple JPGs at once?", answer: "Yes, upload multiple files to compress them in batch." }
+    ]
+  },
+  "jpeg-compressor": {
+    id: "jpeg-compressor",
+    toolName: "JPEG Compressor",
+    userIntent: "Reducing JPEG photograph weights is quick and easy with the JPG Compressor. Adjust quality to shrink files.",
+    userProblem: "Many users experience operational friction because government sites and job boards reject document uploads if the jpeg file weight exceeds strict kilobyte caps.",
+    transformation: "applies standard luminance scaling and block quantization parameters to rebuild compliant JPEG files",
+    keyBenefit: "The tool executes transformations directly in browser RAM to optimize standard jpeg documents, scans, and receipts for official portals with peace of mind. High-resolution camera photos are too large to email, upload, or host efficiently. Running computations on your own device ensures that you conforms strictly to official portal upload rules, preserving legibility of scanned text characters securely. It bypasses traditional server-side bottlenecks and keeps your records safe from third-party monitoring.",
+    advantages: ["Adjustable quantization scales", "Retains color fidelity", "Instant offline downloads"],
+    limitations: ["Compression factors above 90% can introduce block artifacts"],
+    commonMistakes: ["Re-compressing already compressed files multiple times"],
+    troubleshooting: ["Increase compression quality if details appear fuzzy."],
+    practicalUseCases: ["Optimizing phone snapshots", "Preparing web illustrations", "Saving phone memory"],
+    operationWorks: [
+      "Access the JPEG Compressor workspace in your active browser tab.",
+      "Select the JPEG file you wish to optimize.",
+      "Configure the target file size limits or quality constraints.",
+      "Wait a few milliseconds for the in-memory compression script to execute.",
+      "Save the compressed JPEG graphic to your device."
+    ],
+    internalProcessingFlow: [
+      "Read user input parameter: Image Graphic File",
+      "applies standard luminance scaling and block quantization parameters to rebuild compliant JPEG files",
+      "Compile output formatting: Processed Image Graphic"
+    ],
+    faqs: [
+      { question: "Does JPEG compression delete file details?", answer: "Yes, it uses optimized quantization to discard details that human eyes struggle to see." }
+    ]
+  },
+  "image-compressor": {
+    id: "image-compressor",
+    toolName: "Image Compressor",
+    userIntent: "A comprehensive image compression utility that handles multiple formats simultaneously.",
+    userProblem: "The user struggles with large image files that slow down websites or exceed email limits.",
+    transformation: "Uses intelligent format routing. Delegates JPG files to lossy quantization pipelines, PNG files to lossless palette-reduction algorithms, and WebPs to entropy block mapping.",
+    keyBenefit: "Process multiple images of different formats in one batch with unified slider settings.",
+    advantages: [
+      "Process multiple images of different formats in one batch",
+      "Unified slider settings to adjust quality indexes quickly",
+      "Automatic detection of transparency masks to prevent graphic corruption"
+    ],
+    limitations: ["May reduce image quality at low quality settings"],
+    commonMistakes: [
+      "Applying the same low quality factor to logos and photographs in the same batch",
+      "Expecting vector files like SVGs or PDFs to compile in standard image encoders"
+    ],
+    troubleshooting: ["If images look pixelated, try a higher quality setting."],
+    practicalUseCases: ["Website optimization", "Email attachments", "Social media uploads"],
+    faqs: [
+      { question: "Can I compress different file formats at once?", answer: "Yes, the tool is format-agnostic. It routes JPEGs, PNGs, and WebPs through their respective browser encoders in the same queue." },
+      { question: "Does it convert format types during compression?", answer: "No, files are compressed and exported in their original formats unless you explicitly opt to convert them." }
+    ]
+  },
+  "png-compressor": {
+    id: "png-compressor",
+    toolName: "PNG Compressor",
+    userIntent: "Compress PNG images to reduce file size while maintaining transparency.",
+    userProblem: "Lossless PNG files are heavy, causing web page load delays and portal upload errors.",
+    transformation: "applies lossless quantization and palette-reduction rules to shrink PNG weight client-side",
+    keyBenefit: "reduces PNG size significantly while preserving alpha transparency channels and visual edges",
+    advantages: ["Lossless compression ratios", "Retains alpha transparent layers", "Local on-device rendering"],
+    limitations: ["Color-heavy photos in PNG format remain larger than JPEGs"],
+    commonMistakes: ["Using PNG format for complex scenic photographs"],
+    troubleshooting: ["Check output dimensions to verify layout scaling remains intact."],
+    practicalUseCases: ["Optimizing web logos and icons", "Shrinking UI screenshot file sizes", "Preparing web illustrations"],
+    faqs: [
+      { question: "Is PNG compression lossless?", answer: "Yes, it preserves transparency and edge pixel details using lossless palette reductions." }
+    ]
+  },
+  "bmi-calculator": {
+    id: "bmi-calculator",
+    toolName: "BMI Calculator",
+    userIntent: "Calculate your Body Mass Index (BMI) using metric or imperial units.",
+    userProblem: "Tracking metabolic metrics manually using math formulas is slow and prone to errors.",
+    transformation: "computes body fat index parameters using standard height-to-weight ratios client-side",
+    keyBenefit: "provides instant, accurate BMI calculations to help users assess body mass indices locally",
+    advantages: ["Supports metric and imperial calculations", "Calculates body weight categories instantly", "Offline browser processing"],
+    limitations: ["May overestimate body fat percentage in athletes with heavy muscle mass"],
+    commonMistakes: ["Confusing pounds with kilograms in weight input fields"],
+    troubleshooting: ["Ensure height is entered in centimeters or feet/inches according to selected mode."],
+    practicalUseCases: ["Monitoring fitness progression", "Tracking personal health metrics", "Weight management goals"],
+    faqs: [
+      { question: "What is a healthy BMI range?", answer: "A BMI between 18.5 and 24.9 is considered healthy for most adults." }
+    ]
+  },
+  "age-calculator": {
+    id: "age-calculator",
+    toolName: "Age Calculator",
+    userIntent: "Calculate your exact age in years, months, and days instantly.",
+    userProblem: "Manually counting dates and years for applications or milestone planning is slow and prone to errors.",
+    transformation: "calculates calendar differences between two timestamps, accounting for leap years and month lengths",
+    keyBenefit: "delivers exact age totals down to the day in your browser tab with complete privacy",
+    advantages: ["Calculates exact age in years, months, and days", "Supports custom date-interval comparisons", "Processed locally for privacy"],
+    limitations: ["Does not account for timezone coordinates in calculations"],
+    commonMistakes: ["Entering the incorrect birthdate calendar year"],
+    troubleshooting: ["Verify the date format matches the standard calendar picker."],
+    practicalUseCases: ["Verifying age limits for job submissions", "Planning retirement milestones", "Tracking date intervals for records"],
+    faqs: [
+      { question: "Does the calculator account for leap years?", answer: "Yes. Leap years and standard monthly variances are automatically processed." }
+    ]
+  },
+  "temperature-converter": {
+    id: "temperature-converter",
+    toolName: "Temperature Converter",
+    userIntent: "Convert temperature values between Celsius, Fahrenheit, and Kelvin scales.",
+    userProblem: "Remembering exact temperature scaling coefficients is difficult during cooking or scientific tasks.",
+    transformation: "applies standard thermodynamic multiplier formulas client-side in real-time",
+    keyBenefit: "provides precise, instant temperature scaling without remote server calls",
+    advantages: ["Converts between Celsius, Fahrenheit, and Kelvin", "Real-time updates as you type", "Zero network latency"],
+    limitations: ["Does not support historical scales like Rankine"],
+    commonMistakes: ["Confusing negative temperature signs in inputs"],
+    troubleshooting: ["Check input unit selections before reading output values."],
+    practicalUseCases: ["Converting kitchen recipes", "Checking travel weather metrics", "Performing science calculations"],
+    faqs: [
+      { question: "What is absolute zero in Kelvin?", answer: "Absolute zero is 0 Kelvin, which corresponds to -273.15°C or -459.67°F." }
+    ]
+  },
+  "qr-code-scanner": {
+    id: "qr-code-scanner",
+    toolName: "QR Code Scanner",
+    userIntent: "Scan and decode QR codes instantly using your device camera or image uploads.",
+    userProblem: "Many QR scanner apps track search locations, require bloatware installations, or lack sandbox security.",
+    transformation: "extracts scannable matrix coordinates from image frames and translates them in-memory client-side",
+    keyBenefit: "provides a lightweight, sandbox-secured QR reader with 100% data privacy",
+    advantages: ["Supports camera scanning and file uploads", "No network tracking or redirect servers", "Decodes patterns in milliseconds"],
+    limitations: ["Requires camera permissions for live webcam streaming"],
+    commonMistakes: ["Scanning dark QR code frames printed on dark backgrounds"],
+    troubleshooting: ["Ensure the camera has sufficient lighting and focus if scans fail."],
+    practicalUseCases: ["Reading restaurant menus on mobile", "Accessing guest Wi-Fi networks", "Checking encoded contact card links"],
+    faqs: [
+      { question: "Can I scan a QR code from a file?", answer: "Yes. You can upload a screenshot or image file to decode the QR code without a camera." }
     ]
   }
 };

@@ -426,6 +426,330 @@ const conversionIntentMatrix: ConversionIntentProfile[] = [
         answer: "Tracer engines convert flat colors and simple shapes best. Photographic images create millions of complex paths, making the SVG slow to render."
       }
     ]
+  },
+  {
+    from: "webp",
+    to: "jpg",
+    userIntent: "Convert web-optimized WebP images to standard JPG format for broad compatibility.",
+    userProblem: "Many legacy desktop software suites and older upload portals reject WebP files, demanding traditional JPG formats.",
+    transformation: "Decodes WebP image bytes and rasterizes them into a highly compressed standard JPG container.",
+    keyBenefit: "Ensures your web-downloaded WebP assets can be opened, edited, or uploaded to any platform requiring JPGs.",
+    bestUseCases: [
+      "Converting web images for use in older document editors",
+      "Uploading graphics to application forms that only support JPG files",
+      "Sharing web assets with users on older device models"
+    ],
+    warnings: [
+      "WebP transparency (alpha channel) is lost during JPG conversion, resulting in a solid background (usually white).",
+      "Some file size increase might happen due to format structure overhead."
+    ],
+    outputChecks: [
+      "Check that transparent background areas are white and clean.",
+      "Confirm that text overlays in the image remain legible."
+    ],
+    faqSet: [
+      {
+        question: "Will the transparency of WebP be kept in the JPG?",
+        answer: "No. The JPG format doesn't support transparency, so any transparent background will be filled with a solid color, defaulting to white."
+      }
+    ]
+  },
+  {
+    from: "jpg",
+    to: "jpeg",
+    userIntent: "Normalize image file extensions from JPG to JPEG format.",
+    userProblem: "Strict configuration schemas or legacy systems sometimes require file extensions to match .jpeg exactly, rejecting .jpg.",
+    transformation: "Wraps the source JPG image stream into a standard JPEG named file container without changing the underlying compressed data.",
+    keyBenefit: "Avoids portal rejection by matching file extensions to exact strict requirements without any quality loss.",
+    bestUseCases: [
+      "Satisfying strict database import rules that require .jpeg formats",
+      "Standardizing image file extensions in development repositories",
+      "Preparing batches of photos for legacy processing systems"
+    ],
+    warnings: [
+      "This conversion only updates the container extension naming; the underlying compression remains exactly the same.",
+      "No modifications are made to the pixel grid or colors."
+    ],
+    outputChecks: [
+      "Confirm the file extension displays as .jpeg on your system.",
+      "Verify the image opens normally in standard viewers."
+    ],
+    faqSet: [
+      {
+        question: "Is there any quality loss when converting JPG to JPEG?",
+        answer: "No. JPG and JPEG represent the exact same image encoding rules. The conversion is a file extension wrapper rename with zero changes to data."
+      }
+    ]
+  },
+  {
+    from: "jpeg",
+    to: "jpg",
+    userIntent: "Normalize image file extensions from JPEG to JPG format.",
+    userProblem: "Some older mobile platforms or web portals require the 3-letter .jpg extension, rejecting the 4-letter .jpeg files.",
+    transformation: "Wraps the source JPEG image stream into a standard JPG named file container without altering visual bytes.",
+    keyBenefit: "Ensures complete compatibility with systems requiring short file extensions without re-encoding pixels.",
+    bestUseCases: [
+      "Meeting requirements for web upload forms accepting only .jpg extensions",
+      "Saving disk directory namespace by standardizing all image extensions to 3-letter formats",
+      "Sharing photos with older devices that do not recognize .jpeg extensions"
+    ],
+    warnings: [
+      "This is a container mapping change; no pixel re-encoding or image compression takes place.",
+      "The visual quality and metadata properties are fully preserved."
+    ],
+    outputChecks: [
+      "Confirm the final output file extension is .jpg.",
+      "Ensure the image remains fully readable and clean."
+    ],
+    faqSet: [
+      {
+        question: "Does this conversion change the file size?",
+        answer: "No. Since the image data is not re-compressed, the file size remains identical."
+      }
+    ]
+  },
+  {
+    from: "webp",
+    to: "png",
+    userIntent: "Convert compressed WebP images to lossless PNG format for printing or editing.",
+    userProblem: "Editing programs and vector suites frequently fail to import newer WebP files, blocking design pipelines.",
+    transformation: "Decodes WebP lossy/lossless pixel layouts and maps them to a standard lossless PNG pixel layout.",
+    keyBenefit: "Preserves transparent boundaries and visual details while enabling edits in legacy design suites.",
+    bestUseCases: [
+      "Opening web graphics in older design suites",
+      "Converting transparent WebP icons for print templates",
+      "Preparing web assets for software pipelines requiring PNG formats"
+    ],
+    warnings: [
+      "PNG files are typically larger than WebP, so expect an increase in file weight.",
+      "Converting will not restore detail lost in original WebP lossy compression."
+    ],
+    outputChecks: [
+      "Check that transparent background areas are properly preserved.",
+      "Verify the file is recognized by your target editor."
+    ],
+    faqSet: [
+      {
+        question: "Why is the output PNG larger than the source WebP?",
+        answer: "WebP uses next-generation compression. PNG is a legacy format that requires more disk bytes to store the same pixel array losslessly."
+      }
+    ]
+  },
+  {
+    from: "jpg",
+    to: "webp",
+    userIntent: "Convert JPG photographs to WebP format to reduce web page loading times.",
+    userProblem: "Heavy JPG files slow down page rendering, hurting search rankings and mobile user experience.",
+    transformation: "Compresses JPG pixel grids into next-generation WebP entropy layers in client memory.",
+    keyBenefit: "Reduces image file sizes by 30-40% compared to JPG while maintaining equal visual details.",
+    bestUseCases: [
+      "Optimizing photo assets for fast website rendering",
+      "Reducing hosting bandwidth by serving lighter images",
+      "Optimizing gallery pages for mobile web visitors"
+    ],
+    warnings: [
+      "Very old web browsers (like Internet Explorer) do not support WebP images natively.",
+      "Re-compressing already lossy JPGs to WebP does not recover lost pixel details."
+    ],
+    outputChecks: [
+      "Ensure there are no excessive compression artifacts or pixel blur.",
+      "Verify the new image footprint is smaller than the original JPG."
+    ],
+    faqSet: [
+      {
+        question: "Does converting JPG to WebP restore photo quality?",
+        answer: "No. WebP is highly efficient, but it cannot recreate details that were discarded during the original JPG compression. It preserves the current visual state with a smaller size."
+      }
+    ]
+  },
+  {
+    from: "webp",
+    to: "svg",
+    userIntent: "Trace raster WebP images into scalable vector SVG path structures.",
+    userProblem: "WebP files are raster arrays that become blurry and pixelated when scaled up for prints or responsive web banners.",
+    transformation: "Analyzes WebP pixel borders, groups color regions, and traces them into vector XML coordinates.",
+    keyBenefit: "Produces scalable vector graphics that look clean at any scale, perfect for logos and diagrams.",
+    bestUseCases: [
+      "Tracing simple WebP logos into scalable print files",
+      "Converting icons to vectors for responsive web interfaces",
+      "Generating clean vector layouts from raster sketches"
+    ],
+    warnings: [
+      "Photographs and complex gradients will produce massive, slow-to-render SVG files.",
+      "The traced shapes might lose fine details and require manual node cleanups."
+    ],
+    outputChecks: [
+      "Verify the output graphic is clean and curves are smooth.",
+      "Ensure the SVG file footprint is small enough to load quickly."
+    ],
+    faqSet: [
+      {
+        question: "Can I convert complex WebP photos to SVG vectors?",
+        answer: "Tracing is best for simple shapes and logos. Complex photos generate millions of vector paths, which can slow down web browsers."
+      }
+    ]
+  },
+  {
+    from: "svg",
+    to: "webp",
+    userIntent: "Rasterize vector SVG files into optimized WebP graphics for web integration.",
+    userProblem: "Complex SVG vector layouts can consume high CPU resources for rendering, causing lag on mobile screens.",
+    transformation: "Draws vector XML path coordinates onto a raster canvas and exports it to optimized WebP format.",
+    keyBenefit: "Generates web-optimized raster graphics that load quickly without client-side CPU rendering lag.",
+    bestUseCases: [
+      "Optimizing complex vector illustrations for website articles",
+      "Creating web-friendly raster graphics from vector logo assets",
+      "Reducing web page CPU loads for responsive designs"
+    ],
+    warnings: [
+      "The output file is a raster grid and will look pixelated if scaled past export dimensions.",
+      "All vector coordinates are flattened and cannot be edited as paths."
+    ],
+    outputChecks: [
+      "Verify text and curved borders are sharp at the selected resolution.",
+      "Confirm transparency layers are mapped correctly."
+    ],
+    faqSet: [
+      {
+        question: "Will the WebP file scale infinitely like the SVG?",
+        answer: "No. WebP is a raster format. You must select correct width and height dimensions before rasterizing."
+      }
+    ]
+  },
+  {
+    from: "svg",
+    to: "jpg",
+    userIntent: "Rasterize vector SVG assets to traditional JPG format.",
+    userProblem: "Many document formats and print portals reject SVG vector formats, demanding standard JPG photos.",
+    transformation: "Renders vector paths onto a flat pixel canvas and exports it to compressed JPG format.",
+    keyBenefit: "Ensures complete compatibility with standard document portals and offline viewers.",
+    bestUseCases: [
+      "Converting vector layouts for profile uploads",
+      "Preparing graphics for print shops requiring JPG sheets",
+      "Ensuring consistent design previews across legacy browsers"
+    ],
+    warnings: [
+      "Transparency is lost because the JPG format does not support alpha channels, resulting in a solid background (usually white).",
+      "Rasterization means the output cannot be scaled without quality loss."
+    ],
+    outputChecks: [
+      "Ensure transparent backgrounds are white and clean.",
+      "Verify the export resolution is high enough to keep text legible."
+    ],
+    faqSet: [
+      {
+        question: "What happens to the transparent background of the SVG?",
+        answer: "Since JPG doesn't support transparency, the transparent areas are filled with a solid background color (defaulting to white)."
+      }
+    ]
+  },
+  {
+    from: "base64",
+    to: "image",
+    userIntent: "decode base64 encoded text strings back into viewable image graphic files",
+    userProblem: "data URI schemes and inline base64 image strings are unreadable text streams, preventing direct visual rendering in standard photo viewers",
+    transformation: "decodes the alphanumeric base64 character blocks and converts the binary stream into a downloadable image blob",
+    keyBenefit: "reclaims visual graphic files from raw text representations securely in the browser",
+    bestUseCases: [
+      "Restoring graphic assets from base64 database backups",
+      "Debugging inline HTML data URI image sources",
+      "Converting embedded CSS asset strings into separate image files"
+    ],
+    warnings: [
+      "Ensure the input base64 string includes standard MIME type headers (e.g., data:image/png;base64).",
+      "Corrupted character segments will cause visual distortion or decoding failure."
+    ],
+    outputChecks: [
+      "Verify the output image displays correctly without broken pixels.",
+      "Check that the image dimensions match the source parameters."
+    ],
+    faqSet: [
+      {
+        question: "Does decoding base64 restore lost image resolution?",
+        answer: "No. Decoding reconstructs the exact original file structure. If the original image was low-quality, the decoded image will have the matching resolution."
+      }
+    ]
+  },
+  {
+    from: "image",
+    to: "base64",
+    userIntent: "encode image files into base64 text strings for direct HTML/CSS embed formats",
+    userProblem: "serving separate small logo and icon graphic files creates extra HTTP network requests, slowing down page loading speeds",
+    transformation: "reads the binary image array and translates the bytes into a standard RFC 4648 base64 text stream",
+    keyBenefit: "enables inline visual styling directly inside stylesheets or markup documents, bypassing external source links",
+    bestUseCases: [
+      "Embedding small logo graphics directly inside email templates",
+      "Packaging visual icons directly within CSS files for fast loading",
+      "Serializing graphic attachments for API data payloads"
+    ],
+    warnings: [
+      "Encoding large photos (above 1MB) creates massive base64 text strings, which increases stylesheet sizes.",
+      "Ensure the target platform supports data URI formats for standard rendering."
+    ],
+    outputChecks: [
+      "Verify that the generated string starts with data:image/ format prefix.",
+      "Test the output string in a browser address bar to verify it renders the image."
+    ],
+    faqSet: [
+      {
+        question: "Does base64 encoding increase the file size?",
+        answer: "Yes. Base64 encoding represents binary data using 64 ASCII characters. This increases the character count, making the base64 text roughly 33% larger than the binary file."
+      }
+    ]
+  },
+  {
+    from: "black-and-white",
+    to: "color",
+    userIntent: "colorize monochrome photos to restore vibrant, life-like color spaces",
+    userProblem: "historical or old archives are restricted to grayscale tones, hiding original ambient hues and visual details",
+    transformation: "runs local colorization scripts and canvas layer overlays to predict and apply vibrant color channels to monochrome layers",
+    keyBenefit: "breathes new life into historical black and white graphics by generating realistic visual color palettes client-side",
+    bestUseCases: [
+      "Colorizing family vintage grayscale photos",
+      "Restoring historical archive images for presentations",
+      "Enhancing artistic monochrome assets with natural color hues"
+    ],
+    warnings: [
+      "Generated color channels are mathematical estimations and might not represent the exact historical colors.",
+      "High-contrast shadows or overexposed segments might not colorize evenly."
+    ],
+    outputChecks: [
+      "Review the color balance to ensure skin tones and environments look natural.",
+      "Verify that the output does not contain bleeding color edges."
+    ],
+    faqSet: [
+      {
+        question: "Is the colorized output 100% historically accurate?",
+        answer: "No. The system uses colorization algorithms to predict hues based on luminance gradients. It provides a realistic estimate rather than a historical record."
+      }
+    ]
+  },
+  {
+    from: "color",
+    to: "black-and-white",
+    userIntent: "convert vibrant color images to dramatic monochrome or grayscale formats",
+    userProblem: "color graphics can look cluttered or lack artistic emphasis, and printing full color requires high printer ink costs",
+    transformation: "strips RGB saturation components and evaluates pixel luminance values to calculate uniform grayscale weights",
+    keyBenefit: "creates clean, artistic black and white graphics instantly while reducing print ink requirements",
+    bestUseCases: [
+      "Creating dramatic grayscale art layouts from family photos",
+      "Preparing documents for monochrome office printing",
+      "Isolating high-contrast shadow details for graphics editing"
+    ],
+    warnings: [
+      "All original color channel information is discarded; save a backup of your color source.",
+      "Low contrast color transitions might render as a single flat gray tone."
+    ],
+    outputChecks: [
+      "Ensure shadow details are still visible and contrast is balanced.",
+      "Check that the output format meets standard grayscale layout rules."
+    ],
+    faqSet: [
+      {
+        question: "Can I recover the original colors of my photo from the black and white output?",
+        answer: "No. Once converted to black and white, the individual RGB color channel details are permanently discarded. Keep a copy of the original color file."
+      }
+    ]
   }
 ];
 

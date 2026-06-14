@@ -63,23 +63,6 @@ export function BlogArticle({ post }: BlogArticleProps) {
           </section>
         )}
 
-        {/* 4. Who Can Use This Tool */}
-        {s.whoCanUse && s.whoCanUse.length > 0 && (
-          <section className="space-y-3">
-            <h2 className="font-display font-bold text-xl text-slate-950 dark:text-white tracking-tight flex items-center gap-2">
-              <Users className="w-5 h-5 text-teal-600 dark:text-teal-400" /> Who Can Use This Tool
-            </h2>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm pl-0 list-none">
-              {s.whoCanUse.map((user: string, idx: number) => (
-                <li key={idx} className="flex items-center gap-2 bg-slate-50 border border-slate-200 dark:bg-slate-900 dark:border-slate-800 p-3 rounded-xl">
-                  <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                  <span className="text-slate-900 dark:text-white text-[13px] font-semibold">{cleanListItem(user)}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
         {/* 5. Inputs & Outputs */}
         {(s.inputsRequired || s.outputProduced) && (
           <section className="grid grid-cols-1 sm:grid-cols-2 gap-6">

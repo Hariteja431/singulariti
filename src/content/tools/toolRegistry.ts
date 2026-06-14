@@ -2041,12 +2041,13 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "emi-calculator-guide",
     "shortDescription": "Calculate monthly loan EMI, total interest, and total repayment amount.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Principal Loan Amount",
+      "Annual Interest Rate",
+      "Loan Repayment Tenure"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Monthly EMI Payment",
+      "Amortization Repayment Breakdown"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2067,12 +2068,13 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "sip-calculator-guide",
     "shortDescription": "Estimate maturity value and estimated returns of your mutual fund SIP investments.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Monthly SIP Deposit Amount",
+      "Expected Annual Return Rate",
+      "Investment Duration Period"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Future Valuation Balance",
+      "Estimated Wealth Gain Yield"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2093,12 +2095,14 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "compound-interest-calculator-guide",
     "shortDescription": "Calculate future compound interest earnings with flexible compounding frequencies.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Base Principal Amount",
+      "Compounding Interest Rate",
+      "Compounding Frequency Option",
+      "Investment Years Duration"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Future Maturity Balance",
+      "Total Compound Interest Yield"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2119,12 +2123,12 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "cagr-calculator-guide",
     "shortDescription": "Calculate Compound Annual Growth Rate of investments over years.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Initial Capital Value",
+      "Final Capital Value",
+      "Growth Time Period in Years"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Compound Annual Growth Rate Percentage"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2145,12 +2149,13 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "fd-calculator-guide",
     "shortDescription": "Calculate Fixed Deposit maturity amount and interest earned.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "FD Principal Deposit",
+      "Fixed Deposit Interest Rate",
+      "Fixed Deposit Tenure Duration"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Maturity Valuation Amount",
+      "Total FD Interest Earned"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2171,12 +2176,12 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "roi-calculator-guide",
     "shortDescription": "Calculate Return on Investment percentage and annualized performance.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Total Project Cost Base",
+      "Net Financial Returns"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Return on Investment Percentage",
+      "Net Gains Breakdown"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2221,12 +2226,14 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "mortgage-calculator-guide",
     "shortDescription": "Estimate monthly mortgage payments, including property tax and home insurance.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Property Purchase Price",
+      "Down Payment Capital",
+      "Loan Annual Interest Rate",
+      "Mortgage Term Duration"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Monthly Mortgage Payment Estimate",
+      "Property Tax and Hazard Insurance Cost Estimates"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2247,12 +2254,13 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "loan-calculator-guide",
     "shortDescription": "Calculate monthly loan payments, total interest, and amortized schedules.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Borrowed Principal Amount",
+      "Loan Annual Interest Rate",
+      "Loan Term Duration"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Monthly Loan Payment",
+      "Loan Amortization Repayment Table"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2273,12 +2281,12 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "income-tax-calculator-guide",
     "shortDescription": "Estimate income tax payable under Old and New tax regimes with deductions.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Gross Annual Income",
+      "Standard and Custom Deductions"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Tax Liability Breakdown",
+      "Old vs New Regime Comparison"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2299,12 +2307,12 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "gst-calculator-guide",
     "shortDescription": "Calculate GST amounts by adding or removing GST with custom rates.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Net Price",
+      "GST Percentage Rate"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Gross Price Including GST",
+      "GST Tax Amount"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2325,12 +2333,13 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "discount-calculator-guide",
     "shortDescription": "Calculate discount savings, final sales price, and additional discounts.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Original Product Price",
+      "Discount Percentage",
+      "Additional Discount Option"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Final Discounted Sale Price",
+      "Total Saved Money"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2351,12 +2360,13 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "profit-calculator-guide",
     "shortDescription": "Calculate cost, selling price, profit amount, and profit margins.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Product Unit Cost",
+      "Target Markup or Margin"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Selling Price",
+      "Gross Profit Margin",
+      "Net Profit Amount"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2377,12 +2387,12 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "youtube-earnings-calculator-guide",
     "shortDescription": "Estimate daily, monthly, and yearly YouTube video creation earnings.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Estimated Daily Video Views",
+      "Estimated RPM/CPM Metrics"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Estimated Daily Earnings Range",
+      "Projected Monthly and Annual Video Revenue"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2403,12 +2413,12 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "adsense-revenue-calculator-guide",
     "shortDescription": "Estimate Google AdSense earnings based on page views, CPC, and CTR.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Estimated Page Views",
+      "Cost Per Click (CPC)",
+      "Click-Through Rate (CTR)"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Estimated AdSense Earnings Report"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2429,12 +2439,13 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "simple-interest-calculator-guide",
     "shortDescription": "Calculate simple interest earnings, principal amounts, or active interest rates.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Principal Investment Sum",
+      "Simple Interest Rate",
+      "Tenure Term Duration"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Simple Interest Earned",
+      "Final Repayment Balance"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2455,12 +2466,12 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "salary-calculator-guide",
     "shortDescription": "Convert salary figures between hourly, daily, weekly, monthly, and annual amounts.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Base Wage Amount",
+      "Wage Frequency Option",
+      "Working Hours per Week"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Equivalent Hourly, Weekly, Monthly, and Annual Wage Breakdown"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2481,12 +2492,12 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "percentage-calculator-guide",
     "shortDescription": "Compute percentages, percentage increases, decreases, and fractions.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Base Numeric Value",
+      "Percentage Change Factor"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Calculated Percentage Result",
+      "Fractional Ratio Value"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2507,12 +2518,12 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "cgpa-calculator-guide",
     "shortDescription": "Calculate cumulative grade point average (CGPA) and convert to percentages.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Semester Grade Points",
+      "Subject Credit Hours"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Cumulative Grade Point Average (CGPA)",
+      "Percentage Equivalent Result"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2533,12 +2544,11 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "scientific-calculator-guide",
     "shortDescription": "Full scientific calculator supporting trigonometry, logs, factorials, and powers.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Mathematical Expression String",
+      "Trigonometric / Logarithmic Input Coordinates"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Scientific Evaluation Result"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2559,12 +2569,12 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "basic-calculator-guide",
     "shortDescription": "Simple mathematical calculator for addition, subtraction, multiplication, and division.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Basic Arithmetic Value A",
+      "Basic Arithmetic Value B",
+      "Mathematical Operator Option"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Arithmetic Calculation Sum"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2585,12 +2595,12 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "age-calculator-guide",
     "shortDescription": "Calculate chronological age in years, months, and days, and countdown to next birthday.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Birth Date",
+      "Current or Target Date"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Age in Years, Months, and Days",
+      "Birthday Countdown"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2611,12 +2621,11 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "date-difference-calculator-guide",
     "shortDescription": "Calculate exact years, months, and days difference between two selected dates.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Start Date",
+      "End Date"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Difference in Days, Weeks, Months, and Years"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2637,12 +2646,12 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "bmi-calculator-guide",
     "shortDescription": "Calculate body mass index (BMI) and identify healthy weight ranges.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Weight",
+      "Height"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Body Mass Index Value",
+      "Weight Status Category"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2663,12 +2672,15 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "calorie-calculator-guide",
     "shortDescription": "Calculate BMR and daily calorie maintenance requirements based on fitness goals.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Age",
+      "Gender",
+      "Height",
+      "Weight",
+      "Activity Level"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "BMR Calorie Estimate",
+      "Daily Caloric Goals"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2689,12 +2701,13 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "tip-calculator-guide",
     "shortDescription": "Calculate split bills, tip percentages, and exact share payments.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Bill Amount",
+      "Tip Percentage",
+      "Number of Guests"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Total Tip Amount",
+      "Share Amount per Guest"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -2715,12 +2728,11 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "time-duration-calculator-guide",
     "shortDescription": "Calculate exact elapsed time durations in hours, minutes, and seconds between times.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Start Time",
+      "End Time"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Elapsed Duration in Hours and Minutes"
     ],
     "operationType": "calculator",
     "runsInBrowser": true,
@@ -3800,10 +3812,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "length-converter-guide",
     "shortDescription": "Convert between kilometers, meters, centimeters, miles, and inches.",
     "inputType": [
-      "Source Format File / Value"
+      "Length Value (Metric/Imperial)"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Length Measurement"
     ],
     "operationType": "converter",
     "runsInBrowser": true,
@@ -3824,10 +3836,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "weight-converter-guide",
     "shortDescription": "Convert between kilograms, grams, pounds, ounces, and tons.",
     "inputType": [
-      "Source Format File / Value"
+      "Weight Mass Value"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Mass Measurement"
     ],
     "operationType": "converter",
     "runsInBrowser": true,
@@ -3848,10 +3860,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "temperature-converter-guide",
     "shortDescription": "Convert Celsius, Fahrenheit, and Kelvin scales.",
     "inputType": [
-      "Source Format File / Value"
+      "Temperature Degree Value"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Temperature Reading"
     ],
     "operationType": "converter",
     "runsInBrowser": true,
@@ -3872,10 +3884,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "area-converter-guide",
     "shortDescription": "Convert between square meters, square feet, acres, and hectares.",
     "inputType": [
-      "Source Format File / Value"
+      "Area Size Value"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Area Dimensions"
     ],
     "operationType": "converter",
     "runsInBrowser": true,
@@ -3896,10 +3908,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "volume-converter-guide",
     "shortDescription": "Convert liters, milliliters, gallons, and cubic meters.",
     "inputType": [
-      "Source Format File / Value"
+      "Volume Capacity Value"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Liquid Volume"
     ],
     "operationType": "converter",
     "runsInBrowser": true,
@@ -3920,10 +3932,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "speed-converter-guide",
     "shortDescription": "Convert km/h, mph, m/s, and knots.",
     "inputType": [
-      "Source Format File / Value"
+      "Speed Velocity Value"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Speed Velocity"
     ],
     "operationType": "converter",
     "runsInBrowser": true,
@@ -3944,10 +3956,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "time-converter-guide",
     "shortDescription": "Convert hours, minutes, seconds, days, and weeks.",
     "inputType": [
-      "Source Format File / Value"
+      "Time Period Duration"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Time Interval"
     ],
     "operationType": "converter",
     "runsInBrowser": true,
@@ -3968,17 +3980,15 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "data-storage-converter-guide",
     "shortDescription": "Convert gigabytes, megabytes, terabytes, and bits.",
     "inputType": [
-      "Numeric Parameters",
-      "Rates / Tenures"
+      "Data Storage Capacity"
     ],
     "outputType": [
-      "Calculated Metrics",
-      "Schedules"
+      "Converted Digital Storage Space"
     ],
-    "operationType": "calculator",
+    "operationType": "converter",
     "runsInBrowser": true,
     "requiresBackend": false,
-    "hasFormula": true,
+    "hasFormula": false,
     "relatedToolIds": [
       "length-converter",
       "weight-converter",
@@ -3994,10 +4004,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "fuel-efficiency-converter-guide",
     "shortDescription": "Convert mpg, L/100km, and km/L values.",
     "inputType": [
-      "Source Format File / Value"
+      "Fuel Economy Rate"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Fuel Efficiency Rate"
     ],
     "operationType": "converter",
     "runsInBrowser": true,
@@ -4018,10 +4028,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "angle-converter-guide",
     "shortDescription": "Convert degrees, radians, and gradians.",
     "inputType": [
-      "Source Format File / Value"
+      "Angle Degree Value"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Angular Position"
     ],
     "operationType": "converter",
     "runsInBrowser": true,
@@ -4042,10 +4052,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "pressure-converter-guide",
     "shortDescription": "Convert Pascal, Bar, PSI, and Atmosphere units.",
     "inputType": [
-      "Source Format File / Value"
+      "Barometric Pressure Value"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Pressure Output"
     ],
     "operationType": "converter",
     "runsInBrowser": true,
@@ -4066,10 +4076,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "energy-converter-guide",
     "shortDescription": "Convert Joules, Calories, Kilowatt-hours, and BTUs.",
     "inputType": [
-      "Source Format File / Value"
+      "Energy Work Value"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Heat Energy Output"
     ],
     "operationType": "converter",
     "runsInBrowser": true,
@@ -4090,10 +4100,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "power-converter-guide",
     "shortDescription": "Convert Watts, Kilowatts, and Horsepower.",
     "inputType": [
-      "Source Format File / Value"
+      "Power Wattage Value"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Power Capability"
     ],
     "operationType": "converter",
     "runsInBrowser": true,
@@ -4114,10 +4124,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "frequency-converter-guide",
     "shortDescription": "Convert Hertz, Kilohertz, Megahertz, and Gigahertz.",
     "inputType": [
-      "Source Format File / Value"
+      "Frequency Hertz Value"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Cycle Rate"
     ],
     "operationType": "converter",
     "runsInBrowser": true,
@@ -4138,10 +4148,10 @@ export const toolRegistry: UtilityRegistryItem[] = [
     "guideSlug": "number-base-converter-guide",
     "shortDescription": "Convert binary, octal, decimal, and hexadecimal bases.",
     "inputType": [
-      "Source Format File / Value"
+      "Number Representation Base"
     ],
     "outputType": [
-      "Target Format File / Value"
+      "Converted Radix Form"
     ],
     "operationType": "converter",
     "runsInBrowser": true,

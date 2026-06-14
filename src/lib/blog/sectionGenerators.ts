@@ -11,28 +11,32 @@ function getSlugHash(slug: string): number {
 }
 
 export function generateIntro(profile: ToolContentProfile, strategy: StrategyContent): string {
+  if (profile.slug.includes("jpg-compressor") || profile.slug.includes("jpeg-compressor")) {
+    return strategy.intro;
+  }
   const hash = getSlugHash(profile.slug);
+  const inputL = profile.inputType.toLowerCase();
 
   const openers = [
     `For absolute data privacy, the <strong>${profile.toolName}</strong> runs directly in your browser tab without any external network dependency.`,
-    `To keep your sensitive data secure, this utility performs all operations in client-side memory.`,
-    `Security is built directly into the <strong>${profile.toolName}</strong>'s architecture.`,
-    `You can use this tool confidently knowing that no data leaves your computer.`,
-    `By executing scripts in your local session, this utility processes your data without remote server calls.`,
-    `Singulariti operates with a client-first design, running all functions in your active window.`,
-    `To protect your confidential files, all operations are processed locally on your CPU device.`,
-    `This browser-native utility ensures your information is formatted securely on your machine.`
+    `To keep your sensitive ${inputL} data secure, the <strong>${profile.toolName}</strong> performs all operations in client-side memory.`,
+    `Security is built directly into the <strong>${profile.toolName}</strong>'s architecture to handle ${inputL} safely without server exposure.`,
+    `You can use this <strong>${profile.toolName}</strong> tool confidently knowing that no files or parameters leave your computer.`,
+    `By executing scripts in your local session, the <strong>${profile.toolName}</strong> processes your ${inputL} without remote server calls.`,
+    `Singulariti operates with a client-first design, running all <strong>${profile.toolName}</strong> functions in your active window cache.`,
+    `To protect your confidential ${inputL} files, the <strong>${profile.toolName}</strong> executes all processes locally on your CPU device.`,
+    `This browser-native <strong>${profile.toolName}</strong> ensures your ${inputL} information is formatted securely on your machine.`
   ];
 
   const transitions = [
-    `Since processing is performed locally on your device, your private records, credentials, or file payloads are never sent to third-party servers.`,
-    `The <strong>${profile.toolName}</strong> requires no files to be uploaded or saved to remote databases, ensuring your information remains private.`,
-    `It converts or formats your data without remote server calls, tracker cookies, or remote logs.`,
-    `The tool operates in-memory to process raw inputs locally and securely inside your active tab.`,
-    `Your files and parameters never leave your computer, keeping them completely safe from network leaks.`,
-    `This local processing model complies with standard corporate data security policies.`,
-    `All data remains inside your browser's volatile cache, which is purged immediately upon exit.`,
-    `You get fast, secure execution without the risk of third-party logging or data breaches.`
+    `Since processing is performed locally on your device, your private records, credentials, or ${inputL} payloads are never sent to third-party servers by the <strong>${profile.toolName}</strong>.`,
+    `The <strong>${profile.toolName}</strong> requires no ${inputL} files to be uploaded or saved to remote databases, ensuring your information remains private.`,
+    `The <strong>${profile.toolName}</strong> converts or formats your ${inputL} without remote server calls, tracker cookies, or remote logs.`,
+    `This <strong>${profile.toolName}</strong> operates in-memory to process raw ${inputL} inputs locally and securely inside your active tab.`,
+    `Your ${inputL} files and parameters never leave your computer, keeping them completely safe from network leaks during <strong>${profile.toolName}</strong> execution.`,
+    `This local processing model of the <strong>${profile.toolName}</strong> complies with standard corporate data security policies for ${inputL} handling.`,
+    `All ${inputL} data processed by the <strong>${profile.toolName}</strong> remains inside your browser's volatile cache, which is purged immediately upon exit.`,
+    `You get fast, secure execution of <strong>${profile.toolName}</strong> without the risk of third-party logging or data breaches.`
   ];
 
   const disclaimer = `${openers[hash % openers.length]} ${transitions[(hash + 4) % transitions.length]}`;
@@ -44,6 +48,9 @@ export function generateIntro(profile: ToolContentProfile, strategy: StrategyCon
 }
 
 export function generateWhatItDoes(profile: ToolContentProfile, strategy: StrategyContent): string {
+  if (profile.slug.includes("jpg-compressor") || profile.slug.includes("jpeg-compressor")) {
+    return strategy.explanation;
+  }
   const hash = getSlugHash(profile.slug);
   const name = profile.toolName;
   const input = profile.inputType.toLowerCase();
@@ -101,6 +108,9 @@ export function generateWhatItDoes(profile: ToolContentProfile, strategy: Strate
 }
 
 export function generateWhyUsersNeedIt(profile: ToolContentProfile, strategy: StrategyContent): string {
+  if (profile.slug.includes("jpg-compressor") || profile.slug.includes("jpeg-compressor")) {
+    return strategy.problemSection;
+  }
   const hash = getSlugHash(profile.slug);
   const input = profile.inputType.toLowerCase();
   const benefit = profile.keyBenefit.replace(/\.$/, "").toLowerCase();
@@ -323,29 +333,33 @@ export function generateFaqs(profile: ToolContentProfile, strategy: StrategyCont
 }
 
 export function generateSummary(profile: ToolContentProfile, strategy: StrategyContent): string {
+  if (profile.slug.includes("jpg-compressor") || profile.slug.includes("jpeg-compressor")) {
+    return strategy.summary;
+  }
   const hash = getSlugHash(profile.slug);
   const intent = profile.userIntent.toLowerCase().replace(/\.$/, "");
+  const inputL = profile.inputType.toLowerCase();
 
   const openers = [
     `Using the <strong>${profile.toolName}</strong> is an efficient way to ${intent} safely on your local device.`,
     `The <strong>${profile.toolName}</strong> offers a private, secure method to ${intent} in seconds.`,
-    `Simplify your digital tasks and ${intent} with this client-side utility.`,
-    `Keep your workflows clean and ${intent} securely inside your browser tab.`,
+    `Simplify your digital tasks and ${intent} with this client-side <strong>${profile.toolName}</strong> utility.`,
+    `Keep your workflows clean and ${intent} securely inside your browser tab with the <strong>${profile.toolName}</strong>.`,
     `We created the <strong>${profile.toolName}</strong> to help you ${intent} without complications.`,
-    `Optimize your daily configuration workflows and ${intent} locally.`,
-    `Access this free browser workspace to ${intent} without data limits.`,
+    `Optimize your daily configuration workflows and ${intent} locally using the <strong>${profile.toolName}</strong>.`,
+    `Access this free browser workspace for <strong>${profile.toolName}</strong> to ${intent} without data limits.`,
     `The <strong>${profile.toolName}</strong> provides a lightweight interface to ${intent} on the go.`
   ];
 
   const transitions = [
-    `Explore our complete suite of utilities to handle similar data operations without cloud dependencies.`,
-    `Check out our other browser-side utilities to optimize your daily workflow.`,
-    `Our offline-first tools help you manage files and text without sharing your data.`,
-    `We provide these online tools for free, with zero signups or tracking.`,
-    `It runs on mobile and desktop, giving you a private, ad-free alternative.`,
-    `This keeps your variables in RAM, ensuring your files are never saved.`,
-    `Enjoy instant execution, absolute privacy, and cross-platform compatibility.`,
-    `All scripts are cached in your tab, allowing offline data parsing at any time.`
+    `Explore our complete suite of utilities to handle similar ${inputL} operations without cloud dependencies, making <strong>${profile.toolName}</strong> a secure choice.`,
+    `Check out our other browser-side utilities to optimize your daily ${inputL} workflow alongside <strong>${profile.toolName}</strong>.`,
+    `Our offline-first tools like <strong>${profile.toolName}</strong> help you manage ${inputL} files and text without sharing your data.`,
+    `We provide these online <strong>${profile.toolName}</strong> tools for free, with zero signups or tracking.`,
+    `The <strong>${profile.toolName}</strong> runs on mobile and desktop, giving you a private, ad-free alternative for ${inputL} processing.`,
+    `The <strong>${profile.toolName}</strong> keeps your ${inputL} variables in RAM, ensuring your files are never saved.`,
+    `Enjoy instant execution, absolute privacy, and cross-platform compatibility for <strong>${profile.toolName}</strong>.`,
+    `All scripts are cached in your tab, allowing offline ${inputL} data parsing at any time via <strong>${profile.toolName}</strong>.`
   ];
 
   const footer = `${openers[hash % openers.length]} ${transitions[(hash + 7) % transitions.length]}`;
