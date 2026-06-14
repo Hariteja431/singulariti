@@ -26,35 +26,17 @@ Use this to design buttons, background headers, and custom borders for modern we
 
 Avoid pasting secrets, API keys, private tokens, or credentials into formatting, decoding, or testing tools unless you fully understand how the page processes the data.
 
-## Deep Dive & Technical Implementation
-
-The primary function of the CSS Gradient Generator is to handle Color stops and angle directions and generate the corresponding CSS linear/radial gradient code through an optimized generator pipeline. Specifically, the application reads the provided Color stops and angle directions, parses its components, and feeds them into the local browser-side execution matrix to output the precise CSS linear/radial gradient code. Because this runs entirely client-side, the computations are performed instantly in your browser tab using native JavaScript memory allocations, ensuring that no Color stops and angle directions data is ever sent to a remote server. This local execution model guarantees that the operations are completely private, making the CSS Gradient Generator highly suitable for security-conscious developers, students, and professionals.
-
-Minification tools shrink code by removing comments, whitespace, and unnecessary delimiters without altering execution logic. The tool analyzes code syntax, compresses variable names (where applicable), and outputs a highly compact text stream, saving bandwidth and improving script loading speeds.
-
-## Advanced Workflows & Optimization
-
-To achieve the best results with the CSS Gradient Generator, users should ensure their source Color stops and angle directions is clean and correctly formatted. For complex workflows, you can process your target data here to get the CSS linear/radial gradient code, and then copy it directly into other utility tools in our suite to continue your operations. This modular design allows you to chain multiple browser-based operations together without any download or installation friction.
-
-For generating secure system passwords or hashes, run the generator tool in a private browsing window. This prevents browser extensions or keyloggers from monitoring the local fields, maximizing security.
-
 ## Related Tools
 
 Here are some other related utility tools you can explore to streamline your workflows:
 
-- [XML Formatter](/tools/dev/xml-formatter)
-- [YAML Formatter](/tools/dev/yaml-formatter)
-- [JSON Validator](/tools/dev/json-validator)
-- [JSON Formatter](/tools/dev/json-formatter)
-- [Explore All Generator Tools](/tools)
-
+- [HEX to RGB Converter](/tools/dev/hex-to-rgb)
+- [RGB to HEX Converter](/tools/dev/rgb-to-hex)
+- [Timestamp Converter](/tools/dev/timestamp-converter)
+- [Unix Time Converter](/tools/dev/unix-time-converter)
 
 ## FAQs
 
-### Does the JSON validator show syntax errors?
+### Does it support alpha transparency?
 
-Yes. If your JSON is invalid, the parser points to the exact line number and character column where the syntax error occurred.
-
-### Is it safe to format JSON containing API keys or passwords?
-
-Absolutely. Because all parsing and formatting are executed locally in your browser's JavaScript engine, no sensitive credentials are ever sent over the network.
+Yes, you can configure the opacity of each color node using RGBA stops.
