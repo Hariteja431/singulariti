@@ -98,37 +98,6 @@ export interface MetadataOptions {
 const BASE_URL = 'https://singulariti.in';
 const DEFAULT_OG_IMAGE = 'https://singulariti.in/og-fallback.png';
 
-export function cleanCanonicalUrl(urlOrPath: string): string {
-  if (!urlOrPath) return BASE_URL;
-
-  let path = urlOrPath;
-  const hasWww = urlOrPath.includes('www.singulariti.in');
-
-  if (urlOrPath.startsWith('http://') || urlOrPath.startsWith('https://')) {
-    try {
-      const parsed = new URL(urlOrPath);
-      path = parsed.pathname + parsed.search;
-    } catch (e) {
-      path = urlOrPath.replace(/^https?:\/\/[^\/]+/, '');
-    }
-  }
-
-  const [pathname] = path.split(/[?#]/);
-
-  let cleanPath = pathname.trim();
-  if (cleanPath === '/' || cleanPath === '') {
-    return hasWww ? 'https://www.singulariti.in' : BASE_URL;
-  }
-  if (!cleanPath.startsWith('/')) {
-    cleanPath = `/${cleanPath}`;
-  }
-  if (cleanPath.endsWith('/')) {
-    cleanPath = cleanPath.slice(0, -1);
-  }
-  
-  return `${hasWww ? 'https://www.singulariti.in' : BASE_URL}${cleanPath}`;
-}
-
 export function constructMetadata({
   title,
   description,
@@ -140,7 +109,19 @@ export function constructMetadata({
   updatedAt,
   keywords,
 }: MetadataOptions): Metadata {
-  const canonicalUrl = cleanCanonicalUrl(path);
+  // Ensure paths are formatted properly without trailing slash unless it's homepage
+  let cleanPath = path;
+  if (cleanPath && cleanPath !== '/') {
+    cleanPath = cleanPath.startsWith('/') ? cleanPath : `/${cleanPath}`;
+    // Strip trailing slash if present
+    if (cleanPath.endsWith('/')) {
+      cleanPath = cleanPath.slice(0, -1);
+    }
+  } else {
+    cleanPath = '';
+  }
+
+  const canonicalUrl = `${BASE_URL}${cleanPath}`;
   
   let robotsConfig;
   if (robots === 'noindex') {
@@ -266,22 +247,19 @@ export function buildMetadata(input: BuildMetadataInput): Metadata {
         },
       };
 
-  const canonicalUrl = cleanCanonicalUrl(input.canonical);
-  const ogUrl = cleanCanonicalUrl(input.openGraph?.url ?? input.canonical);
-
   return {
     title: finalTitle,
     description: input.description,
     keywords: input.keywords,
     authors: [{ name: "Singulariti", url: "https://singulariti.in" }],
     alternates: {
-      canonical: canonicalUrl,
+      canonical: input.canonical,
     },
     robots: robotsConfig,
     openGraph: {
       title: input.openGraph?.title ?? titleString,
       description: input.openGraph?.description ?? input.description,
-      url: ogUrl,
+      url: input.openGraph?.url ?? input.canonical,
       siteName: 'Singulariti',
       locale: 'en_US',
       type: input.openGraph?.type ?? "website",
