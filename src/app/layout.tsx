@@ -8,6 +8,7 @@ import { DynamicStructuredData } from "@/components/seo/DynamicStructuredData";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { AdsenseScript } from "@/components/seo/AdsenseScript";
 import { Analytics } from "@vercel/analytics/next";
+import { headers } from "next/headers";
 
 const syne = Syne({
   variable: "--font-syne",
@@ -27,7 +28,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://singulariti.in"),
   title: {
-    default: "Online Utility Tools for PDF, Image, Text, Code, SEO and Calculations | Singulariti",
+    default: "Free Browser Utility Tools | Singulariti",
     template: "%s | Singulariti",
   },
   description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals. Zero uploads, absolute privacy.",
@@ -54,11 +55,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const pathname = headersList.get('x-invoke-path') || '';
+
   return (
     <html
       lang="en"
@@ -113,10 +117,14 @@ export default function RootLayout({
             },
             "description": "Singulariti offers free browser-based utility tools for PDF management, image compression, text formatting, developer encoding, and calculator tasks — all processed locally with zero uploads.",
             "foundingDate": "2026-06-06",
-            "sameAs": []
+            "sameAs": [
+              "https://x.com/singulariti_in",
+              "https://www.instagram.com/singulariti.in",
+              "https://www.youtube.com/@singulariti_in"
+            ]
           })}}
         />
-        <DynamicStructuredData />
+        <DynamicStructuredData pathname={pathname} />
         <AdsenseScript />
       </head>
       <body suppressHydrationWarning className="min-h-full flex flex-col font-sans bg-background text-foreground transition-colors duration-300">

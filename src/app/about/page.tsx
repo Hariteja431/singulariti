@@ -47,7 +47,7 @@ export default function AboutPage() {
           <div className="bg-surface border border-border rounded-xl p-6 mb-8">
             <h2 className="font-display font-bold text-xl text-ink mb-4">Contact Information</h2>
             <p className="mb-2"><strong>Email:</strong> <a href="mailto:singulariti.contact@gmail.com" className="text-primary hover:underline">singulariti.contact@gmail.com</a></p>
-            <p><strong>Address:</strong> Vishakapatnam, Andhra Pradesh, India</p>
+            <p><strong>Address:</strong> Visakhapatnam, Andhra Pradesh, India</p>
           </div>
         </section>
       </main>

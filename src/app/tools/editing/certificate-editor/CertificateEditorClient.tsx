@@ -9,7 +9,8 @@ import { LoadingSpinner } from '@/components/tools/LoadingSpinner';
 import { 
   Award, Type, Square, Circle, Sparkles, Undo2, Redo2, ZoomIn, ZoomOut, 
   RotateCcw, Trash2, PenTool, Upload, Download, Check, X, Image as ImageIcon, 
-  Layers, AlignLeft, AlignCenter, AlignRight, Bold, Italic, Underline, ArrowLeft
+  Layers, AlignLeft, AlignCenter, AlignRight, Bold, Italic, Underline, ArrowLeft,
+  Maximize2, Minimize2
 } from 'lucide-react';
 import { loadPdfDocument, renderPageToDataUrl } from '@/lib/pdf/pdfRenderHelpers';
 
@@ -60,6 +61,45 @@ const templateMinimalist = `
 type TemplateId = 'classic' | 'modern' | 'emerald' | 'minimalist' | 'custom';
 
 export function CertificateEditorClient({ article }: { article?: string }) {
+  const [isMaximized, setIsMaximized] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMaximized) {
+        setIsMaximized(false);
+      }
+    };
+
+    const handleFullscreenChange = () => {
+      if (!document.fullscreenElement && isMaximized) {
+        setIsMaximized(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, [isMaximized]);
+
+  const handleToggleMaximize = () => {
+    if (!isMaximized) {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch((err) => {
+          console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
+        });
+      }
+      setIsMaximized(true);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+      setIsMaximized(false);
+    }
+  };
+
   const [mode, setMode] = useState<'select' | 'editor'>('select');
   const [template, setTemplate] = useState<TemplateId>('classic');
   const [documentState, setDocumentState] = useState({
@@ -1217,12 +1257,25 @@ export function CertificateEditorClient({ article }: { article?: string }) {
 
       {/* MODE 2: ACTIVE EDITOR WORKSPACE */}
       {mode === 'editor' && (
-        <div className="bg-surface border border-border rounded-xl p-4 md:p-6 shadow-sm animate-in fade-in duration-300">
+        <div className={isMaximized 
+          ? "fixed inset-0 z-[150] bg-slate-50 dark:bg-zinc-950 flex flex-col p-4 md:p-6 gap-4 w-[100dvw] h-[100dvh] overflow-hidden animate-in fade-in duration-200" 
+          : "bg-surface border border-border rounded-xl p-4 md:p-6 shadow-sm animate-in fade-in duration-300 flex flex-col"
+        }>
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Maximized View Header */}
+          {isMaximized && (
+            <div className="flex items-center justify-between border-b border-border dark:border-zinc-800 pb-2 flex-shrink-0">
+              <div>
+                <h2 className="text-sm font-sans font-bold text-ink dark:text-zinc-100">Certificate Editor (Maximized Workspace)</h2>
+                <p className="text-[10px] text-slate dark:text-zinc-400 font-sans">Press <kbd className="bg-background dark:bg-zinc-800 px-1 border dark:border-zinc-700 rounded text-ink dark:text-zinc-300">ESC</kbd> or click the restore button to exit.</p>
+              </div>
+            </div>
+          )}
+
+          <div className={`grid grid-cols-1 lg:grid-cols-12 gap-6 ${isMaximized ? 'flex-1 min-h-0 overflow-hidden' : ''}`}>
             
             {/* LEFT PANEL: Templates & Insert Elements (Col 3) */}
-            <div className="lg:col-span-3 space-y-5">
+            <div className={`lg:col-span-3 space-y-5 ${isMaximized ? 'overflow-y-auto pr-2 custom-scrollbar h-full pb-4' : ''}`}>
               
               {/* Template Selector */}
               <div className="p-4 bg-background border border-border rounded-xl">
@@ -1433,71 +1486,84 @@ export function CertificateEditorClient({ article }: { article?: string }) {
             </div>
 
             {/* MIDDLE: Interactive Canvas (Col 6) */}
-            <div className="lg:col-span-6 flex flex-col items-center">
+            <div className={`lg:col-span-6 flex flex-col items-center ${isMaximized ? 'h-full overflow-hidden' : ''}`}>
               
-              {/* Top Toolbar */}
-              <div className="w-full flex items-center justify-between bg-background border border-border rounded-xl px-4 py-2.5 mb-4 gap-2 overflow-x-auto">
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={handleBackToStart}
-                    title="Back to start screen"
-                    className="flex items-center gap-1 px-2.5 py-1.5 bg-surface hover:bg-surface/85 border border-border rounded-lg text-xs font-semibold text-ink transition"
-                  >
-                    <ArrowLeft className="w-3.5 h-3.5" />
-                    <span>Back</span>
-                  </button>
-                  
-                  <div className="w-[1px] h-6 bg-border mx-1" />
+              {/* Top Toolbar Wrapper */}
+              <div className="w-full flex items-center gap-2 bg-background border border-border rounded-xl px-2 py-2 mb-4">
+                <div className="flex-1 flex items-center justify-between overflow-x-auto px-2 gap-4 custom-scrollbar-thin">
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <button
+                      onClick={handleBackToStart}
+                      title="Back to start screen"
+                      className="flex items-center gap-1 px-2.5 py-1.5 bg-surface hover:bg-surface/85 border border-border rounded-lg text-xs font-semibold text-ink transition"
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5" />
+                      <span>Back</span>
+                    </button>
+                    
+                    <div className="w-[1px] h-6 bg-border mx-1" />
 
-                  <button
-                    onClick={handleUndo}
-                    disabled={!canUndo}
-                    title="Undo"
-                    className="p-2 bg-surface hover:bg-surface/80 disabled:opacity-40 border border-border rounded-lg text-ink transition"
-                  >
-                    <Undo2 className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={handleRedo}
-                    disabled={!canRedo}
-                    title="Redo"
-                    className="p-2 bg-surface hover:bg-surface/80 disabled:opacity-40 border border-border rounded-lg text-ink transition"
-                  >
-                    <Redo2 className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={handleResetCanvas}
-                    title="Reset Canvas"
-                    className="p-2 bg-surface hover:bg-surface/80 border border-border rounded-lg text-ink hover:text-red-500 transition"
-                  >
-                    <RotateCcw className="w-4 h-4" />
-                  </button>
+                    <button
+                      onClick={handleUndo}
+                      disabled={!canUndo}
+                      title="Undo"
+                      className="p-2 bg-surface hover:bg-surface/80 disabled:opacity-40 border border-border rounded-lg text-ink transition"
+                    >
+                      <Undo2 className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={handleRedo}
+                      disabled={!canRedo}
+                      title="Redo"
+                      className="p-2 bg-surface hover:bg-surface/80 disabled:opacity-40 border border-border rounded-lg text-ink transition"
+                    >
+                      <Redo2 className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={handleResetCanvas}
+                      title="Reset Canvas"
+                      className="p-2 bg-surface hover:bg-surface/80 border border-border rounded-lg text-ink hover:text-red-500 transition"
+                    >
+                      <RotateCcw className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <button
+                      onClick={() => handleZoomChange(0.9)}
+                      title="Zoom Out"
+                      className="p-2 bg-surface hover:bg-surface/80 border border-border rounded-lg text-ink transition"
+                    >
+                      <ZoomOut className="w-4 h-4" />
+                    </button>
+                    <span className="text-xs font-mono text-slate bg-surface border border-border px-2 py-1 rounded-lg">
+                      {Math.round(zoom * 100)}%
+                    </span>
+                    <button
+                      onClick={() => handleZoomChange(1.1)}
+                      title="Zoom In"
+                      className="p-2 bg-surface hover:bg-surface/80 border border-border rounded-lg text-ink transition"
+                    >
+                      <ZoomIn className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={resetZoom}
+                      title="100%"
+                      className="px-2.5 py-1 bg-surface hover:bg-surface/80 border border-border rounded-lg text-xs text-ink transition font-sans"
+                    >
+                      Actual Size
+                    </button>
+                  </div>
                 </div>
-
-                <div className="flex items-center gap-2">
+                
+                {/* Fullscreen Button pinned to the right */}
+                <div className="flex items-center pl-2 border-l border-border flex-shrink-0">
                   <button
-                    onClick={() => handleZoomChange(0.9)}
-                    title="Zoom Out"
+                    onClick={handleToggleMaximize}
+                    title={isMaximized ? "Exit Fullscreen" : "Enter Fullscreen"}
                     className="p-2 bg-surface hover:bg-surface/80 border border-border rounded-lg text-ink transition"
                   >
-                    <ZoomOut className="w-4 h-4" />
-                  </button>
-                  <span className="text-xs font-mono text-slate bg-surface border border-border px-2 py-1 rounded-lg">
-                    {Math.round(zoom * 100)}%
-                  </span>
-                  <button
-                    onClick={() => handleZoomChange(1.1)}
-                    title="Zoom In"
-                    className="p-2 bg-surface hover:bg-surface/80 border border-border rounded-lg text-ink transition"
-                  >
-                    <ZoomIn className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={resetZoom}
-                    title="100%"
-                    className="px-2.5 py-1 bg-surface hover:bg-surface/80 border border-border rounded-lg text-xs text-ink transition font-sans"
-                  >
-                    Actual Size
+                    {isMaximized ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
                   </button>
                 </div>
               </div>
@@ -1505,7 +1571,7 @@ export function CertificateEditorClient({ article }: { article?: string }) {
               {/* The actual canvas container with scroll/scale */}
               <div 
                 ref={containerRef}
-                className="w-full relative border border-border rounded-xl bg-background/50 overflow-auto flex justify-center items-center p-4 min-h-[480px]"
+                className={`w-full relative border border-border rounded-xl bg-background/50 overflow-auto flex justify-center items-center p-4 ${isMaximized ? 'flex-1 min-h-0' : 'min-h-[480px]'}`}
               >
                 {/* Prevent global canvas rules from distorting Fabric layout */}
                 <style dangerouslySetInnerHTML={{ __html: `
@@ -1546,7 +1612,7 @@ export function CertificateEditorClient({ article }: { article?: string }) {
             </div>
 
             {/* RIGHT PANEL: Object Properties Panel (Col 3) */}
-            <div className="lg:col-span-3 space-y-4">
+            <div className={`lg:col-span-3 space-y-4 ${isMaximized ? 'overflow-y-auto pr-2 custom-scrollbar h-full pb-4' : ''}`}>
               
               {/* Contextual Properties Box */}
               <div className="p-4 bg-background border border-border rounded-xl space-y-4 min-h-[350px]">

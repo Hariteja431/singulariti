@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
+import DOMPurify from 'dompurify';
 
 interface FAQItem {
   question: string;
@@ -11,6 +12,8 @@ interface FAQItem {
 interface FAQSectionProps {
   faqs: FAQItem[];
 }
+
+import { DynamicFAQSchema } from '../seo/DynamicFAQSchema';
 
 export function FAQSection({ faqs }: FAQSectionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -23,6 +26,7 @@ export function FAQSection({ faqs }: FAQSectionProps) {
 
   return (
     <div className="space-y-6 pt-8 border-t border-slate-200 dark:border-slate-800/80">
+      <DynamicFAQSchema faqs={faqs} />
       <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white flex items-center gap-2 mb-6">
         <HelpCircle className="w-5 h-5 text-teal-600 dark:text-teal-400" /> Frequently Asked Questions
       </h3>
@@ -48,7 +52,7 @@ export function FAQSection({ faqs }: FAQSectionProps) {
               {isOpen && (
                 <div 
                   className="px-5 pb-5 pt-0 text-sm font-sans text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800/60 animate-in fade-in duration-200"
-                  dangerouslySetInnerHTML={{ __html: faq.answer }}
+                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(faq.answer) }}
                 />
               )}
             </div>

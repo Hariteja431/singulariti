@@ -17,6 +17,7 @@ import {
   AlertTriangle, 
   Settings 
 } from 'lucide-react';
+import DOMPurify from 'dompurify';
 
 interface BlogArticleProps {
   post: any;
@@ -38,9 +39,28 @@ export function BlogArticle({ post }: BlogArticleProps) {
     return (
       <article className="space-y-12 font-sans text-slate-700 dark:text-slate-300 blog-article-content">
         
+        {/* Editorial Byline */}
+        <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800 pb-4 mb-8">
+          <address className="not-italic inline-flex items-center gap-1 font-medium text-slate-700 dark:text-slate-300">
+            By Singulariti Editorial Team
+          </address>
+          <span className="opacity-50">|</span>
+          <span className="flex items-center gap-1">
+            <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+            Fact-checked by Developer Experts
+          </span>
+          {post.date && (
+            <>
+              <span className="opacity-50">|</span>
+              <time dateTime={post.date}>
+                {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+            </>
+          )}
+        </div>
         {/* 1. Introduction */}
         <section className="blog-content-body prose max-w-none text-slate-700 dark:text-slate-300 leading-relaxed">
-          <div dangerouslySetInnerHTML={{ __html: s.introduction }} />
+          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(s.introduction) }} />
         </section>
 
         {/* 2. What This Tool Does */}
@@ -49,7 +69,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
             <h2 className="font-display font-bold text-xl text-slate-950 dark:text-white tracking-tight flex items-center gap-2">
               <Cpu className="w-5 h-5 text-teal-600 dark:text-teal-400" /> What This Tool Does
             </h2>
-            <div className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: s.whatThisToolDoes }} />
+            <div className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(s.whatThisToolDoes) }} />
           </section>
         )}
 
@@ -59,7 +79,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
             <h2 className="font-display font-bold text-xl text-slate-950 dark:text-white tracking-tight flex items-center gap-2">
               <HelpCircle className="w-5 h-5 text-teal-600 dark:text-teal-400" /> Why This Tool Is Included
             </h2>
-            <div className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: s.whyIncluded }} />
+            <div className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(s.whyIncluded) }} />
           </section>
         )}
 
@@ -300,7 +320,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
                 </h4>
                 <div 
                   className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-white dark:bg-slate-950 p-5 rounded-2xl border border-slate-200 dark:border-slate-800"
-                  dangerouslySetInnerHTML={{ __html: s.technicalExplanation }}
+                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(s.technicalExplanation) }}
                 />
               </div>
             )}
@@ -368,14 +388,14 @@ export function BlogArticle({ post }: BlogArticleProps) {
             </h3>
             <div 
               className="text-xs leading-relaxed font-semibold text-teal-700 dark:text-teal-300"
-              dangerouslySetInnerHTML={{ __html: s.privacyNote }}
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(s.privacyNote) }}
             />
           </section>
         )}
 
         {/* 19. Conclusion */}
         <section className="blog-content-body prose max-w-none text-slate-700 dark:text-slate-300 leading-relaxed pt-4 border-t border-slate-200 dark:border-slate-800/80">
-          <div dangerouslySetInnerHTML={{ __html: s.conclusion }} />
+          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(s.conclusion) }} />
         </section>
 
       </article>
@@ -386,6 +406,25 @@ export function BlogArticle({ post }: BlogArticleProps) {
   if (sectionsArray) {
     return (
       <article className="space-y-8 font-sans text-slate-700 dark:text-slate-300 blog-article-content">
+        {/* Editorial Byline */}
+        <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800 pb-4 mb-8">
+          <address className="not-italic inline-flex items-center gap-1 font-medium text-slate-700 dark:text-slate-300">
+            By Singulariti Editorial Team
+          </address>
+          <span className="opacity-50">|</span>
+          <span className="flex items-center gap-1">
+            <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+            Fact-checked by Developer Experts
+          </span>
+          {post.date && (
+            <>
+              <span className="opacity-50">|</span>
+              <time dateTime={post.date}>
+                {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+            </>
+          )}
+        </div>
         {sectionsArray.map((sec: any) => (
           <BlogSection key={sec.id} section={sec} />
         ))}

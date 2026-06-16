@@ -11,6 +11,15 @@ interface QRScannerResultProps {
   onClear?: () => void;
 }
 
+function getSafeUrl(rawText: string): string | null {
+  try {
+    const url = new URL(rawText.startsWith('http') ? rawText : `https://${rawText}`);
+    return ['http:', 'https:'].includes(url.protocol) ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
 export function QRScannerResult({ result, onClear }: QRScannerResultProps) {
   const [copied, setCopied] = useState(false);
 
@@ -27,6 +36,7 @@ export function QRScannerResult({ result, onClear }: QRScannerResultProps) {
   };
 
   const isUrl = result.type === 'url' || result.rawText.startsWith('http://') || result.rawText.startsWith('https://');
+  const safeUrl = isUrl ? getSafeUrl(result.rawText) : null;
 
   return (
     <div className="bg-surface border border-border rounded-xl p-6 shadow-sm max-w-2xl mx-auto w-full animate-in fade-in slide-in-from-top-4 duration-300">
@@ -74,9 +84,9 @@ export function QRScannerResult({ result, onClear }: QRScannerResultProps) {
             {copied ? 'Copied' : 'Copy'}
           </Button>
 
-          {isUrl && (
+          {safeUrl && (
             <a
-              href={result.rawText.startsWith('http') ? result.rawText : `https://${result.rawText}`}
+              href={safeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block"

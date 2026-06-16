@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { AlertTriangle } from 'lucide-react';
+import DOMPurify from 'dompurify';
 
 interface WarningBoxProps {
   heading: string;
@@ -18,7 +19,7 @@ export function WarningBox({ heading, content, items }: WarningBoxProps) {
       <h3 className="font-display font-bold text-sm text-amber-600 dark:text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
         <AlertTriangle className="w-4 h-4" /> {heading}
       </h3>
-      <div dangerouslySetInnerHTML={{ __html: content }} className="text-sm text-slate leading-relaxed" />
+      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }} className="text-sm text-slate leading-relaxed" />
       {items && items.length > 0 && (
         <ul className="space-y-1.5 text-xs pl-0 list-none">
           {items.map((item, idx) => (

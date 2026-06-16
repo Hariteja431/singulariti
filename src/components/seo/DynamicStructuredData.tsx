@@ -1,11 +1,7 @@
-"use client";
-
 import React from 'react';
-import { usePathname } from 'next/navigation';
 import { registry } from '@/registry';
 
-export function DynamicStructuredData() {
-  const pathname = usePathname();
+export function DynamicStructuredData({ pathname }: { pathname?: string }) {
   if (!pathname) return null;
 
   const parts = pathname.split('/').filter(Boolean);

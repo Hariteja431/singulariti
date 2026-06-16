@@ -14,7 +14,7 @@ export function FeedbackForm() {
     const subject = encodeURIComponent(`${subjectType} from ${name}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nType: ${subjectType}\n\nMessage/Details:\n${message}`);
     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=singulariti.contact@gmail.com&su=${subject}&body=${body}`;
-    window.open(gmailUrl, '_blank');
+    window.open(gmailUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (

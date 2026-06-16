@@ -4,11 +4,7 @@ export async function GET() {
   const pubId = process.env.NEXT_PUBLIC_ADSENSE_PUB_ID || '';
   
   if (!pubId) {
-    return new NextResponse('google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0\n# Replace NEXT_PUBLIC_ADSENSE_PUB_ID in your environment variables with your actual Publisher ID', {
-      headers: {
-        'Content-Type': 'text/plain',
-      },
-    });
+    return new NextResponse('', { status: 404 });
   }
 
   // Remove 'ca-' if the user accidentally included it in the ENV var, ads.txt only uses 'pub-...'

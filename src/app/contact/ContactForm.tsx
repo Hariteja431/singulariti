@@ -13,7 +13,7 @@ export function ContactForm() {
     const subject = encodeURIComponent(`Contact from ${name}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=singulariti.contact@gmail.com&su=${subject}&body=${body}`;
-    window.open(gmailUrl, '_blank');
+    window.open(gmailUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (

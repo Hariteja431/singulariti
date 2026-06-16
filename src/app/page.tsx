@@ -4,7 +4,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { ImageIcon, FileText, QrCode, Wand2, Calculator, Keyboard, Timer, Brush, Type, Code, Scale, Search, Shuffle, PlaySquare } from 'lucide-react';
+import { ImageIcon, FileText, QrCode, Wand2, Calculator, Keyboard, Timer, Brush, Type, Code, Scale, Search, Shuffle, PlaySquare, Award } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import { PremiumIconContainer } from '@/components/ui/PremiumIconContainer';
 import HeroOrbitalEcosystem from '@/components/ui/HeroOrbitalEcosystem';
@@ -236,6 +236,12 @@ export default function Home() {
               description="Draw, write, sketch, add shapes, and export your whiteboard directly in your browser."
               icon={<PremiumIconContainer><Brush /></PremiumIconContainer>}
               href="/tools/editing/online-whiteboard"
+            />
+            <Card 
+              title="Certificate Editor"
+              description="Create and edit certificates online. Choose templates, customize text, draw signatures, place logos, and export to PDF/PNG."
+              icon={<PremiumIconContainer><Award /></PremiumIconContainer>}
+              href="/tools/editing/certificate-editor"
             />
           </div>
         </section>

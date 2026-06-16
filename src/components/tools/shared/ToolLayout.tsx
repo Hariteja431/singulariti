@@ -116,7 +116,7 @@ export function ToolLayout({
         {/* Hero Area */}
         <section className="container mx-auto px-4 max-w-3xl text-center mb-6">
           <h1 className="font-display font-bold text-3xl md:text-4xl text-ink mb-3 tracking-tight">
-            {title}
+            {!title.toLowerCase().includes('online') && !title.toLowerCase().includes('free') ? `${title} Online Free` : title}
           </h1>
           <p className="font-sans text-base text-slate leading-relaxed">
             {description}

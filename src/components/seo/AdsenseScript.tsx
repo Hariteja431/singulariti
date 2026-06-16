@@ -1,16 +1,23 @@
+"use client";
 import Script from 'next/script';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export function AdsenseScript() {
   const pubId = process.env.NEXT_PUBLIC_ADSENSE_PUB_ID;
+  const [consented, setConsented] = useState(false);
 
-  if (!pubId) {
-    return null; // Don't render anything if the ID isn't set yet
-  }
+  useEffect(() => {
+    const check = () => {
+      if (localStorage.getItem('cookie-consent') === 'accepted') setConsented(true);
+    };
+    check();
+    window.addEventListener('storage', check);
+    return () => window.removeEventListener('storage', check);
+  }, []);
 
-  // Ensure the ID starts with 'ca-pub-'
+  if (!pubId || !consented) return null;
+
   const formattedPubId = pubId.startsWith('ca-pub-') ? pubId : `ca-pub-${pubId.replace(/^pub-/, '')}`;
-
   return (
     <Script
       async

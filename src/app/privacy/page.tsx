@@ -46,17 +46,15 @@ export default function PrivacyPage() {
             Most of our tools operate entirely inside your web browser. File operations, image compression, formatting, and calculations are computed locally on your device. For these tools, files are never uploaded to our servers, keeping your documents, images, and data strictly on your device.
           </p>
 
-          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">3. Temporary Backend Processing</h2>
+          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">3. Browser Memory Processing</h2>
           <p className="mb-4 leading-relaxed">
-            For specific heavy processing tools that require backend computation (such as local PDF conversions):
+            All files are processed directly within your browser's memory (RAM). This means:
           </p>
           <ul className="list-disc pl-6 mb-4 space-y-2 leading-relaxed">
-            <li>Files are transmitted securely via HTTPS.</li>
-            <li>Processing is performed in temporary, isolated directories.</li>
-            <li>No files are stored permanently.</li>
-            <li>Original file names are sanitized and randomized immediately.</li>
-            <li>All input files and converted outputs are deleted from the disk automatically and immediately after output streaming finishes.</li>
-            <li>Exposing or storing uploaded files publicly is prohibited.</li>
+            <li>No files are ever uploaded or transmitted to our servers.</li>
+            <li>All processing happens entirely on your local device.</li>
+            <li>Once you refresh or close the tab, all data is immediately cleared from memory.</li>
+            <li>We have absolutely zero access to your files or documents.</li>
           </ul>
 
           <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">4. No Data Collection or Selling</h2>
