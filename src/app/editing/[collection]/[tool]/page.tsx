@@ -110,10 +110,12 @@ export async function generateStaticParams() {
 
   category.collections.forEach(collection => {
     collection.tools.forEach(tool => {
-      paths.push({
-        collection: collection.id,
-        tool: tool.id
-      });
+      if (tool.id !== 'certificate-editor') {
+        paths.push({
+          collection: collection.id,
+          tool: tool.id
+        });
+      }
     });
   });
 

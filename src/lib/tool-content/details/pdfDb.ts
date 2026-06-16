@@ -100,6 +100,36 @@ export const pdfDetailsDb: Record<string, ToolDetailEntry> = {
     commonMistakes: ["Forgetting that standard digital overlays are not cryptographically binding certificates"],
     faqs: [{"q":"Is this signature legally binding?","a":"It is a standard visual signature overlay. For official or corporate audits, verify whether your portal accepts scanned/drawn signatures."}]
   },
+  "certificate-editor": {
+    whyNeed: "Creating professional certificates for students, employees, or event attendees requires flexible template editing without expensive software.",
+    howWorks: "The browser-based application reads templates and user content in-memory. The engine uses Fabric.js client-side canvas rendering to support custom background images, text field editing, drawing paths/signatures, drag-and-drop alignment, and outputs high-quality PDFs or images securely.",
+    whenToUse: "Use the **Certificate Editor** when you need to design, customize, or bulk-edit achievement certificates, diplomas, or course completion awards using any local file template path.",
+    stepByStep: [
+      "Select a pre-designed certificate template or upload your own template from any file path.",
+      "Add custom text fields (Name, Title, Date) and position them anywhere on the canvas.",
+      "Draw or upload your signature, place logos/seals, and style fonts and colors.",
+      "Download your completed certificate as a print-ready PDF or high-resolution PNG."
+    ],
+    advantages: [
+      "No data leaves your device — completely client-side and secure",
+      "Drag-and-drop text positioning and custom text path options",
+      "Supports drawing signatures and importing external transparent PNG logos",
+      "Export as vector-quality PDF or high-resolution raster images"
+    ],
+    commonMistakes: [
+      "Using low-resolution images as custom templates, causing blurry certificate printouts"
+    ],
+    faqs: [
+      {
+        q: "Can I use my own certificate template design?",
+        a: "Yes. You can upload any JPEG or PNG image from your device to use as a custom background template."
+      },
+      {
+        q: "Does this tool store my custom certificates?",
+        a: "No. All edits are processed entirely in your browser memory. Make sure to download your files, as they are not stored on any server."
+      }
+    ]
+  },
   "watermark-pdf": {
     whyNeed: "Preventing unauthorized copying of draft publications or contract agreements requires clear watermarks.",
     howWorks: "The browser-based application reads parameters in-memory. Specifically, the engine renders overlay layers on PDF page canvas coordinates client-side for high-speed operation, providing instant feedback without sending any data over the internet.",

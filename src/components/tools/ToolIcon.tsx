@@ -21,7 +21,9 @@ import {
   // QR
   QrCode, ScanLine, Wifi, Smartphone, Mail, Briefcase, Globe,
   // Media & Random
-  Mic, Monitor, Camera, Video, PlaySquare, Volume2, Gamepad2, Shuffle, Dice5, Focus, Sparkles, LifeBuoy
+  Mic, Monitor, Camera, Video, PlaySquare, Volume2, Gamepad2, Shuffle, Dice5, Focus, Sparkles, LifeBuoy,
+  // Award
+  Award
 } from 'lucide-react';
 
 interface ToolIconProps {
@@ -61,6 +63,7 @@ export function ToolIcon({ toolId, className = "w-14 h-14" }: ToolIconProps) {
   else if (id.includes('to-svg')) IconComponent = FileCode2;
   else if (id.includes('to-text')) IconComponent = FileText;
   else if (id.includes('base64')) IconComponent = Binary;
+  else if (id.includes('certificate')) IconComponent = Award;
 
   // ==========================================
   // PDF TOOLS

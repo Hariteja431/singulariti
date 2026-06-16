@@ -4878,6 +4878,20 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
     "openGraph": { "title": "Webcam Recorder \u2013 Take Photos & Record Video Online", "description": "Take webcam snapshots or record video right from your browser securely. Your webcam data never leaves your device.", "url": "https://singulariti.in/media/video/webcam-recorder", "type": "website", "image": "https://singulariti.in/og-fallback.png" },
     "twitter": { "card": "summary_large_image", "title": "Webcam Recorder \u2013 Take Photos & Record Video Online", "description": "Take webcam snapshots or record video right from your browser securely. Your webcam data never leaves your device.", "image": "https://singulariti.in/og-fallback.png" },
     "schemaType": "WebApplication"
+  },
+  "certificate-editor": {
+    "utilityId": "certificate-editor",
+    "name": "Certificate Editor",
+    "section": "Image Editing Tools",
+    "subSection": "Image Editing Tools",
+    "url": "/tools/editing/certificate-editor",
+    "title": "Certificate Editor Online Free – Create & Edit Certificates",
+    "description": "Create and edit certificates online. Upload custom templates, edit text fields, draw signatures, place logos, and download as PDF or PNG. Safe and private.",
+    "canonical": "https://singulariti.in/tools/editing/certificate-editor",
+    "robots": { "index": true, "follow": true },
+    "openGraph": { "title": "Certificate Editor Online Free – Create & Edit Certificates", "description": "Create and edit certificates online. Upload custom templates, edit text fields, draw signatures, place logos, and download as PDF or PNG. Safe and private.", "url": "https://singulariti.in/tools/editing/certificate-editor", "type": "website", "image": "https://singulariti.in/og-fallback.png" },
+    "twitter": { "card": "summary_large_image", "title": "Certificate Editor Online Free – Create & Edit Certificates", "description": "Create and edit certificates online. Upload custom templates, edit text fields, draw signatures, place logos, and download as PDF or PNG. Safe and private.", "image": "https://singulariti.in/og-fallback.png" },
+    "schemaType": "WebApplication"
   }
 };
 

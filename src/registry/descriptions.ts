@@ -169,6 +169,7 @@ const toolActions: Record<string, string> = {
   // PDF Tools - Utilities
   'compress-pdf': 'Optimize and reduce the file size of PDF documents while maintaining document layout',
   'sign-pdf': 'Place a digital signature on PDF pages by drawing or uploading signature files',
+  'certificate-editor': 'Create, edit, and design professional certificates using templates, custom text layouts, and freehand drawing',
   'watermark-pdf': 'Add customized text or image watermark layers to PDF pages',
   'protect-pdf': 'Secure PDF files with custom passwords and encryption standards',
   'metadata-viewer': 'Inspect hidden PDF metadata details, creation dates, software producers, and file statistics',

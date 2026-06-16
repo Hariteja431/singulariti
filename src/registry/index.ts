@@ -541,6 +541,15 @@ export const registry: EcosystemRegistry = {
               engine: 'single-editing',
               path: '/editing/tools/add-logo-overlay',
               options: { action: 'logo' }
+            },
+            {
+              id: 'certificate-editor',
+              name: 'Certificate Editor',
+              description: 'Create and edit certificates online. Choose templates, customize text, draw signatures, place logos, and export to PDF/PNG.',
+              seoTitle: 'Certificate Editor Online Free – Create & Edit Certificates | Singulariti',
+              seoDescription: 'Free online browser-based certificate editor. Upload custom templates, customize text fields, draw signatures, place logos, and download as PDF or PNG.',
+              engine: 'editing',
+              path: '/tools/editing/certificate-editor'
             }
           ]
         }
