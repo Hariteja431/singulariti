@@ -60,20 +60,40 @@ export function TimerControls({
   resetTimer: () => void,
   setCustomTime: (m: number) => void
 }) {
+  const [showCustomInput, setShowCustomInput] = useState(false);
+  const [customMinutes, setCustomMinutes] = useState(25);
+
+  const handleCustomSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (customMinutes > 0) {
+      setCustomTime(customMinutes);
+      setShowCustomInput(false);
+    }
+  };
+
   const modes = [
     { id: 'pomodoro', label: 'Pomodoro' },
     { id: 'short_break', label: 'Short Break' },
-    { id: 'long_break', label: 'Long Break' }
+    { id: 'long_break', label: 'Long Break' },
+    { id: 'custom', label: 'Custom' }
   ];
 
   return (
-    <div className="flex flex-col items-center space-y-8 z-20">
-      <div className="flex bg-surface/50 p-1 rounded-full space-x-1 border border-border/50">
+    <div className="flex flex-col items-center space-y-6 z-20">
+      <div className="flex flex-wrap justify-center bg-surface/50 p-1 rounded-3xl space-x-1 border border-border/50 items-center">
         {modes.map(m => (
           <button
             key={m.id}
-            onClick={() => changeMode(m.id as PomodoroMode)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+            onClick={() => {
+              if (m.id === 'custom') {
+                setShowCustomInput(!showCustomInput);
+                if (mode !== 'custom') changeMode('custom');
+              } else {
+                setShowCustomInput(false);
+                changeMode(m.id as PomodoroMode);
+              }
+            }}
+            className={`px-4 py-2 my-1 rounded-full text-sm font-medium transition-all duration-300 ${
               mode === m.id ? 'bg-primary text-primary-foreground shadow-sm' : 'text-slate hover:text-foreground hover:bg-surface'
             }`}
           >
@@ -81,6 +101,35 @@ export function TimerControls({
           </button>
         ))}
       </div>
+
+      <AnimatePresence>
+        {showCustomInput && (
+          <motion.form 
+            initial={{ opacity: 0, height: 0, y: -10 }}
+            animate={{ opacity: 1, height: 'auto', y: 0 }}
+            exit={{ opacity: 0, height: 0, y: -10 }}
+            onSubmit={handleCustomSubmit}
+            className="flex items-center space-x-3 overflow-hidden"
+          >
+            <input 
+              type="number" 
+              min="1"
+              max="999"
+              value={customMinutes}
+              onChange={(e) => setCustomMinutes(parseInt(e.target.value) || 0)}
+              className="w-20 px-3 py-1.5 rounded-lg bg-background border border-border focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-foreground text-center"
+              placeholder="Min"
+            />
+            <span className="text-slate text-sm font-medium">minutes</span>
+            <button 
+              type="submit"
+              className="px-4 py-1.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium shadow-sm"
+            >
+              Set
+            </button>
+          </motion.form>
+        )}
+      </AnimatePresence>
 
       <div className="flex items-center space-x-6">
         <button 
