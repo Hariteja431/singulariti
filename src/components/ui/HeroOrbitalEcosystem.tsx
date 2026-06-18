@@ -408,8 +408,8 @@ export default function HeroOrbitalEcosystem() {
               "w-full h-full rounded-full flex items-center justify-center relative backdrop-blur-md",
               "transition-all duration-500",
               isActive
-                ? "border-[1.5px] border-primary bg-primary shadow-[0_10px_25px_-5px_rgba(20,184,166,0.5)] dark:shadow-[0_0_40px_rgba(20,184,166,0.6),0_0_15px_rgba(20,184,166,0.4)_inset] scale-110"
-                : "border border-slate-200/60 dark:border-primary/40 bg-white/90 dark:bg-[#0a0a0a] shadow-sm hover:border-primary/50 dark:hover:border-primary hover:bg-primary/5 dark:group-hover:bg-primary/20 hover:shadow-md dark:group-hover:shadow-[0_0_25px_rgba(20,184,166,0.5),inset_0_0_10px_rgba(20,184,166,0.2)]",
+                ? "border-2 border-primary bg-primary shadow-[0_10px_25px_-5px_rgba(20,184,166,0.5)] dark:shadow-[0_0_40px_rgba(20,184,166,0.6),0_0_15px_rgba(20,184,166,0.4)_inset] scale-110"
+                : "border-2 border-primary/50 shadow-[0_4px_15px_rgba(20,184,166,0.1)] dark:border-primary/50 bg-white/95 dark:bg-[#0a0a0a] hover:border-primary/80 dark:hover:border-primary hover:bg-primary/5 dark:group-hover:bg-primary/20 hover:shadow-[0_8px_25px_rgba(20,184,166,0.15)] dark:group-hover:shadow-[0_0_25px_rgba(20,184,166,0.5),inset_0_0_10px_rgba(20,184,166,0.2)]",
             ].join(" ")}>
               {/* Teal Icons for all states */}
               <Icon
