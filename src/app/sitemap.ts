@@ -4,7 +4,7 @@ import { blogSeriesList, blogSubSeriesList, blogGuidesList } from '@/content/too
 import { getAllPosts } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://singulariti.in';
+  const baseUrl = 'https://www.singulariti.in';
 
   // Use current date for sitemap generation
   const lastModified = new Date();

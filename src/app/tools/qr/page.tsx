@@ -13,7 +13,7 @@ const seo = getPageSEO('category-qr')!;
 export const metadata = buildMetadata({
   title: seo.title,
   description: seo.description,
-  canonical: `https://singulariti.in${seo.path}`,
+  canonical: `https://www.singulariti.in${seo.path}`,
   robots: seo.robots,
   openGraph: {
     title: seo.openGraph.title,

@@ -8,7 +8,7 @@ const seo = getUtilitySEO('web-compiler');
 export const metadata = buildMetadata({
   title: seo?.title || 'HTML/CSS/JS Web Compiler | Singulariti',
   description: seo?.description || 'Write HTML, CSS, and JavaScript and see the results instantly in your browser.',
-  canonical: `https://singulariti.in/tools/dev/web-compiler`,
+  canonical: `https://www.singulariti.in/tools/dev/web-compiler`,
 });
 
 export default function WebCompilerPage() {

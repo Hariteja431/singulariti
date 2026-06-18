@@ -16,12 +16,12 @@ const seo = getPageSEO('blog')!;
 export const metadata = buildMetadata({
   title: "Blog | Singulariti Tool Guides",
   description: "Read simple Singulariti guides for PDF tools, image tools, developer utilities, SEO tools, calculators, converters, and everyday digital tasks.",
-  canonical: `https://singulariti.in/blog`,
+  canonical: `https://www.singulariti.in/blog`,
   robots: seo.robots,
   openGraph: {
     title: "Blog | Singulariti Tool Guides",
     description: "Read simple Singulariti guides for PDF tools, image tools, developer utilities, SEO tools, calculators, converters, and everyday digital tasks.",
-    url: "https://singulariti.in/blog",
+    url: "https://www.singulariti.in/blog",
     type: "website",
     image: seo.openGraph.image,
   },

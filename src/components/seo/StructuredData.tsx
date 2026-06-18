@@ -29,7 +29,7 @@ export function StructuredData({ breadcrumbs, softwareApp }: StructuredDataProps
                 "@type": "ListItem",
                 "position": index + 1,
                 "name": crumb.name,
-                "item": `https://singulariti.in${crumb.item}`
+                "item": `https://www.singulariti.in${crumb.item}`
               }))
             })
           }}

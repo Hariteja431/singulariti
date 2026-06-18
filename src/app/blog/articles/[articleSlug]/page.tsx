@@ -62,19 +62,19 @@ export default async function BlogPostPage({ params }: PageProps) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://singulariti.in"
+        "item": "https://www.singulariti.in"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Blog",
-        "item": "https://singulariti.in/blog"
+        "item": "https://www.singulariti.in/blog"
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": post.title,
-        "item": `https://singulariti.in/blog/articles/${post.slug}`
+        "item": `https://www.singulariti.in/blog/articles/${post.slug}`
       }
     ]
   };
@@ -84,7 +84,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     "@type": "BlogPosting",
     "headline": post.title,
     "description": post.metaDescription,
-    "image": post.featuredImage ? `https://singulariti.in${post.featuredImage}` : undefined,
+    "image": post.featuredImage ? `https://www.singulariti.in${post.featuredImage}` : undefined,
     "datePublished": post.publishedAt,
     "dateModified": post.updatedAt,
     "author": {
@@ -96,12 +96,12 @@ export default async function BlogPostPage({ params }: PageProps) {
       "name": "Singulariti",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://singulariti.in/favicon.ico"
+        "url": "https://www.singulariti.in/favicon.ico"
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://singulariti.in/blog/articles/${post.slug}`
+      "@id": `https://www.singulariti.in/blog/articles/${post.slug}`
     }
   };
 

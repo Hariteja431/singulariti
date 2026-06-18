@@ -16,21 +16,21 @@ const seo = {
   openGraph: {
     title: "Random Generators & Pickers | Singulariti",
     description: "Free online random tools. Use our wheel spinner, random number generator, and dice roller entirely in your browser.",
-    url: "https://singulariti.in/random",
+    url: "https://www.singulariti.in/random",
     type: "website" as const,
-    image: "https://singulariti.in/og/random.png",
+    image: "https://www.singulariti.in/og/random.png",
   },
   twitter: {
     title: "Random Generators & Pickers | Singulariti",
     description: "Free online random tools. Use our wheel spinner, random number generator, and dice roller entirely in your browser.",
-    image: "https://singulariti.in/og/random.png",
+    image: "https://www.singulariti.in/og/random.png",
   }
 };
 
 export const metadata = buildMetadata({
   title: seo.title,
   description: seo.description,
-  canonical: `https://singulariti.in${seo.path}`,
+  canonical: `https://www.singulariti.in${seo.path}`,
   robots: seo.robots,
   openGraph: seo.openGraph,
   twitter: seo.twitter,

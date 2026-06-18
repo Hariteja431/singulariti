@@ -10,7 +10,7 @@ const seo = getPageSEO('typing-speed-test')!;
 export const metadata = buildMetadata({
   title: seo.title,
   description: seo.description,
-  canonical: `https://singulariti.in${seo.path}`,
+  canonical: `https://www.singulariti.in${seo.path}`,
   robots: seo.robots,
   openGraph: {
     title: seo.openGraph.title,
@@ -32,7 +32,7 @@ export default function TypingSpeedTestPage() {
     '@type': 'WebPage',
     name: 'Typing Speed Test',
     description: 'Free online typing speed test to measure WPM and accuracy.',
-    url: 'https://singulariti.in/typing-speed-test',
+    url: 'https://www.singulariti.in/typing-speed-test',
     mainEntity: {
       '@type': 'SoftwareApplication',
       name: 'Singulariti Typing Speed Test',

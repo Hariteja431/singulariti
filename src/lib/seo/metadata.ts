@@ -95,8 +95,8 @@ export interface MetadataOptions {
   keywords?: string[] | string;
 }
 
-const BASE_URL = 'https://singulariti.in';
-const DEFAULT_OG_IMAGE = 'https://singulariti.in/og-fallback.png';
+const BASE_URL = 'https://www.singulariti.in';
+const DEFAULT_OG_IMAGE = 'https://www.singulariti.in/og-fallback.png';
 
 export function constructMetadata({
   title,
@@ -161,7 +161,7 @@ export function constructMetadata({
     title: finalTitle,
     description,
     keywords,
-    authors: [{ name: "Singulariti", url: "https://singulariti.in" }],
+    authors: [{ name: "Singulariti", url: "https://www.singulariti.in" }],
     alternates: {
       canonical: canonicalUrl,
     },
@@ -251,7 +251,7 @@ export function buildMetadata(input: BuildMetadataInput): Metadata {
     title: finalTitle,
     description: input.description,
     keywords: input.keywords,
-    authors: [{ name: "Singulariti", url: "https://singulariti.in" }],
+    authors: [{ name: "Singulariti", url: "https://www.singulariti.in" }],
     alternates: {
       canonical: input.canonical,
     },
@@ -265,7 +265,7 @@ export function buildMetadata(input: BuildMetadataInput): Metadata {
       type: input.openGraph?.type ?? "website",
       images: [
         {
-          url: input.openGraph?.image ?? "https://singulariti.in/og-fallback.png",
+          url: input.openGraph?.image ?? "https://www.singulariti.in/og-fallback.png",
           alt: titleString,
         }
       ],
@@ -276,7 +276,7 @@ export function buildMetadata(input: BuildMetadataInput): Metadata {
       creator: '@singulariti_in',
       title: input.twitter?.title ?? titleString,
       description: input.twitter?.description ?? input.description,
-      images: [input.twitter?.image ?? input.openGraph?.image ?? "https://singulariti.in/og-fallback.png"],
+      images: [input.twitter?.image ?? input.openGraph?.image ?? "https://www.singulariti.in/og-fallback.png"],
     },
   };
 }

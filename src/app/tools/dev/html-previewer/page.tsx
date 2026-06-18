@@ -9,7 +9,7 @@ const seo = getUtilitySEO('html-previewer');
 export const metadata = buildMetadata({
   title: seo?.title || 'Premium HTML Previewer | Singulariti',
   description: seo?.description || 'Render raw HTML code elements live in a safe frame with Monaco Editor.',
-  canonical: `https://singulariti.in/tools/dev/html-previewer`,
+  canonical: `https://www.singulariti.in/tools/dev/html-previewer`,
 });
 
 export default function HtmlPreviewerPage() {

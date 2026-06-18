@@ -22,12 +22,12 @@ export function SchemaJsonLd({ post }: SchemaJsonLdProps) {
       "name": "Singulariti",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://singulariti.in/favicon.ico"
+        "url": "https://www.singulariti.in/favicon.ico"
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://singulariti.in/blog/${post.categorySlug}/${post.slug}`
+      "@id": `https://www.singulariti.in/blog/${post.categorySlug}/${post.slug}`
     }
   };
 
@@ -39,25 +39,25 @@ export function SchemaJsonLd({ post }: SchemaJsonLdProps) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://singulariti.in"
+        "item": "https://www.singulariti.in"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Blog",
-        "item": "https://singulariti.in/blog"
+        "item": "https://www.singulariti.in/blog"
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": post.category,
-        "item": `https://singulariti.in/blog/${post.categorySlug}`
+        "item": `https://www.singulariti.in/blog/${post.categorySlug}`
       },
       {
         "@type": "ListItem",
         "position": 4,
         "name": post.title,
-        "item": `https://singulariti.in/blog/${post.categorySlug}/${post.slug}`
+        "item": `https://www.singulariti.in/blog/${post.categorySlug}/${post.slug}`
       }
     ]
   };

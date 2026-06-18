@@ -17,21 +17,21 @@ const seo = {
   openGraph: {
     title: "Media Tools | Singulariti",
     description: "Record audio, capture screen, and trim audio completely in the browser securely.",
-    url: "https://singulariti.in/media",
+    url: "https://www.singulariti.in/media",
     type: "website" as const,
-    image: "https://singulariti.in/og/media.png",
+    image: "https://www.singulariti.in/og/media.png",
   },
   twitter: {
     title: "Media Tools | Singulariti",
     description: "Record audio, capture screen, and trim audio completely in the browser securely.",
-    image: "https://singulariti.in/og/media.png",
+    image: "https://www.singulariti.in/og/media.png",
   }
 };
 
 export const metadata = buildMetadata({
   title: seo.title,
   description: seo.description,
-  canonical: `https://singulariti.in${seo.path}`,
+  canonical: `https://www.singulariti.in${seo.path}`,
   robots: seo.robots,
   openGraph: seo.openGraph,
   twitter: seo.twitter,

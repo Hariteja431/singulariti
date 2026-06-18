@@ -33,14 +33,14 @@ export function ToolContentBlock({ utilityId, article }: ToolContentBlockProps) 
                 "author": {
                   "@type": "Organization",
                   "name": "Singulariti Editorial Team",
-                  "url": "https://singulariti.in/editorial-policy"
+                  "url": "https://www.singulariti.in/editorial-policy"
                 },
                 "publisher": {
                   "@type": "Organization",
                   "name": "Singulariti Labs",
                   "logo": {
                     "@type": "ImageObject",
-                    "url": "https://singulariti.in/og-fallback.png"
+                    "url": "https://www.singulariti.in/og-fallback.png"
                   }
                 },
                 "datePublished": "2026-06-06",

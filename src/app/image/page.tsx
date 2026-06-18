@@ -11,7 +11,7 @@ const seo = getPageSEO('category-image')!;
 export const metadata = buildMetadata({
   title: "Image Tools | Singulariti",
   description: seo.description,
-  canonical: `https://singulariti.in${seo.path}`,
+  canonical: `https://www.singulariti.in${seo.path}`,
   robots: seo.robots,
   openGraph: {
     title: "Image Tools | Singulariti",

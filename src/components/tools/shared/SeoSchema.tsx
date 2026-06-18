@@ -30,7 +30,7 @@ export function SeoSchema({ name, description, section, canonical, collectionNam
     "operatingSystem": "Web Browser",
     "browserRequirements": "Requires JavaScript. Requires HTML5.",
     "softwareVersion": "1.0.0",
-    "image": "https://singulariti.in/og-fallback.png",
+    "image": "https://www.singulariti.in/og-fallback.png",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -39,10 +39,10 @@ export function SeoSchema({ name, description, section, canonical, collectionNam
     "publisher": {
       "@type": "Organization",
       "name": "Singulariti",
-      "url": "https://singulariti.in",
+      "url": "https://www.singulariti.in",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://singulariti.in/og-fallback.png"
+        "url": "https://www.singulariti.in/og-fallback.png"
       }
     },
     "featureList": "Browser-based processing, No file upload required, Instant results, Zero privacy risk, No registration needed",
@@ -68,14 +68,14 @@ export function SeoSchema({ name, description, section, canonical, collectionNam
   };
 
   const sectionSlug = getSectionSlug(section);
-  const sectionUrl = `https://singulariti.in/${sectionSlug}`;
+  const sectionUrl = `https://www.singulariti.in/${sectionSlug}`;
 
   const itemListElement = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://singulariti.in"
+      "item": "https://www.singulariti.in"
     },
     {
       "@type": "ListItem",

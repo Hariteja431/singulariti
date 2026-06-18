@@ -119,7 +119,7 @@ export default async function ToolPage(props: { params: Promise<{ collection: st
             section={seo.section}
             canonical={seo.canonical}
             collectionName={collection.name}
-            collectionUrl={`https://singulariti.in/image/${collection.id}`}
+            collectionUrl={`https://www.singulariti.in/image/${collection.id}`}
           />
         )}
       </main>
