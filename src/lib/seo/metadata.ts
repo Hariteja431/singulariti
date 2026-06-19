@@ -200,7 +200,7 @@ export function constructMetadata({
 export interface BuildMetadataInput {
   title: string;
   description: string;
-  canonical: string;
+  canonical?: string;
   keywords?: string[] | string;
   robots?: {
     index: boolean;
@@ -247,19 +247,16 @@ export function buildMetadata(input: BuildMetadataInput): Metadata {
         },
       };
 
-  return {
+  const metadata: Metadata = {
     title: finalTitle,
     description: input.description,
     keywords: input.keywords,
     authors: [{ name: "Singulariti", url: "https://www.singulariti.in" }],
-    alternates: {
-      canonical: input.canonical,
-    },
     robots: robotsConfig,
     openGraph: {
       title: input.openGraph?.title ?? titleString,
       description: input.openGraph?.description ?? input.description,
-      url: input.openGraph?.url ?? input.canonical,
+      url: input.openGraph?.url ?? input.canonical ?? "https://www.singulariti.in",
       siteName: 'Singulariti',
       locale: 'en_US',
       type: input.openGraph?.type ?? "website",
@@ -279,5 +276,13 @@ export function buildMetadata(input: BuildMetadataInput): Metadata {
       images: [input.twitter?.image ?? input.openGraph?.image ?? "https://www.singulariti.in/og-fallback.png"],
     },
   };
+
+  if (input.canonical) {
+    metadata.alternates = {
+      canonical: input.canonical,
+    };
+  }
+
+  return metadata;
 }
 

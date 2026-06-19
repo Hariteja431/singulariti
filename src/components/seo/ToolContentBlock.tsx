@@ -11,6 +11,9 @@ interface ToolContentBlockProps {
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
+const LAST_UPDATE_DATE = "2026-06-19";
+const LAST_UPDATE_DISPLAY = "Jun 19, 2026";
+
 export function ToolContentBlock({ utilityId, article }: ToolContentBlockProps) {
   const content = seoContentRegistry[utilityId];
 
@@ -44,7 +47,7 @@ export function ToolContentBlock({ utilityId, article }: ToolContentBlockProps) 
                   }
                 },
                 "datePublished": "2026-06-06",
-                "dateModified": new Date().toISOString().split('T')[0]
+                "dateModified": LAST_UPDATE_DATE
               })
             }}
           />
@@ -55,7 +58,7 @@ export function ToolContentBlock({ utilityId, article }: ToolContentBlockProps) 
                 <span className="font-medium text-ink">Singulariti Editorial Team</span>
               </div>
               <span>•</span>
-              <span>Updated {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+              <span>Updated {LAST_UPDATE_DISPLAY}</span>
             </div>
             <div className="prose prose-slate dark:prose-invert max-w-none text-slate prose-headings:font-display prose-headings:font-bold prose-headings:text-ink prose-strong:text-ink prose-p:font-sans prose-p:leading-relaxed prose-a:text-primary hover:prose-a:text-primary/80">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>

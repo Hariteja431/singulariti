@@ -27,6 +27,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.singulariti.in"),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: "Free Browser Utility Tools | Singulariti",
     template: "%s | Singulariti",

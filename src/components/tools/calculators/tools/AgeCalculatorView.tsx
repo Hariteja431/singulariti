@@ -16,12 +16,15 @@ interface AgeCalculatorViewProps {
 }
 
 export function AgeCalculatorView({toolId, title, description, article }: AgeCalculatorViewProps) {
-  const todayStr = new Date().toISOString().split('T')[0];
   const [dob, setDob] = useState<string>('');
-  const [currentDate, setCurrentDate] = useState<string>(todayStr);
+  const [currentDate, setCurrentDate] = useState<string>('');
   const [result, setResult] = useState<AgeResult | null>(null);
   
   const [errors, setErrors] = useState<{ dob?: string | null }>({});
+
+  React.useEffect(() => {
+    setCurrentDate(new Date().toISOString().split('T')[0]);
+  }, []);
 
   const handleCalculate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,7 +43,7 @@ export function AgeCalculatorView({toolId, title, description, article }: AgeCal
 
   const handleReset = () => {
     setDob('');
-    setCurrentDate(todayStr);
+    setCurrentDate(new Date().toISOString().split('T')[0]);
     setResult(null);
     setErrors({});
   };

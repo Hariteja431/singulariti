@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/blog/search', '/search', '/tools?q='],
+      disallow: ['/api/', '/search', '/blog/search'],
     },
     sitemap: 'https://www.singulariti.in/sitemap.xml',
   };

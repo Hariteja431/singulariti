@@ -15,9 +15,8 @@ interface DateDifferenceCalculatorViewProps {
 }
 
 export function DateDifferenceCalculatorView({toolId, title, description, article }: DateDifferenceCalculatorViewProps) {
-  const todayStr = new Date().toISOString().split('T')[0];
-  const [startDate, setStartDate] = useState<string>(todayStr);
-  const [endDate, setEndDate] = useState<string>(todayStr);
+  const [startDate, setStartDate] = useState<string>('');
+  const [endDate, setEndDate] = useState<string>('');
   const [includeEndDate, setIncludeEndDate] = useState<boolean>(false);
   const [result, setResult] = useState<{
     years: number;
@@ -32,6 +31,12 @@ export function DateDifferenceCalculatorView({toolId, title, description, articl
     startDate?: string | null;
     endDate?: string | null;
   }>({});
+
+  React.useEffect(() => {
+    const todayStr = new Date().toISOString().split('T')[0];
+    setStartDate(todayStr);
+    setEndDate(todayStr);
+  }, []);
 
   const handleCalculate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,6 +56,7 @@ export function DateDifferenceCalculatorView({toolId, title, description, articl
   };
 
   const handleReset = () => {
+    const todayStr = new Date().toISOString().split('T')[0];
     setStartDate(todayStr);
     setEndDate(todayStr);
     setIncludeEndDate(false);
