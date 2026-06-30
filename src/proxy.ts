@@ -3,7 +3,9 @@ import type { NextRequest } from 'next/server';
 
 export function proxy(request: NextRequest) {
   const hostname = request.headers.get('host') || '';
-  
+  const proto = request.headers.get('x-forwarded-proto') || 'https';
+  const url = request.nextUrl.clone();
+
   // Local development bypass check
   const isLocal = 
     hostname.includes('localhost') || 
@@ -12,11 +14,10 @@ export function proxy(request: NextRequest) {
     hostname.startsWith('10.') || 
     hostname.endsWith('.local');
 
-  if (!isLocal && hostname !== 'www.singulariti.in') {
-    const url = request.nextUrl.clone();
-    // Redirect to www.singulariti.in preserving the full path and search queries
+  // Permanent 301 Redirect for non-www and HTTP requests on production
+  if (!isLocal && (proto === 'http' || hostname !== 'www.singulariti.in')) {
     const targetUrl = `https://www.singulariti.in${url.pathname}${url.search}`;
-    return NextResponse.redirect(targetUrl, 308);
+    return NextResponse.redirect(targetUrl, 301);
   }
 
   // Pass current pathname to layouts and components via headers
@@ -30,7 +31,7 @@ export function proxy(request: NextRequest) {
   });
 }
 
-// Ensure proxy runs on all paths except Next.js internals, static files, and APIs
+// Ensure proxy runs on all paths except Next.js internals and static assets
 export const config = {
   matcher: [
     /*
@@ -38,9 +39,8 @@ export const config = {
      * - api (API routes)
      * - _next/static (static files)
      * - _next/image (image optimization files)
-     * - favicon.ico, sitemap.xml, robots.txt, ads.txt (metadata/static files)
-     * - public assets like .svg, .png, .jpg, .webmanifest
+     * - Static images, webmanifest, and internal worker files directly inside public/
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|ads.txt|.*\\.svg|.*\\.png|.*\\.jpg|.*\\.webmanifest).*)',
+    '/((?!api|_next/static|_next/image|.*\\.svg|.*\\.png|.*\\.jpg|.*\\.webmanifest|pdf.worker.min.mjs).*)',
   ],
 };

@@ -98,6 +98,24 @@ export interface MetadataOptions {
 const BASE_URL = 'https://www.singulariti.in';
 const DEFAULT_OG_IMAGE = 'https://www.singulariti.in/og-fallback.png';
 
+function sanitizeUrlToPreferred(urlStr: string | undefined): string | undefined {
+  if (!urlStr) return urlStr;
+  if (urlStr.startsWith('/')) {
+    return urlStr;
+  }
+  return urlStr
+    .replace(/^http:\/\/(www\.)?singulariti\.in/, 'https://www.singulariti.in')
+    .replace(/^https:\/\/singulariti\.in/, 'https://www.singulariti.in');
+}
+
+function makeRelativePath(urlStr: string | undefined): string | undefined {
+  if (!urlStr) return urlStr;
+  if (urlStr.startsWith('/')) {
+    return urlStr;
+  }
+  return urlStr.replace(/^https?:\/\/(www\.)?singulariti\.in/, '') || '/';
+}
+
 export function constructMetadata({
   title,
   description,
@@ -121,7 +139,7 @@ export function constructMetadata({
     cleanPath = '';
   }
 
-  const canonicalUrl = `${BASE_URL}${cleanPath}`;
+  const canonicalUrl = makeRelativePath(`${BASE_URL}${cleanPath}`) || '/';
   
   let robotsConfig;
   if (robots === 'noindex') {
@@ -152,7 +170,7 @@ export function constructMetadata({
   }
 
   const imageUrl = image
-    ? (image.startsWith('http') ? image : `${BASE_URL}${image}`)
+    ? (image.startsWith('http') ? sanitizeUrlToPreferred(image) : `${BASE_URL}${image}`)
     : DEFAULT_OG_IMAGE;
 
   const finalTitle = title.endsWith(' | Singulariti') ? { absolute: title } : title;
@@ -175,7 +193,7 @@ export function constructMetadata({
       type,
       images: [
         {
-          url: imageUrl,
+          url: sanitizeUrlToPreferred(imageUrl)!,
           width: 1200,
           height: 630,
           alt: typeof finalTitle === 'string' ? finalTitle : finalTitle.absolute,
@@ -192,7 +210,7 @@ export function constructMetadata({
       creator: '@singulariti_in',
       title: typeof finalTitle === 'string' ? finalTitle : finalTitle.absolute,
       description,
-      images: [imageUrl],
+      images: [sanitizeUrlToPreferred(imageUrl)!],
     },
   };
 }
@@ -247,6 +265,10 @@ export function buildMetadata(input: BuildMetadataInput): Metadata {
         },
       };
 
+  const canonicalPath = input.canonical ? makeRelativePath(input.canonical) : undefined;
+  const ogUrl = input.openGraph?.url ?? input.canonical ?? "/";
+  const relativeOgUrl = makeRelativePath(ogUrl) || '/';
+
   const metadata: Metadata = {
     title: finalTitle,
     description: input.description,
@@ -256,13 +278,13 @@ export function buildMetadata(input: BuildMetadataInput): Metadata {
     openGraph: {
       title: input.openGraph?.title ?? titleString,
       description: input.openGraph?.description ?? input.description,
-      url: input.openGraph?.url ?? input.canonical ?? "https://www.singulariti.in",
+      url: relativeOgUrl,
       siteName: 'Singulariti',
       locale: 'en_US',
       type: input.openGraph?.type ?? "website",
       images: [
         {
-          url: input.openGraph?.image ?? "https://www.singulariti.in/og-fallback.png",
+          url: sanitizeUrlToPreferred(input.openGraph?.image ?? "https://www.singulariti.in/og-fallback.png")!,
           alt: titleString,
         }
       ],
@@ -273,13 +295,13 @@ export function buildMetadata(input: BuildMetadataInput): Metadata {
       creator: '@singulariti_in',
       title: input.twitter?.title ?? titleString,
       description: input.twitter?.description ?? input.description,
-      images: [input.twitter?.image ?? input.openGraph?.image ?? "https://www.singulariti.in/og-fallback.png"],
+      images: [sanitizeUrlToPreferred(input.twitter?.image ?? input.openGraph?.image ?? "https://www.singulariti.in/og-fallback.png")!],
     },
   };
 
-  if (input.canonical) {
+  if (canonicalPath) {
     metadata.alternates = {
-      canonical: input.canonical,
+      canonical: canonicalPath,
     };
   }
 

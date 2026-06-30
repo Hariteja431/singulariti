@@ -25,38 +25,56 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://www.singulariti.in"),
-  alternates: {
-    canonical: "/",
-  },
-  title: {
-    default: "Free Browser Utility Tools | Singulariti",
-    template: "%s | Singulariti",
-  },
-  description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals. Zero uploads, absolute privacy.",
-  applicationName: "Singulariti",
-  manifest: "/manifest.webmanifest",
-  authors: [{ name: "Singulariti", url: "https://www.singulariti.in" }],
-  openGraph: {
-    title: "Online Utility Tools for PDF, Image, Text, Code, SEO and Calculations | Singulariti",
-    description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals.",
-    url: "https://www.singulariti.in",
-    siteName: "Singulariti",
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@singulariti_in",
-    creator: "@singulariti_in",
-    title: "Online Utility Tools for PDF, Image, Text, Code, SEO and Calculations | Singulariti",
-    description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals.",
-  },
-  verification: {
-    google: "pP-iBJEuqbqGuEA8zoxRm675DyStL_AVhrFuJrhSJWk",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = await headers();
+  const pathname = headersList.get('x-invoke-path') || '';
+
+  // Ensure clean pathname without trailing slash, unless it's the root
+  let cleanPath = pathname;
+  if (cleanPath && cleanPath !== '/') {
+    cleanPath = cleanPath.startsWith('/') ? cleanPath : `/${cleanPath}`;
+    if (cleanPath.endsWith('/')) {
+      cleanPath = cleanPath.slice(0, -1);
+    }
+  } else {
+    cleanPath = '';
+  }
+
+  const canonicalUrl = cleanPath || '/';
+
+  return {
+    metadataBase: new URL("https://www.singulariti.in"),
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    title: {
+      default: "Free Browser Utility Tools | Singulariti",
+      template: "%s | Singulariti",
+    },
+    description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals. Zero uploads, absolute privacy.",
+    applicationName: "Singulariti",
+    manifest: "/manifest.webmanifest",
+    authors: [{ name: "Singulariti", url: "https://www.singulariti.in" }],
+    openGraph: {
+      title: "Online Utility Tools for PDF, Image, Text, Code, SEO and Calculations | Singulariti",
+      description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals.",
+      url: `https://www.singulariti.in${cleanPath}`,
+      siteName: "Singulariti",
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@singulariti_in",
+      creator: "@singulariti_in",
+      title: "Online Utility Tools for PDF, Image, Text, Code, SEO and Calculations | Singulariti",
+      description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals.",
+    },
+    verification: {
+      google: "pP-iBJEuqbqGuEA8zoxRm675DyStL_AVhrFuJrhSJWk",
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
