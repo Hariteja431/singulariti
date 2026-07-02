@@ -1,12 +1,17 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import { Group as PanelGroup, Panel, Separator as PanelResizeHandle } from 'react-resizable-panels';
 import { useWebCompilerStore, LayoutMode } from '@/store/useCompilerStore';
-import { MonacoEditorWrapper } from '../shared/MonacoEditorWrapper';
 import { DevicePreviewFrame } from '../shared/DevicePreviewFrame';
 import { ConsoleOverlay } from '../shared/ConsoleOverlay';
 import { ToolLayout } from '../shared/ToolLayout';
+
+const MonacoEditorWrapper = dynamic(
+  () => import('../shared/MonacoEditorWrapper').then(mod => mod.MonacoEditorWrapper),
+  { ssr: false, loading: () => <div className="flex w-full h-full items-center justify-center text-slate text-sm">Loading Editor...</div> }
+);
 import { Play, Download, Upload, Layout, FileJson, Settings2, Trash2, Eraser, AlignLeft } from 'lucide-react';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';

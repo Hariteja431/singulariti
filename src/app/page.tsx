@@ -256,15 +256,15 @@ export default function Home() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
             <div>
-              <h4 className="font-display font-bold text-[17px] text-ink mb-2">1. Total Privacy</h4>
+              <h3 className="font-display font-bold text-[17px] text-ink mb-2">1. Total Privacy</h3>
               <p className="text-[13px] text-slate font-sans">Your files never leave your device. No uploads means zero risk of data leaks.</p>
             </div>
             <div>
-              <h4 className="font-display font-bold text-[17px] text-ink mb-2">2. Blazing Fast</h4>
+              <h3 className="font-display font-bold text-[17px] text-ink mb-2">2. Blazing Fast</h3>
               <p className="text-[13px] text-slate font-sans">Skip the upload and download times. Processing starts instantly.</p>
             </div>
             <div>
-              <h4 className="font-display font-bold text-[17px] text-ink mb-2">3. Zero Limits</h4>
+              <h3 className="font-display font-bold text-[17px] text-ink mb-2">3. Zero Limits</h3>
               <p className="text-[13px] text-slate font-sans">No arbitrary file size limits or wait queues. Use the full power of your machine.</p>
             </div>
           </div>

@@ -87,6 +87,7 @@ export function BlogCard({ post }: BlogCardProps) {
             src={imageUrl} 
             alt={post.imageAlt || `Illustration for ${post.title}`}
             className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            loading="lazy"
           />
         )}
       </div>
@@ -111,9 +112,9 @@ export function BlogCard({ post }: BlogCardProps) {
 
           {/* Title */}
           <Link href={post.url} className="block">
-            <h4 className="line-clamp-2 text-lg font-semibold text-slate-900 hover:text-teal-700 dark:text-white dark:hover:text-teal-300 transition-colors duration-200">
+            <h2 className="line-clamp-2 text-lg font-semibold text-slate-900 hover:text-teal-700 dark:text-white dark:hover:text-teal-300 transition-colors duration-200">
               {post.title}
-            </h4>
+            </h2>
           </Link>
 
           {/* Excerpt */}

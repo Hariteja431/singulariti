@@ -2,11 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { Search, Sun, Moon, Home, Wrench, LayoutGrid, FileText } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { CommandPalette } from '../ui/CommandPalette';
 import { Logo } from '../ui/Logo';
 import { NavBar } from '../ui/tubelight-navbar';
+
+const CommandPalette = dynamic(
+  () => import('../ui/CommandPalette').then(mod => mod.CommandPalette),
+  { ssr: false }
+);
 
 const navItems = [
   { name: 'Home', url: '/', icon: Home },
@@ -55,7 +60,7 @@ export function Header() {
           
           {/* Left: Logo */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center" aria-label="Singulariti Homepage">
               <Logo />
             </Link>
           </div>
@@ -71,6 +76,7 @@ export function Header() {
               onClick={() => setIsSearchOpen(true)}
               suppressHydrationWarning
               className="hidden lg:flex items-center bg-background border border-border rounded-full px-3 py-1.5 text-slate w-48 hover:border-slate transition-colors text-left"
+              aria-label="Open search command palette"
             >
               <Search className="w-4 h-4 mr-2" />
               <span className="text-[13px] flex-1">Search...</span>
@@ -98,7 +104,9 @@ export function Header() {
         </div>
       </header>
       
-      <CommandPalette isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      {isSearchOpen && (
+        <CommandPalette isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      )}
     </>
   );
 }

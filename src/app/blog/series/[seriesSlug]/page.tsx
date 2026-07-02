@@ -145,7 +145,7 @@ export default async function SeriesDetailsPage({ params, searchParams }: PagePr
               
               {postGuide && postGuide.sections.whatThisToolDoes && (
                 <section className="bg-surface border border-border p-6 rounded-2xl space-y-2.5 shadow-xs">
-                  <h3 className="font-display font-bold text-xs text-slate uppercase tracking-wider">Functional Context & Purpose</h3>
+                  <h2 className="font-display font-bold text-xs text-slate uppercase tracking-wider">Functional Context & Purpose</h2>
                   <p className="text-xs text-slate leading-relaxed">{postGuide.sections.whatThisToolDoes}</p>
                 </section>
               )}

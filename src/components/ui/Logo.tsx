@@ -14,6 +14,7 @@ export function Logo({ className = '', showText = true }: LogoProps) {
         className="w-8 h-8 shrink-0 overflow-visible" 
         fill="none" 
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
       >
         {/* Faces for 3D effect */}
         <polygon points="50,10 15,85 50,60" className="fill-slate opacity-10" />

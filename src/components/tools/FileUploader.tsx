@@ -94,9 +94,9 @@ export function FileUploader({
         </p>
         
         <div className="flex justify-center pointer-events-none">
-          <Button variant="primary" size="lg" className="w-full max-w-xs">
+          <div className="inline-flex items-center justify-center font-sans font-medium transition-all bg-primary text-dark h-12 px-6 text-[17px] rounded-lg w-full max-w-xs">
             Choose {multiple ? 'Files' : 'File'}
-          </Button>
+          </div>
         </div>
         
         <div className="mt-6 flex flex-col items-center justify-center gap-2 text-[13px] font-sans text-slate pointer-events-none">

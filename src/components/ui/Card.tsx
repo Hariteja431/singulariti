@@ -25,7 +25,7 @@ export function Card({ title, description, icon, href, badge }: CardProps) {
           )}
         </div>
         
-        <h3 className="font-display font-bold text-[17px] text-ink mb-2 group-hover:text-primary transition-colors">
+        <h3 className="font-display font-bold text-[17px] text-ink mb-2 group-hover:text-primary-text transition-colors">
           {title}
         </h3>
         
@@ -33,7 +33,7 @@ export function Card({ title, description, icon, href, badge }: CardProps) {
           {description}
         </p>
         
-        <div className="mt-auto flex items-center text-[13px] font-medium text-primary opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
+        <div className="mt-auto flex items-center text-[13px] font-medium text-primary-text opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
           Open Tool <ArrowRight className="ml-1 w-4 h-4" />
         </div>
       </div>

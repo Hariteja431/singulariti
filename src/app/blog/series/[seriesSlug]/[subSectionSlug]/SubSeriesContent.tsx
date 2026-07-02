@@ -92,9 +92,9 @@ export function SubSeriesContent({ seriesSlug, subSectionSlug, page }: SubSeries
           {/* Sibling Subsections Widget */}
           {siblingSubsections.length > 0 && (
             <div className="bg-surface border border-border p-5 rounded-2xl space-y-3.5 shadow-sm">
-              <h3 className="font-display font-bold text-xs text-slate uppercase tracking-wider border-b border-border pb-2.5">
+              <h2 className="font-display font-bold text-xs text-slate uppercase tracking-wider border-b border-border pb-2.5">
                 Other {series.name} Groups
-              </h3>
+              </h2>
               <ul className="space-y-2 text-xs font-sans">
                 {siblingSubsections.map(sib => (
                   <li key={sib.id}>
@@ -128,9 +128,9 @@ export function SubSeriesContent({ seriesSlug, subSectionSlug, page }: SubSeries
                   >
                     <div className="space-y-3">
                       <div className="flex items-center justify-between gap-2">
-                        <h4 className="font-display font-bold text-base text-ink leading-snug">
+                        <h3 className="font-display font-bold text-base text-ink leading-snug">
                           {tool?.name || guide.title}
-                        </h4>
+                        </h3>
                         {tool?.runsInBrowser && (
                           <span className="text-[9px] font-sans font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full flex-shrink-0">
                             Local Browser

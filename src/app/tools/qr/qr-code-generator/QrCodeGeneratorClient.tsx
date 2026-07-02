@@ -288,7 +288,7 @@ export function QrCodeGeneratorClient({
       onClearError={() => setError(null)}
       article={article}
     >
-      <div className="bg-surface border border-border rounded-xl p-6 md:p-8 shadow-sm">
+      <div className="bg-surface border border-border rounded-2xl p-6 md:p-8 shadow-sm">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           

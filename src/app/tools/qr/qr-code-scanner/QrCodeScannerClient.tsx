@@ -315,7 +315,7 @@ export function QrCodeScannerClient({ article }: { article?: string } = {}) {
       onClearError={() => setError(null)}
       article={article}
     >
-      <div className="bg-surface border border-border rounded-xl p-6 md:p-8 shadow-sm">
+      <div className="bg-surface border border-border rounded-2xl p-6 md:p-8 shadow-sm">
         
         {/* Scanner Modes tabs */}
         <div className="flex bg-background border border-border rounded-xl p-1 mb-8 max-w-md mx-auto">

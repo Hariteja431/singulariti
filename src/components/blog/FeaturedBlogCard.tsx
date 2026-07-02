@@ -84,6 +84,7 @@ export default function FeaturedBlogCard({ post }: FeaturedBlogCardProps) {
             src={imageUrl} 
             alt={post.imageAlt || `Illustration for ${post.title}`}
             className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            loading="lazy"
           />
         )}
       </div>

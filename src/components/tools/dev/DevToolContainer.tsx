@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import { ToolLayout } from '../shared/ToolLayout';
 import { TextBox } from '../shared/TextBox';
 import { ResultBox } from '../shared/ResultBox';
@@ -8,9 +9,13 @@ import { Button } from '@/components/ui/Button';
 import { format as formatSql } from 'sql-formatter';
 import { sanitizeHtml } from '@/lib/sanitization';
 import { useHtmlPreviewerStore } from '@/store/useCompilerStore';
-import { MonacoEditorWrapper } from '../shared/MonacoEditorWrapper';
 import { DevicePreviewFrame } from '../shared/DevicePreviewFrame';
 import { Group as PanelGroup, Panel, Separator as PanelResizeHandle } from 'react-resizable-panels';
+
+const MonacoEditorWrapper = dynamic(
+  () => import('../shared/MonacoEditorWrapper').then(mod => mod.MonacoEditorWrapper),
+  { ssr: false, loading: () => <div className="flex w-full h-full items-center justify-center text-slate text-sm">Loading Editor...</div> }
+);
 import { Play, Download, Layout, FileJson, AlignLeft, Image as ImageIcon } from 'lucide-react';
 import { saveAs } from 'file-saver';
 import { getDevContent } from './devContent';

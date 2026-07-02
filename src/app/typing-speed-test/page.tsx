@@ -1,10 +1,15 @@
 import React from 'react';
-import { TypingTestContainer } from '@/components/typing/TypingTestContainer';
+import dynamic from 'next/dynamic';
 import { TypingSeoContent } from '@/components/typing/TypingSeoContent';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { getPageSEO } from '@/lib/seo/pageMetadata';
+
+const TypingTestContainer = dynamic(
+  () => import('@/components/typing/TypingTestContainer').then(mod => mod.TypingTestContainer),
+  { loading: () => <div className="w-full flex items-center justify-center min-h-[40vh]"><div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div></div> }
+);
 
 const seo = getPageSEO('typing-speed-test')!;
 export const metadata = buildMetadata({

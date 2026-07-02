@@ -23,7 +23,7 @@ export function AdsenseScript() {
       async
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${formattedPubId}`}
       crossOrigin="anonymous"
-      strategy="afterInteractive"
+      strategy="lazyOnload"
     />
   );
 }

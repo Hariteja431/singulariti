@@ -394,7 +394,7 @@ export default function HeroOrbitalEcosystem() {
             key={node.id}
             id={`orbit-node-${node.id}`}
             className="absolute top-0 left-0 w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] cursor-pointer group"
-            style={{ willChange: "transform, opacity" }}
+            style={{ willChange: "transform, opacity", opacity: mounted ? 1 : 0, transition: "opacity 0.3s ease-in" }}
             onClick={e => { e.stopPropagation(); toggle(node.id); }}
           >
             {/* Ping Ring */}

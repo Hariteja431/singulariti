@@ -21,7 +21,7 @@ export function Footer() {
                 href="https://www.youtube.com/@singulariti_in" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-slate hover:text-primary transition-colors duration-200"
+                className="text-slate hover:text-primary-text transition-colors duration-200"
                 aria-label="YouTube"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -32,7 +32,7 @@ export function Footer() {
                 href="https://www.instagram.com/singulariti.in?igsh=cml2ZjI3c2ZwZHdw" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-slate hover:text-primary transition-colors duration-200"
+                className="text-slate hover:text-primary-text transition-colors duration-200"
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -45,7 +45,7 @@ export function Footer() {
                 href="https://x.com/singulariti_in" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-slate hover:text-primary transition-colors duration-200"
+                className="text-slate hover:text-primary-text transition-colors duration-200"
                 aria-label="X (formerly Twitter)"
               >
                 <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor">
@@ -56,7 +56,7 @@ export function Footer() {
                 href="https://www.reddit.com/user/singulariti_in/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-slate hover:text-primary transition-colors duration-200"
+                className="text-slate hover:text-primary-text transition-colors duration-200"
                 aria-label="Reddit"
               >
                 <svg className="w-[19px] h-[19px]" viewBox="0 0 24 24" fill="currentColor">
@@ -67,40 +67,40 @@ export function Footer() {
           </div>
           
           <div>
-            <h4 className="font-display font-bold text-[15px] text-ink mb-4">Ecosystem</h4>
+            <h3 className="font-display font-bold text-[15px] text-ink mb-4">Ecosystem</h3>
             <nav className="space-y-2 flex flex-col" aria-label="Ecosystem">
-              <Link href="/tools/pdf" className="text-[13px] text-slate hover:text-primary transition-colors">PDF Tools</Link>
-              <Link href="/image" className="text-[13px] text-slate hover:text-primary transition-colors">Image Tools</Link>
-              <Link href="/tools/text" className="text-[13px] text-slate hover:text-primary transition-colors">Text Tools</Link>
-              <Link href="/tools/dev" className="text-[13px] text-slate hover:text-primary transition-colors">Developer Tools</Link>
-              <Link href="/tools/calculators" className="text-[13px] text-slate hover:text-primary transition-colors">Calculators</Link>
-              <Link href="/tools/convert" className="text-[13px] text-slate hover:text-primary transition-colors">Converters</Link>
-              <Link href="/tools/qr" className="text-[13px] text-slate hover:text-primary transition-colors">QR Tools</Link>
-              <Link href="/tools/seo" className="text-[13px] text-slate hover:text-primary transition-colors">SEO Tools</Link>
-              <Link href="/pomodoro-timer" className="text-[13px] text-slate hover:text-primary transition-colors">Pomodoro Timer</Link>
-              <Link href="/typing-speed-test" className="text-[13px] text-slate hover:text-primary transition-colors">Typing Speed Test</Link>
+              <Link href="/tools/pdf" className="text-[13px] text-slate hover:text-primary-text transition-colors">PDF Tools</Link>
+              <Link href="/image" className="text-[13px] text-slate hover:text-primary-text transition-colors">Image Tools</Link>
+              <Link href="/tools/text" className="text-[13px] text-slate hover:text-primary-text transition-colors">Text Tools</Link>
+              <Link href="/tools/dev" className="text-[13px] text-slate hover:text-primary-text transition-colors">Developer Tools</Link>
+              <Link href="/tools/calculators" className="text-[13px] text-slate hover:text-primary-text transition-colors">Calculators</Link>
+              <Link href="/tools/convert" className="text-[13px] text-slate hover:text-primary-text transition-colors">Converters</Link>
+              <Link href="/tools/qr" className="text-[13px] text-slate hover:text-primary-text transition-colors">QR Tools</Link>
+              <Link href="/tools/seo" className="text-[13px] text-slate hover:text-primary-text transition-colors">SEO Tools</Link>
+              <Link href="/pomodoro-timer" className="text-[13px] text-slate hover:text-primary-text transition-colors">Pomodoro Timer</Link>
+              <Link href="/typing-speed-test" className="text-[13px] text-slate hover:text-primary-text transition-colors">Typing Speed Test</Link>
             </nav>
           </div>
           
           <div>
-            <h4 className="font-display font-bold text-[15px] text-ink mb-4">Company</h4>
+            <h3 className="font-display font-bold text-[15px] text-ink mb-4">Company</h3>
             <nav className="space-y-2 flex flex-col" aria-label="Company">
-              <Link href="/about" className="text-[13px] text-slate hover:text-primary transition-colors">About</Link>
-              <Link href="/blog" className="text-[13px] text-slate hover:text-primary transition-colors">Blog</Link>
-              <Link href="/contact" className="text-[13px] text-slate hover:text-primary transition-colors">Contact</Link>
-              <Link href="/feedback" className="text-[13px] text-slate hover:text-primary transition-colors">Feedback & Requests</Link>
-              <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="text-[13px] text-slate hover:text-primary transition-colors">Sitemap</a>
+              <Link href="/about" className="text-[13px] text-slate hover:text-primary-text transition-colors">About</Link>
+              <Link href="/blog" className="text-[13px] text-slate hover:text-primary-text transition-colors">Blog</Link>
+              <Link href="/contact" className="text-[13px] text-slate hover:text-primary-text transition-colors">Contact</Link>
+              <Link href="/feedback" className="text-[13px] text-slate hover:text-primary-text transition-colors">Feedback & Requests</Link>
+              <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="text-[13px] text-slate hover:text-primary-text transition-colors">Sitemap</a>
             </nav>
           </div>
           
           <div>
-            <h4 className="font-display font-bold text-[15px] text-ink mb-4">Legal</h4>
+            <h3 className="font-display font-bold text-[15px] text-ink mb-4">Legal</h3>
             <nav className="space-y-2 flex flex-col" aria-label="Legal">
-              <Link href="/privacy" className="text-[13px] text-slate hover:text-primary transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="text-[13px] text-slate hover:text-primary transition-colors">Terms of Service</Link>
-              <Link href="/cookie-policy" className="text-[13px] text-slate hover:text-primary transition-colors">Cookie Policy</Link>
-              <Link href="/editorial-policy" className="text-[13px] text-slate hover:text-primary transition-colors">Editorial Policy</Link>
-              <Link href="/disclaimer" className="text-[13px] text-slate hover:text-primary transition-colors">Disclaimer</Link>
+              <Link href="/privacy" className="text-[13px] text-slate hover:text-primary-text transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="text-[13px] text-slate hover:text-primary-text transition-colors">Terms of Service</Link>
+              <Link href="/cookie-policy" className="text-[13px] text-slate hover:text-primary-text transition-colors">Cookie Policy</Link>
+              <Link href="/editorial-policy" className="text-[13px] text-slate hover:text-primary-text transition-colors">Editorial Policy</Link>
+              <Link href="/disclaimer" className="text-[13px] text-slate hover:text-primary-text transition-colors">Disclaimer</Link>
             </nav>
           </div>
         </div>

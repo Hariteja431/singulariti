@@ -10,10 +10,10 @@ interface SimilarTopicsSidebarProps {
 export function SimilarTopicsSidebar({ currentSeriesId }: SimilarTopicsSidebarProps) {
   return (
     <div className="bg-surface border border-border p-6 rounded-2xl space-y-4 shadow-sm">
-      <h3 className="font-display font-bold text-xs text-slate uppercase tracking-wider flex items-center gap-1.5 border-b border-border pb-3">
+      <h2 className="font-display font-bold text-xs text-slate uppercase tracking-wider flex items-center gap-1.5 border-b border-border pb-3">
         <BookOpen className="w-4 h-4 text-primary" />
         Similar Topics
-      </h3>
+      </h2>
       
       {/* Desktop Vertical List / Mobile Horizontal Scroll */}
       <nav className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0 scrollbar-none whitespace-nowrap lg:whitespace-normal">

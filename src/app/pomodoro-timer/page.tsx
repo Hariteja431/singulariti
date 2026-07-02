@@ -1,9 +1,14 @@
 import React from 'react';
-import PomodoroContainer from '@/components/pomodoro/PomodoroContainer';
+import dynamic from 'next/dynamic';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { getPageSEO } from '@/lib/seo/pageMetadata';
+
+const PomodoroContainer = dynamic(
+  () => import('@/components/pomodoro/PomodoroContainer'),
+  { loading: () => <div className="w-full flex items-center justify-center min-h-[40vh]"><div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div></div> }
+);
 
 const seo = getPageSEO('pomodoro-timer')!;
 export const metadata = buildMetadata({

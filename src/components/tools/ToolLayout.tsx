@@ -145,7 +145,7 @@ export function ToolLayout({
 
         {/* Privacy Lock Banner */}
         <section className="container mx-auto px-4 md:px-6 max-w-5xl mb-8">
-          <div className="flex items-center gap-3 bg-primary/5 border border-primary/10 rounded-xl p-4 text-primary max-w-3xl mx-auto">
+          <div className="flex items-center gap-3 bg-primary/5 border border-primary/10 rounded-xl p-4 text-primary-text max-w-3xl mx-auto">
             <ShieldCheck className="w-5 h-5 flex-shrink-0" />
             <p className="text-[13px] font-sans font-medium leading-relaxed">
               {privacyLabel || (() => {
@@ -207,7 +207,7 @@ export function ToolLayout({
         <section className="container mx-auto px-4 md:px-6 max-w-4xl mt-12 space-y-12">
           {/* Article / Comprehensive Content */}
           {article && (
-            <div className="bg-surface/50 border border-border/60 rounded-2xl p-6 md:p-8 prose prose-slate dark:prose-invert max-w-none text-slate prose-headings:font-display prose-headings:font-bold prose-headings:text-ink prose-strong:text-ink prose-p:font-sans prose-p:leading-relaxed prose-a:text-primary hover:prose-a:text-primary/80">
+            <div className="bg-surface/50 border border-border/60 rounded-2xl p-6 md:p-8 prose prose-slate dark:prose-invert max-w-none text-slate prose-headings:font-display prose-headings:font-bold prose-headings:text-ink prose-strong:text-ink prose-p:font-sans prose-p:leading-relaxed prose-a:text-primary-text hover:prose-a:text-primary-text/80">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {article}
               </ReactMarkdown>
@@ -221,7 +221,7 @@ export function ToolLayout({
               <ol className="space-y-4">
                 {howToUse.map((step, i) => (
                   <li key={i} className="flex gap-4 font-sans text-sm text-slate">
-                    <span className="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary font-bold text-xs">
+                    <span className="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary-text font-bold text-xs">
                       {i + 1}
                     </span>
                     <span className="pt-0.5">{step}</span>
@@ -240,7 +240,7 @@ export function ToolLayout({
                   <div key={i} className="border border-border bg-surface rounded-xl overflow-hidden transition-colors">
                     <button
                       onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                      className="w-full flex items-center justify-between p-5 text-left font-display font-bold text-[15px] text-ink hover:text-primary transition-colors focus:outline-none"
+                      className="w-full flex items-center justify-between p-5 text-left font-display font-bold text-[15px] text-ink hover:text-primary-text transition-colors focus:outline-none"
                     >
                       <span>{faq.question}</span>
                       <span className="text-slate flex-shrink-0 text-xl font-light">
