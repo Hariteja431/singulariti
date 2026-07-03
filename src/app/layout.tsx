@@ -43,7 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
     cleanPath = '';
   }
 
-  const canonicalUrl = cleanPath || '/';
+  const canonicalUrl = `https://www.singulariti.in${cleanPath || '/'}`;
 
   return {
     metadataBase: new URL("https://www.singulariti.in"),

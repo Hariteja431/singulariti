@@ -5,6 +5,8 @@
  * DESCRIPTION: Unique, 120-155 characters. Must mention it's free, browser-based, and has zero privacy risk/no server uploads.
  * OG IMAGE: Always use "https://www.singulariti.in/og-fallback.png" unless a specific image exists in /public/og/[category].png.
  */
+import { registry } from '@/registry';
+
 export type UtilitySEO = {
   utilityId: string;
   name: string;
@@ -4896,5 +4898,56 @@ export const utilityMetadataRegistry: Record<string, UtilitySEO> = {
 };
 
 export function getUtilitySEO(id: string): UtilitySEO | undefined {
-  return utilityMetadataRegistry[id];
+  let item = utilityMetadataRegistry[id];
+  if (!item) {
+    let foundTool = null;
+    let foundCategory = null;
+    let foundCollection = null;
+    
+    for (const cat of registry.categories) {
+      for (const col of cat.collections) {
+        const t = col.tools.find(x => x.id === id);
+        if (t) {
+          foundTool = t;
+          foundCategory = cat;
+          foundCollection = col;
+          break;
+        }
+      }
+      if (foundTool) break;
+    }
+    
+    if (foundTool) {
+      const canonical = `https://www.singulariti.in${foundTool.path}`;
+      item = {
+        utilityId: foundTool.id,
+        name: foundTool.name,
+        section: foundCategory?.name || '',
+        subSection: foundCollection?.name || '',
+        url: foundTool.path,
+        title: foundTool.seoTitle || `${foundTool.name} — Free Online Tool | Singulariti`,
+        description: foundTool.seoDescription || foundTool.description,
+        canonical: canonical,
+        robots: {
+          index: true,
+          follow: true
+        },
+        openGraph: {
+          title: foundTool.seoTitle || `${foundTool.name} — Free Online Tool | Singulariti`,
+          description: foundTool.seoDescription || foundTool.description,
+          url: canonical,
+          type: "website",
+          image: "https://www.singulariti.in/og-fallback.png"
+        },
+        twitter: {
+          card: "summary_large_image",
+          title: foundTool.seoTitle || `${foundTool.name} — Free Online Tool | Singulariti`,
+          description: foundTool.seoDescription || foundTool.description,
+          image: "https://www.singulariti.in/og-fallback.png"
+        },
+        schemaType: "WebApplication"
+      };
+    }
+  }
+  return item;
 }

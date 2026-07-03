@@ -100,12 +100,24 @@ const DEFAULT_OG_IMAGE = 'https://www.singulariti.in/og-fallback.png';
 
 function sanitizeUrlToPreferred(urlStr: string | undefined): string | undefined {
   if (!urlStr) return urlStr;
-  if (urlStr.startsWith('/')) {
-    return urlStr;
+  let res = urlStr;
+  if (res.startsWith('/')) {
+    res = `https://www.singulariti.in${res}`;
+  } else {
+    res = res
+      .replace(/^http:\/\/(www\.)?singulariti\.in/, 'https://www.singulariti.in')
+      .replace(/^https:\/\/singulariti\.in/, 'https://www.singulariti.in');
   }
-  return urlStr
-    .replace(/^http:\/\/(www\.)?singulariti\.in/, 'https://www.singulariti.in')
-    .replace(/^https:\/\/singulariti\.in/, 'https://www.singulariti.in');
+
+  // Ensure trailing slash is stripped for all URLs except the root domain
+  if (res !== 'https://www.singulariti.in/' && res !== 'https://www.singulariti.in') {
+    if (res.endsWith('/')) {
+      res = res.slice(0, -1);
+    }
+  } else {
+    res = 'https://www.singulariti.in/';
+  }
+  return res;
 }
 
 function makeRelativePath(urlStr: string | undefined): string | undefined {
@@ -139,7 +151,7 @@ export function constructMetadata({
     cleanPath = '';
   }
 
-  const canonicalUrl = makeRelativePath(`${BASE_URL}${cleanPath}`) || '/';
+  const canonicalUrl = sanitizeUrlToPreferred(`${BASE_URL}${cleanPath}`) || 'https://www.singulariti.in/';
   
   let robotsConfig;
   if (robots === 'noindex') {
@@ -265,9 +277,9 @@ export function buildMetadata(input: BuildMetadataInput): Metadata {
         },
       };
 
-  const canonicalPath = input.canonical ? makeRelativePath(input.canonical) : undefined;
+  const canonicalPath = input.canonical ? sanitizeUrlToPreferred(input.canonical) : undefined;
   const ogUrl = input.openGraph?.url ?? input.canonical ?? "/";
-  const relativeOgUrl = makeRelativePath(ogUrl) || '/';
+  const absoluteOgUrl = sanitizeUrlToPreferred(ogUrl) || 'https://www.singulariti.in/';
 
   const metadata: Metadata = {
     title: finalTitle,
@@ -278,7 +290,7 @@ export function buildMetadata(input: BuildMetadataInput): Metadata {
     openGraph: {
       title: input.openGraph?.title ?? titleString,
       description: input.openGraph?.description ?? input.description,
-      url: relativeOgUrl,
+      url: absoluteOgUrl,
       siteName: 'Singulariti',
       locale: 'en_US',
       type: input.openGraph?.type ?? "website",
