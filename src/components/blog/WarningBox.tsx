@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { AlertTriangle } from 'lucide-react';
-import DOMPurify from 'dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 
 interface WarningBoxProps {
   heading: string;

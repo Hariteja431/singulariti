@@ -5,7 +5,7 @@ import { ExampleBox } from './ExampleBox';
 import { TipBox } from './TipBox';
 import { WarningBox } from './WarningBox';
 import { ListChecks, BookOpen, Layers } from 'lucide-react';
-import DOMPurify from 'dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 
 interface BlogSectionProps {
   section: {

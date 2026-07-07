@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
-import DOMPurify from 'dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 
 interface FAQItem {
   question: string;

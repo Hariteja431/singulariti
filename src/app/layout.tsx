@@ -8,7 +8,7 @@ import { DynamicStructuredData } from "@/components/seo/DynamicStructuredData";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { AdsenseScript } from "@/components/seo/AdsenseScript";
 import { Analytics } from "@vercel/analytics/next";
-import { headers } from "next/headers";
+
 
 const syne = Syne({
   variable: "--font-syne",
@@ -29,27 +29,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const headersList = await headers();
-  const pathname = headersList.get('x-invoke-path') || '';
-
-  // Ensure clean pathname without trailing slash, unless it's the root
-  let cleanPath = pathname;
-  if (cleanPath && cleanPath !== '/') {
-    cleanPath = cleanPath.startsWith('/') ? cleanPath : `/${cleanPath}`;
-    if (cleanPath.endsWith('/')) {
-      cleanPath = cleanPath.slice(0, -1);
-    }
-  } else {
-    cleanPath = '';
-  }
-
-  const canonicalUrl = `https://www.singulariti.in${cleanPath || '/'}`;
-
   return {
     metadataBase: new URL("https://www.singulariti.in"),
-    alternates: {
-      canonical: canonicalUrl,
-    },
     title: {
       default: "Free Browser Utility Tools | Singulariti",
       template: "%s | Singulariti",
@@ -61,7 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: "Online Utility Tools for PDF, Image, Text, Code, SEO and Calculations | Singulariti",
       description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals.",
-      url: `https://www.singulariti.in${cleanPath}`,
+      url: "https://www.singulariti.in",
       siteName: "Singulariti",
       locale: "en_US",
       type: "website",
@@ -79,14 +60,11 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headersList = await headers();
-  const pathname = headersList.get('x-invoke-path') || '';
-
   return (
     <html
       lang="en"
@@ -152,7 +130,7 @@ export default async function RootLayout({
             })
           }}
         />
-        <DynamicStructuredData pathname={pathname} />
+        <DynamicStructuredData />
         <AdsenseScript />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />

@@ -17,7 +17,7 @@ import {
   AlertTriangle, 
   Settings 
 } from 'lucide-react';
-import DOMPurify from 'dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 
 interface BlogArticleProps {
   post: any;
