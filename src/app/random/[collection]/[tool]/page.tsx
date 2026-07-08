@@ -8,10 +8,7 @@ import { RandomEngine } from '@/components/tool/RandomEngine';
 import { getToolByPath, getCategoryById } from '@/registry';
 import { SeoSchema } from '@/components/tools/shared/SeoSchema';
 import { getUtilitySEO } from '@/lib/seo/utilityMetadata';
-import fs from 'fs';
-import path from 'path';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import { ToolContentBlock } from '@/components/seo/ToolContentBlock';
 
 export default async function ToolPage(props: { params: Promise<{ collection: string; tool: string }> }) {
   const params = await props.params;
@@ -26,13 +23,7 @@ export default async function ToolPage(props: { params: Promise<{ collection: st
 
   const seo = getUtilitySEO(tool.id);
 
-  let articleContent = '';
-  try {
-    const articlePath = path.join(process.cwd(), 'src', 'content', 'articles', `${tool.id}.md`);
-    if (fs.existsSync(articlePath)) {
-      articleContent = fs.readFileSync(articlePath, 'utf8');
-    }
-  } catch (e) {}
+
 
   return (
     <>
@@ -65,24 +56,8 @@ export default async function ToolPage(props: { params: Promise<{ collection: st
         </section>
 
         {/* SEO / Content Section */}
-        {articleContent ? (
-          <section className="container mx-auto px-4 max-w-3xl mt-16 text-slate font-sans">
-            <article className="prose prose-slate dark:prose-invert max-w-none text-slate prose-headings:text-ink prose-strong:text-ink">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {articleContent}
-              </ReactMarkdown>
-            </article>
-          </section>
-        ) : (
-          <section className="container mx-auto px-4 max-w-3xl mt-16 text-slate font-sans">
-            <article className="prose prose-slate dark:prose-invert max-w-none text-slate prose-headings:text-ink prose-strong:text-ink">
-              <h2 className="text-2xl font-bold font-display text-ink mb-4">About {tool.name}</h2>
-              <p className="mb-6">
-                Welcome to this online {tool.name}. The utility is designed to be fast, secure, and run entirely within the web browser. This means that data is processed client-side, ensuring outcomes are genuinely random and private.
-              </p>
-            </article>
-          </section>
-        )}
+        <ToolContentBlock utilityId={tool.id} tool={tool} />
+
 
         {/* Schema Markup */}
         {seo && (

@@ -2,10 +2,13 @@ import React from 'react';
 import { seoContentRegistry } from '@/lib/seo/contentRegistry';
 import { DynamicFAQSchema } from './DynamicFAQSchema';
 import { CheckCircle2, ChevronDown } from 'lucide-react';
+import { ToolRegistryItem } from '@/registry/types';
+import { DynamicToolArticle } from './DynamicToolArticle';
 
 interface ToolContentBlockProps {
   utilityId: string;
   article?: string;
+  tool?: ToolRegistryItem;
 }
 
 import ReactMarkdown from 'react-markdown';
@@ -14,11 +17,13 @@ import remarkGfm from 'remark-gfm';
 const LAST_UPDATE_DATE = "2026-06-19";
 const LAST_UPDATE_DISPLAY = "Jun 19, 2026";
 
-export function ToolContentBlock({ utilityId, article }: ToolContentBlockProps) {
+export function ToolContentBlock({ utilityId, article, tool }: ToolContentBlockProps) {
   const content = seoContentRegistry[utilityId];
 
-  // If no content is defined for this tool yet, return null
-  if (!content) return null;
+  // If no static content is defined, fallback to dynamic programmatic article
+  if (!content) {
+    return tool ? <DynamicToolArticle tool={tool} /> : null;
+  }
 
   return (
     <div className="w-full max-w-4xl mx-auto mt-20 mb-12 px-4 space-y-16">

@@ -10,6 +10,8 @@ import { Footer } from '../layout/Footer';
 import { SeoSchema } from './shared/SeoSchema';
 import { getUtilitySEO } from '@/lib/seo/utilityMetadata';
 import { RelatedTools } from '../layout/RelatedTools';
+import { getToolById } from '@/registry';
+import { DynamicToolArticle } from '../seo/DynamicToolArticle';
 
 interface ToolLayoutProps {
   utilityId?: string;
@@ -67,6 +69,7 @@ export function ToolLayout({
   }
 
   const seo = utilityId ? getUtilitySEO(utilityId) : undefined;
+  const tool = utilityId ? getToolById(utilityId) : undefined;
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -206,12 +209,14 @@ export function ToolLayout({
         {/* Details & FAQ Area */}
         <section className="container mx-auto px-4 md:px-6 max-w-4xl mt-12 space-y-12">
           {/* Article / Comprehensive Content */}
-          {article && (
+          {article ? (
             <div className="bg-surface/50 border border-border/60 rounded-2xl p-6 md:p-8 prose prose-slate dark:prose-invert max-w-none text-slate prose-headings:font-display prose-headings:font-bold prose-headings:text-ink prose-strong:text-ink prose-p:font-sans prose-p:leading-relaxed prose-a:text-primary-text hover:prose-a:text-primary-text/80">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {article}
               </ReactMarkdown>
             </div>
+          ) : (
+            tool && <DynamicToolArticle tool={tool} />
           )}
 
           {/* How to Use */}

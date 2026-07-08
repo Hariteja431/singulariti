@@ -1440,6 +1440,16 @@ export function getCategoryById(id: string) {
   return registry.categories.find(c => c.id === id);
 }
 
+export function getToolById(id: string): any | undefined {
+  for (const category of registry.categories) {
+    for (const collection of category.collections) {
+      const tool = collection.tools.find((t) => t.id === id);
+      if (tool) return tool;
+    }
+  }
+  return undefined;
+}
+
 export function getCollectionByPath(categoryPath: string, collectionId: string) {
   const category = getCategoryById(categoryPath.replace('/', ''));
   return category?.collections.find(c => c.id === collectionId);

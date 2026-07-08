@@ -4,7 +4,6 @@ import { Syne, Outfit, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import Script from "next/script";
 import "./globals.css";
-import { DynamicStructuredData } from "@/components/seo/DynamicStructuredData";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { AdsenseScript } from "@/components/seo/AdsenseScript";
 import { Analytics } from "@vercel/analytics/next";
@@ -130,7 +129,6 @@ export default function RootLayout({
             })
           }}
         />
-        <DynamicStructuredData />
         <AdsenseScript />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
