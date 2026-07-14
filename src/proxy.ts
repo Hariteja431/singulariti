@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const hostname = request.headers.get('host') || '';
   const proto = request.headers.get('x-forwarded-proto') || 'https';
   const url = request.nextUrl.clone();
@@ -31,7 +31,7 @@ export function middleware(request: NextRequest) {
   });
 }
 
-// Ensure middleware runs on all paths except Next.js internals and static assets
+// Ensure proxy runs on all paths except Next.js internals and static assets
 export const config = {
   matcher: [
     /*
