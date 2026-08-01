@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function proxy(request: NextRequest) {
-  const hostname = request.headers.get('host') || '';
+  const rawHost = request.headers.get('host') || '';
+  const hostname = rawHost.split(':')[0];
   const proto = request.headers.get('x-forwarded-proto') || 'https';
   const url = request.nextUrl.clone();
 
