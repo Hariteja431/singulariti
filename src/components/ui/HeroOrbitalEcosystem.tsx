@@ -386,7 +386,7 @@ export default function HeroOrbitalEcosystem() {
           viewBox="0 0 360 360"
           className="w-[340px] h-[340px] sm:w-[380px] sm:h-[380px] lg:w-[480px] lg:h-[480px] overflow-visible drop-shadow-[0_10px_20px_rgba(0,0,0,0.08)] dark:drop-shadow-[0_0_20px_rgba(20,184,166,0.4)]"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          xmlns="https://www.w3.org/2000/svg"
         >
           <defs>
             <radialGradient id="sg-core-glow" cx="50%" cy="50%" r="50%">

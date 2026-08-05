@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -19,9 +19,9 @@ interface PageProps {
 
 export async function generateStaticParams() {
   const { getAllPosts } = await import('@/lib/blog');
-  const postSlugs = getAllPosts().map(p => ({ utilitySlug: p.slug }));
-  
-  return postSlugs;
+  return getAllPosts()
+    .filter(p => p.url.startsWith('/blog/guides/'))
+    .map(p => ({ utilitySlug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -49,12 +49,18 @@ export default async function UtilityGuidePage({ params }: PageProps) {
   const { utilitySlug } = await params;
   const post = getPostBySlug(utilitySlug);
 
-  // Look up tool metadata in our registry (might be undefined for general guides)
-  const tool = toolRegistry.find(t => t.guideSlug === utilitySlug);
-
   if (!post) {
     notFound();
   }
+
+  // Redirect if canonical url is different
+  const expectedUrl = `/blog/guides/${post.slug}`;
+  if (post.url && post.url !== expectedUrl) {
+    redirect(post.url);
+  }
+
+  // Look up tool metadata in our registry (might be undefined for general guides)
+  const tool = toolRegistry.find(t => t.guideSlug === utilitySlug);
 
   const section = tool ? sectionRegistry.find(s => s.id === tool.sectionId) : undefined;
   const subSection = tool ? subSectionRegistry.find(ss => ss.id === tool.subSectionId) : undefined;

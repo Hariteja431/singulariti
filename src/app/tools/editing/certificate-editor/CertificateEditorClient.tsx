@@ -16,7 +16,7 @@ import { loadPdfDocument, renderPageToDataUrl } from '@/lib/pdf/pdfRenderHelpers
 
 // SVG templates defined as raw strings
 const templateClassicNavy = `
-<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="https://www.w3.org/2000/svg">
   <rect width="1000" height="707" fill="#0f172a" />
   <rect x="25" y="25" width="950" height="657" fill="none" stroke="#d4af37" stroke-width="4" />
   <rect x="35" y="35" width="930" height="637" fill="none" stroke="#f1f5f9" stroke-width="1.5" stroke-dasharray="8,8" />
@@ -30,7 +30,7 @@ const templateClassicNavy = `
 `;
 
 const templateModernTeal = `
-<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="https://www.w3.org/2000/svg">
   <rect width="1000" height="707" fill="#f8fafc" />
   <path d="M 0,0 L 250,0 L 0,250 Z" fill="#0d9488" fill-opacity="0.1" />
   <path d="M 0,0 L 150,0 L 0,150 Z" fill="#0d9488" fill-opacity="0.3" />
@@ -42,7 +42,7 @@ const templateModernTeal = `
 `;
 
 const templateElegantEmerald = `
-<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="https://www.w3.org/2000/svg">
   <rect width="1000" height="707" fill="#fcfcf9" />
   <rect x="30" y="30" width="940" height="647" fill="none" stroke="#065f46" stroke-width="6" />
   <rect x="42" y="42" width="916" height="623" fill="none" stroke="#b45309" stroke-width="2" />
@@ -51,7 +51,7 @@ const templateElegantEmerald = `
 `;
 
 const templateMinimalist = `
-<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="https://www.w3.org/2000/svg">
   <rect width="1000" height="707" fill="#ffffff" />
   <rect x="20" y="20" width="960" height="667" fill="none" stroke="#1e293b" stroke-width="2" />
   <rect x="26" y="26" width="948" height="655" fill="none" stroke="#94a3b8" stroke-width="0.75" />
@@ -60,7 +60,13 @@ const templateMinimalist = `
 
 type TemplateId = 'classic' | 'modern' | 'emerald' | 'minimalist' | 'custom';
 
-export function CertificateEditorClient({ article }: { article?: string }) {
+interface CertificateEditorClientProps {
+  article?: string;
+  externalError?: string | null;
+  setExternalError?: (err: string | null) => void;
+}
+
+export function CertificateEditorClient({ article, externalError, setExternalError }: CertificateEditorClientProps) {
   const [isMaximized, setIsMaximized] = useState(false);
 
   useEffect(() => {
@@ -114,7 +120,9 @@ export function CertificateEditorClient({ article }: { article?: string }) {
   };
   const [customBgDataUrl, setCustomBgDataUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [localError, setLocalError] = useState<string | null>(null);
+  const error = externalError !== undefined ? externalError : localError;
+  const setError = setExternalError !== undefined ? setExternalError : setLocalError;
   const [dragActive, setDragActive] = useState(false);
   
   // Undo/Redo & Zoom States
@@ -1125,38 +1133,7 @@ export function CertificateEditorClient({ article }: { article?: string }) {
   };
 
   return (
-    <ToolLayout
-      article={article}
-      howToUse={[
-        "Choose to start from a pre-made design template, or upload any PDF/Image certificate from your local path.",
-        "Add headings, recipient names, custom paragraphs, or dates to the certificate template.",
-        "Double click any text on the canvas to customize and edit its words.",
-        "Modify visual details like fonts, sizes, colors, and line styles using the properties panel.",
-        "Overlay transparent brand logos or paint signature brushstrokes directly onto the layout.",
-        "Open the Signature Pad modal to sketch and insert smooth vector-like digital signatures.",
-        "Export the final print-ready design as a vector PDF document or high-quality PNG graphics."
-      ]}
-      faqs={[
-        {
-          "question": "Can I edit certificates in my own local folder path?",
-          "answer": "Yes. Select 'Upload Existing Certificate' on the landing screen, and upload your file (Image or PDF) from any directory on your computer."
-        },
-        {
-          "question": "Are my files, signatures, or logos secure?",
-          "answer": "Yes, absolutely. This utility runs entirely locally in your browser sandbox. None of your certificates, text, signatures, or logo images are sent to any external server."
-        },
-        {
-          "question": "What formats can I export?",
-          "answer": "You can export the customized certificate as a print-ready vector PDF document (A4 scale) or a high-resolution PNG image."
-        }
-      ]}
-      title="Certificate Editor"
-      description="Create, edit, and design professional certificates directly in your browser. Choose elegant pre-made layouts or upload custom backgrounds. Processed 100% locally."
-      categoryName="Image Editing Tools"
-      categoryHref="/editing"
-      error={error}
-      onClearError={() => setError(null)}
-    >
+    <div className="w-full flex flex-col items-center">
       {/* Dynamic Font Loader Link */}
       <link 
         rel="stylesheet" 
@@ -1958,6 +1935,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
         </div>
       )}
 
-    </ToolLayout>
+    </div>
   );
 }

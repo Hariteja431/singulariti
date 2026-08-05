@@ -36,10 +36,12 @@ export default function EditorialPolicyPage() {
           <div className="max-w-none">
             
             <section className="mb-12">
-              <h2 className="flex items-center gap-3 text-2xl font-display font-bold text-ink mb-4">
+              <div className="flex items-center gap-3 mb-4">
                 <Scale className="w-6 h-6 text-primary flex-shrink-0" />
-                1. Our Privacy-First Commitment
-              </h2>
+                <h2 className="text-2xl font-display font-bold text-ink">
+                  1. Our Privacy-First Commitment
+                </h2>
+              </div>
               <p className="font-sans text-slate leading-relaxed mb-4">
                 Every tool hosted on Singulariti.in is engineered to run <strong className="text-ink">100% locally in your web browser</strong> using client-side technologies (HTML5, WebAssembly, and modern JavaScript APIs).
               </p>
@@ -51,10 +53,12 @@ export default function EditorialPolicyPage() {
             </section>
 
             <section className="mb-12">
-              <h2 className="flex items-center gap-3 text-2xl font-display font-bold text-ink mb-4">
+              <div className="flex items-center gap-3 mb-4">
                 <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0" />
-                2. Accuracy &amp; Reliability Standard
-              </h2>
+                <h2 className="text-2xl font-display font-bold text-ink">
+                  2. Accuracy &amp; Reliability Standard
+                </h2>
+              </div>
               <p className="font-sans text-slate leading-relaxed mb-4">
                 Our editorial team and engineers rigorously test every utility before publication to ensure it meets our high standards for accuracy.
               </p>
@@ -66,10 +70,12 @@ export default function EditorialPolicyPage() {
             </section>
 
             <section className="mb-12">
-              <h2 className="flex items-center gap-3 text-2xl font-display font-bold text-ink mb-4">
+              <div className="flex items-center gap-3 mb-4">
                 <FileText className="w-6 h-6 text-primary flex-shrink-0" />
-                3. Content &amp; Educational Guidelines
-              </h2>
+                <h2 className="text-2xl font-display font-bold text-ink">
+                  3. Content &amp; Educational Guidelines
+                </h2>
+              </div>
               <p className="font-sans text-slate leading-relaxed mb-4">
                 The instructional articles and FAQs provided alongside each tool are authored and reviewed by the Singulariti Editorial Team. Our goal is to demystify complex technical tasks.
               </p>

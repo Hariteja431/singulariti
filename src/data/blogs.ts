@@ -81,7 +81,7 @@ export const BLOG_CATEGORIES: Record<string, BlogCategory> = {
 export const BLOG_POSTS: BlogPost[] = [
   {
     title: "Reduce PDF File Size Free",
-    slug: "compress-pdf",
+    slug: "compress-pdf-guide",
     category: "PDF Tools",
     categorySlug: "pdf-tools",
     toolName: "Compress PDF",
@@ -216,7 +216,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     title: "Compress Image Files Online",
-    slug: "image-compressor",
+    slug: "image-compressor-guide",
     category: "Image Tools",
     categorySlug: "image-tools",
     toolName: "Image Compressor",
@@ -351,7 +351,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     title: "Format JSON Code Online",
-    slug: "json-formatter",
+    slug: "json-formatter-guide",
     category: "Developer Tools",
     categorySlug: "developer-tools",
     toolName: "JSON Formatter",
@@ -482,7 +482,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     title: "Generate QR Codes Online",
-    slug: "qr-code-generator",
+    slug: "qr-code-generator-guide",
     category: "QR Code Tools",
     categorySlug: "qr-tools",
     toolName: "QR Code Generator",
@@ -613,7 +613,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     title: "Count Words and Characters",
-    slug: "word-counter",
+    slug: "word-counter-guide",
     category: "Text Tools",
     categorySlug: "text-tools",
     toolName: "Word Counter",

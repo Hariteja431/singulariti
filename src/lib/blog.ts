@@ -1981,3 +1981,10 @@ export function getAllCategories(): string[] {
   return Array.from(new Set(all.map(post => post.category)));
 }
 
+export function getToolGuideUrl(toolId: string): string | undefined {
+  const tool = toolRegistry.find(t => t.id === toolId);
+  if (!tool) return undefined;
+  const post = getAllPosts().find(p => p.slug === tool.guideSlug);
+  return post ? post.url : `/blog/guides/${tool.guideSlug}`;
+}
+

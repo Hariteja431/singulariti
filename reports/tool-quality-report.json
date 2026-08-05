@@ -462,6 +462,48 @@
     ]
   },
   {
+    "slug": "audio-trimmer",
+    "title": "Audio Trimmer",
+    "issues": [
+      {
+        "type": "keyword-swapped-template",
+        "targetSlug": "online-voice-recorder",
+        "similarityScore": 0.9754601226993865,
+        "message": "Overall article content is too similar (97.5%) suggesting keyword-swapped templates."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "online-voice-recorder",
+        "similarityScore": 1,
+        "message": "Found 6 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "keyword-swapped-template",
+        "targetSlug": "screen-recorder",
+        "similarityScore": 0.9754601226993865,
+        "message": "Overall article content is too similar (97.5%) suggesting keyword-swapped templates."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "screen-recorder",
+        "similarityScore": 1,
+        "message": "Found 6 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "keyword-swapped-template",
+        "targetSlug": "webcam-recorder",
+        "similarityScore": 0.9754601226993865,
+        "message": "Overall article content is too similar (97.5%) suggesting keyword-swapped templates."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "webcam-recorder",
+        "similarityScore": 1,
+        "message": "Found 6 highly similar/duplicate paragraphs."
+      }
+    ]
+  },
+  {
     "slug": "black-and-white-to-color",
     "title": "Black And White To Color",
     "issues": [
@@ -1032,18 +1074,6 @@
     ]
   },
   {
-    "slug": "color-picker-tool",
-    "title": "Color Picker Tool",
-    "issues": [
-      {
-        "type": "identical-related-tools",
-        "targetSlug": "cron-generator",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      }
-    ]
-  },
-  {
     "slug": "color-to-black-and-white",
     "title": "Color To Black And White",
     "issues": [
@@ -1310,18 +1340,6 @@
         "targetSlug": "wifi-qr-code-generator",
         "similarityScore": 1,
         "message": "List of related tools is identical."
-      }
-    ]
-  },
-  {
-    "slug": "emi-calculator",
-    "title": "Emi Calculator",
-    "issues": [
-      {
-        "type": "duplicate-paragraphs",
-        "targetSlug": "sip-calculator",
-        "similarityScore": 0.42857142857142855,
-        "message": "Found 3 highly similar/duplicate paragraphs."
       }
     ]
   },
@@ -1950,18 +1968,6 @@
     ]
   },
   {
-    "slug": "hash-generator",
-    "title": "Hash Generator",
-    "issues": [
-      {
-        "type": "identical-related-tools",
-        "targetSlug": "cron-generator",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      }
-    ]
-  },
-  {
     "slug": "heading-structure-checker",
     "title": "Heading Structure Checker",
     "issues": [
@@ -2013,12 +2019,6 @@
     "slug": "hex-to-rgb",
     "title": "Hex To Rgb",
     "issues": [
-      {
-        "type": "identical-related-tools",
-        "targetSlug": "cron-generator",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      },
       {
         "type": "identical-related-tools",
         "targetSlug": "markdown-previewer",
@@ -2418,18 +2418,6 @@
     ]
   },
   {
-    "slug": "jpeg-compressor",
-    "title": "Jpeg Compressor",
-    "issues": [
-      {
-        "type": "identical-related-tools",
-        "targetSlug": "heic-to-jpg",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      }
-    ]
-  },
-  {
     "slug": "jpeg-to-jpg",
     "title": "Jpeg To Jpg",
     "issues": [
@@ -2496,18 +2484,6 @@
       {
         "type": "identical-related-tools",
         "targetSlug": "webp-to-svg",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      }
-    ]
-  },
-  {
-    "slug": "jpg-compressor",
-    "title": "Jpg Compressor",
-    "issues": [
-      {
-        "type": "identical-related-tools",
-        "targetSlug": "heic-to-jpg",
         "similarityScore": 1,
         "message": "List of related tools is identical."
       }
@@ -2819,12 +2795,6 @@
     "issues": [
       {
         "type": "identical-related-tools",
-        "targetSlug": "cron-generator",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      },
-      {
-        "type": "identical-related-tools",
         "targetSlug": "hex-to-rgb",
         "similarityScore": 1,
         "message": "List of related tools is identical."
@@ -2874,6 +2844,12 @@
       {
         "type": "identical-related-tools",
         "targetSlug": "page-counter",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pdf-to-text",
         "similarityScore": 1,
         "message": "List of related tools is identical."
       },
@@ -2994,6 +2970,48 @@
     ]
   },
   {
+    "slug": "online-voice-recorder",
+    "title": "Online Voice Recorder",
+    "issues": [
+      {
+        "type": "keyword-swapped-template",
+        "targetSlug": "audio-trimmer",
+        "similarityScore": 0.9754601226993865,
+        "message": "Overall article content is too similar (97.5%) suggesting keyword-swapped templates."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "audio-trimmer",
+        "similarityScore": 1,
+        "message": "Found 6 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "keyword-swapped-template",
+        "targetSlug": "screen-recorder",
+        "similarityScore": 0.9876543209876543,
+        "message": "Overall article content is too similar (98.8%) suggesting keyword-swapped templates."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "screen-recorder",
+        "similarityScore": 1,
+        "message": "Found 6 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "keyword-swapped-template",
+        "targetSlug": "webcam-recorder",
+        "similarityScore": 0.9876543209876543,
+        "message": "Overall article content is too similar (98.8%) suggesting keyword-swapped templates."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "webcam-recorder",
+        "similarityScore": 1,
+        "message": "Found 6 highly similar/duplicate paragraphs."
+      }
+    ]
+  },
+  {
     "slug": "open-graph-generator",
     "title": "Open Graph Generator",
     "issues": [
@@ -3048,6 +3066,12 @@
       {
         "type": "identical-related-tools",
         "targetSlug": "metadata-viewer",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pdf-to-text",
         "similarityScore": 1,
         "message": "List of related tools is identical."
       },
@@ -3204,18 +3228,6 @@
       {
         "type": "identical-related-tools",
         "targetSlug": "base64-to-image",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      },
-      {
-        "type": "identical-related-tools",
-        "targetSlug": "gif-maker",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      },
-      {
-        "type": "identical-related-tools",
-        "targetSlug": "heic-to-jpg",
         "similarityScore": 1,
         "message": "List of related tools is identical."
       },
@@ -3620,6 +3632,12 @@
         "targetSlug": "page-counter",
         "similarityScore": 1,
         "message": "List of related tools is identical."
+      },
+      {
+        "type": "identical-related-tools",
+        "targetSlug": "pdf-to-text",
+        "similarityScore": 1,
+        "message": "List of related tools is identical."
       }
     ]
   },
@@ -3875,12 +3893,6 @@
     "issues": [
       {
         "type": "identical-related-tools",
-        "targetSlug": "cron-generator",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      },
-      {
-        "type": "identical-related-tools",
         "targetSlug": "hex-to-rgb",
         "similarityScore": 1,
         "message": "List of related tools is identical."
@@ -4028,6 +4040,48 @@
         "targetSlug": "youtube-earnings-calculator",
         "similarityScore": 1,
         "message": "List of related tools is identical."
+      }
+    ]
+  },
+  {
+    "slug": "screen-recorder",
+    "title": "Screen Recorder",
+    "issues": [
+      {
+        "type": "keyword-swapped-template",
+        "targetSlug": "audio-trimmer",
+        "similarityScore": 0.9754601226993865,
+        "message": "Overall article content is too similar (97.5%) suggesting keyword-swapped templates."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "audio-trimmer",
+        "similarityScore": 1,
+        "message": "Found 6 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "keyword-swapped-template",
+        "targetSlug": "online-voice-recorder",
+        "similarityScore": 0.9876543209876543,
+        "message": "Overall article content is too similar (98.8%) suggesting keyword-swapped templates."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "online-voice-recorder",
+        "similarityScore": 1,
+        "message": "Found 6 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "keyword-swapped-template",
+        "targetSlug": "webcam-recorder",
+        "similarityScore": 0.9876543209876543,
+        "message": "Overall article content is too similar (98.8%) suggesting keyword-swapped templates."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "webcam-recorder",
+        "similarityScore": 1,
+        "message": "Found 6 highly similar/duplicate paragraphs."
       }
     ]
   },
@@ -4322,18 +4376,6 @@
         "targetSlug": "youtube-earnings-calculator",
         "similarityScore": 1,
         "message": "List of related tools is identical."
-      }
-    ]
-  },
-  {
-    "slug": "sip-calculator",
-    "title": "Sip Calculator",
-    "issues": [
-      {
-        "type": "duplicate-paragraphs",
-        "targetSlug": "emi-calculator",
-        "similarityScore": 0.42857142857142855,
-        "message": "Found 3 highly similar/duplicate paragraphs."
       }
     ]
   },
@@ -4686,18 +4728,6 @@
       {
         "type": "identical-related-tools",
         "targetSlug": "base64-to-image",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      },
-      {
-        "type": "identical-related-tools",
-        "targetSlug": "gif-maker",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      },
-      {
-        "type": "identical-related-tools",
-        "targetSlug": "heic-to-jpg",
         "similarityScore": 1,
         "message": "List of related tools is identical."
       },
@@ -5597,12 +5627,6 @@
     "issues": [
       {
         "type": "identical-related-tools",
-        "targetSlug": "cron-generator",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      },
-      {
-        "type": "identical-related-tools",
         "targetSlug": "hex-to-rgb",
         "similarityScore": 1,
         "message": "List of related tools is identical."
@@ -5801,12 +5825,6 @@
     "issues": [
       {
         "type": "identical-related-tools",
-        "targetSlug": "cron-generator",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      },
-      {
-        "type": "identical-related-tools",
         "targetSlug": "hex-to-rgb",
         "similarityScore": 1,
         "message": "List of related tools is identical."
@@ -5868,24 +5886,6 @@
       {
         "type": "identical-related-tools",
         "targetSlug": "wifi-qr-code-generator",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      }
-    ]
-  },
-  {
-    "slug": "uuid-generator",
-    "title": "Uuid Generator",
-    "issues": [
-      {
-        "type": "identical-related-tools",
-        "targetSlug": "cron-generator",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      },
-      {
-        "type": "identical-related-tools",
-        "targetSlug": "password-generator",
         "similarityScore": 1,
         "message": "List of related tools is identical."
       }
@@ -6018,24 +6018,54 @@
     ]
   },
   {
+    "slug": "webcam-recorder",
+    "title": "Webcam Recorder",
+    "issues": [
+      {
+        "type": "keyword-swapped-template",
+        "targetSlug": "audio-trimmer",
+        "similarityScore": 0.9754601226993865,
+        "message": "Overall article content is too similar (97.5%) suggesting keyword-swapped templates."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "audio-trimmer",
+        "similarityScore": 1,
+        "message": "Found 6 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "keyword-swapped-template",
+        "targetSlug": "online-voice-recorder",
+        "similarityScore": 0.9876543209876543,
+        "message": "Overall article content is too similar (98.8%) suggesting keyword-swapped templates."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "online-voice-recorder",
+        "similarityScore": 1,
+        "message": "Found 6 highly similar/duplicate paragraphs."
+      },
+      {
+        "type": "keyword-swapped-template",
+        "targetSlug": "screen-recorder",
+        "similarityScore": 0.9876543209876543,
+        "message": "Overall article content is too similar (98.8%) suggesting keyword-swapped templates."
+      },
+      {
+        "type": "duplicate-paragraphs",
+        "targetSlug": "screen-recorder",
+        "similarityScore": 1,
+        "message": "Found 6 highly similar/duplicate paragraphs."
+      }
+    ]
+  },
+  {
     "slug": "webp-compressor",
     "title": "Webp Compressor",
     "issues": [
       {
         "type": "identical-related-tools",
         "targetSlug": "base64-to-image",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      },
-      {
-        "type": "identical-related-tools",
-        "targetSlug": "gif-maker",
-        "similarityScore": 1,
-        "message": "List of related tools is identical."
-      },
-      {
-        "type": "identical-related-tools",
-        "targetSlug": "heic-to-jpg",
         "similarityScore": 1,
         "message": "List of related tools is identical."
       },

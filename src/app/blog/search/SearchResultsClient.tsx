@@ -94,20 +94,11 @@ function SearchResultsContent() {
   return (
     <div className="container mx-auto px-4 md:px-6 max-w-7xl space-y-8">
       
-      {/* Breadcrumbs */}
-      <div className="flex items-center gap-2 text-xs font-sans text-slate">
-        <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-        <span>/</span>
-        <Link href="/blog" className="hover:text-primary transition-colors">Blog</Link>
-        <span>/</span>
-        <span className="text-ink font-semibold">Search Results</span>
-      </div>
-
       {/* Heading Results Banner */}
       <header className="border-b border-border pb-6 space-y-2">
-        <h1 className="font-display font-bold text-2xl md:text-3xl text-ink tracking-tight flex items-center gap-2">
-          Search results for &ldquo;<span className="text-primary">{query || selectedOpType || 'all tools'}</span>&rdquo;
-        </h1>
+        <h2 className="font-display font-bold text-2xl md:text-3xl text-ink tracking-tight">
+          Search results for &ldquo;{query || selectedOpType || 'all tools'}&rdquo;
+        </h2>
         <p className="font-sans text-xs text-slate">
           Found {filteredResults.length} matching utility tools. Use the filter settings below to narrow down your results.
         </p>

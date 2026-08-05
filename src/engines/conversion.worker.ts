@@ -19,7 +19,7 @@ self.addEventListener('message', async (e) => {
           reader.readAsDataURL(file);
         });
         bitmap = await createImageBitmap(file);
-        const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="${bitmap.width}" height="${bitmap.height}"><image href="${dataUrl}" width="100%" height="100%"/></svg>`;
+        const svgString = `<svg xmlns="https://www.w3.org/2000/svg" width="${bitmap.width}" height="${bitmap.height}"><image href="${dataUrl}" width="100%" height="100%"/></svg>`;
         const blob = new Blob([svgString], { type: 'image/svg+xml' });
         self.postMessage({ id, success: true, blob, originalSize: file.size, newSize: blob.size });
       } catch {

@@ -97,6 +97,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/feedback`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/editorial-policy`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/disclaimer`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
   ];
 
   // Dynamic Category, Collection, and Tool routes
@@ -113,7 +131,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     category.collections.forEach((collection) => {
       // Collection root (e.g., /image/compression)
-      if (collection.path) {
+      // Only include collection routes for image and editing categories, as other categories do not have collection landing pages.
+      if (collection.path && (category.id === 'image' || category.id === 'editing')) {
         routes.push({
           url: `${baseUrl}${collection.path}`,
           lastModified,
@@ -157,23 +176,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // Blog Guides (e.g., /blog/guides/word-counter-guide)
+  // Blog Posts (Guides & Articles)
   const posts = getAllPosts();
-  const guides = posts.filter(p => p.toolUrl);
-  guides.forEach((post) => {
+  posts.forEach((post) => {
     routes.push({
-      url: `${baseUrl}/blog/guides/${post.slug}`,
-      lastModified,
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    });
-  });
-
-  // Blog Articles (non-tool guides, e.g., /blog/articles/why-online-utility-tools-are-useful)
-  const articles = posts.filter(p => !p.toolUrl);
-  articles.forEach((post) => {
-    routes.push({
-      url: `${baseUrl}/blog/articles/${post.slug}`,
+      url: `${baseUrl}${post.url}`,
       lastModified,
       changeFrequency: 'weekly',
       priority: 0.7,

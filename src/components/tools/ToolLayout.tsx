@@ -12,6 +12,7 @@ import { getUtilitySEO } from '@/lib/seo/utilityMetadata';
 import { RelatedTools } from '../layout/RelatedTools';
 import { getToolById } from '@/registry';
 import { DynamicToolArticle } from '../seo/DynamicToolArticle';
+import { getToolGuideUrl } from '@/lib/blog';
 
 interface ToolLayoutProps {
   utilityId?: string;
@@ -54,22 +55,11 @@ export function ToolLayout({
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return (
-      <div className="min-h-screen flex flex-col bg-background">
-        <Header />
-        <main className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-6 py-12 pt-24">
-          <div className="h-64 flex items-center justify-center">
-            <div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+
 
   const seo = utilityId ? getUtilitySEO(utilityId) : undefined;
   const tool = utilityId ? getToolById(utilityId) : undefined;
+  const guideUrl = utilityId ? getToolGuideUrl(utilityId) : undefined;
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -144,6 +134,17 @@ export function ToolLayout({
           <p className="font-sans text-base md:text-lg text-slate max-w-2xl mx-auto leading-relaxed">
             {description}
           </p>
+          {guideUrl && (
+            <div className="mt-4">
+              <Link 
+                href={guideUrl}
+                className="inline-flex items-center gap-1.5 text-xs font-sans font-bold text-primary hover:text-primary/80 transition-colors bg-primary/5 hover:bg-primary/10 px-3.5 py-2 rounded-xl"
+              >
+                <span>Read the Complete {title} Guide</span>
+                <span className="text-[10px]">→</span>
+              </Link>
+            </div>
+          )}
         </section>
 
         {/* Privacy Lock Banner */}
@@ -202,7 +203,11 @@ export function ToolLayout({
         {/* Core Tool Interface Workspace */}
         <section className="container mx-auto px-4 md:px-6 w-full flex justify-center">
           <div className="w-full max-w-5xl">
-            {children}
+            {mounted ? children : (
+              <div className="h-64 flex items-center justify-center">
+                <div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+              </div>
+            )}
           </div>
         </section>
 
