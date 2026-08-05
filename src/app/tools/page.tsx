@@ -75,10 +75,12 @@ export default function ToolsDirectoryPage() {
             <div key={category.id} className="border border-border bg-surface rounded-2xl p-6 md:p-8">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-border">
                 <div>
-                  <h2 className="font-display font-bold text-2xl text-ink flex items-center gap-3">
-                    <span className="text-primary">{getIcon(category.id)}</span>
+                <div className="flex items-center gap-3 mb-1">
+                  <span className="text-primary">{getIcon(category.id)}</span>
+                  <h2 className="font-display font-bold text-2xl text-ink">
                     {category.name}
                   </h2>
+                </div>
                   <p className="font-sans text-sm text-slate mt-1">
                     {category.description}
                   </p>

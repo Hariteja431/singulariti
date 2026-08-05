@@ -17,6 +17,8 @@ export interface QrCodeGeneratorClientProps {
   toolSeoTitle?: string;
   toolSeoDescription?: string;
   article?: string;
+  externalError?: string | null;
+  setExternalError?: (err: string | null) => void;
 }
 
 export function QrCodeGeneratorClient({
@@ -24,7 +26,9 @@ export function QrCodeGeneratorClient({
   isStandalone = false,
   toolName = "QR Code Generator",
   toolDescription = "Create highly customized QR codes for URLs, Wi-Fi networks, UPI payments, phone numbers, and contacts. Customize designs, add logos, and export to PNG, SVG, or PDF.",
-  article
+  article,
+  externalError,
+  setExternalError
 }: QrCodeGeneratorClientProps = {}) {
   const [qrType, setQrType] = useState<QRType>(initialType);
   
@@ -93,7 +97,9 @@ export function QrCodeGeneratorClient({
 
   // UI state variables
   const [isProcessing, setIsProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [localError, setLocalError] = useState<string | null>(null);
+  const error = externalError !== undefined ? externalError : localError;
+  const setError = setExternalError !== undefined ? setExternalError : setLocalError;
   const [generatedPngUrl, setGeneratedPngUrl] = useState<string | null>(null);
 
   // Get formatted payload based on active form fields
@@ -262,32 +268,7 @@ export function QrCodeGeneratorClient({
   };
 
   return (
-    <ToolLayout
-      howToUse={[
-        "Enter the text, URL, or data you want to encode.",
-        "Customize the colors, size, and error correction level if desired.",
-        "The QR code will generate instantly in real-time.",
-        "Click 'Download' to save the QR code as an image file."
-]}
-      faqs={[
-        {
-                "question": "Do these QR codes expire?",
-                "answer": "No, they are static QR codes. As long as the destination URL or text remains valid, the QR code will work forever."
-        },
-        {
-                "question": "Is my data sent to a server to generate the code?",
-                "answer": "No, the QR code generation algorithm runs entirely locally in your web browser."
-        }
-]}
-      
-      title={toolName}
-      description={toolDescription}
-      categoryName="QR Tools"
-      categoryHref="/tools/qr"
-      error={error}
-      onClearError={() => setError(null)}
-      article={article}
-    >
+    <div className="w-full flex flex-col items-center">
       <div className="bg-surface border border-border rounded-2xl p-6 md:p-8 shadow-sm">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -908,6 +889,6 @@ export function QrCodeGeneratorClient({
         </div>
 
       </div>
-    </ToolLayout>
+    </div>
   );
 }

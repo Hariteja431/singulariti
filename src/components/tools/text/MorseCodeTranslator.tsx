@@ -189,7 +189,7 @@ export function MorseCodeTranslator({ tool }: Props) {
   };
 
   return (
-    <ToolLayout title={tool.name} description={tool.description} categoryName="Text Tools" categoryHref="/tools/text">
+    <ToolLayout utilityId={tool.id} title={tool.name} description={tool.description} categoryName="Text Tools" categoryHref="/tools/text">
       <div className="max-w-5xl mx-auto space-y-6">
         
         {/* Controls Bar */}

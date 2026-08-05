@@ -96,7 +96,7 @@ export function ZalgoTextGenerator({ tool }: Props) {
   };
 
   return (
-    <ToolLayout title={tool.name} description={tool.description} categoryName="Text Tools" categoryHref="/tools/text">
+    <ToolLayout utilityId={tool.id} title={tool.name} description={tool.description} categoryName="Text Tools" categoryHref="/tools/text">
       <div className="max-w-5xl mx-auto space-y-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           
