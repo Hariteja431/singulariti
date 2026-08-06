@@ -115,6 +115,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.5,
     },
+    {
+      url: `${baseUrl}/cant-access`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
   ];
 
   // Dynamic Category, Collection, and Tool routes

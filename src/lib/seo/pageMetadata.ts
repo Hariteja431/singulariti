@@ -593,6 +593,25 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       description: "Read the disclaimer and limitations of liability for the tools, content, and calculators provided by Singulariti.",
       image: "https://www.singulariti.in/og-fallback.png"
     }
+  },
+  "cant-access": {
+    title: "Can't Access Singulariti? Troubleshooting Guide",
+    description: "If you cannot access Singulariti, follow our troubleshooting steps: force refresh, clear browser cache, flush DNS, or switch to public DNS (Google DNS/OpenDNS).",
+    path: "/cant-access",
+    robots: { index: true, follow: true },
+    openGraph: {
+      title: "Can't Access Singulariti? Troubleshooting Guide",
+      description: "If you cannot access Singulariti, follow our troubleshooting steps: force refresh, clear browser cache, flush DNS, or switch to public DNS (Google DNS/OpenDNS).",
+      url: "https://www.singulariti.in/cant-access",
+      type: "website",
+      image: "https://www.singulariti.in/og-fallback.png"
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Can't Access Singulariti? Troubleshooting Guide",
+      description: "If you cannot access Singulariti, follow our troubleshooting steps: force refresh, clear browser cache, flush DNS, or switch to public DNS (Google DNS/OpenDNS).",
+      image: "https://www.singulariti.in/og-fallback.png"
+    }
   }
 };
 
