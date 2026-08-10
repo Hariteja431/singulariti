@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { toolRegistry, sectionRegistry, subSectionRegistry, UtilityRegistryItem } from '@/content/tools/toolRegistry';
-import { getAllPosts, BlogPost } from '@/lib/blog';
+import { getAllPosts, BlogPost, getToolGuideUrl } from '@/lib/blog';
 import { Search, Compass, Play, ArrowLeft, ArrowRight, ListFilter, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
 
 function SearchResultsContent() {
@@ -181,7 +181,7 @@ function SearchResultsContent() {
               {blogResults.map((post) => (
                 <Link 
                   key={post.slug}
-                  href={`/blog/guides/${post.slug}`}
+                  href={post.url}
                   className="bg-surface border border-border p-5 rounded-2xl hover:border-primary/50 transition-all flex flex-col gap-2 group"
                 >
                   <div className="flex justify-between items-start mb-1">
@@ -254,7 +254,7 @@ function SearchResultsContent() {
                       <Play className="w-3 h-3 fill-white" /> Use Tool
                     </Link>
                     <Link 
-                      href={`/blog/guides/${tool.guideSlug}`}
+                      href={getToolGuideUrl(tool.id) || `/blog/guides/${tool.guideSlug}`}
                       className="flex-1 text-center py-2.5 bg-background border border-border hover:border-primary hover:text-primary rounded-xl transition-all inline-flex items-center justify-center gap-1"
                     >
                       Read Guide <ArrowRight className="w-3 h-3" />

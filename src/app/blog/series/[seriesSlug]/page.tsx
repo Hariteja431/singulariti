@@ -10,7 +10,7 @@ import {
   toolRegistry,
   subSectionRegistry
 } from '@/content/tools/toolRegistry';
-import { getPostBySlug } from '@/lib/blog';
+import { getPostBySlug, getToolGuideUrl } from '@/lib/blog';
 import { SimilarTopicsSidebar } from '@/components/blog/SimilarTopicsSidebar';
 import { constructMetadata } from '@/lib/seo/metadata';
 import { 
@@ -245,7 +245,7 @@ export default async function SeriesDetailsPage({ params, searchParams }: PagePr
                               </div>
                               
                               <h3 className="font-display font-bold text-lg text-ink hover:text-primary leading-tight transition-colors">
-                                <Link href={`/blog/guides/${guide.slug}`}>{guide.title}</Link>
+                                <Link href={getToolGuideUrl(guide.utilityId) || `/blog/guides/${guide.slug}`}>{guide.title}</Link>
                               </h3>
                               
                               <p className="text-xs text-slate leading-relaxed">
@@ -269,7 +269,7 @@ export default async function SeriesDetailsPage({ params, searchParams }: PagePr
                                   </Link>
                                 )}
                                 <Link 
-                                  href={`/blog/guides/${guide.slug}`}
+                                  href={getToolGuideUrl(guide.utilityId) || `/blog/guides/${guide.slug}`}
                                   className="px-3.5 py-1.5 bg-background border border-border hover:border-primary hover:text-primary text-ink font-semibold rounded-lg text-[11px] transition-all"
                                 >
                                   Read Guide
