@@ -34,8 +34,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ params, searchParams }: PageProps) {
   const { seriesSlug } = await params;
+  const queryParams = await searchParams;
   const series = blogSeriesList.find(s => s.slug === seriesSlug);
   if (!series) {
     return {
@@ -43,12 +44,39 @@ export async function generateMetadata({ params }: PageProps) {
     };
   }
 
-  return constructMetadata({
+  // For page 2+, use self-referencing canonical (distinct paginated content).
+  // For page 1 or no page param, canonical points to the clean base URL.
+  const currentPage = parseInt((queryParams?.page as string) || '1', 10);
+  const basePath = `/blog/series/${seriesSlug}`;
+  const canonicalPath = currentPage > 1
+    ? `${basePath}?page=${currentPage}`
+    : basePath;
+
+  const metadata = constructMetadata({
     title: `${series.name} Guides | Usage and Operations Series | Singulariti`,
     description: series.heroDescription || series.description,
-    path: `/blog/series/${seriesSlug}`,
+    path: canonicalPath,
   });
+
+  // For paginated pages beyond page 1, signal to Google via robots
+  // that these are indexable but less important
+  if (currentPage > 1) {
+    metadata.robots = {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large' as const,
+        'max-snippet': -1,
+      },
+    };
+  }
+
+  return metadata;
 }
+
 
 function getPostGuideSlug(sectionSlug: string): string {
   const slug = sectionSlug.toLowerCase();

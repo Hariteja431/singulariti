@@ -108,7 +108,7 @@ export default async function UtilityGuidePage({ params }: PageProps) {
       "name": "Singulariti",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.singulariti.in/favicon.ico"
+        "url": "https://www.singulariti.in/icon.svg"
       }
     },
     "mainEntityOfPage": {

@@ -96,7 +96,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       "name": "Singulariti",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.singulariti.in/favicon.ico"
+        "url": "https://www.singulariti.in/icon.svg"
       }
     },
     "mainEntityOfPage": {

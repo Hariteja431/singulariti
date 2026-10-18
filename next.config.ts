@@ -5,8 +5,25 @@ const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
+  async redirects() {
+    return [
+      // Issue 3: /favicon.ico → /icon.svg (site uses SVG favicons)
+      {
+        source: '/favicon.ico',
+        destination: '/icon.svg',
+        permanent: true, // 301
+      },
+      // Issue 3: /random/generators was a collection page — redirect to parent
+      {
+        source: '/random/generators',
+        destination: '/random',
+        permanent: true, // 301
+      },
+    ];
+  },
   async headers() {
     return [
+      // ── Global security headers ──
       {
         source: '/:path*',
         headers: [
@@ -33,6 +50,44 @@ const nextConfig: NextConfig = {
           {
             key: 'Strict-Transport-Security',
             value: 'max-age=31536000; includeSubDomains; preload',
+          },
+        ],
+      },
+      // ── Issue 4: Prevent static asset indexation (fonts, JS chunks) ──
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow',
+          },
+        ],
+      },
+      // ── Issue 4: Ensure sitemap.xml returns proper Content-Type ──
+      {
+        source: '/sitemap.xml',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/xml; charset=utf-8',
+          },
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex',
+          },
+        ],
+      },
+      // ── Issue 4: Ensure sitemap index returns proper Content-Type ──
+      {
+        source: '/sitemap:path*.xml',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/xml; charset=utf-8',
+          },
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex',
           },
         ],
       },

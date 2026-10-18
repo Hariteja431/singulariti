@@ -26,8 +26,9 @@ export async function generateStaticParams() {
   return paths;
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ params, searchParams }: PageProps) {
   const { seriesSlug, subSectionSlug } = await params;
+  const queryParams = await searchParams;
   const series = blogSeriesList.find(s => s.slug === seriesSlug);
   if (!series) {
     return {
@@ -44,10 +45,18 @@ export async function generateMetadata({ params }: PageProps) {
     };
   }
 
+  // For page 2+, use self-referencing canonical (distinct paginated content).
+  // For page 1 or no page param, canonical points to the clean base URL.
+  const currentPage = parseInt((queryParams?.page as string) || '1', 10);
+  const basePath = `/blog/series/${seriesSlug}/${subSectionSlug}`;
+  const canonicalPath = currentPage > 1
+    ? `${basePath}?page=${currentPage}`
+    : basePath;
+
   return constructMetadata({
     title: `${subSection.name} Guides | ${series.name} Tools | Singulariti`,
     description: subSection.description,
-    path: `/blog/series/${seriesSlug}/${subSectionSlug}`,
+    path: canonicalPath,
   });
 }
 
