@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import Script from "next/script";
 import "./globals.css";
 import { CookieConsent } from "@/components/layout/CookieConsent";
-import { AdsenseScript } from "@/components/seo/AdsenseScript";
+import { AdsenseVerification, AdsenseAutoAds } from "@/components/seo/AdsenseScript";
 import { Analytics } from "@vercel/analytics/next";
 
 
@@ -129,7 +129,7 @@ export default function RootLayout({
             })
           }}
         />
-        <AdsenseScript />
+        <AdsenseVerification />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
@@ -150,6 +150,7 @@ export default function RootLayout({
             });
           `}
         </Script>
+        <AdsenseAutoAds />
         <ThemeProvider>
           {children}
           <CookieConsent />

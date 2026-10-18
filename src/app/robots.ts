@@ -10,7 +10,10 @@ export default function robots(): MetadataRoute.Robots {
           '/api/',
           '/search',
           '/blog/search',
-          '/_next/static/',      // Prevent crawling of static asset chunks (fonts, JS)
+          // NOTE: /_next/static/ is intentionally NOT disallowed here.
+          // Crawlers (including AdSense) must be able to fetch JS chunks
+          // to render the page. X-Robots-Tag: noindex in next.config.ts
+          // prevents these assets from appearing in search results.
         ],
       },
     ],
