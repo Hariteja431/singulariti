@@ -2,8 +2,10 @@
 import Script from 'next/script';
 import React, { useEffect, useState } from 'react';
 
+const PUB_ID = 'ca-pub-7596639289168349';
+
 export function AdsenseScript() {
-  const pubId = process.env.NEXT_PUBLIC_ADSENSE_PUB_ID;
+  const pubId = process.env.NEXT_PUBLIC_ADSENSE_PUB_ID || PUB_ID;
   const [consented, setConsented] = useState(false);
 
   useEffect(() => {
@@ -15,7 +17,7 @@ export function AdsenseScript() {
     return () => window.removeEventListener('storage', check);
   }, []);
 
-  if (!pubId || !consented) return null;
+  if (!consented) return null;
 
   const formattedPubId = pubId.startsWith('ca-pub-') ? pubId : `ca-pub-${pubId.replace(/^pub-/, '')}`;
   return (
