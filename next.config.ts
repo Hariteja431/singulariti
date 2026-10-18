@@ -79,7 +79,7 @@ const nextConfig: NextConfig = {
       },
       // ── Issue 4: Ensure sitemap index returns proper Content-Type ──
       {
-        source: '/sitemap:path*.xml',
+        source: '/sitemap(.*).xml',
         headers: [
           {
             key: 'Content-Type',

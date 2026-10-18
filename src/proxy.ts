@@ -115,16 +115,16 @@ export function proxy(request: NextRequest) {
 }
 
 // Ensure proxy runs on all paths except Next.js internals and static assets
+// Note: X-Robots-Tag for /_next/static/ is also set in next.config.ts headers()
 export const config = {
   matcher: [
     /*
      * Match all request paths except for the ones starting with:
      * - api (API routes)
+     * - _next/static (static files — X-Robots-Tag handled by next.config.ts)
      * - _next/image (image optimization files)
-     * - Static images, webmanifest, and internal worker files directly inside public/
-     * Note: /_next/static/ is explicitly included so we can set X-Robots-Tag headers.
+     * - Static images, webmanifest, and internal worker files in public/
      */
-    '/((?!api|_next/image|.*\\.svg|.*\\.png|.*\\.jpg|.*\\.webmanifest|pdf.worker.min.mjs).*)',
-    '/_next/static/:path*',
+    '/((?!api|_next/static|_next/image|.*\\.svg|.*\\.png|.*\\.jpg|.*\\.webmanifest|pdf\\.worker\\.min\\.mjs).*)',
   ],
 };
