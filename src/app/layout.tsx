@@ -37,6 +37,19 @@ export async function generateMetadata(): Promise<Metadata> {
     description: "Fast, secure, browser-based utility tools designed for creators, developers, students and professionals. Zero uploads, absolute privacy.",
     applicationName: "Singulariti",
     manifest: "/manifest.webmanifest",
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/icon-48x48.png", sizes: "48x48", type: "image/png" },
+        { url: "/icon-96x96.png", sizes: "96x96", type: "image/png" },
+        { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
+        { url: "/icon.svg", type: "image/svg+xml" },
+      ],
+      shortcut: "/favicon.ico",
+      apple: [
+        { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      ],
+    },
     authors: [{ name: "Singulariti", url: "https://www.singulariti.in" }],
     openGraph: {
       title: "Online Utility Tools for PDF, Image, Text, Code, SEO and Calculations | Singulariti",
