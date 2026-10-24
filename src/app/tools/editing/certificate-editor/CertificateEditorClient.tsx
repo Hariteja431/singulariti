@@ -12,7 +12,7 @@ import {
   Layers, AlignLeft, AlignCenter, AlignRight, Bold, Italic, Underline, ArrowLeft,
   Maximize2, Minimize2, Copy, Sliders, ChevronDown, FileText, CheckCircle2,
   Calendar, ShieldCheck, Feather, MoveHorizontal, MoveVertical, Palette, HelpCircle,
-  FolderOpen, Save
+  FolderOpen, Save, RefreshCw
 } from 'lucide-react';
 import { loadPdfDocument, renderPageToDataUrl } from '@/lib/pdf/pdfRenderHelpers';
 import { CERTIFICATE_TEMPLATES, CertificateTheme } from './certificateTemplates';
@@ -39,12 +39,20 @@ const FONT_OPTIONS = [
   { name: 'EB Garamond (Academic)', value: 'EB Garamond', family: 'serif' },
 ];
 
+// 4 Primary Layouts requested by user
+const PRIMARY_LAYOUTS = [
+  { id: 'classic', name: 'Classic Navy', bgClass: 'bg-slate-900 text-amber-400 border-amber-500/40' },
+  { id: 'modern', name: 'Modern Teal', bgClass: 'bg-teal-950/20 text-teal-600 border-teal-500/40' },
+  { id: 'emerald', name: 'Emerald', bgClass: 'bg-emerald-950/20 text-emerald-700 border-emerald-500/40' },
+  { id: 'minimalist', name: 'Minimalist', bgClass: 'bg-white text-slate-800 border-slate-300' },
+];
+
 export function CertificateEditorClient({ article }: { article?: string }) {
   // Navigation & Workspace Mode
   const [mode, setMode] = useState<'select' | 'editor'>('select');
   const [selectedTemplateId, setSelectedTemplateId] = useState<string>('classic');
   const [isMaximized, setIsMaximized] = useState(false);
-  const [activeSidebarTab, setActiveSidebarTab] = useState<'quick-fill' | 'design' | 'decorations'>('quick-fill');
+  const [activeSidebarTab, setActiveSidebarTab] = useState<'layout' | 'quick-fill' | 'elements' | 'badges'>('layout');
 
   // Canvas & Document State (Standard Certificate 1000 x 707 A4 aspect)
   const [documentState, setDocumentState] = useState({
@@ -62,7 +70,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
 
   // Zoom & Viewport
   const [zoom, setZoom] = useState(1);
-  const [autoFitScale, setAutoFitScale] = useState(1);
 
   // Undo / Redo Stacks
   const [canUndo, setCanUndo] = useState(false);
@@ -122,7 +129,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
   const sigPadElRef = useRef<HTMLCanvasElement>(null);
   const sigDrawingRef = useRef(false);
   const sigPointsRef = useRef<{ x: number; y: number }[]>([]);
-  const isUpdatingFromCanvas = useRef(false);
 
   const documentStateRef = useRef(documentState);
   documentStateRef.current = documentState;
@@ -130,7 +136,7 @@ export function CertificateEditorClient({ article }: { article?: string }) {
   // Show auto-dismissing notice
   const notify = (msg: string) => {
     setSuccessNotice(msg);
-    setTimeout(() => setSuccessNotice(null), 3500);
+    setTimeout(() => setSuccessNotice(null), 3000);
   };
 
   // Safe History State Saver
@@ -182,21 +188,24 @@ export function CertificateEditorClient({ article }: { article?: string }) {
     const scaleW = availW / docW;
     const scaleH = availH / docH;
     let targetScale = Math.min(scaleW, scaleH);
-    targetScale = Math.max(0.25, Math.min(targetScale, 1.6));
+    targetScale = Math.max(0.25, Math.min(targetScale, 1.5));
 
-    setAutoFitScale(targetScale);
     applyCanvasZoom(targetScale);
   }, [applyCanvasZoom]);
 
-  // Load Background Helper
-  const loadTemplateBackground = useCallback((themeId: string, insertDefaultFields = true) => {
+  // Robust SVG to Data URL generator
+  const getSvgDataUrl = (svgContent: string): string => {
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgContent.trim())}`;
+  };
+
+  // Core Template Loader: supports initial creation AND live seamless switching
+  const loadTemplateBackground = useCallback((themeId: string, isInitial = false) => {
     const canvas = fabricCanvas.current;
     if (!canvas) return;
 
     setError(null);
     const theme = CERTIFICATE_TEMPLATES[themeId] || CERTIFICATE_TEMPLATES.classic;
-    const base64 = window.btoa(unescape(encodeURIComponent(theme.svg.trim())));
-    const dataUrl = `data:image/svg+xml;base64,${base64}`;
+    setSelectedTemplateId(themeId);
 
     const docW = 1000;
     const docH = 707;
@@ -207,13 +216,18 @@ export function CertificateEditorClient({ article }: { article?: string }) {
       orientation: 'landscape',
     });
 
-    fabric.Image.fromURL(dataUrl, { crossOrigin: 'anonymous' }).then((bgImg) => {
-      canvas.clear();
-      canvas.backgroundColor = '#0b0b0f';
+    const imgEl = new Image();
+    imgEl.onload = () => {
+      // 1. Remove existing background image if present
+      const existingBg = canvas.getObjects().find((o: any) => o.isBackground);
+      if (existingBg) {
+        canvas.remove(existingBg);
+      }
 
-      bgImg.set({
-        scaleX: docW / (bgImg.width || 1),
-        scaleY: docH / (bgImg.height || 1),
+      // 2. Create high-performance background FabricImage
+      const bgImg = new (fabric as any).FabricImage(imgEl, {
+        scaleX: docW / (imgEl.naturalWidth || 1000),
+        scaleY: docH / (imgEl.naturalHeight || 707),
         left: 0,
         top: 0,
         originX: 'left',
@@ -226,16 +240,23 @@ export function CertificateEditorClient({ article }: { article?: string }) {
         lockScalingX: true,
         lockScalingY: true,
         isBackground: true,
-      } as any);
+      });
 
       canvas.add(bgImg);
       canvas.sendObjectToBack(bgImg);
 
-      if (insertDefaultFields) {
+      const existingTexts = canvas.getObjects().filter((o: any) => o.type === 'textbox' || o.type === 'text');
+
+      // 3. If initial load or canvas has no text, create full default fields
+      if (isInitial || existingTexts.length === 0) {
+        canvas.getObjects().forEach((o: any) => {
+          if (!o.isBackground) canvas.remove(o);
+        });
+
         // Issuing Org
         const orgText = new fabric.Textbox('GLOBAL ACADEMY OF EXCELLENCE', {
           left: 100,
-          top: 90,
+          top: 95,
           width: 800,
           fontSize: 13,
           fontFamily: theme.bodyFont,
@@ -251,7 +272,7 @@ export function CertificateEditorClient({ article }: { article?: string }) {
         // Main Title
         const titleText = new fabric.Textbox(quickFill.title, {
           left: 100,
-          top: 140,
+          top: 145,
           width: 800,
           fontSize: 38,
           fontFamily: theme.titleFont,
@@ -267,7 +288,7 @@ export function CertificateEditorClient({ article }: { article?: string }) {
         // Presentation Line
         const presText = new fabric.Textbox(quickFill.presentation, {
           left: 100,
-          top: 225,
+          top: 230,
           width: 800,
           fontSize: 13,
           fontFamily: theme.bodyFont,
@@ -283,7 +304,7 @@ export function CertificateEditorClient({ article }: { article?: string }) {
         // Recipient Name
         const nameText = new fabric.Textbox(quickFill.name, {
           left: 100,
-          top: 275,
+          top: 280,
           width: 800,
           fontSize: 54,
           fontFamily: theme.nameFont,
@@ -295,8 +316,8 @@ export function CertificateEditorClient({ article }: { article?: string }) {
           fieldId: 'name',
         } as any);
 
-        // Gold line under name
-        const line = new fabric.Line([350, 360, 650, 360], {
+        // Accent divider rule under name
+        const line = new fabric.Line([350, 365, 650, 365], {
           stroke: theme.accentColor,
           strokeWidth: 1.5,
           opacity: 0.6,
@@ -307,7 +328,7 @@ export function CertificateEditorClient({ article }: { article?: string }) {
         // Description Paragraph
         const descText = new fabric.Textbox(quickFill.description, {
           left: 150,
-          top: 385,
+          top: 390,
           width: 700,
           fontSize: 15,
           fontFamily: theme.bodyFont,
@@ -379,9 +400,9 @@ export function CertificateEditorClient({ article }: { article?: string }) {
 
         // Default Gold Rosette Badge in center bottom
         const rosetteBadge = DECORATIVE_ELEMENTS[0];
-        const b64 = window.btoa(unescape(encodeURIComponent(rosetteBadge.svg)));
-        fabric.Image.fromURL(`data:image/svg+xml;base64,${b64}`, { crossOrigin: 'anonymous' }).then((sealImg) => {
-          sealImg.set({
+        const badgeEl = new Image();
+        badgeEl.onload = () => {
+          const sealImg = new (fabric as any).FabricImage(badgeEl, {
             left: 455,
             top: 485,
             scaleX: 90 / 200,
@@ -389,12 +410,29 @@ export function CertificateEditorClient({ article }: { article?: string }) {
             originX: 'left',
             originY: 'top',
             fieldId: 'seal',
-          } as any);
+          });
           canvas.add(sealImg);
           canvas.requestRenderAll();
-        });
+        };
+        badgeEl.src = getSvgDataUrl(rosetteBadge.svg);
 
         canvas.add(orgText, titleText, presText, nameText, line, descText, dateLine, dateText, sigLine, signerText, idText);
+      } else {
+        // 4. Live switching: Intelligently adapt existing text colors and fonts to match the new theme!
+        canvas.getObjects().forEach((obj: any) => {
+          if (obj.fieldId === 'title') {
+            obj.set({ fill: theme.accentColor, fontFamily: theme.titleFont });
+          } else if (obj.fieldId === 'name') {
+            obj.set({ fill: theme.accentColor, fontFamily: theme.nameFont });
+          } else if (obj.fieldId === 'divider') {
+            obj.set({ stroke: theme.accentColor });
+          } else if (obj.fieldId === 'description') {
+            obj.set({ fill: theme.textColor, fontFamily: theme.bodyFont });
+          } else if (['org', 'presentation', 'date', 'signer', 'certId'].includes(obj.fieldId)) {
+            obj.set({ fill: theme.secondaryTextColor, fontFamily: theme.bodyFont });
+          }
+        });
+        notify(`Switched to ${theme.name} layout!`);
       }
 
       // Re-trigger font load rendering
@@ -405,16 +443,17 @@ export function CertificateEditorClient({ article }: { article?: string }) {
       }
 
       canvas.requestRenderAll();
-      undoStack.current = [];
-      redoStack.current = [];
-      setCanUndo(false);
-      setCanRedo(false);
+      saveState();
       fitCanvasToContainer();
-    }).catch((err) => {
-      console.error("Failed to load certificate template:", err);
-      setError("Unable to render the selected certificate background.");
-    });
-  }, [quickFill, fitCanvasToContainer]);
+    };
+
+    imgEl.onerror = (e) => {
+      console.error("Failed to load SVG background:", e);
+      setError(`Could not load template "${theme.name}".`);
+    };
+
+    imgEl.src = getSvgDataUrl(theme.svg);
+  }, [quickFill, fitCanvasToContainer, saveState]);
 
   // Load custom background onto canvas (image or uploaded PDF)
   const loadCustomBackgroundOnCanvas = useCallback((dataUrl: string) => {
@@ -422,7 +461,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
     if (!canvas) return;
 
     const imgEl = new Image();
-    imgEl.src = dataUrl;
     imgEl.onload = () => {
       const aspect = imgEl.naturalWidth / imgEl.naturalHeight;
       const newWidth = 1000;
@@ -435,54 +473,53 @@ export function CertificateEditorClient({ article }: { article?: string }) {
         orientation: aspect >= 1 ? 'landscape' : 'portrait',
       });
 
-      fabric.Image.fromURL(dataUrl, { crossOrigin: 'anonymous' }).then((bgImg) => {
-        canvas.clear();
-        canvas.backgroundColor = '#0b0b0f';
-
-        bgImg.set({
-          scaleX: newWidth / (bgImg.width || 1),
-          scaleY: newHeight / (bgImg.height || 1),
-          left: 0,
-          top: 0,
-          originX: 'left',
-          originY: 'top',
-          selectable: false,
-          evented: false,
-          lockMovementX: true,
-          lockMovementY: true,
-          lockRotation: true,
-          lockScalingX: true,
-          lockScalingY: true,
-          isBackground: true,
-        } as any);
-
-        canvas.add(bgImg);
-        canvas.sendObjectToBack(bgImg);
-
-        // Add starter text block
-        const starterText = new fabric.Textbox('ADD RECIPIENT / CERTIFICATE TEXT', {
-          left: 100,
-          top: Math.round(newHeight / 2) - 30,
-          width: 800,
-          fontSize: 32,
-          fontFamily: 'Montserrat',
-          fontWeight: 'bold',
-          textAlign: 'center',
-          fill: '#0f172a',
-          originX: 'left',
-          originY: 'top',
-        });
-        canvas.add(starterText);
-        canvas.setActiveObject(starterText);
-
-        canvas.requestRenderAll();
-        undoStack.current = [];
-        redoStack.current = [];
-        setCanUndo(false);
-        setCanRedo(false);
-        fitCanvasToContainer();
+      const bgImg = new (fabric as any).FabricImage(imgEl, {
+        scaleX: newWidth / (imgEl.naturalWidth || 1000),
+        scaleY: newHeight / (imgEl.naturalHeight || 707),
+        left: 0,
+        top: 0,
+        originX: 'left',
+        originY: 'top',
+        selectable: false,
+        evented: false,
+        lockMovementX: true,
+        lockMovementY: true,
+        lockRotation: true,
+        lockScalingX: true,
+        lockScalingY: true,
+        isBackground: true,
       });
+
+      canvas.clear();
+      canvas.backgroundColor = '#0b0b0f';
+      canvas.add(bgImg);
+      canvas.sendObjectToBack(bgImg);
+
+      // Add starter text block
+      const starterText = new fabric.Textbox('ADD RECIPIENT / CERTIFICATE TEXT', {
+        left: 100,
+        top: Math.round(newHeight / 2) - 30,
+        width: 800,
+        fontSize: 32,
+        fontFamily: 'Montserrat',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        fill: '#0f172a',
+        originX: 'left',
+        originY: 'top',
+      });
+      canvas.add(starterText);
+      canvas.setActiveObject(starterText);
+
+      canvas.requestRenderAll();
+      undoStack.current = [];
+      redoStack.current = [];
+      setCanUndo(false);
+      setCanRedo(false);
+      fitCanvasToContainer();
+      notify("Custom certificate document loaded.");
     };
+    imgEl.src = dataUrl;
   }, [fitCanvasToContainer]);
 
   // Handle Quick Fill synchronization to canvas textboxes
@@ -491,12 +528,8 @@ export function CertificateEditorClient({ article }: { article?: string }) {
     const canvas = fabricCanvas.current;
     if (!canvas) return;
 
-    isUpdatingFromCanvas.current = true;
-    let found = false;
-
     canvas.getObjects().forEach((obj: any) => {
       if (obj.fieldId === field) {
-        found = true;
         if (field === 'date') {
           obj.set({ text: `Issued on: ${val}` });
         } else if (field === 'signer1Name' || field === 'signer1Title') {
@@ -509,7 +542,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
       }
     });
 
-    isUpdatingFromCanvas.current = false;
     canvas.requestRenderAll();
   };
 
@@ -537,7 +569,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
       const activeObj = canvas.getActiveObject() as any;
       const isEditingText = activeObj && activeObj.isEditing;
 
-      // Escape key handles deselect or fullscreen
       if (e.key === 'Escape') {
         if (isMaximized) setIsMaximized(false);
         canvas.discardActiveObject();
@@ -545,10 +576,8 @@ export function CertificateEditorClient({ article }: { article?: string }) {
         return;
       }
 
-      // If user is actively typing inside a textbox, let them type normally
       if (isEditingText) return;
 
-      // Check if focus is in an input or textarea outside canvas
       const targetTag = (e.target as HTMLElement)?.tagName?.toLowerCase();
       if (targetTag === 'input' || targetTag === 'textarea' || targetTag === 'select') {
         return;
@@ -672,7 +701,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
       ro.observe(container);
     }
 
-    // Trigger initial fit
     setTimeout(() => {
       fitCanvasToContainer();
     }, 100);
@@ -859,13 +887,13 @@ export function CertificateEditorClient({ article }: { article?: string }) {
     if (!canvas) return;
 
     saveState();
-    const b64 = window.btoa(unescape(encodeURIComponent(badge.svg)));
-    fabric.Image.fromURL(`data:image/svg+xml;base64,${b64}`, { crossOrigin: 'anonymous' }).then((img) => {
-      img.set({
+    const badgeEl = new Image();
+    badgeEl.onload = () => {
+      const img = new (fabric as any).FabricImage(badgeEl, {
         left: Math.round((documentState.width - badge.defaultWidth) / 2),
         top: Math.round((documentState.height - badge.defaultHeight) / 2),
-        scaleX: badge.defaultWidth / (img.width || 1),
-        scaleY: badge.defaultHeight / (img.height || 1),
+        scaleX: badge.defaultWidth / (badgeEl.naturalWidth || 200),
+        scaleY: badge.defaultHeight / (badgeEl.naturalHeight || 200),
         originX: 'left',
         originY: 'top',
       });
@@ -873,7 +901,8 @@ export function CertificateEditorClient({ article }: { article?: string }) {
       canvas.setActiveObject(img);
       canvas.requestRenderAll();
       notify(`Added ${badge.name}`);
-    });
+    };
+    badgeEl.src = getSvgDataUrl(badge.svg);
   };
 
   // Alignment Tools: Center Horizontally & Vertically
@@ -961,7 +990,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
       canvas.bringObjectToFront(activeObj);
     } else if (action === 'back') {
       canvas.sendObjectToBack(activeObj);
-      // Ensure background stays at bottom
       const bg = canvas.getObjects().find((o: any) => o.isBackground);
       if (bg) canvas.sendObjectToBack(bg);
     } else if (action === 'forward') {
@@ -988,7 +1016,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
     } else if (prop === 'fontFamily') {
       activeObj.set({ fontFamily: val });
       setFontFamily(val);
-      // Ensure web font rendering
       if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(() => canvas.requestRenderAll());
       }
@@ -1125,16 +1152,17 @@ export function CertificateEditorClient({ article }: { article?: string }) {
       const canvas = fabricCanvas.current;
       if (!canvas) return;
 
-      fabric.Image.fromURL(data, { crossOrigin: 'anonymous' }).then((img) => {
+      const imgEl = new Image();
+      imgEl.onload = () => {
         const maxDim = 180;
         let scale = 1;
-        if (img.width && img.width > maxDim) {
-          scale = maxDim / img.width;
+        if (imgEl.width > maxDim) {
+          scale = maxDim / imgEl.width;
         }
         saveState();
-        img.set({
-          left: Math.round((documentState.width - (img.width || 0) * scale) / 2),
-          top: Math.round((documentState.height - (img.height || 0) * scale) / 2),
+        const img = new (fabric as any).FabricImage(imgEl, {
+          left: Math.round((documentState.width - (imgEl.width || 0) * scale) / 2),
+          top: Math.round((documentState.height - (imgEl.height || 0) * scale) / 2),
           scaleX: scale,
           scaleY: scale,
           originX: 'left',
@@ -1144,7 +1172,8 @@ export function CertificateEditorClient({ article }: { article?: string }) {
         canvas.setActiveObject(img);
         canvas.requestRenderAll();
         notify("Image placed on certificate.");
-      });
+      };
+      imgEl.src = data;
     };
     reader.readAsDataURL(file);
     e.target.value = '';
@@ -1234,7 +1263,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
       return;
     }
 
-    // Render typed text to temporary high-res canvas
     const tempCanvas = document.createElement('canvas');
     tempCanvas.width = 600;
     tempCanvas.height = 200;
@@ -1255,9 +1283,10 @@ export function CertificateEditorClient({ article }: { article?: string }) {
     const canvas = fabricCanvas.current;
     if (!canvas) return;
 
-    fabric.Image.fromURL(dataUrl, { crossOrigin: 'anonymous' }).then((sigImg) => {
+    const imgEl = new Image();
+    imgEl.onload = () => {
       saveState();
-      sigImg.set({
+      const sigImg = new (fabric as any).FabricImage(imgEl, {
         left: 630,
         top: 480,
         scaleX: 0.55,
@@ -1272,7 +1301,8 @@ export function CertificateEditorClient({ article }: { article?: string }) {
       setIsSigModalOpen(false);
       clearSigPad();
       notify("Signature inserted successfully.");
-    });
+    };
+    imgEl.src = dataUrl;
   };
 
   // High-Resolution Export Engine
@@ -1287,7 +1317,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
     canvas.discardActiveObject();
     canvas.requestRenderAll();
 
-    // Short pause for repaint
     await new Promise((r) => setTimeout(r, 120));
 
     try {
@@ -1295,12 +1324,10 @@ export function CertificateEditorClient({ article }: { article?: string }) {
       const origH = documentState.height;
       const currentZoom = canvas.getZoom();
 
-      // Multiplier calculation for crisp raster output
       let multiplier = 2; // HD default
       if (quality === 'standard') multiplier = 1;
       if (quality === 'print') multiplier = 3; // 3000px ultra print
 
-      // Temporarily reset canvas to native 100% dimensions
       canvas.setViewportTransform([1, 0, 0, 1, 0, 0]);
       canvas.setDimensions({ width: origW, height: origH });
 
@@ -1310,7 +1337,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
         multiplier,
       });
 
-      // Restore responsive viewport zoom
       canvas.setDimensions({ width: origW * currentZoom, height: origH * currentZoom });
       canvas.setZoom(currentZoom);
       canvas.requestRenderAll();
@@ -1324,7 +1350,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
         link.click();
         notify(`Certificate saved as ${type.toUpperCase()}!`);
       } else {
-        // PDF Export
         const isPortrait = origW < origH;
         const pdf = new jsPDF({
           orientation: isPortrait ? 'portrait' : 'landscape',
@@ -1409,6 +1434,7 @@ export function CertificateEditorClient({ article }: { article?: string }) {
       article={article}
       howToUse={[
         "Choose an imperial, executive, or modern certificate theme, or upload your own certificate file (PDF or Image).",
+        "Switch between Classic Navy, Modern Teal, Emerald, and Minimalist layouts anytime — your text is safely preserved.",
         "Use the Quick Fill panel to enter recipient name, title, date, and signatures in seconds.",
         "Double click any text on the certificate canvas to edit words directly in-place.",
         "Customize fonts (Cinzel, Playfair Display, Great Vibes script), sizes, colors, and line spacing with precision.",
@@ -1417,6 +1443,10 @@ export function CertificateEditorClient({ article }: { article?: string }) {
         "Export in ultra-sharp 300 DPI print quality, vector PDF, or save the project file to edit later."
       ]}
       faqs={[
+        {
+          "question": "Can I switch certificate layouts without losing my typed text?",
+          "answer": "Yes! Clicking between Classic Navy, Modern Teal, Emerald, or Minimalist switches the vector background and automatically adapts text colors for contrast, keeping your custom recipient name, date, and citations intact."
+        },
         {
           "question": "Can I edit an existing certificate PDF without losing quality?",
           "answer": "Yes. Choose 'Upload Existing Certificate', select your PDF, and our local engine will render it with crystal-clear high fidelity. You can place signatures, names, stamps, and dates directly over it."
@@ -1471,41 +1501,63 @@ export function CertificateEditorClient({ article }: { article?: string }) {
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             
-            {/* Template Gallery (Col 8) */}
+            {/* Primary Templates Gallery (Col 8) */}
             <div className="md:col-span-8 bg-surface border border-border rounded-2xl p-6 shadow-sm flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-base font-display font-bold text-ink flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-amber-500" /> Choose a Masterpiece Template
+                    <Sparkles className="w-4 h-4 text-amber-500" /> Choose Certificate Layout
                   </h3>
-                  <span className="text-xs text-slate font-sans">8 Presets Available</span>
+                  <span className="text-xs text-slate font-sans">8 Master Styles</span>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {Object.values(CERTIFICATE_TEMPLATES).map((tmpl) => (
-                    <button
-                      key={tmpl.id}
-                      onClick={() => {
-                        setSelectedTemplateId(tmpl.id);
-                        setMode('editor');
-                      }}
-                      className="group relative flex flex-col items-center p-3 rounded-xl border border-border hover:border-primary bg-background hover:bg-primary/5 transition-all text-left overflow-hidden shadow-xs hover:shadow-md"
-                    >
-                      <div className="w-full h-20 rounded-lg overflow-hidden border border-border/50 mb-2.5 flex items-center justify-center bg-slate-900">
-                        {/* Mini SVG Preview */}
-                        <div 
-                          className="w-full h-full transform scale-90 transition duration-300 group-hover:scale-100"
-                          dangerouslySetInnerHTML={{ __html: tmpl.svg }}
-                        />
-                      </div>
-                      <span className="text-xs font-bold text-ink group-hover:text-primary transition line-clamp-1">
-                        {tmpl.name}
-                      </span>
-                      <span className="text-[10px] text-slate line-clamp-1 mt-0.5">
-                        {tmpl.description}
-                      </span>
-                    </button>
-                  ))}
+                {/* 4 Core Layouts Prominently Highlighted */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+                  {PRIMARY_LAYOUTS.map((p) => {
+                    const tmpl = CERTIFICATE_TEMPLATES[p.id];
+                    return (
+                      <button
+                        key={p.id}
+                        onClick={() => {
+                          setSelectedTemplateId(p.id);
+                          setMode('editor');
+                        }}
+                        className="group relative flex flex-col p-3 rounded-xl border border-border hover:border-primary bg-background hover:bg-primary/5 transition-all text-left shadow-xs hover:shadow-md"
+                      >
+                        <div className="w-full h-20 rounded-lg overflow-hidden border border-border/50 mb-2.5 flex items-center justify-center bg-slate-900">
+                          <div 
+                            className="w-full h-full transform scale-90 transition duration-300 group-hover:scale-100"
+                            dangerouslySetInnerHTML={{ __html: tmpl?.svg || '' }}
+                          />
+                        </div>
+                        <span className="text-xs font-bold text-ink group-hover:text-primary transition line-clamp-1">
+                          {p.name}
+                        </span>
+                        <span className="text-[10px] text-slate line-clamp-1 mt-0.5">
+                          {tmpl?.description}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* 4 Extended Themes */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 border-t border-border/60">
+                  {['ruby', 'corporate', 'vintage', 'obsidian'].map((id) => {
+                    const tmpl = CERTIFICATE_TEMPLATES[id];
+                    return (
+                      <button
+                        key={id}
+                        onClick={() => {
+                          setSelectedTemplateId(id);
+                          setMode('editor');
+                        }}
+                        className="p-2 rounded-lg border border-border hover:border-primary bg-background hover:bg-primary/5 text-left text-xs font-semibold text-ink group transition"
+                      >
+                        <span className="group-hover:text-primary transition line-clamp-1">{tmpl.name}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -1701,11 +1753,58 @@ export function CertificateEditorClient({ article }: { article?: string }) {
             {/* =================================================== */}
             <div className={`lg:col-span-3 flex flex-col gap-4 ${isMaximized ? 'overflow-y-auto pr-2 custom-scrollbar h-full' : ''}`}>
               
-              {/* Tab Selector */}
+              {/* PRIMARY CERTIFICATE LAYOUT SELECTOR CARD */}
+              <div className="p-4 bg-background border border-border rounded-xl space-y-3">
+                <div className="flex items-center justify-between pb-1 border-b border-border/80">
+                  <h3 className="font-display font-bold text-xs text-ink uppercase tracking-wider flex items-center gap-1.5">
+                    <Award className="w-4 h-4 text-primary" /> Certificate Layout
+                  </h3>
+                  <span className="text-[10px] text-slate font-sans">Instant Switch</span>
+                </div>
+
+                {/* 4 Core Buttons requested by user */}
+                <div className="grid grid-cols-2 gap-2 font-sans">
+                  {PRIMARY_LAYOUTS.map((layout) => {
+                    const isSelected = selectedTemplateId === layout.id;
+                    return (
+                      <button
+                        key={layout.id}
+                        onClick={() => loadTemplateBackground(layout.id, false)}
+                        className={`p-2.5 rounded-lg border text-xs font-bold text-left transition-all flex items-center justify-between shadow-xs ${
+                          isSelected
+                            ? 'bg-primary text-white border-primary ring-2 ring-primary/20'
+                            : 'bg-surface border-border text-ink hover:border-primary/50 hover:bg-primary/5'
+                        }`}
+                      >
+                        <span className="truncate">{layout.name}</span>
+                        {isSelected && <Check className="w-3.5 h-3.5 flex-shrink-0" />}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Extended Theme Dropdown */}
+                <div className="pt-2 border-t border-border/60 flex items-center justify-between text-xs">
+                  <span className="text-[11px] text-slate">More styles:</span>
+                  <select
+                    value={['classic', 'modern', 'emerald', 'minimalist'].includes(selectedTemplateId) ? '' : selectedTemplateId}
+                    onChange={(e) => e.target.value && loadTemplateBackground(e.target.value, false)}
+                    className="h-7 px-2 bg-surface border border-border rounded text-[11px] text-ink outline-none focus:border-primary"
+                  >
+                    <option value="" disabled>Select style...</option>
+                    <option value="ruby">Prestige Crimson</option>
+                    <option value="corporate">Corporate Blue</option>
+                    <option value="vintage">Vintage Parchment</option>
+                    <option value="obsidian">Luxury Obsidian</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Sub-Tab Navigation */}
               <div className="flex p-1 bg-surface border border-border rounded-xl gap-1">
                 <button
                   onClick={() => setActiveSidebarTab('quick-fill')}
-                  className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition font-sans flex items-center justify-center gap-1.5 ${
+                  className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition font-sans flex items-center justify-center gap-1 ${
                     activeSidebarTab === 'quick-fill'
                       ? 'bg-primary text-white shadow-xs'
                       : 'text-slate hover:text-ink hover:bg-background'
@@ -1714,9 +1813,9 @@ export function CertificateEditorClient({ article }: { article?: string }) {
                   <FileText className="w-3.5 h-3.5" /> Quick Fill
                 </button>
                 <button
-                  onClick={() => setActiveSidebarTab('design')}
-                  className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition font-sans flex items-center justify-center gap-1.5 ${
-                    activeSidebarTab === 'design'
+                  onClick={() => setActiveSidebarTab('elements')}
+                  className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition font-sans flex items-center justify-center gap-1 ${
+                    activeSidebarTab === 'elements'
                       ? 'bg-primary text-white shadow-xs'
                       : 'text-slate hover:text-ink hover:bg-background'
                   }`}
@@ -1724,9 +1823,9 @@ export function CertificateEditorClient({ article }: { article?: string }) {
                   <Sliders className="w-3.5 h-3.5" /> Elements
                 </button>
                 <button
-                  onClick={() => setActiveSidebarTab('decorations')}
-                  className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition font-sans flex items-center justify-center gap-1.5 ${
-                    activeSidebarTab === 'decorations'
+                  onClick={() => setActiveSidebarTab('badges')}
+                  className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition font-sans flex items-center justify-center gap-1 ${
+                    activeSidebarTab === 'badges'
                       ? 'bg-primary text-white shadow-xs'
                       : 'text-slate hover:text-ink hover:bg-background'
                   }`}
@@ -1735,10 +1834,10 @@ export function CertificateEditorClient({ article }: { article?: string }) {
                 </button>
               </div>
 
-              {/* TAB 1: QUICK FILL PANEL */}
+              {/* TAB: QUICK FILL PANEL */}
               {activeSidebarTab === 'quick-fill' && (
-                <div className="p-4 bg-background border border-border rounded-xl space-y-4 animate-in fade-in duration-200">
-                  <div className="flex items-center justify-between pb-2 border-b border-border">
+                <div className="p-4 bg-background border border-border rounded-xl space-y-3.5 animate-in fade-in duration-200">
+                  <div className="flex items-center justify-between pb-1 border-b border-border">
                     <span className="text-xs font-bold text-ink uppercase tracking-wider flex items-center gap-1.5">
                       <FileText className="w-3.5 h-3.5 text-primary" /> Certificate Fields
                     </span>
@@ -1852,12 +1951,11 @@ export function CertificateEditorClient({ article }: { article?: string }) {
                       className="w-full px-2.5 py-1.5 bg-surface border border-border rounded-lg text-xs font-mono text-ink outline-none focus:border-primary"
                     />
                   </div>
-
                 </div>
               )}
 
-              {/* TAB 2: DESIGN & ELEMENT INSERTION */}
-              {activeSidebarTab === 'design' && (
+              {/* TAB: DESIGN & ELEMENTS */}
+              {activeSidebarTab === 'elements' && (
                 <div className="p-4 bg-background border border-border rounded-xl space-y-4 animate-in fade-in duration-200">
                   
                   {/* Insert Text Blocks */}
@@ -1999,10 +2097,10 @@ export function CertificateEditorClient({ article }: { article?: string }) {
                 </div>
               )}
 
-              {/* TAB 3: DECORATIVE BADGES & ROSETTES */}
-              {activeSidebarTab === 'decorations' && (
+              {/* TAB: BADGES & MEDALS */}
+              {activeSidebarTab === 'badges' && (
                 <div className="p-4 bg-background border border-border rounded-xl space-y-3 animate-in fade-in duration-200">
-                  <div className="flex items-center justify-between pb-2 border-b border-border">
+                  <div className="flex items-center justify-between pb-1 border-b border-border">
                     <span className="text-xs font-bold text-ink uppercase tracking-wider flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5 text-amber-500" /> Vector Medals & Seals
                     </span>
@@ -2039,7 +2137,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
             {/* =================================================== */}
             <div className={`lg:col-span-6 flex flex-col items-center ${isMaximized ? 'h-full overflow-hidden' : ''}`}>
               
-              {/* Responsive Canvas Container with auto-fit centering */}
               <div 
                 ref={containerRef}
                 className={`w-full relative border border-border rounded-2xl bg-slate-900/40 dark:bg-black/60 overflow-auto flex justify-center items-center p-4 transition-all shadow-inner ${
@@ -2057,7 +2154,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
                 <canvas ref={canvasElRef} className="block" />
               </div>
 
-              {/* Bottom Quick Advice bar */}
               <div className="w-full flex items-center justify-between text-[11px] text-slate mt-2 px-1">
                 <span>* Double-click any text to edit inline. Use arrow keys to micro-nudge.</span>
                 <span className="font-mono">{documentState.width} &times; {documentState.height} px (A4)</span>
@@ -2534,7 +2630,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
             {/* TAB 1: DRAW SIGNATURE */}
             {sigModalTab === 'draw' && (
               <div className="space-y-3">
-                {/* Ink and Thickness bar */}
                 <div className="flex items-center justify-between text-xs text-slate">
                   <div className="flex items-center gap-2">
                     <span>Ink Color:</span>
@@ -2578,7 +2673,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
                   </div>
                 </div>
 
-                {/* Drawing Surface */}
                 <div className="bg-white border-2 border-dashed border-border rounded-xl overflow-hidden relative cursor-crosshair shadow-inner">
                   <canvas
                     ref={sigPadElRef}
