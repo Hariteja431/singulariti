@@ -1,11 +1,9 @@
 "use client";
 
-import dynamic from 'next/dynamic';
+import { ProtectPdfClient } from './ProtectPdfClient';
 
-const ProtectPdfClient = dynamic(
-  () => import('./ProtectPdfClient').then((m) => m.ProtectPdfClient),
-  { ssr: false }
-);
+
+
 
 interface Props {
   article?: string;

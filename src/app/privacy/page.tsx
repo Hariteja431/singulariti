@@ -31,56 +31,61 @@ export default function PrivacyPage() {
       <main className="flex-1 w-full flex flex-col items-center pt-24 pb-12">
         <section className="container mx-auto px-4 max-w-3xl font-sans text-slate">
           <h1 className="font-display font-bold text-4xl text-ink mb-3">Privacy Policy</h1>
-          <p className="text-sm text-slate mb-8">Last Updated: June 2026</p>
+          <p className="text-sm text-slate mb-8">Last Updated: October 2026</p>
           <p className="mb-6 leading-relaxed">
-            Privacy is a top priority on this website. This Privacy Policy details how information, files, and data are handled when utilizing the tools.
+            Privacy and transparency are core values at Singulariti. This Privacy Policy outlines how your information, files, and data are treated when you use our website, tools, and services.
           </p>
 
           <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">1. No Login, Signup, or User Accounts</h2>
           <p className="mb-4 leading-relaxed">
-            This website does not require or offer any login, signup, or registration system. There is no creation of user accounts, maintenance of user profile databases, or collection of personal identifiers (such as names, email addresses, or phone numbers) to access the utility tools.
+            Singulariti does not require or offer user account registration. You can access and use all our utility tools without creating a profile, providing your name, email address, password, or any personal identification details.
           </p>
 
-          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">2. Browser-Side (Local) File Processing</h2>
+          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">2. Browser-Side (Local) Processing Architecture</h2>
           <p className="mb-4 leading-relaxed">
-            Most of our tools operate entirely inside your web browser. File operations, image compression, formatting, and calculations are computed locally on your device. For these tools, files are never uploaded to our servers, keeping your documents, images, and data strictly on your device.
-          </p>
-
-          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">3. Browser Memory Processing</h2>
-          <p className="mb-4 leading-relaxed">
-            All files are processed directly within your browser's memory (RAM). This means:
+            Our tools are built using modern web standards including HTML5 Canvas, WebAssembly, Web Workers, and the Web Cryptography API. All file conversions, PDF modifications, image compression, formatting, calculations, and text manipulations are performed entirely within your web browser on your own device.
           </p>
           <ul className="list-disc pl-6 mb-4 space-y-2 leading-relaxed">
-            <li>No files are ever uploaded or transmitted to our servers.</li>
-            <li>All processing happens entirely on your local device.</li>
-            <li>Once you refresh or close the tab, all data is immediately cleared from memory.</li>
-            <li>We have absolutely zero access to your files or documents.</li>
+            <li><strong>Zero Server Uploads:</strong> Your documents, images, and inputs are never transmitted, stored, or processed on our servers.</li>
+            <li><strong>Local Volatile Memory:</strong> Files are held temporarily in your browser&apos;s RAM only during your active session.</li>
+            <li><strong>Immediate Clearing:</strong> Once you reload the page, close the browser tab, or click &quot;Reset&quot;, all temporary data is instantly cleared from memory.</li>
+            <li><strong>Complete Confidentiality:</strong> Singulariti team members and third parties have no access to your files or content.</li>
           </ul>
 
-          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">4. No Data Collection or Selling</h2>
+          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">3. Data Collection and Usage</h2>
           <p className="mb-4 leading-relaxed">
-            Personal data or uploaded file content is not sold, traded, rented, or distributed to third parties. There is no intentional collection, inspection, or retention of file contents, text entries in development tools, QR code data, image metadata, or personal documents.
+            We do not sell, rent, trade, or monetize personal data or uploaded file contents. We do not inspect, log, or harvest file contents, developer code snippets, QR code values, financial calculation inputs, or personal documents.
           </p>
 
-          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">5. Usage Analytics</h2>
+          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">4. Google AdSense &amp; Third-Party Advertising</h2>
           <p className="mb-4 leading-relaxed">
-            Basic, anonymous analytics (such as page views, browser type, and country location) may be collected solely to monitor website health and performance. Analytics configurations exclude tracking:
+            To provide our utility tools completely free of charge, we partner with third-party advertising networks, primarily Google AdSense. In compliance with Google Publisher Policies and data transparency guidelines:
           </p>
           <ul className="list-disc pl-6 mb-4 space-y-2 leading-relaxed">
-            <li>Uploaded file names or contents.</li>
-            <li>Text or source codes entered into utility tools.</li>
-            <li>QR code strings or metadata.</li>
-            <li>Images, PDFs, or generated calculations.</li>
+            <li>Third-party vendors, including Google, use cookies to serve ads based on a user&apos;s prior visits to this website or other websites across the Internet.</li>
+            <li>Google&apos;s use of advertising cookies enables it and its partners to serve personalized or contextual advertisements to visitors based on browsing history.</li>
+            <li>Users may opt out of personalized advertising at any time by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Google Ads Settings</a>.</li>
+            <li>Alternatively, users can opt out of a third-party vendor&apos;s use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">www.aboutads.info</a> or <a href="https://youronlinechoices.eu/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Your Online Choices</a>.</li>
           </ul>
 
-          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">6. Third-Party Advertising</h2>
+          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">5. Cookies and Web Storage</h2>
           <p className="mb-4 leading-relaxed">
-            Advertisements may be displayed to keep this service free, provided by third-party vendors like Google AdSense, which may use cookies to serve personalized ads based on visit history.
+            Singulariti uses minimal cookies and local web storage strictly for:
+          </p>
+          <ul className="list-disc pl-6 mb-4 space-y-2 leading-relaxed">
+            <li>Remembering your user interface preferences (such as Dark/Light theme).</li>
+            <li>Recording your cookie consent selection.</li>
+            <li>Aggregated, anonymized traffic analytics (via Google Analytics 4) to monitor website uptime, popular utilities, and technical performance.</li>
+          </ul>
+
+          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">6. External Links</h2>
+          <p className="mb-4 leading-relaxed">
+            Our articles and guides may contain reference links to third-party websites or official documentation. Singulariti is not responsible for the privacy practices, terms, or content of external third-party websites.
           </p>
 
-          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">7. Contact</h2>
+          <h2 className="font-display font-bold text-2xl text-ink mt-8 mb-4">7. Contact &amp; Inquiries</h2>
           <p className="mb-4 leading-relaxed">
-            For questions or feedback regarding this policy or the privacy practices of the utility tools, please contact Singulariti Labs:
+            If you have questions, concerns, or feedback regarding our privacy practices or this policy, please contact our team:
           </p>
           <div className="bg-surface border border-border rounded-xl p-6 mt-6 mb-8">
             <h3 className="font-display font-bold text-lg text-ink mb-4">Singulariti Labs</h3>

@@ -1,11 +1,9 @@
 "use client";
 
-import dynamic from 'next/dynamic';
+import { CompressPdfClient } from './CompressPdfClient';
 
-const CompressPdfClient = dynamic(
-  () => import('./CompressPdfClient').then((m) => m.CompressPdfClient),
-  { ssr: false }
-);
+
+
 
 import { ToolContentBlock } from '@/components/seo/ToolContentBlock';
 

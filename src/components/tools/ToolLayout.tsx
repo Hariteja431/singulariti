@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { ShieldCheck, AlertTriangle, AlertCircle } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -46,30 +46,22 @@ export function ToolLayout({
   relatedTools,
   article
 }: ToolLayoutProps) {
-  const [mounted, setMounted] = useState(false);
+
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  
 
-  if (!mounted) {
-    return (
-      <div className="min-h-screen flex flex-col bg-background">
-        <Header />
-        <main className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-6 py-12 pt-24">
-          <div className="h-64 flex items-center justify-center">
-            <div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  
 
   const seo = utilityId ? getUtilitySEO(utilityId) : undefined;
-  const tool = utilityId ? getToolById(utilityId) : undefined;
+  const activeTool: any = (utilityId ? getToolById(utilityId) : undefined) || {
+    id: utilityId || title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    name: title,
+    description: description,
+    engine: 'utility',
+    path: categoryHref
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -216,7 +208,7 @@ export function ToolLayout({
               </ReactMarkdown>
             </div>
           ) : (
-            tool && <DynamicToolArticle tool={tool} />
+            <DynamicToolArticle tool={activeTool} />
           )}
 
           {/* How to Use */}

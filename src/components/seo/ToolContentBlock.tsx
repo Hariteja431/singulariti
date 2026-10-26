@@ -3,7 +3,10 @@ import { seoContentRegistry } from '@/lib/seo/contentRegistry';
 import { DynamicFAQSchema } from './DynamicFAQSchema';
 import { CheckCircle2, ChevronDown } from 'lucide-react';
 import { ToolRegistryItem } from '@/registry/types';
+import { getToolById } from '@/registry';
 import { DynamicToolArticle } from './DynamicToolArticle';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface ToolContentBlockProps {
   utilityId: string;
@@ -11,18 +14,22 @@ interface ToolContentBlockProps {
   tool?: ToolRegistryItem;
 }
 
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-
 const LAST_UPDATE_DATE = "2026-06-19";
 const LAST_UPDATE_DISPLAY = "Jun 19, 2026";
 
 export function ToolContentBlock({ utilityId, article, tool }: ToolContentBlockProps) {
   const content = seoContentRegistry[utilityId];
 
-  // If no static content is defined, fallback to dynamic programmatic article
+  // If no static content is defined in seoContentRegistry, fallback to dynamic comprehensive article
   if (!content) {
-    return tool ? <DynamicToolArticle tool={tool} /> : null;
+    const activeTool = tool || getToolById(utilityId) || {
+      id: utilityId,
+      name: utilityId.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' '),
+      description: 'Online browser-based utility tool.',
+      engine: 'utility',
+      path: `/tools/${utilityId}`
+    };
+    return <DynamicToolArticle tool={activeTool} />;
   }
 
   return (

@@ -1,139 +1,161 @@
 import React from 'react';
 import { ToolRegistryItem } from '@/registry/types';
+import { getToolDetails } from '@/lib/tool-content/allToolsDb';
+import { CheckCircle2, AlertTriangle, ShieldCheck, HelpCircle, ListOrdered } from 'lucide-react';
 
 interface DynamicToolArticleProps {
   tool: ToolRegistryItem;
 }
 
 export function DynamicToolArticle({ tool }: DynamicToolArticleProps) {
-  const lowerName = tool.name.toLowerCase();
-  
-  const renderCompressionText = () => (
-    <>
-      <p className="mb-6">
-        When you need to reduce the file size of your assets without sacrificing visual quality, the <strong>{tool.name}</strong> provides an efficient, browser-based solution. 
-        Designed to {tool.description.toLowerCase().replace(/\.$/, '')}, this utility ensures that your digital assets are optimized for faster web loading and easier sharing.
-      </p>
-      <h3 className="text-xl font-bold font-display text-ink mb-3">How Local Compression Works</h3>
-      <p className="mb-6">
-        Unlike remote cloud services that require you to upload your files, this compression engine runs locally on your device. 
-        By utilizing advanced algorithms directly within your web browser, it shrinks the file footprint instantly while guaranteeing that your original data remains completely private and secure.
-      </p>
-    </>
-  );
+  const details = getToolDetails(tool.id, tool.name, tool.description);
 
-  const renderConversionText = () => (
-    <>
-      <p className="mb-6">
-        Format compatibility issues can slow down your workflow. The <strong>{tool.name}</strong> is built to seamlessly {tool.description.toLowerCase().replace(/\.$/, '')}.
-        Whether you are preparing assets for web deployment or ensuring compatibility across different software platforms, this tool provides a rapid and precise conversion process.
-      </p>
-      <h3 className="text-xl font-bold font-display text-ink mb-3">Secure Format Translation</h3>
-      <p className="mb-6">
-        Because the conversion process occurs entirely on the client side, your files are never transmitted to external servers. 
-        This zero-upload approach not only protects your sensitive information but also bypasses the file size limits typically imposed by cloud-based conversion tools.
-      </p>
-    </>
-  );
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": details.faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a
+      }
+    }))
+  };
 
-  const renderDeveloperText = () => (
-    <>
-      <p className="mb-6">
-        The <strong>{tool.name}</strong> is a dedicated utility crafted to {tool.description.toLowerCase().replace(/\.$/, '')}. 
-        Engineered specifically for developers and technical professionals, it streamlines tedious data formatting, encoding, and validation tasks directly within your active workflow.
-      </p>
-      <h3 className="text-xl font-bold font-display text-ink mb-3">Client-Side Execution</h3>
-      <p className="mb-6">
-        Handling sensitive code snippets, tokens, or production data requires absolute security. 
-        This tool processes all inputs natively within your browser environment, ensuring that your proprietary data or configuration strings are never exposed to third-party endpoints.
-      </p>
-    </>
-  );
-  
-  const renderTextToolText = () => (
-    <>
-      <p className="mb-6">
-        Optimizing and formatting written content is seamless with the <strong>{tool.name}</strong>. 
-        Our platform allows you to {tool.description.toLowerCase().replace(/\.$/, '')}, making it an invaluable resource for writers, editors, and digital marketers seeking to improve their content workflow.
-      </p>
-      <h3 className="text-xl font-bold font-display text-ink mb-3">Instant Text Processing</h3>
-      <p className="mb-6">
-        Text manipulation should be instantaneous. By performing all calculations and formatting rules locally, this utility delivers real-time results without the latency or privacy concerns associated with server-side text processors.
-      </p>
-    </>
-  );
-
-  const renderCalculatorText = () => (
-    <>
-      <p className="mb-6">
-        The <strong>{tool.name}</strong> is an interactive computational tool designed to {tool.description.toLowerCase().replace(/\.$/, '')}. 
-        Whether you are managing personal finances, solving complex mathematical equations, or calculating critical metrics, this utility provides immediate and accurate results.
-      </p>
-      <h3 className="text-xl font-bold font-display text-ink mb-3">Private and Accurate Calculations</h3>
-      <p className="mb-6">
-        Financial and personal data should remain private. All formulas and computations are executed natively in your browser's memory. No input data is tracked, stored, or transmitted, providing you with a highly secure calculation environment.
-      </p>
-    </>
-  );
-
-  const renderEditingText = () => (
-    <>
-      <p className="mb-6">
-        The <strong>{tool.name}</strong> empowers you to visually {tool.description.toLowerCase().replace(/\.$/, '')}. 
-        It brings complex editing capabilities directly into your browser, providing a highly responsive canvas without the need for expensive desktop software installations.
-      </p>
-      <h3 className="text-xl font-bold font-display text-ink mb-3">Browser-Based Canvas Rendering</h3>
-      <p className="mb-6">
-        All graphical edits and visual adjustments are rendered in real-time utilizing HTML5 Canvas and WebGL. This means your high-resolution assets are processed securely on your machine, eliminating slow cloud syncs and preserving your digital privacy.
-      </p>
-    </>
-  );
-
-  const renderDefaultText = () => (
-    <>
-      <p className="mb-6">
-        Welcome to the <strong>{tool.name}</strong>. This utility is specifically designed to {tool.description.toLowerCase().replace(/\.$/, '')}. 
-        It offers a streamlined, intuitive interface to help you achieve your goals quickly and efficiently without unnecessary complications.
-      </p>
-      <h3 className="text-xl font-bold font-display text-ink mb-3">Privacy First</h3>
-      <p className="mb-6">
-        Singulariti prioritizes your privacy above all else. This tool operates entirely within the confines of your web browser, ensuring that your files, inputs, and generated outputs remain strictly on your local device.
-      </p>
-    </>
-  );
-
-  const getDynamicContent = () => {
-    switch (tool.engine) {
-      case 'compression': return renderCompressionText();
-      case 'conversion': return renderConversionText();
-      case 'developer': return renderDeveloperText();
-      case 'text-tool': return renderTextToolText();
-      case 'editing': 
-      case 'single-editing': return renderEditingText();
-      case 'unit-converter':
-      case 'utility': return renderCalculatorText();
-      default:
-        if (lowerName.includes('calculator') || lowerName.includes('converter')) return renderCalculatorText();
-        if (lowerName.includes('text') || lowerName.includes('counter')) return renderTextToolText();
-        if (lowerName.includes('edit') || lowerName.includes('crop') || lowerName.includes('rotate')) return renderEditingText();
-        return renderDefaultText();
-    }
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": `How to use ${tool.name}`,
+    "description": tool.description,
+    "step": details.stepByStep.map((step, idx) => ({
+      "@type": "HowToStep",
+      "position": idx + 1,
+      "text": step
+    }))
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto mt-16 mb-12 px-4">
-      <div className="bg-surface/50 border border-border/60 rounded-2xl p-6 md:p-8">
-        <article className="prose prose-slate dark:prose-invert max-w-none text-slate prose-headings:font-display prose-headings:font-bold prose-headings:text-ink prose-strong:text-ink prose-p:font-sans prose-p:leading-relaxed">
-          <h2 className="text-2xl font-bold font-display text-ink mb-4">About the {tool.name}</h2>
-          {getDynamicContent()}
-          <h3 className="text-xl font-bold font-display text-ink mb-3">Key Benefits</h3>
-          <ul className="list-disc pl-6 mb-6">
-            <li className="mb-2"><strong>Zero Uploads:</strong> No arbitrary file size limits or wait times.</li>
-            <li className="mb-2"><strong>Unmatched Privacy:</strong> Data never leaves your personal device.</li>
-            <li className="mb-2"><strong>Always Free:</strong> Unrestricted access with no subscription required.</li>
+    <article className="w-full max-w-4xl mx-auto mt-16 mb-12 px-4 space-y-12">
+      {/* Schema.org Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+
+      {/* 1. Overview & Purpose */}
+      <section className="bg-surface border border-border rounded-2xl p-6 md:p-8 space-y-4 shadow-sm">
+        <h2 className="text-2xl md:text-3xl font-display font-bold text-ink">
+          About the {tool.name}
+        </h2>
+        <p className="text-slate text-base md:text-lg leading-relaxed">
+          {details.whyNeed}
+        </p>
+        <p className="text-slate text-base leading-relaxed">
+          {details.whenToUse}
+        </p>
+      </section>
+
+      {/* 2. Technical Architecture & Local Privacy */}
+      <section className="bg-surface border border-border rounded-2xl p-6 md:p-8 space-y-4 shadow-sm">
+        <div className="flex items-center gap-3 text-primary">
+          <ShieldCheck className="w-7 h-7 flex-shrink-0" />
+          <h3 className="text-xl md:text-2xl font-display font-bold text-ink">
+            How Client-Side Processing Works
+          </h3>
+        </div>
+        <p className="text-slate text-base leading-relaxed">
+          {details.howWorks}
+        </p>
+        <div className="bg-primary/5 border border-primary/10 rounded-xl p-4 text-sm text-slate leading-relaxed">
+          <strong>Privacy Guarantee:</strong> Unlike traditional web services that upload your personal documents, images, or configuration files to third-party cloud servers, Singulariti executes all processing in your web browser&apos;s volatile memory. No files are transferred over the network, ensuring complete confidentiality.
+        </div>
+      </section>
+
+      {/* 3. Step-by-Step Instructions */}
+      <section className="bg-surface border border-border rounded-2xl p-6 md:p-8 space-y-6 shadow-sm">
+        <div className="flex items-center gap-3 text-ink">
+          <ListOrdered className="w-6 h-6 text-primary flex-shrink-0" />
+          <h3 className="text-xl md:text-2xl font-display font-bold">
+            Step-by-Step Guide: How to Use {tool.name}
+          </h3>
+        </div>
+        <ol className="space-y-4">
+          {details.stepByStep.map((step, idx) => (
+            <li key={idx} className="flex items-start gap-4 text-slate">
+              <span className="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center text-sm mt-0.5">
+                {idx + 1}
+              </span>
+              <span className="text-base leading-relaxed pt-0.5">
+                {step}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* 4. Key Advantages */}
+      <section className="bg-surface border border-border rounded-2xl p-6 md:p-8 space-y-6 shadow-sm">
+        <h3 className="text-xl md:text-2xl font-display font-bold text-ink">
+          Key Advantages &amp; Features
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {details.advantages.map((adv, idx) => (
+            <div key={idx} className="flex items-start gap-3 p-4 bg-background/50 rounded-xl border border-border/60">
+              <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+              <p className="text-slate text-sm leading-relaxed">{adv}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. Common Mistakes to Avoid */}
+      {details.commonMistakes.length > 0 && (
+        <section className="bg-surface border border-border rounded-2xl p-6 md:p-8 space-y-4 shadow-sm">
+          <div className="flex items-center gap-3 text-amber-500">
+            <AlertTriangle className="w-6 h-6 flex-shrink-0" />
+            <h3 className="text-xl md:text-2xl font-display font-bold text-ink">
+              Tips &amp; Common Mistakes to Avoid
+            </h3>
+          </div>
+          <ul className="space-y-3">
+            {details.commonMistakes.map((mistake, idx) => (
+              <li key={idx} className="flex items-start gap-3 text-slate text-sm leading-relaxed">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0 mt-2" />
+                <span>{mistake}</span>
+              </li>
+            ))}
           </ul>
-        </article>
-      </div>
-    </div>
+        </section>
+      )}
+
+      {/* 6. Frequently Asked Questions */}
+      {details.faqs.length > 0 && (
+        <section className="bg-surface border border-border rounded-2xl p-6 md:p-8 space-y-6 shadow-sm">
+          <div className="flex items-center gap-3 text-ink">
+            <HelpCircle className="w-6 h-6 text-primary flex-shrink-0" />
+            <h3 className="text-xl md:text-2xl font-display font-bold">
+              Frequently Asked Questions
+            </h3>
+          </div>
+          <div className="space-y-4 divide-y divide-border/60">
+            {details.faqs.map((faq, idx) => (
+              <div key={idx} className={idx > 0 ? "pt-4" : ""}>
+                <h4 className="text-base font-bold text-ink mb-2">
+                  {faq.q}
+                </h4>
+                <p className="text-slate text-sm leading-relaxed">
+                  {faq.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+    </article>
   );
 }

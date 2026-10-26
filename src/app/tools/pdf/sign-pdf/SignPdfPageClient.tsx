@@ -1,11 +1,9 @@
 "use client";
 
-import dynamic from 'next/dynamic';
+import { SignPdfClient } from './SignPdfClient';
 
-const SignPdfClient = dynamic(
-  () => import('./SignPdfClient').then((m) => m.SignPdfClient),
-  { ssr: false }
-);
+
+
 
 interface Props {
   article?: string;

@@ -1,11 +1,9 @@
 "use client";
 
-import dynamic from 'next/dynamic';
+import { ExtractPdfPagesClient } from './ExtractPdfPagesClient';
 
-const ExtractPdfPagesClient = dynamic(
-  () => import('./ExtractPdfPagesClient').then((m) => m.ExtractPdfPagesClient),
-  { ssr: false }
-);
+
+
 
 interface Props {
   article?: string;

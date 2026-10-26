@@ -1,11 +1,9 @@
 "use client";
 
-import dynamic from 'next/dynamic';
+import { PageCounterClient } from './PageCounterClient';
 
-const PageCounterClient = dynamic(
-  () => import('./PageCounterClient').then((m) => m.PageCounterClient),
-  { ssr: false }
-);
+
+
 
 interface Props {
   article?: string;

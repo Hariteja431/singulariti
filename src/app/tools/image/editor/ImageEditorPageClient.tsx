@@ -1,12 +1,8 @@
 "use client";
 
-import dynamic from 'next/dynamic';
 import React from 'react';
 
-const ImageEditorClient = dynamic(() => import('@/components/tools/image-editor/ImageEditorClient').then(mod => mod.ImageEditorClient), {
-  ssr: false,
-  loading: () => <div className="min-h-screen flex items-center justify-center">Loading Image Editor...</div>
-});
+import { ImageEditorClient } from '@/components/tools/image-editor/ImageEditorClient';
 
 import { ToolContentBlock } from '@/components/seo/ToolContentBlock';
 

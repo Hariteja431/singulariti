@@ -1,11 +1,9 @@
 "use client";
 
-import dynamic from 'next/dynamic';
+import { PdfToJpgClient } from './PdfToJpgClient';
 
-const PdfToJpgClient = dynamic(
-  () => import('./PdfToJpgClient').then((m) => m.PdfToJpgClient),
-  { ssr: false }
-);
+
+
 
 interface Props {
   article?: string;

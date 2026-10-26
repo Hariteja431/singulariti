@@ -1,11 +1,9 @@
 "use client";
 
-import dynamic from 'next/dynamic';
+import { DeletePdfPagesClient } from './DeletePdfPagesClient';
 
-const DeletePdfPagesClient = dynamic(
-  () => import('./DeletePdfPagesClient').then((m) => m.DeletePdfPagesClient),
-  { ssr: false }
-);
+
+
 
 interface Props {
   article?: string;

@@ -1,11 +1,9 @@
 "use client";
 
-import dynamic from 'next/dynamic';
+import { RotatePdfClient } from './RotatePdfClient';
 
-const RotatePdfClient = dynamic(
-  () => import('./RotatePdfClient').then((m) => m.RotatePdfClient),
-  { ssr: false }
-);
+
+
 
 interface Props {
   article?: string;

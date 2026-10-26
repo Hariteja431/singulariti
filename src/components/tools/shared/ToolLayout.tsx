@@ -7,6 +7,8 @@ import { Footer } from '@/components/layout/Footer';
 import { ChevronDown, ChevronUp, ArrowLeft, ShieldCheck } from 'lucide-react';
 import { SeoSchema } from './SeoSchema';
 import { getUtilitySEO } from '@/lib/seo/utilityMetadata';
+import { DynamicToolArticle } from '@/components/seo/DynamicToolArticle';
+import { getToolById } from '@/registry';
 
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -50,6 +52,13 @@ export function ToolLayout({
   };
 
   const seo = utilityId ? getUtilitySEO(utilityId) : undefined;
+  const activeTool: any = (utilityId ? getToolById(utilityId) : undefined) || {
+    id: utilityId || title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    name: title,
+    description: description,
+    engine: 'utility',
+    path: categoryPath || '/tools'
+  };
 
   return (
     <>

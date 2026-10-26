@@ -1,11 +1,9 @@
 "use client";
 
-import dynamic from 'next/dynamic';
+import { RearrangePdfPagesClient } from './RearrangePdfPagesClient';
 
-const RearrangePdfPagesClient = dynamic(
-  () => import('./RearrangePdfPagesClient').then((m) => m.RearrangePdfPagesClient),
-  { ssr: false }
-);
+
+
 
 interface Props {
   article?: string;

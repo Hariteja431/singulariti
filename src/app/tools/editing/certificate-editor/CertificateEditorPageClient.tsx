@@ -1,11 +1,7 @@
 "use client";
 
-import dynamic from 'next/dynamic';
 
-const CertificateEditorClient = dynamic(
-  () => import('./CertificateEditorClient').then((m) => m.CertificateEditorClient),
-  { ssr: false }
-);
+import { CertificateEditorClient } from './CertificateEditorClient';
 
 interface Props {
   article?: string;
