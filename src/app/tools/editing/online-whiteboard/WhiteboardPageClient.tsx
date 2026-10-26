@@ -1,7 +1,7 @@
 "use client";
 
-import React from 'react';
-
+import React, { useState } from 'react';
+import { ToolLayout } from '@/components/tools/ToolLayout';
 import WhiteboardClientWrapper from '@/components/tools/whiteboard/WhiteboardClientWrapper';
 
 export function WhiteboardPageClient() {

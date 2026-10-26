@@ -1,8 +1,8 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { QRType } from '@/lib/qr/qrHelpers';
-
+import { ToolLayout } from '@/components/tools/ToolLayout';
 import { QrCodeGeneratorClient } from '../qr-code-generator/QrCodeGeneratorClient';
 
 interface Props {

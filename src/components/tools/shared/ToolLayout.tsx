@@ -9,6 +9,7 @@ import { SeoSchema } from './SeoSchema';
 import { getUtilitySEO } from '@/lib/seo/utilityMetadata';
 import { DynamicToolArticle } from '@/components/seo/DynamicToolArticle';
 import { getToolById } from '@/registry';
+import { getToolGuideUrl } from '@/lib/blog';
 
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -52,6 +53,7 @@ export function ToolLayout({
   };
 
   const seo = utilityId ? getUtilitySEO(utilityId) : undefined;
+  const guideUrl = utilityId ? getToolGuideUrl(utilityId) : undefined;
   const activeTool: any = (utilityId ? getToolById(utilityId) : undefined) || {
     id: utilityId || title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
     name: title,

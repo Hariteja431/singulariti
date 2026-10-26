@@ -2774,6 +2774,6 @@ export function CertificateEditorClient({ article }: { article?: string }) {
         </div>
       )}
 
-    </div>
+    </ToolLayout>
   );
 }

@@ -56,6 +56,7 @@ export function ToolLayout({
   
 
   const seo = utilityId ? getUtilitySEO(utilityId) : undefined;
+  const guideUrl = utilityId ? getToolGuideUrl(utilityId) : undefined;
   const activeTool: any = (utilityId ? getToolById(utilityId) : undefined) || {
     id: utilityId || title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
     name: title,
@@ -206,11 +207,7 @@ export function ToolLayout({
         {/* Core Tool Interface Workspace */}
         <section className="container mx-auto px-4 md:px-6 w-full flex justify-center">
           <div className="w-full max-w-5xl">
-            {mounted ? children : (
-              <div className="h-64 flex items-center justify-center">
-                <div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
-              </div>
-            )}
+            {children}
           </div>
         </section>
 
