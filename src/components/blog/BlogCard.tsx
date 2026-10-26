@@ -129,7 +129,7 @@ export function BlogCard({ post }: BlogCardProps) {
             href={post.url}
             className="inline-flex items-center gap-2 text-sm font-semibold text-teal-700 hover:text-teal-800 dark:text-teal-300 dark:hover:text-teal-200 transition-colors duration-200"
           >
-            Read More <ArrowRight className="w-3.5 h-3.5" />
+            Read the complete {post.title} guide <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>

@@ -8,6 +8,7 @@ import {
   toolRegistry
 } from '@/content/tools/toolRegistry';
 import { SimilarTopicsSidebar } from '@/components/blog/SimilarTopicsSidebar';
+import { getToolGuideUrl } from '@/lib/blog';
 import { 
   ArrowLeft, 
   Play, 
@@ -166,7 +167,7 @@ export function SubSeriesContent({ seriesSlug, subSectionSlug, page }: SubSeries
                         </Link>
                       )}
                       <Link 
-                        href={`/blog/guides/${guide.slug}`}
+                        href={getToolGuideUrl(guide.utilityId) || `/blog/guides/${guide.slug}`}
                         className="flex-1 text-center py-2.5 bg-background border border-border hover:border-primary hover:text-primary rounded-xl transition-all inline-flex items-center justify-center gap-1"
                       >
                         Read Guide <ArrowRight className="w-3 h-3" />

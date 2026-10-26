@@ -34,7 +34,7 @@ export function BlogArticle({ post }: BlogArticleProps) {
   const rawSections = post.rawSections;
   const sectionsArray = Array.isArray(post.sections) ? post.sections : null;
 
-  if (rawSections) {
+  if (rawSections && post.toolUrl) {
     const s = rawSections;
     return (
       <article className="space-y-12 font-sans text-slate-700 dark:text-slate-300 blog-article-content">
@@ -66,9 +66,12 @@ export function BlogArticle({ post }: BlogArticleProps) {
         {/* 2. What This Tool Does */}
         {s.whatThisToolDoes && (
           <section className="space-y-3">
-            <h2 className="font-display font-bold text-xl text-slate-950 dark:text-white tracking-tight flex items-center gap-2">
-              <Cpu className="w-5 h-5 text-teal-600 dark:text-teal-400" /> What This Tool Does
-            </h2>
+            <div className="flex items-center gap-2">
+              <Cpu className="w-5 h-5 text-teal-600 dark:text-teal-400" />
+              <h2 className="font-display font-bold text-xl text-slate-950 dark:text-white tracking-tight">
+                What This Tool Does
+              </h2>
+            </div>
             <div className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(s.whatThisToolDoes) }} />
           </section>
         )}
@@ -76,9 +79,12 @@ export function BlogArticle({ post }: BlogArticleProps) {
         {/* 3. Why This Tool Is Included */}
         {s.whyIncluded && (
           <section className="space-y-3">
-            <h2 className="font-display font-bold text-xl text-slate-950 dark:text-white tracking-tight flex items-center gap-2">
-              <HelpCircle className="w-5 h-5 text-teal-600 dark:text-teal-400" /> Why This Tool Is Included
-            </h2>
+            <div className="flex items-center gap-2">
+              <HelpCircle className="w-5 h-5 text-teal-600 dark:text-teal-400" />
+              <h2 className="font-display font-bold text-xl text-slate-950 dark:text-white tracking-tight">
+                Why This Tool Is Included
+              </h2>
+            </div>
             <div className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(s.whyIncluded) }} />
           </section>
         )}
@@ -118,9 +124,12 @@ export function BlogArticle({ post }: BlogArticleProps) {
         {/* 6. How to Use */}
         {s.howToUse && s.howToUse.length > 0 && (
           <section className="space-y-3">
-            <h2 className="font-display font-bold text-xl text-slate-950 dark:text-white tracking-tight flex items-center gap-2">
-              <ListChecks className="w-5 h-5 text-teal-600 dark:text-teal-400" /> How to Use This Tool
-            </h2>
+            <div className="flex items-center gap-2">
+              <ListChecks className="w-5 h-5 text-teal-600 dark:text-teal-400" />
+              <h2 className="font-display font-bold text-xl text-slate-950 dark:text-white tracking-tight">
+                How to Use This Tool
+              </h2>
+            </div>
             <ol className="space-y-2.5 list-none pl-0">
               {s.howToUse.map((step: string, idx: number) => (
                 <li key={idx} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">

@@ -81,10 +81,13 @@ export default async function BlogHomePage() {
           <section className="max-w-6xl mx-auto px-4 space-y-10 pt-8">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800/80 pb-4">
               <div>
-                <h2 className="font-display font-bold text-2xl text-slate-950 dark:text-white tracking-tight flex items-center gap-2">
-                  <Layers className="w-6 h-6 text-teal-600 dark:text-teal-400" /> Guide Series
-                </h2>
-                <p className="text-slate-600 dark:text-slate-300 text-sm font-sans mt-1">
+                <div className="flex items-center gap-2 mb-1">
+                  <Layers className="w-6 h-6 text-teal-600 dark:text-teal-400" />
+                  <h2 className="font-display font-bold text-2xl text-slate-950 dark:text-white tracking-tight">
+                    Guide Series
+                  </h2>
+                </div>
+                <p className="text-slate-600 dark:text-slate-300 text-sm font-sans">
                   Discover sub-sections and individual tools grouped by utility classes.
                 </p>
               </div>

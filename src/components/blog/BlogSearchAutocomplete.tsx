@@ -5,7 +5,7 @@ import { Search, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { toolRegistry } from '@/content/tools/toolRegistry';
-import { getAllPosts } from '@/lib/blog';
+import { getAllPosts, getToolGuideUrl } from '@/lib/blog';
 
 export function BlogSearchAutocomplete() {
   const [query, setQuery] = useState('');
@@ -122,7 +122,7 @@ export function BlogSearchAutocomplete() {
                   {matchingTools.map(tool => (
                     <Link
                       key={tool.id}
-                      href={`/blog/guides/${tool.guideSlug}`}
+                      href={getToolGuideUrl(tool.id) || `/blog/guides/${tool.guideSlug}`}
                       onClick={() => setIsOpen(false)}
                       className="block px-3 py-2.5 rounded-xl hover:bg-teal-50 dark:hover:bg-teal-950/20 transition-colors"
                     >

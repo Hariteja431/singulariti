@@ -67,9 +67,12 @@ export default async function BlogCategoryPage({ params }: PageProps) {
 
           {/* Header */}
           <header className="max-w-4xl mb-12 space-y-4">
-            <h1 className="font-display font-bold text-3xl md:text-5xl text-slate-950 dark:text-white leading-tight tracking-tight flex items-center gap-3">
-              <FolderOpen className="w-8 h-8 text-teal-600 dark:text-teal-400" /> {catData.name} Guides
-            </h1>
+            <div className="flex items-center gap-3 mb-2">
+              <FolderOpen className="w-8 h-8 text-teal-600 dark:text-teal-400" />
+              <h1 className="font-display font-bold text-3xl md:text-5xl text-slate-950 dark:text-white leading-tight tracking-tight">
+                {catData.name} Guides
+              </h1>
+            </div>
             <p className="font-sans text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
               {catData.description}
             </p>

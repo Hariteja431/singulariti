@@ -130,6 +130,17 @@ export function ToolLayout({
           <p className="font-sans text-base text-slate leading-relaxed">
             {description}
           </p>
+          {guideUrl && (
+            <div className="mt-4">
+              <Link 
+                href={guideUrl}
+                className="inline-flex items-center gap-1.5 text-xs font-sans font-bold text-primary hover:text-primary/80 transition-colors bg-primary/5 hover:bg-primary/10 px-3.5 py-2 rounded-xl"
+              >
+                <span>Read the Complete {title} Guide</span>
+                <span className="text-[10px]">→</span>
+              </Link>
+            </div>
+          )}
         </section>
 
         {/* Privacy Lock Banner */}

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { toolRegistry, sectionRegistry, subSectionRegistry, UtilityRegistryItem } from '@/content/tools/toolRegistry';
-import { getAllPosts, BlogPost } from '@/lib/blog';
+import { getAllPosts, BlogPost, getToolGuideUrl } from '@/lib/blog';
 import { Search, Compass, Play, ArrowLeft, ArrowRight, ListFilter, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
 
 function SearchResultsContent() {
@@ -94,20 +94,11 @@ function SearchResultsContent() {
   return (
     <div className="container mx-auto px-4 md:px-6 max-w-7xl space-y-8">
       
-      {/* Breadcrumbs */}
-      <div className="flex items-center gap-2 text-xs font-sans text-slate">
-        <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-        <span>/</span>
-        <Link href="/blog" className="hover:text-primary transition-colors">Blog</Link>
-        <span>/</span>
-        <span className="text-ink font-semibold">Search Results</span>
-      </div>
-
       {/* Heading Results Banner */}
       <header className="border-b border-border pb-6 space-y-2">
-        <h1 className="font-display font-bold text-2xl md:text-3xl text-ink tracking-tight flex items-center gap-2">
-          Search results for &ldquo;<span className="text-primary">{query || selectedOpType || 'all tools'}</span>&rdquo;
-        </h1>
+        <h2 className="font-display font-bold text-2xl md:text-3xl text-ink tracking-tight">
+          Search results for &ldquo;{query || selectedOpType || 'all tools'}&rdquo;
+        </h2>
         <p className="font-sans text-xs text-slate">
           Found {filteredResults.length} matching utility tools. Use the filter settings below to narrow down your results.
         </p>
@@ -190,7 +181,7 @@ function SearchResultsContent() {
               {blogResults.map((post) => (
                 <Link 
                   key={post.slug}
-                  href={`/blog/guides/${post.slug}`}
+                  href={post.url}
                   className="bg-surface border border-border p-5 rounded-2xl hover:border-primary/50 transition-all flex flex-col gap-2 group"
                 >
                   <div className="flex justify-between items-start mb-1">
@@ -263,7 +254,7 @@ function SearchResultsContent() {
                       <Play className="w-3 h-3 fill-white" /> Use Tool
                     </Link>
                     <Link 
-                      href={`/blog/guides/${tool.guideSlug}`}
+                      href={getToolGuideUrl(tool.id) || `/blog/guides/${tool.guideSlug}`}
                       className="flex-1 text-center py-2.5 bg-background border border-border hover:border-primary hover:text-primary rounded-xl transition-all inline-flex items-center justify-center gap-1"
                     >
                       Read Guide <ArrowRight className="w-3 h-3" />

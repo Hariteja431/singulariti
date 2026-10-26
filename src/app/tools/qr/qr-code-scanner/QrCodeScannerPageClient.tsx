@@ -1,4 +1,6 @@
 "use client";
+import { ToolLayoutPlaceholder } from '@/components/tools/ToolLayoutPlaceholder';
+
 
 
 import { QrCodeScannerClient } from './QrCodeScannerClient';

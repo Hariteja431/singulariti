@@ -89,6 +89,7 @@ export function Footer() {
               <Link href="/blog" className="text-[13px] text-slate hover:text-primary-text transition-colors">Blog</Link>
               <Link href="/contact" className="text-[13px] text-slate hover:text-primary-text transition-colors">Contact</Link>
               <Link href="/feedback" className="text-[13px] text-slate hover:text-primary-text transition-colors">Feedback & Requests</Link>
+              <Link href="/cant-access" className="text-[13px] text-slate hover:text-primary-text transition-colors">Can't Access?</Link>
               <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="text-[13px] text-slate hover:text-primary-text transition-colors">Sitemap</a>
             </nav>
           </div>

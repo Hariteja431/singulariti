@@ -537,6 +537,25 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       image: "https://www.singulariti.in/og-fallback.png"
     }
   },
+  "collection-image-animation": {
+    title: "Image Animation Utilities - Edit & Create GIFs Online",
+    description: "Use image animation utilities to create, compress, and resize animated GIFs, or convert images to animations directly in the browser.",
+    path: "/image/animation",
+    robots: { index: true, follow: true },
+    openGraph: {
+      title: "Image Animation Utilities - Edit & Create GIFs Online",
+      description: "Use image animation utilities to create, compress, and resize animated GIFs, or convert images to animations directly in the browser.",
+      url: "https://www.singulariti.in/image/animation",
+      type: "website",
+      image: "https://www.singulariti.in/og-fallback.png"
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Image Animation Utilities - Edit & Create GIFs Online",
+      description: "Use image animation utilities to create, compress, and resize animated GIFs, or convert images to animations directly in the browser.",
+      image: "https://www.singulariti.in/og-fallback.png"
+    }
+  },
   "collection-editing-tools": {
     title: "Image Editing Utilities - Edit Images Online",
     description: "Use image editing utilities to resize, crop, rotate, flip, and apply filters to images directly in the browser.",
@@ -572,6 +591,25 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
       card: "summary_large_image",
       title: "Disclaimer | Singulariti",
       description: "Read the disclaimer and limitations of liability for the tools, content, and calculators provided by Singulariti.",
+      image: "https://www.singulariti.in/og-fallback.png"
+    }
+  },
+  "cant-access": {
+    title: "Can't Access Singulariti? Troubleshooting Guide",
+    description: "If you cannot access Singulariti, follow our troubleshooting steps: force refresh, clear browser cache, flush DNS, or switch to public DNS (Google DNS/OpenDNS).",
+    path: "/cant-access",
+    robots: { index: true, follow: true },
+    openGraph: {
+      title: "Can't Access Singulariti? Troubleshooting Guide",
+      description: "If you cannot access Singulariti, follow our troubleshooting steps: force refresh, clear browser cache, flush DNS, or switch to public DNS (Google DNS/OpenDNS).",
+      url: "https://www.singulariti.in/cant-access",
+      type: "website",
+      image: "https://www.singulariti.in/og-fallback.png"
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Can't Access Singulariti? Troubleshooting Guide",
+      description: "If you cannot access Singulariti, follow our troubleshooting steps: force refresh, clear browser cache, flush DNS, or switch to public DNS (Google DNS/OpenDNS).",
       image: "https://www.singulariti.in/og-fallback.png"
     }
   }

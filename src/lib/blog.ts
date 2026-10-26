@@ -1948,6 +1948,40 @@ export function getAllPostsCached(): any[] {
     }
   });
 
+  // Create a map of slug to correct URL
+  const slugToUrlMap = new Map<string, string>();
+  all.forEach(post => {
+    slugToUrlMap.set(post.slug, post.url);
+  });
+
+  // Post-process all posts to fix related items and related tools URLs
+  all.forEach(post => {
+    if (post.relatedTools) {
+      post.relatedTools.forEach((t: any) => {
+        let targetSlug = '';
+        if (t.url) {
+          const parts = t.url.split('/');
+          targetSlug = parts[parts.length - 1];
+        }
+        if (targetSlug && slugToUrlMap.has(targetSlug)) {
+          t.url = slugToUrlMap.get(targetSlug)!;
+        }
+      });
+    }
+    if (post.relatedItems) {
+      post.relatedItems.forEach((t: any) => {
+        let targetSlug = '';
+        if (t.url) {
+          const parts = t.url.split('/');
+          targetSlug = parts[parts.length - 1];
+        }
+        if (targetSlug && slugToUrlMap.has(targetSlug)) {
+          t.url = slugToUrlMap.get(targetSlug)!;
+        }
+      });
+    }
+  });
+
   cachedBlogPosts = all;
   return all;
 }
@@ -1979,5 +2013,12 @@ export function getPostsByCategory(category: string): any[] {
 export function getAllCategories(): string[] {
   const all = getAllPosts();
   return Array.from(new Set(all.map(post => post.category)));
+}
+
+export function getToolGuideUrl(toolId: string): string | undefined {
+  const tool = toolRegistry.find(t => t.id === toolId);
+  if (!tool) return undefined;
+  const post = getAllPosts().find(p => p.slug === tool.guideSlug);
+  return post ? post.url : `/blog/guides/${tool.guideSlug}`;
 }
 

@@ -36,6 +36,7 @@ export default function FeedbackPage() {
             Have an idea for a new utility? Found a bug? Or just want to share your thoughts on Singulariti? 
             Please use the form below to let us know. We appreciate your input to help us build the best browser-side utilities.
           </p>
+          <h2 className="sr-only">Feedback Form</h2>
           <FeedbackForm />
         </section>
       </main>

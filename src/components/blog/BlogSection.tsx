@@ -40,7 +40,7 @@ export function BlogSection({ section }: BlogSectionProps) {
 
   return (
     <section id={id} className="space-y-4 pt-6 border-t border-border/40 first:border-0 first:pt-0">
-      <h2 className="font-display font-bold text-xl text-ink tracking-tight flex items-center gap-2">
+      <div className="flex items-center gap-2">
         {type === "steps" ? (
           <ListChecks className="w-5 h-5 text-primary" />
         ) : type === "bullets" ? (
@@ -48,8 +48,10 @@ export function BlogSection({ section }: BlogSectionProps) {
         ) : (
           <BookOpen className="w-5 h-5 text-primary" />
         )}
-        {heading}
-      </h2>
+        <h2 className="font-display font-bold text-xl text-ink tracking-tight">
+          {heading}
+        </h2>
+      </div>
 
       <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }} className="text-sm leading-relaxed text-slate prose max-w-none dark:prose-invert" />
 

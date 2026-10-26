@@ -5,6 +5,8 @@ import { QrCodeGeneratorClient } from './QrCodeGeneratorClient';
 import fs from 'fs';
 import path from 'path';
 
+import { ToolLayout } from '@/components/tools/ToolLayout';
+
 const seo = getUtilitySEO('qr-code-generator')!;
 export const metadata = buildMetadata({
   title: seo.title,
@@ -33,5 +35,16 @@ export default async function QrCodeGeneratorPage() {
       article = fs.readFileSync(articlePath, 'utf8');
     }
   } catch (e) { /* ignore */ }
-  return <QrCodeGeneratorClient article={article || undefined} />;
+  return (
+    <ToolLayout
+      utilityId="qr-code-generator"
+      title="QR Code Generator"
+      description="Create highly customized QR codes for URLs, Wi-Fi networks, UPI payments, phone numbers, and contacts. Customize designs, add logos, and export to PNG, SVG, or PDF."
+      categoryName="QR Code Tools"
+      categoryHref="/tools/qr"
+      article={article || undefined}
+    >
+      <QrCodeGeneratorClient isStandalone={true} />
+    </ToolLayout>
+  );
 }
