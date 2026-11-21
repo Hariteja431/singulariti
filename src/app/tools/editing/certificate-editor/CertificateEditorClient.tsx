@@ -13,7 +13,8 @@ import {
   Layers, AlignLeft, AlignCenter, AlignRight, Bold, Italic, Underline,
   Maximize2, Minimize2, Copy, Sliders, ChevronDown, FileText, CheckCircle2,
   Calendar, ShieldCheck, Feather, MoveHorizontal, MoveVertical, Palette,
-  FolderOpen, Save, RefreshCw, QrCode as QrIcon, Users, Stamp, ArrowUpRight
+  FolderOpen, Save, RefreshCw, QrCode as QrIcon, Users, Stamp, ArrowUpRight,
+  Lock, Unlock, ArrowUp, ArrowDown
 } from 'lucide-react';
 import { loadPdfDocument, renderPageToDataUrl } from '@/lib/pdf/pdfRenderHelpers';
 import { CERTIFICATE_TEMPLATES, CertificateTheme } from './certificateTemplates';
@@ -129,13 +130,19 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
   const [shapeStrokeWidth, setShapeStrokeWidth] = useState(2);
 
   // Signatures State
-  const [signerCount, setSignerCount] = useState<'single' | 'double'>('double');
+  const [signerCount, setSignerCount] = useState<'single' | 'double' | 'triple'>('double');
+  const [isObjectLocked, setIsObjectLocked] = useState(false);
+  const [isBulkModalOpen, setIsBulkModalOpen] = useState(false);
+  const [bulkRawInput, setBulkRawInput] = useState('Alexander J. Mercer\nSophia Maria Rodriguez\nDavid K. Chen\nEmily Watson\nMarcus Aurelius Thorne');
+  const [bulkList, setBulkList] = useState<string[]>(['Alexander J. Mercer', 'Sophia Maria Rodriguez', 'David K. Chen', 'Emily Watson', 'Marcus Aurelius Thorne']);
+  const [bulkIndex, setBulkIndex] = useState(0);
+  const [isBulkGenerating, setIsBulkGenerating] = useState(false);
   const [isSigModalOpen, setIsSigModalOpen] = useState(false);
   const [sigModalTab, setSigModalTab] = useState<'type' | 'draw' | 'upload'>('type');
   const [typedSigText, setTypedSigText] = useState('Dr. Marcus Vance');
   const [typedSigFont, setTypedSigFont] = useState('Great Vibes');
   const [typedSigColor, setTypedSigColor] = useState('#0f172a');
-  const [sigTarget, setSigTarget] = useState<'signer1' | 'signer2'>('signer1');
+  const [sigTarget, setSigTarget] = useState<'signer1' | 'signer2' | 'signer3'>('signer1');
 
   // Drawing Pad for Signature
   const [sigPenColor, setSigPenColor] = useState('#0f172a');
@@ -159,6 +166,8 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
     signer1Title: 'Director of Academic Affairs',
     signer2Name: 'Prof. Eleanor Cross',
     signer2Title: 'Program Chair & Dean',
+    signer3Name: 'Dr. Sarah Jenkins',
+    signer3Title: 'President & Vice-Chancellor',
     verificationUrl: 'https://www.singulariti.in/verify?id=CERT-2026-X89',
   });
 
@@ -505,6 +514,216 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
     imgEl.src = getSvgDataUrl(theme.svg);
   }, [quickFill, fitCanvasToContainer, saveState]);
 
+
+  // 1-Click Orientation Switcher (Landscape <-> Portrait A4)
+  const toggleOrientation = useCallback(() => {
+    const canvas = fabricCanvas.current;
+    if (!canvas) return;
+
+    const currentOri = documentStateRef.current.orientation;
+    const isNowPortrait = currentOri === 'landscape';
+    const newWidth = isNowPortrait ? 707 : 1000;
+    const newHeight = isNowPortrait ? 1000 : 707;
+    const newOrientation = isNowPortrait ? 'portrait' : 'landscape';
+
+    setDocumentState({
+      width: newWidth,
+      height: newHeight,
+      aspectRatio: newWidth / newHeight,
+      orientation: newOrientation,
+    });
+
+    // Re-scale background
+    const bgImg = canvas.getObjects().find((o: any) => o.isBackground);
+    if (bgImg) {
+      const imgEl = (bgImg as any)._element;
+      if (imgEl) {
+        bgImg.set({
+          scaleX: newWidth / (imgEl.naturalWidth || 1000),
+          scaleY: newHeight / (imgEl.naturalHeight || 707),
+        });
+      }
+    }
+
+    // Gracefully adapt positions of core certificate fields
+    canvas.getObjects().forEach((obj: any) => {
+      if (obj.isBackground) return;
+
+      if (obj.fieldId === 'org') {
+        obj.set({
+          left: isNowPortrait ? 53 : 100,
+          top: isNowPortrait ? 110 : 90,
+          width: isNowPortrait ? 600 : 800,
+        });
+      } else if (obj.fieldId === 'title') {
+        obj.set({
+          left: isNowPortrait ? 53 : 100,
+          top: isNowPortrait ? 160 : 135,
+          width: isNowPortrait ? 600 : 800,
+        });
+      } else if (obj.fieldId === 'presentation') {
+        obj.set({
+          left: isNowPortrait ? 53 : 100,
+          top: isNowPortrait ? 250 : 220,
+          width: isNowPortrait ? 600 : 800,
+        });
+      } else if (obj.fieldId === 'name') {
+        obj.set({
+          left: isNowPortrait ? 53 : 100,
+          top: isNowPortrait ? 300 : 265,
+          width: isNowPortrait ? 600 : 800,
+        });
+      } else if (obj.fieldId === 'divider') {
+        if (isNowPortrait) {
+          obj.set({ x1: 203, y1: 390, x2: 503, y2: 390 });
+        } else {
+          obj.set({ x1: 350, y1: 350, x2: 650, y2: 350 });
+        }
+      } else if (obj.fieldId === 'description') {
+        obj.set({
+          left: isNowPortrait ? 78 : 150,
+          top: isNowPortrait ? 420 : 375,
+          width: isNowPortrait ? 550 : 700,
+        });
+      } else if (obj.fieldId === 'seal') {
+        obj.set({
+          left: isNowPortrait ? 308 : 455,
+          top: isNowPortrait ? 570 : 485,
+        });
+      } else if (obj.fieldId === 'date') {
+        obj.set({
+          left: isNowPortrait ? 60 : 110,
+          top: isNowPortrait ? 750 : 550,
+          width: isNowPortrait ? 240 : 250,
+        });
+      } else if (obj.fieldId === 'signer1') {
+        obj.set({
+          left: isNowPortrait ? 400 : 640,
+          top: isNowPortrait ? 750 : 550,
+          width: isNowPortrait ? 240 : 250,
+        });
+      } else if (obj.fieldId === 'certId') {
+        obj.set({
+          left: isNowPortrait ? 53 : 100,
+          top: isNowPortrait ? 890 : 645,
+          width: isNowPortrait ? 600 : 800,
+        });
+      }
+    });
+
+    canvas.setDimensions({ width: newWidth, height: newHeight });
+    canvas.requestRenderAll();
+    saveState();
+    fitCanvasToContainer();
+    notify(`Switched to A4 ${newOrientation === 'portrait' ? 'Portrait' : 'Landscape'}!`);
+  }, [fitCanvasToContainer, saveState]);
+
+  
+
+  const toggleLockSelected = () => {
+    const canvas = fabricCanvas.current;
+    if (!canvas) return;
+    const activeObj = canvas.getActiveObject();
+    if (!activeObj || (activeObj as any).isBackground) return;
+
+    saveState();
+    const nextLock = !activeObj.lockMovementX;
+    activeObj.set({
+      lockMovementX: nextLock,
+      lockMovementY: nextLock,
+      lockRotation: nextLock,
+      lockScalingX: nextLock,
+      lockScalingY: nextLock,
+      hasControls: !nextLock,
+    });
+    setIsObjectLocked(nextLock);
+    canvas.requestRenderAll();
+    notify(nextLock ? "Element locked in place" : "Element unlocked");
+  };
+
+  // Helper for signature placement
+  const getSignaturePlacement = (target: 'signer1' | 'signer2' | 'signer3') => {
+    const isPortrait = documentStateRef.current.orientation === 'portrait';
+    const top = isPortrait ? 710 : 480;
+    if (signerCount === 'single') {
+      return { left: isPortrait ? 250 : 400, top };
+    }
+    if (signerCount === 'triple') {
+      if (target === 'signer1') return { left: isPortrait ? 50 : 70, top };
+      if (target === 'signer2') return { left: isPortrait ? 250 : 370, top };
+      return { left: isPortrait ? 450 : 680, top };
+    }
+    return {
+      left: target === 'signer1' ? (isPortrait ? 80 : 130) : (isPortrait ? 420 : 660),
+      top,
+    };
+  };
+
+  // Batch / Multi-Recipient Handlers
+  const handleApplyBulkName = (index: number) => {
+    if (!bulkList[index]) return;
+    setBulkIndex(index);
+    handleQuickFillChange('name', bulkList[index]);
+  };
+
+  const handleBulkDownloadPdf = async () => {
+    const canvas = fabricCanvas.current;
+    if (!canvas || bulkList.length === 0) return;
+    setIsBulkGenerating(true);
+    setIsProcessing(true);
+    setProcessingMessage(`Generating batch certificate 1 of ${bulkList.length}...`);
+
+    try {
+      const origW = documentState.width;
+      const origH = documentState.height;
+      const isPortrait = origW < origH;
+
+      const pdf = new jsPDF({
+        orientation: isPortrait ? 'portrait' : 'landscape',
+        unit: 'mm',
+        format: 'a4',
+      });
+
+      const pdfW = isPortrait ? 210 : 297;
+      const pdfH = isPortrait ? 297 : 210;
+
+      const nameObj = canvas.getObjects().find((o: any) => o.fieldId === 'name') as fabric.Textbox;
+
+      for (let i = 0; i < bulkList.length; i++) {
+        const recipientName = bulkList[i];
+        setProcessingMessage(`Rendering page ${i + 1} of ${bulkList.length}: ${recipientName}`);
+
+        if (nameObj) {
+          nameObj.set({ text: recipientName });
+        }
+        canvas.requestRenderAll();
+        await new Promise((r) => setTimeout(r, 60));
+
+        const pageDataUrl = canvas.toDataURL({
+          format: 'png',
+          quality: 0.95,
+          multiplier: 2,
+        });
+
+        if (i > 0) {
+          pdf.addPage('a4', isPortrait ? 'portrait' : 'landscape');
+        }
+        pdf.addImage(pageDataUrl, 'PNG', 0, 0, pdfW, pdfH, undefined, 'FAST');
+      }
+
+      pdf.save(`certificates_batch_${bulkList.length}_recipients.pdf`);
+      notify(`Downloaded batch PDF with ${bulkList.length} certificates!`);
+      setIsBulkModalOpen(false);
+    } catch (e) {
+      console.error("Batch PDF error:", e);
+      setError("Failed to generate batch certificates. Please try again.");
+    } finally {
+      setIsBulkGenerating(false);
+      setIsProcessing(false);
+      setProcessingMessage('');
+    }
+  };
+
   // Load Custom Background (PDF or User Image)
   const loadCustomBackgroundOnCanvas = useCallback((dataUrl: string) => {
     const canvas = fabricCanvas.current;
@@ -591,7 +810,11 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
     if (!canvas) return;
 
     canvas.getObjects().forEach((obj: any) => {
-      if (obj.fieldId === field) {
+      const isSigner1 = ['signer1Name', 'signer1Title'].includes(field as string) && obj.fieldId === 'signer1';
+      const isSigner2 = ['signer2Name', 'signer2Title'].includes(field as string) && obj.fieldId === 'signer2';
+      const isSigner3 = ['signer3Name', 'signer3Title'].includes(field as string) && obj.fieldId === 'signer3';
+
+      if (obj.fieldId === field || isSigner1 || isSigner2 || isSigner3) {
         if (field === 'date') {
           obj.set({ text: `Issued on: ${val}` });
         } else if (field === 'certificateId') {
@@ -603,6 +826,10 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
         } else if (field === 'signer2Name' || field === 'signer2Title') {
           const s1 = field === 'signer2Name' ? val : quickFill.signer2Name;
           const s2 = field === 'signer2Title' ? val : quickFill.signer2Title;
+          obj.set({ text: `${s1}\n${s2}` });
+        } else if (field === 'signer3Name' || field === 'signer3Title') {
+          const s1 = field === 'signer3Name' ? val : (quickFill.signer3Name || 'Dr. Sarah Jenkins');
+          const s2 = field === 'signer3Title' ? val : (quickFill.signer3Title || 'President & Vice-Chancellor');
           obj.set({ text: `${s1}\n${s2}` });
         } else {
           obj.set({ text: val });
@@ -664,7 +891,7 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
   };
 
   // Toggle between 1 Signer (Centered) vs 2 Signers (Left/Right)
-  const handleSignerCountToggle = (count: 'single' | 'double') => {
+    const handleSignerCountToggle = (count: 'single' | 'double' | 'triple') => {
     setSignerCount(count);
     const canvas = fabricCanvas.current;
     if (!canvas) return;
@@ -674,13 +901,17 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
 
     // Remove existing signers
     canvas.getObjects().forEach((o: any) => {
-      if (['signer1', 'signer2', 'sigLine1', 'sigLine2'].includes(o.fieldId)) {
+      if (['signer1', 'signer2', 'signer3', 'sigLine1', 'sigLine2', 'sigLine3'].includes(o.fieldId)) {
         canvas.remove(o);
       }
     });
 
+    const isPortrait = documentStateRef.current.orientation === 'portrait';
+    const yLine = isPortrait ? 780 : 540;
+    const yText = isPortrait ? 790 : 550;
+
     if (count === 'single') {
-      const sigLine = new fabric.Line([375, 540, 625, 540], {
+      const sigLine = new fabric.Line([375, yLine, 625, yLine], {
         stroke: theme.secondaryTextColor,
         strokeWidth: 1,
         opacity: 0.4,
@@ -690,7 +921,7 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
 
       const signerText = new fabric.Textbox(`${quickFill.signer1Name}\n${quickFill.signer1Title}`, {
         left: 350,
-        top: 550,
+        top: yText,
         width: 300,
         fontSize: 13,
         fontFamily: theme.bodyFont,
@@ -703,9 +934,9 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
       } as any);
 
       canvas.add(sigLine, signerText);
-    } else {
+    } else if (count === 'double') {
       // Double signers
-      const sigLine1 = new fabric.Line([110, 540, 360, 540], {
+      const sigLine1 = new fabric.Line([110, yLine, 360, yLine], {
         stroke: theme.secondaryTextColor,
         strokeWidth: 1,
         opacity: 0.4,
@@ -715,7 +946,7 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
 
       const signerText1 = new fabric.Textbox(`${quickFill.signer1Name}\n${quickFill.signer1Title}`, {
         left: 110,
-        top: 550,
+        top: yText,
         width: 250,
         fontSize: 13,
         fontFamily: theme.bodyFont,
@@ -727,7 +958,7 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
         fieldId: 'signer1',
       } as any);
 
-      const sigLine2 = new fabric.Line([640, 540, 890, 540], {
+      const sigLine2 = new fabric.Line([640, yLine, 890, yLine], {
         stroke: theme.secondaryTextColor,
         strokeWidth: 1,
         opacity: 0.4,
@@ -737,7 +968,7 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
 
       const signerText2 = new fabric.Textbox(`${quickFill.signer2Name}\n${quickFill.signer2Title}`, {
         left: 640,
-        top: 550,
+        top: yText,
         width: 250,
         fontSize: 13,
         fontFamily: theme.bodyFont,
@@ -750,10 +981,76 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
       } as any);
 
       canvas.add(sigLine1, signerText1, sigLine2, signerText2);
+    } else if (count === 'triple') {
+      // Triple signers evenly spaced
+      const sigLine1 = new fabric.Line([60, yLine, 260, yLine], {
+        stroke: theme.secondaryTextColor,
+        strokeWidth: 1,
+        opacity: 0.4,
+        selectable: true,
+        fieldId: 'sigLine1',
+      } as any);
+      const signerText1 = new fabric.Textbox(`${quickFill.signer1Name}\n${quickFill.signer1Title}`, {
+        left: 50,
+        top: yText,
+        width: 220,
+        fontSize: 12,
+        fontFamily: theme.bodyFont,
+        fill: theme.secondaryTextColor,
+        textAlign: 'center',
+        lineHeight: 1.3,
+        originX: 'left',
+        originY: 'top',
+        fieldId: 'signer1',
+      } as any);
+
+      const sigLine2 = new fabric.Line([370, yLine, 570, yLine], {
+        stroke: theme.secondaryTextColor,
+        strokeWidth: 1,
+        opacity: 0.4,
+        selectable: true,
+        fieldId: 'sigLine2',
+      } as any);
+      const signerText2 = new fabric.Textbox(`${quickFill.signer2Name}\n${quickFill.signer2Title}`, {
+        left: 360,
+        top: yText,
+        width: 220,
+        fontSize: 12,
+        fontFamily: theme.bodyFont,
+        fill: theme.secondaryTextColor,
+        textAlign: 'center',
+        lineHeight: 1.3,
+        originX: 'left',
+        originY: 'top',
+        fieldId: 'signer2',
+      } as any);
+
+      const sigLine3 = new fabric.Line([680, yLine, 880, yLine], {
+        stroke: theme.secondaryTextColor,
+        strokeWidth: 1,
+        opacity: 0.4,
+        selectable: true,
+        fieldId: 'sigLine3',
+      } as any);
+      const signerText3 = new fabric.Textbox(`${quickFill.signer3Name || 'Dr. Sarah Jenkins'}\n${quickFill.signer3Title || 'President & Vice-Chancellor'}`, {
+        left: 670,
+        top: yText,
+        width: 220,
+        fontSize: 12,
+        fontFamily: theme.bodyFont,
+        fill: theme.secondaryTextColor,
+        textAlign: 'center',
+        lineHeight: 1.3,
+        originX: 'left',
+        originY: 'top',
+        fieldId: 'signer3',
+      } as any);
+
+      canvas.add(sigLine1, signerText1, sigLine2, signerText2, sigLine3, signerText3);
     }
 
     canvas.requestRenderAll();
-    notify(`Updated signer layout to ${count === 'single' ? '1 signer' : '2 signers'}`);
+    notify(`Updated signer layout to ${count === 'single' ? '1 signer' : (count === 'double' ? '2 signers' : '3 signers')}`);
   };
 
   // Add Verification QR Code
@@ -1693,9 +1990,14 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
                 <span className="text-xs font-bold text-ink tracking-tight">
                   Certificate Studio
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-primary/10 text-primary font-semibold">
-                  A4 Landscape
-                </span>
+                <button
+                  onClick={toggleOrientation}
+                  title="Click to toggle between Landscape and Portrait orientation"
+                  className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-primary/10 hover:bg-primary/20 text-primary font-semibold transition border border-primary/20 cursor-pointer"
+                >
+                  <RotateCcw className="w-2.5 h-2.5" />
+                  <span>{documentState.orientation === 'landscape' ? 'A4 Landscape (297×210mm)' : 'A4 Portrait (210×297mm)'}</span>
+                </button>
               </div>
               <span className="text-[11px] text-slate block">
                 {selectedTemplateId === 'custom' ? 'Custom Background' : CERTIFICATE_TEMPLATES[selectedTemplateId]?.name || 'Classic Navy'}
@@ -1901,7 +2203,18 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
                   <span className="text-xs font-bold text-ink uppercase tracking-wider flex items-center gap-1.5">
                     <FileText className="w-3.5 h-3.5 text-primary" /> Certificate Content
                   </span>
-                  <span className="text-[10px] text-primary font-semibold">Live Synced</span>
+                  <button
+                    onClick={() => {
+                      const list = bulkRawInput.split('\n').map(s => s.trim()).filter(Boolean);
+                      setBulkList(list);
+                      setIsBulkModalOpen(true);
+                    }}
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary text-[11px] font-bold transition border border-primary/20"
+                    title="Batch issue certificates for multiple recipients at once"
+                  >
+                    <Users className="w-3 h-3" />
+                    <span>Bulk Issue ({bulkList.length || 5})</span>
+                  </button>
                 </div>
 
                 {/* Recipient Full Name */}
@@ -2072,34 +2385,44 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
                 {/* Signer Count Selector (1 vs 2 Signers) */}
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-slate block">Signer Layout</label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-3 gap-1.5">
                     <button
                       onClick={() => handleSignerCountToggle('single')}
-                      className={`py-1.5 px-2.5 rounded-lg border text-xs font-bold transition flex items-center justify-center gap-1.5 ${
+                      className={`py-1.5 px-2 rounded-lg border text-[11px] font-bold transition flex items-center justify-center gap-1 ${
                         signerCount === 'single'
                           ? 'bg-primary text-white border-primary shadow-xs'
                           : 'bg-surface border-border text-slate hover:text-ink'
                       }`}
                     >
-                      <Users className="w-3.5 h-3.5" /> 1 Signer (Center)
+                      <Users className="w-3 h-3" /> 1 Signer
                     </button>
                     <button
                       onClick={() => handleSignerCountToggle('double')}
-                      className={`py-1.5 px-2.5 rounded-lg border text-xs font-bold transition flex items-center justify-center gap-1.5 ${
+                      className={`py-1.5 px-2 rounded-lg border text-[11px] font-bold transition flex items-center justify-center gap-1 ${
                         signerCount === 'double'
                           ? 'bg-primary text-white border-primary shadow-xs'
                           : 'bg-surface border-border text-slate hover:text-ink'
                       }`}
                     >
-                      <Users className="w-3.5 h-3.5" /> 2 Signers (L & R)
+                      <Users className="w-3 h-3" /> 2 Signers
+                    </button>
+                    <button
+                      onClick={() => handleSignerCountToggle('triple')}
+                      className={`py-1.5 px-2 rounded-lg border text-[11px] font-bold transition flex items-center justify-center gap-1 ${
+                        signerCount === 'triple'
+                          ? 'bg-primary text-white border-primary shadow-xs'
+                          : 'bg-surface border-border text-slate hover:text-ink'
+                      }`}
+                    >
+                      <Users className="w-3 h-3" /> 3 Signers
                     </button>
                   </div>
                 </div>
 
-                {/* Signer 1 Form & Signature Insertion */}
+                {/* Signer 1 Form */}
                 <div className="p-3 bg-surface border border-border rounded-xl space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-ink">Signer 1 {signerCount === 'double' ? '(Left)' : '(Primary)'}</span>
+                    <span className="text-xs font-bold text-ink">Signer 1 {signerCount === 'single' ? '(Center)' : '(Left)'}</span>
                     <button
                       onClick={() => {
                         setSigTarget('signer1');
@@ -2127,11 +2450,11 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
                   />
                 </div>
 
-                {/* Signer 2 Form (if double) */}
-                {signerCount === 'double' && (
+                {/* Signer 2 Form */}
+                {(signerCount === 'double' || signerCount === 'triple') && (
                   <div className="p-3 bg-surface border border-border rounded-xl space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-ink">Signer 2 (Right)</span>
+                      <span className="text-xs font-bold text-ink">Signer 2 {signerCount === 'triple' ? '(Center)' : '(Right)'}</span>
                       <button
                         onClick={() => {
                           setSigTarget('signer2');
@@ -2155,6 +2478,39 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
                       value={quickFill.signer2Title}
                       onChange={(e) => handleQuickFillChange('signer2Title', e.target.value)}
                       placeholder="Signer 2 Title / Department"
+                      className="w-full px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs text-slate outline-none focus:border-primary"
+                    />
+                  </div>
+                )}
+
+                {/* Signer 3 Form */}
+                {signerCount === 'triple' && (
+                  <div className="p-3 bg-surface border border-border rounded-xl space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-ink">Signer 3 (Right)</span>
+                      <button
+                        onClick={() => {
+                          setSigTarget('signer3');
+                          setTypedSigText(quickFill.signer3Name || 'Dr. Sarah Jenkins');
+                          setIsSigModalOpen(true);
+                        }}
+                        className="text-[11px] font-semibold text-primary hover:underline flex items-center gap-1"
+                      >
+                        <PenTool className="w-3 h-3" /> Add Signature
+                      </button>
+                    </div>
+                    <input
+                      type="text"
+                      value={quickFill.signer3Name || ''}
+                      onChange={(e) => handleQuickFillChange('signer3Name', e.target.value)}
+                      placeholder="Signer 3 Name"
+                      className="w-full px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs text-ink outline-none focus:border-primary"
+                    />
+                    <input
+                      type="text"
+                      value={quickFill.signer3Title || ''}
+                      onChange={(e) => handleQuickFillChange('signer3Title', e.target.value)}
+                      placeholder="Signer 3 Title / Department"
                       className="w-full px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs text-slate outline-none focus:border-primary"
                     />
                   </div>
@@ -2598,42 +2954,90 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
                   )}
 
                   {/* Action Bar: Duplicate, Delete, Layer Reorder */}
-                  <div className="pt-3 border-t border-border space-y-2">
+                  <div className="pt-3 border-t border-border space-y-2.5">
                     <span className="text-[10px] font-bold text-slate uppercase tracking-wider block">
-                      Element Actions
+                      Element Alignment &amp; Actions
                     </span>
 
+                    {/* Alignment & Centering */}
                     <div className="grid grid-cols-2 gap-2">
+                      <button
+                        onClick={centerObjectHorizontally}
+                        className="py-1.5 px-2 bg-surface hover:bg-surface/80 border border-border rounded-lg text-xs font-semibold text-ink flex items-center justify-center gap-1.5 transition"
+                        title="Center element horizontally"
+                      >
+                        <AlignCenter className="w-3.5 h-3.5 text-primary" /> Center H
+                      </button>
+                      <button
+                        onClick={centerObjectVertically}
+                        className="py-1.5 px-2 bg-surface hover:bg-surface/80 border border-border rounded-lg text-xs font-semibold text-ink flex items-center justify-center gap-1.5 transition"
+                        title="Center element vertically"
+                      >
+                        <MoveVertical className="w-3.5 h-3.5 text-primary" /> Center V
+                      </button>
+                    </div>
+
+                    {/* Lock & Duplicate */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        onClick={toggleLockSelected}
+                        className={`py-1.5 px-2 border rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition ${
+                          isObjectLocked 
+                            ? 'bg-amber-500/10 border-amber-500/30 text-amber-500' 
+                            : 'bg-surface hover:bg-surface/80 border-border text-ink'
+                        }`}
+                        title="Lock element to prevent accidental moving"
+                      >
+                        {isObjectLocked ? <Lock className="w-3.5 h-3.5" /> : <Unlock className="w-3.5 h-3.5" />}
+                        <span>{isObjectLocked ? 'Locked' : 'Lock'}</span>
+                      </button>
                       <button
                         onClick={duplicateSelected}
                         className="py-1.5 px-2 bg-surface hover:bg-surface/80 border border-border rounded-lg text-xs font-semibold text-ink flex items-center justify-center gap-1.5 transition"
                       >
                         <Copy className="w-3.5 h-3.5 text-primary" /> Duplicate
                       </button>
-                      <button
-                        onClick={deleteSelected}
-                        className="py-1.5 px-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" /> Delete
-                      </button>
                     </div>
 
-                    <div className="flex gap-1 pt-1">
+                    {/* Layer Reorder */}
+                    <div className="grid grid-cols-4 gap-1 pt-1">
+                      <button
+                        onClick={() => layerArrange('front')}
+                        className="py-1 bg-surface border border-border rounded text-[10px] font-semibold text-slate hover:text-ink transition"
+                        title="Bring to Front"
+                      >
+                        To Front
+                      </button>
                       <button
                         onClick={() => layerArrange('forward')}
-                        className="flex-1 py-1 bg-surface border border-border rounded text-[11px] text-slate hover:text-ink transition"
+                        className="py-1 bg-surface border border-border rounded text-[10px] font-semibold text-slate hover:text-ink transition"
                         title="Bring Forward"
                       >
-                        Bring Up
+                        Up
                       </button>
                       <button
                         onClick={() => layerArrange('backward')}
-                        className="flex-1 py-1 bg-surface border border-border rounded text-[11px] text-slate hover:text-ink transition"
+                        className="py-1 bg-surface border border-border rounded text-[10px] font-semibold text-slate hover:text-ink transition"
                         title="Send Backward"
                       >
-                        Send Down
+                        Down
+                      </button>
+                      <button
+                        onClick={() => layerArrange('back')}
+                        className="py-1 bg-surface border border-border rounded text-[10px] font-semibold text-slate hover:text-ink transition"
+                        title="Send to Back"
+                      >
+                        To Back
                       </button>
                     </div>
+
+                    {/* Delete */}
+                    <button
+                      onClick={deleteSelected}
+                      className="w-full py-1.5 px-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" /> Delete Element
+                    </button>
                   </div>
 
                 </div>
@@ -2660,7 +3064,7 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
                   <Feather className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-ink">Add Signature for {sigTarget === 'signer1' ? quickFill.signer1Name : quickFill.signer2Name}</h3>
+                  <h3 className="text-sm font-bold text-ink">Add Signature for {sigTarget === 'signer1' ? quickFill.signer1Name : (sigTarget === 'signer2' ? quickFill.signer2Name : (quickFill.signer3Name || 'Signer 3'))}</h3>
                   <span className="text-[11px] text-slate">Calligraphy Script, Digital Pen, or Image</span>
                 </div>
               </div>
@@ -2891,6 +3295,130 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
           <div className="bg-surface border border-border rounded-2xl p-6 shadow-2xl flex flex-col items-center gap-3">
             <LoadingSpinner size="lg" />
             <p className="text-xs font-bold text-ink">{processingMessage || 'Processing...'}</p>
+          </div>
+        </div>
+      )}
+
+
+      {/* ======================================================== */}
+      {/* BATCH / MULTI-RECIPIENT GENERATOR MODAL                  */}
+      {/* ======================================================== */}
+      {isBulkModalOpen && (
+        <div className="fixed inset-0 z-[200] bg-black/75 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-background border border-border rounded-2xl w-full max-w-2xl p-6 shadow-2xl space-y-5 animate-in zoom-in-95 duration-200">
+            
+            <div className="flex items-center justify-between pb-3 border-b border-border">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold">
+                  <Users className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-ink">Batch / Multi-Recipient Generator</h3>
+                  <span className="text-xs text-slate">Issue certificates for an entire class, team, or event roster in seconds</span>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsBulkModalOpen(false)}
+                className="p-1.5 rounded-lg border border-border hover:bg-surface text-slate hover:text-ink transition"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {/* Left Column: Names list input */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-ink">Recipient Names (1 per line)</label>
+                  <span className="text-[11px] font-mono font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                    {bulkList.length} recipients
+                  </span>
+                </div>
+                <textarea
+                  rows={8}
+                  value={bulkRawInput}
+                  onChange={(e) => {
+                    setBulkRawInput(e.target.value);
+                    const list = e.target.value.split('\n').map(s => s.trim()).filter(Boolean);
+                    setBulkList(list);
+                    if (bulkIndex >= list.length) setBulkIndex(Math.max(0, list.length - 1));
+                  }}
+                  placeholder="Paste student or attendee names here..."
+                  className="w-full p-3 bg-surface border border-border rounded-xl text-xs text-ink font-mono outline-none focus:border-primary leading-relaxed resize-y"
+                />
+                <p className="text-[11px] text-slate">
+                  Paste roster from Excel, Google Sheets, or CSV (each line becomes an individual certificate).
+                </p>
+              </div>
+
+              {/* Right Column: Live Certificate Preview Stepper */}
+              <div className="space-y-4 bg-surface/50 border border-border rounded-xl p-4 flex flex-col justify-between">
+                <div className="space-y-3">
+                  <span className="text-xs font-bold text-ink uppercase tracking-wider block">
+                    Live Canvas Preview
+                  </span>
+                  
+                  {bulkList.length > 0 ? (
+                    <div className="p-4 bg-background border border-border rounded-xl text-center space-y-2 shadow-xs">
+                      <span className="text-[10px] font-bold text-slate uppercase tracking-wider block">
+                        Recipient {bulkIndex + 1} of {bulkList.length}
+                      </span>
+                      <p className="text-lg font-bold font-display text-primary truncate px-2">
+                        {bulkList[bulkIndex] || 'No recipient'}
+                      </p>
+                      <button
+                        onClick={() => handleApplyBulkName(bulkIndex)}
+                        className="text-xs font-semibold text-primary hover:underline block mx-auto"
+                      >
+                        ✓ Applied to live canvas
+                      </button>
+                    </div>
+                  ) : (
+                    <p className="text-xs text-slate italic text-center py-6">
+                      Add at least 1 recipient name on the left.
+                    </p>
+                  )}
+
+                  {/* Stepper Controls */}
+                  <div className="flex items-center justify-between gap-2 pt-2">
+                    <button
+                      onClick={() => handleApplyBulkName(Math.max(0, bulkIndex - 1))}
+                      disabled={bulkIndex <= 0 || bulkList.length === 0}
+                      className="flex-1 py-1.5 px-3 bg-background border border-border rounded-lg text-xs font-semibold text-ink disabled:opacity-40 hover:bg-surface transition"
+                    >
+                      ← Previous
+                    </button>
+                    <button
+                      onClick={() => handleApplyBulkName(Math.min(bulkList.length - 1, bulkIndex + 1))}
+                      disabled={bulkIndex >= bulkList.length - 1 || bulkList.length === 0}
+                      className="flex-1 py-1.5 px-3 bg-background border border-border rounded-lg text-xs font-semibold text-ink disabled:opacity-40 hover:bg-surface transition"
+                    >
+                      Next →
+                    </button>
+                  </div>
+                </div>
+
+                {/* Batch Download Action */}
+                <div className="pt-4 border-t border-border space-y-2">
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    className="w-full"
+                    onClick={handleBulkDownloadPdf}
+                    disabled={isBulkGenerating || bulkList.length === 0}
+                    leftIcon={isBulkGenerating ? <LoadingSpinner size="sm" /> : <Download className="w-3.5 h-3.5" />}
+                  >
+                    {isBulkGenerating 
+                      ? 'Generating Multi-Page PDF...' 
+                      : `Download All as Combined PDF (${bulkList.length} Pages)`}
+                  </Button>
+                  <p className="text-[10px] text-center text-slate">
+                    Generates a single print-ready PDF containing all certificates. 100% client-side.
+                  </p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       )}

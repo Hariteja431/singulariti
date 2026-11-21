@@ -1,7 +1,7 @@
 export interface BadgeElement {
   id: string;
   name: string;
-  category: 'seal' | 'ribbon' | 'medal' | 'divider';
+  category: 'seal' | 'ribbon' | 'medal' | 'divider' | 'ornament';
   svg: string;
   defaultWidth: number;
   defaultHeight: number;
@@ -150,6 +150,114 @@ export const DECORATIVE_ELEMENTS: BadgeElement[] = [
   <polygon points="200,6 208,15 200,24 192,15" fill="#f59e0b" stroke="#b45309" stroke-width="1" />
   <circle cx="186" cy="15" r="3" fill="#f59e0b" />
   <circle cx="214" cy="15" r="3" fill="#f59e0b" />
+</svg>`,
+  },
+  {
+    id: 'royal-blue-rosette',
+    name: 'Royal Blue & Gold Rosette',
+    category: 'seal',
+    defaultWidth: 120,
+    defaultHeight: 120,
+    svg: `<svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="rbGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <radialGradient id="rbNavy" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="100" r="90" fill="url(#rbNavy)" stroke="url(#rbGold)" stroke-width="4" />
+  <circle cx="100" cy="100" r="82" fill="none" stroke="#fbbf24" stroke-width="1" stroke-dasharray="6 4" />
+  <circle cx="100" cy="100" r="68" fill="none" stroke="url(#rbGold)" stroke-width="2" />
+  <polygon points="100,55 110,80 135,84 116,102 121,128 100,115 79,128 84,102 65,84 90,80" fill="url(#rbGold)" />
+  <text x="100" y="160" font-family="Cinzel, serif" font-size="9" font-weight="bold" fill="#fef08a" text-anchor="middle" letter-spacing="2">OFFICIAL SEAL</text>
+</svg>`,
+  },
+  {
+    id: 'silver-excellence-medal',
+    name: 'Silver Honors Medal',
+    category: 'medal',
+    defaultWidth: 120,
+    defaultHeight: 120,
+    svg: `<svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="30%" stop-color="#e2e8f0" />
+      <stop offset="70%" stop-color="#94a3b8" />
+      <stop offset="100%" stop-color="#475569" />
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="88" fill="url(#silverGrad)" stroke="#64748b" stroke-width="3" />
+  <circle cx="100" cy="100" r="74" fill="#0f172a" stroke="#cbd5e1" stroke-width="2" />
+  <polygon points="100,60 112,85 138,88 118,107 124,133 100,119 76,133 82,107 62,88 88,85" fill="url(#silverGrad)" />
+  <circle cx="100" cy="100" r="50" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3" />
+</svg>`,
+  },
+  {
+    id: 'corporate-crest-shield',
+    name: 'Heraldic Crest Shield',
+    category: 'seal',
+    defaultWidth: 110,
+    defaultHeight: 130,
+    svg: `<svg viewBox="0 0 200 240" width="200" height="240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shieldGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+  </defs>
+  <path d="M100,10 L180,40 L180,120 C180,180 100,230 100,230 C100,230 20,180 20,120 L20,40 Z" fill="#0f172a" stroke="url(#shieldGold)" stroke-width="4" />
+  <path d="M100,25 L165,50 L165,115 C165,165 100,210 100,210 C100,210 35,165 35,115 L35,50 Z" fill="none" stroke="url(#shieldGold)" stroke-width="1.5" stroke-dasharray="4 3" />
+  <polygon points="100,70 110,95 136,98 116,117 122,143 100,129 78,143 84,117 64,98 90,95" fill="url(#shieldGold)" />
+  <circle cx="100" cy="165" r="8" fill="url(#shieldGold)" />
+</svg>`,
+  },
+  {
+    id: 'vintage-corner-filigree',
+    name: 'Vintage Corner Filigree',
+    category: 'ornament',
+    defaultWidth: 100,
+    defaultHeight: 100,
+    svg: `<svg viewBox="0 0 100 100" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cfGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+  </defs>
+  <path d="M0,0 L90,0 C60,20 20,60 0,90 Z" fill="url(#cfGold)" opacity="0.9" />
+  <path d="M10,10 L75,10 C50,25 25,50 10,75 Z" fill="#090d16" />
+  <circle cx="35" cy="35" r="7" fill="url(#cfGold)" />
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#fef08a" stroke-width="2" />
+  <line x1="0" y1="0" x2="0" y2="90" stroke="#fef08a" stroke-width="2" />
+</svg>`,
+  },
+  {
+    id: 'laurel-divider',
+    name: 'Laurel Branch Divider',
+    category: 'divider',
+    defaultWidth: 420,
+    defaultHeight: 36,
+    svg: `<svg viewBox="0 0 420 36" width="420" height="36" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="lbGold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b45309" stop-opacity="0.2" />
+      <stop offset="50%" stop-color="#fbbf24" stop-opacity="1" />
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0.2" />
+    </linearGradient>
+  </defs>
+  <line x1="10" y1="18" x2="190" y2="18" stroke="url(#lbGold)" stroke-width="1.5" />
+  <line x1="230" y1="18" x2="410" y2="18" stroke="url(#lbGold)" stroke-width="1.5" />
+  <circle cx="210" cy="18" r="6" fill="#fbbf24" stroke="#b45309" stroke-width="1" />
+  <ellipse cx="198" cy="14" rx="6" ry="3" transform="rotate(-20, 198, 14)" fill="#fbbf24" />
+  <ellipse cx="222" cy="14" rx="6" ry="3" transform="rotate(20, 222, 14)" fill="#fbbf24" />
+  <ellipse cx="188" cy="18" rx="5" ry="2.5" fill="#f59e0b" />
+  <ellipse cx="232" cy="18" rx="5" ry="2.5" fill="#f59e0b" />
 </svg>`,
   },
 ];
