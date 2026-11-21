@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: post.metaTitle,
     description: post.metaDescription,
     path: `/blog/guides/${post.slug}`,
+    robots: 'noindex',
     type: 'article',
     image: post.featuredImage || undefined,
     publishedTime: post.publishedAt,

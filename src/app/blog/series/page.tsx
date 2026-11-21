@@ -12,6 +12,7 @@ export const metadata = constructMetadata({
   title: 'Utility Guide Series Directory | Singulariti',
   description: 'Explore the complete directory of utility guide series covering formatting, compression, health, math, and code validators.',
   path: '/blog/series',
+  robots: 'noindex',
 });
 
 export default function SeriesDirectoryPage() {

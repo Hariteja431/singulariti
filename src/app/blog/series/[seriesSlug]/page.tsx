@@ -56,6 +56,7 @@ export async function generateMetadata({ params, searchParams }: PageProps) {
     title: `${series.name} Guides | Usage and Operations Series | Singulariti`,
     description: series.heroDescription || series.description,
     path: canonicalPath,
+    robots: 'noindex',
   });
 
   // For paginated pages beyond page 1, signal to Google via robots

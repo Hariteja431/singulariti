@@ -1,6 +1,5 @@
 import { MetadataRoute } from 'next';
 import { registry } from '@/registry';
-import { blogSeriesList, blogSubSeriesList, blogGuidesList } from '@/content/tools/toolRegistry';
 import { getAllPosts } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -11,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const categories = registry.categories;
 
-  // Base routes
+  // Base routes: Only authoritative, non-thin pages
   const routes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
@@ -57,18 +56,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/series`,
-      lastModified,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/utility-guides`,
       lastModified,
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -161,35 +148,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // Blog Series (e.g., /blog/series/pdf-utilities)
-  blogSeriesList.forEach((series) => {
-    routes.push({
-      url: `${baseUrl}/blog/series/${series.slug}`,
-      lastModified,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    });
-
-    // Blog Sub-Series (e.g., /blog/series/pdf-utilities/management-utilities)
-    const subSections = blogSubSeriesList.filter(ss => ss.seriesId === series.id);
-    subSections.forEach((sub) => {
-      routes.push({
-        url: `${baseUrl}/blog/series/${series.slug}/${sub.slug}`,
-        lastModified,
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      });
-    });
-  });
-
-  // Blog Posts (Guides & Articles)
+  // Blog Posts: Include only high-quality, hand-crafted editorial articles (18 curated in-depth guides)
+  // Programmatic fallback guides (/blog/guides/*) and thin directory series (/blog/series/*) are excluded
+  // from the sitemap to prevent "Scaled Content Abuse" and "Thin Content" algorithmic flags.
   const posts = getAllPosts();
-  posts.forEach((post) => {
+  const editorialArticles = posts.filter(post => post.url && post.url.startsWith('/blog/articles/'));
+  editorialArticles.forEach((post) => {
     routes.push({
       url: `${baseUrl}${post.url}`,
       lastModified,
       changeFrequency: 'weekly',
-      priority: 0.7,
+      priority: 0.8,
     });
   });
 

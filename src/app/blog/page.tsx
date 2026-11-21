@@ -33,7 +33,11 @@ export const metadata = buildMetadata({
 });
 
 export default async function BlogHomePage() {
-  const posts = getAllPosts();
+  const allPosts = getAllPosts();
+  // Curate authoritative, hand-crafted editorial articles and detailed guides
+  const editorialPosts = allPosts.filter(p => p.url && p.url.startsWith('/blog/articles/'));
+  const detailedGuides = allPosts.filter(p => !p.url.startsWith('/blog/articles/') && p.contentLevel === 'detailed');
+  const posts = [...editorialPosts, ...detailedGuides];
 
   return (
     <>

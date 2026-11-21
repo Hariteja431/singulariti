@@ -57,6 +57,7 @@ export async function generateMetadata({ params, searchParams }: PageProps) {
     title: `${subSection.name} Guides | ${series.name} Tools | Singulariti`,
     description: subSection.description,
     path: canonicalPath,
+    robots: 'noindex',
   });
 }
 

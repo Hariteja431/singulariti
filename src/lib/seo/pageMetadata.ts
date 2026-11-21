@@ -446,7 +446,7 @@ export const pageMetadataRegistry: Record<string, PageSEO> = {
     title: "Utility Guides Directory - Index Archive | Singulariti",
     description: "Browse the complete directory index of utility guides. Discover sections and subsections covering formatting, compression, health, and math calculators.",
     path: "/blog/utility-guides",
-    robots: { index: true, follow: true },
+    robots: { index: false, follow: true },
     openGraph: {
       title: "Utility Guides Directory - Index Archive | Singulariti",
       description: "Browse the complete directory index of utility guides. Discover sections and subsections covering formatting, compression, health, and math calculators.",
