@@ -97,6 +97,29 @@ export default function RootLayout({
             `
           }}
         />
+        {/* Google Consent Mode v2 (Strict AdSense & GA4 Compliance) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              (function() {
+                var consent = null;
+                try {
+                  consent = localStorage.getItem('cookie-consent');
+                } catch (e) {}
+                var isDenied = consent === 'declined';
+                gtag('consent', 'default', {
+                  'ad_storage': isDenied ? 'denied' : 'granted',
+                  'ad_user_data': isDenied ? 'denied' : 'granted',
+                  'ad_personalization': isDenied ? 'denied' : 'granted',
+                  'analytics_storage': isDenied ? 'denied' : 'granted',
+                  'wait_for_update': 500
+                });
+              })();
+            `
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

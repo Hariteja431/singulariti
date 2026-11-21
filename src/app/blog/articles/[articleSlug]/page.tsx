@@ -89,11 +89,13 @@ export default async function BlogPostPage({ params }: PageProps) {
     "dateModified": post.updatedAt,
     "author": {
       "@type": "Organization",
-      "name": "Singulariti"
+      "name": "Singulariti",
+      "url": "https://www.singulariti.in/about"
     },
     "publisher": {
       "@type": "Organization",
       "name": "Singulariti",
+      "url": "https://www.singulariti.in",
       "logo": {
         "@type": "ImageObject",
         "url": "https://www.singulariti.in/icon.svg"
