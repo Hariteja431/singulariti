@@ -1941,6 +1941,7 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
 
   return (
     <ToolLayout
+      utilityId="certificate-editor"
       article={article}
       howToUse={[
         "Choose an imperial, modern, emerald, or minimalist template, or upload any existing certificate PDF or image.",

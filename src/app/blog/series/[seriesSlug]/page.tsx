@@ -59,21 +59,7 @@ export async function generateMetadata({ params, searchParams }: PageProps) {
     robots: 'noindex',
   });
 
-  // For paginated pages beyond page 1, signal to Google via robots
-  // that these are indexable but less important
-  if (currentPage > 1) {
-    metadata.robots = {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large' as const,
-        'max-snippet': -1,
-      },
-    };
-  }
+
 
   return metadata;
 }
