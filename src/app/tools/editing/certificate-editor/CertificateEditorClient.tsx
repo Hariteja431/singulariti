@@ -14,7 +14,7 @@ import {
   Maximize2, Minimize2, Copy, Sliders, ChevronDown, FileText, CheckCircle2,
   Calendar, ShieldCheck, Feather, MoveHorizontal, MoveVertical, Palette,
   FolderOpen, Save, RefreshCw, QrCode as QrIcon, Users, Stamp, ArrowUpRight,
-  Lock, Unlock, ArrowUp, ArrowDown
+  Lock, Unlock, ArrowUp, ArrowDown, Eye
 } from 'lucide-react';
 import { loadPdfDocument, renderPageToDataUrl } from '@/lib/pdf/pdfRenderHelpers';
 import { CERTIFICATE_TEMPLATES, CertificateTheme } from './certificateTemplates';
@@ -153,6 +153,9 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
   const [brushColor, setBrushColor] = useState('#f59e0b');
   const [brushWidth, setBrushWidth] = useState(3);
 
+  // Responsive Mobile Studio Tab ('canvas' preview, 'editor' controls, 'inspector' properties)
+  const [mobileStudioTab, setMobileStudioTab] = useState<'canvas' | 'editor' | 'inspector'>('canvas');
+
   // Form Fields Quick Fill State
   const [quickFill, setQuickFill] = useState({
     org: 'GLOBAL ACADEMY OF EXCELLENCE',
@@ -238,13 +241,14 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
     setZoom(newZoom);
   }, []);
 
-  // Calculate container auto-fit scale
+  // Calculate container auto-fit scale with mobile responsive padding
   const fitCanvasToContainer = useCallback(() => {
     const container = containerRef.current;
     if (!container) return;
-    const padding = 32;
-    const availW = Math.max(100, container.clientWidth - padding);
-    const availH = Math.max(100, container.clientHeight - padding);
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const padding = isMobile ? 14 : 32;
+    const availW = Math.max(60, container.clientWidth - padding);
+    const availH = Math.max(60, container.clientHeight - padding);
 
     const docW = documentStateRef.current.width;
     const docH = documentStateRef.current.height;
@@ -252,7 +256,8 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
     const scaleW = availW / docW;
     const scaleH = availH / docH;
     let targetScale = Math.min(scaleW, scaleH);
-    targetScale = Math.max(0.3, Math.min(targetScale, 1.4));
+    // Allow downscaling down to 0.16 for smaller phone screens
+    targetScale = Math.max(0.16, Math.min(targetScale, 1.4));
 
     applyCanvasZoom(targetScale);
   }, [applyCanvasZoom]);
@@ -1852,6 +1857,16 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
     };
   }, []);
 
+  // Re-fit canvas smoothly when mobile user toggles to the canvas tab
+  useEffect(() => {
+    if (mobileStudioTab === 'canvas') {
+      const timer = setTimeout(() => {
+        fitCanvasToContainer();
+      }, 60);
+      return () => clearTimeout(timer);
+    }
+  }, [mobileStudioTab, fitCanvasToContainer]);
+
   // Freehand drawing settings listener
   useEffect(() => {
     const canvas = fabricCanvas.current;
@@ -2085,15 +2100,16 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
           </div>
 
           {/* Right: Project Save & Export Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
             <Button
               variant="outline"
               size="sm"
               onClick={handleSaveProject}
               title="Save project file (.cert) to edit later"
+              className="text-xs px-2 sm:px-3"
               leftIcon={<Save className="w-3.5 h-3.5" />}
             >
-              Save Project
+              <span className="hidden sm:inline">Save</span> Project
             </Button>
 
             <Button
@@ -2101,9 +2117,10 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
               size="sm"
               onClick={() => handleExport('png', 'hd')}
               disabled={isProcessing}
+              className="text-xs px-2 sm:px-3"
               leftIcon={<ImageIcon className="w-3.5 h-3.5" />}
             >
-              Export PNG
+              PNG
             </Button>
 
             <Button
@@ -2111,12 +2128,53 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
               size="sm"
               onClick={() => handleExport('pdf', 'print')}
               disabled={isProcessing}
+              className="text-xs px-2.5 sm:px-3 font-bold"
               leftIcon={<Download className="w-3.5 h-3.5" />}
             >
-              Download PDF (Print 300 DPI)
+              PDF <span className="hidden md:inline">(Print 300 DPI)</span>
             </Button>
           </div>
 
+        </div>
+
+        {/* Mobile View Mode Switcher (< lg screens) */}
+        <div className="flex lg:hidden items-center justify-between gap-1 p-1 mb-3 bg-background border border-border rounded-xl">
+          <button
+            onClick={() => setMobileStudioTab('canvas')}
+            className={`flex-1 py-2 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5 ${
+              mobileStudioTab === 'canvas'
+                ? 'bg-primary text-white shadow-xs'
+                : 'text-slate hover:text-ink hover:bg-surface'
+            }`}
+          >
+            <Eye className="w-3.5 h-3.5" />
+            <span>Canvas</span>
+          </button>
+          <button
+            onClick={() => setMobileStudioTab('editor')}
+            className={`flex-1 py-2 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5 ${
+              mobileStudioTab === 'editor'
+                ? 'bg-primary text-white shadow-xs'
+                : 'text-slate hover:text-ink hover:bg-surface'
+            }`}
+          >
+            <Sliders className="w-3.5 h-3.5" />
+            <span>Tools & Themes</span>
+          </button>
+          <button
+            onClick={() => setMobileStudioTab('inspector')}
+            className={`flex-1 py-2 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5 relative ${
+              mobileStudioTab === 'inspector'
+                ? 'bg-primary text-white shadow-xs'
+                : 'text-slate hover:text-ink hover:bg-surface'
+            }`}
+          >
+            <Layers className="w-3.5 h-3.5" />
+            <span>Inspector</span>
+            {selectedType && (
+              <span className="w-2 h-2 rounded-full bg-amber-400 absolute top-1.5 right-2 ring-2 ring-background" />
+            )}
+          </button>
         </div>
 
         {/* ======================================================== */}
@@ -2127,7 +2185,18 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
           {/* ======================================================= */}
           {/* LEFT COLUMN: Sidebar Navigation & Tools (Col 3)         */}
           {/* ======================================================= */}
-          <div className={`lg:col-span-3 flex flex-col gap-3.5 ${isMaximized ? 'overflow-y-auto pr-2 custom-scrollbar h-full' : ''}`}>
+          <div className={`${mobileStudioTab === 'editor' ? 'flex' : 'hidden lg:flex'} lg:col-span-3 flex-col gap-3.5 ${isMaximized ? 'overflow-y-auto pr-2 custom-scrollbar h-full' : ''}`}>
+            
+            {/* Mobile View Canvas Banner */}
+            <div className="flex lg:hidden items-center justify-between p-2.5 bg-primary/10 border border-primary/20 rounded-xl mb-1">
+              <span className="text-xs font-semibold text-primary">Done editing settings?</span>
+              <button
+                onClick={() => setMobileStudioTab('canvas')}
+                className="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold hover:bg-primary/90 flex items-center gap-1.5 shadow-xs"
+              >
+                <Eye className="w-3.5 h-3.5" /> View Canvas
+              </button>
+            </div>
             
             {/* Primary Navigation Tabs */}
             <div className="grid grid-cols-3 gap-1 p-1 bg-background border border-border rounded-xl">
@@ -2682,13 +2751,13 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
           {/* ======================================================= */}
           {/* MIDDLE COLUMN: Interactive Canvas (Col 6)               */}
           {/* ======================================================= */}
-          <div className={`lg:col-span-6 flex flex-col items-center ${isMaximized ? 'h-full overflow-hidden' : ''}`}>
+          <div className={`${mobileStudioTab === 'canvas' ? 'flex' : 'hidden lg:flex'} lg:col-span-6 flex-col items-center ${isMaximized ? 'h-full overflow-hidden' : ''}`}>
             
             {/* Canvas Container with clean centering */}
             <div 
               ref={containerRef}
-              className={`w-full relative border border-border rounded-2xl bg-slate-900/60 dark:bg-black/70 overflow-auto flex justify-center items-center p-4 transition-all shadow-inner ${
-                isMaximized ? 'flex-1 min-h-0' : 'min-h-[520px]'
+              className={`w-full relative border border-border rounded-2xl bg-slate-900/60 dark:bg-black/70 overflow-auto flex justify-center items-center p-2 sm:p-4 transition-all shadow-inner ${
+                isMaximized ? 'flex-1 min-h-0' : 'min-h-[320px] sm:min-h-[520px]'
               }`}
             >
               <style dangerouslySetInnerHTML={{ __html: `
@@ -2703,9 +2772,27 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
             </div>
 
             {/* Quick Canvas Status bar */}
-            <div className="w-full flex items-center justify-between text-[11px] text-slate mt-2 px-1">
-              <span>* Double-click any text on the certificate to edit directly in-place.</span>
-              <span className="font-mono">{documentState.width} &times; {documentState.height} px (A4 Landscape)</span>
+            <div className="w-full flex flex-wrap items-center justify-between text-[11px] text-slate mt-2 px-1 gap-1">
+              <span>* Tap or double-click any text to edit directly.</span>
+              <span className="font-mono">{documentState.width} &times; {documentState.height} px ({documentState.orientation === 'landscape' ? 'Landscape' : 'Portrait'})</span>
+            </div>
+
+            {/* Mobile Quick Action Pills */}
+            <div className="flex lg:hidden items-center gap-2 mt-3 w-full">
+              <button
+                onClick={() => setMobileStudioTab('editor')}
+                className="flex-1 py-2 px-3 bg-surface hover:bg-surface/80 border border-border rounded-xl text-xs font-semibold text-ink flex items-center justify-center gap-1.5 transition shadow-xs"
+              >
+                <Sliders className="w-3.5 h-3.5 text-primary" /> Edit Details & Themes
+              </button>
+              {selectedType && (
+                <button
+                  onClick={() => setMobileStudioTab('inspector')}
+                  className="flex-1 py-2 px-3 bg-primary text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs"
+                >
+                  <Layers className="w-3.5 h-3.5" /> Inspect ({selectedType})
+                </button>
+              )}
             </div>
 
           </div>
@@ -2713,7 +2800,18 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
           {/* ======================================================= */}
           {/* RIGHT COLUMN: Element Inspector & Controls (Col 3)      */}
           {/* ======================================================= */}
-          <div className={`lg:col-span-3 space-y-3.5 ${isMaximized ? 'overflow-y-auto pr-2 custom-scrollbar h-full' : ''}`}>
+          <div className={`${mobileStudioTab === 'inspector' ? 'block' : 'hidden lg:block'} lg:col-span-3 space-y-3.5 ${isMaximized ? 'overflow-y-auto pr-2 custom-scrollbar h-full' : ''}`}>
+            
+            {/* Mobile View Canvas Banner */}
+            <div className="flex lg:hidden items-center justify-between p-2.5 bg-primary/10 border border-primary/20 rounded-xl mb-1">
+              <span className="text-xs font-semibold text-primary">Done inspecting?</span>
+              <button
+                onClick={() => setMobileStudioTab('canvas')}
+                className="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold hover:bg-primary/90 flex items-center gap-1.5 shadow-xs"
+              >
+                <Eye className="w-3.5 h-3.5" /> View Canvas
+              </button>
+            </div>
             
             <div className="p-4 bg-background border border-border rounded-xl space-y-4 min-h-[380px]">
               <div className="flex items-center justify-between pb-2 border-b border-border">
@@ -3215,6 +3313,7 @@ export function CertificateEditorClient({ article, externalError, setExternalErr
                     onTouchStart={startSigDrawing}
                     onTouchMove={drawSigMove}
                     onTouchEnd={stopSigDrawing}
+                    style={{ touchAction: 'none' }}
                     className="w-full block"
                   />
                   <span className="absolute bottom-2 right-2 text-[10px] text-slate-400 select-none pointer-events-none">

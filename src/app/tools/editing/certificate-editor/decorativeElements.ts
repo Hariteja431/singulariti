@@ -260,4 +260,125 @@ export const DECORATIVE_ELEMENTS: BadgeElement[] = [
   <ellipse cx="232" cy="18" rx="5" ry="2.5" fill="#f59e0b" />
 </svg>`,
   },
+  {
+    id: 'starburst-award-crest',
+    name: '3D Gold Starburst Rosette',
+    category: 'seal',
+    defaultWidth: 120,
+    defaultHeight: 120,
+    svg: `<svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sbGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="50%" stop-color="#eab308" />
+      <stop offset="100%" stop-color="#a16207" />
+    </linearGradient>
+  </defs>
+  <g fill="url(#sbGold)" stroke="#854d0e" stroke-width="1.5">
+    <circle cx="100" cy="100" r="90" fill="url(#sbGold)" />
+    <circle cx="100" cy="100" r="75" fill="#fef08a" stroke="#a16207" stroke-width="2" />
+    <circle cx="100" cy="100" r="68" fill="none" stroke="#a16207" stroke-width="1" stroke-dasharray="4 2" />
+    <polygon points="100,50 112,80 144,84 119,106 126,138 100,121 74,138 81,106 56,84 88,80" fill="url(#sbGold)" />
+  </g>
+</svg>`,
+  },
+  {
+    id: 'olympic-tricolor-medal',
+    name: 'Championship Ribbon Medal',
+    category: 'medal',
+    defaultWidth: 120,
+    defaultHeight: 160,
+    svg: `<svg viewBox="0 0 200 270" width="200" height="270" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="medGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="100%" stop-color="#ca8a04" />
+    </linearGradient>
+  </defs>
+  <!-- Tricolor Ribbon V-Shape -->
+  <polygon points="60,130 30,260 70,230 90,260 80,130" fill="#1d4ed8" />
+  <polygon points="80,130 90,260 110,230 120,260 100,130" fill="#ffffff" />
+  <polygon points="120,130 110,260 130,230 170,260 140,130" fill="#dc2626" />
+  <!-- Medal Medallion -->
+  <circle cx="100" cy="95" r="75" fill="url(#medGold)" stroke="#854d0e" stroke-width="3" />
+  <circle cx="100" cy="95" r="62" fill="#fef9c3" stroke="#854d0e" stroke-width="2" />
+  <polygon points="100,60 108,82 130,85 113,101 118,122 100,111 82,122 87,101 70,85 92,82" fill="url(#medGold)" stroke="#854d0e" stroke-width="1" />
+</svg>`,
+  },
+  {
+    id: 'cyber-shield-badge',
+    name: 'Certified Security Crest',
+    category: 'seal',
+    defaultWidth: 110,
+    defaultHeight: 130,
+    svg: `<svg viewBox="0 0 200 240" width="200" height="240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="secCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+  </defs>
+  <path d="M100,15 L180,45 L180,125 C180,185 100,235 100,235 C100,235 20,185 20,125 L20,45 Z" fill="#090d16" stroke="url(#secCyan)" stroke-width="4" />
+  <path d="M70,115 L92,137 L135,90" fill="none" stroke="url(#secCyan)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="100" cy="180" r="10" fill="url(#secCyan)" />
+</svg>`,
+  },
+  {
+    id: 'academic-mortarboard-crest',
+    name: 'Academic Graduation Crest',
+    category: 'medal',
+    defaultWidth: 130,
+    defaultHeight: 130,
+    svg: `<svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="acadGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="85" fill="#0f172a" stroke="url(#acadGold)" stroke-width="4" />
+  <polygon points="100,55 155,75 100,95 45,75" fill="url(#acadGold)" />
+  <polygon points="65,85 65,115 C65,135 100,145 100,145 C100,145 135,135 135,115 L135,85 L100,98 Z" fill="url(#acadGold)" />
+  <line x1="145" y1="75" x2="155" y2="115" stroke="url(#acadGold)" stroke-width="2.5" />
+</svg>`,
+  },
+  {
+    id: 'diamond-excellence-rosette',
+    name: 'Diamond Facet Crest',
+    category: 'seal',
+    defaultWidth: 120,
+    defaultHeight: 120,
+    svg: `<svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="diaBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="85" fill="none" stroke="url(#diaBlue)" stroke-width="3" stroke-dasharray="6 3" />
+  <circle cx="100" cy="100" r="76" fill="#f0f9ff" stroke="url(#diaBlue)" stroke-width="2" />
+  <polygon points="70,80 130,80 150,105 100,145 50,105" fill="url(#diaBlue)" />
+  <polygon points="70,80 100,105 130,80" fill="#bae6fd" />
+</svg>`,
+  },
+  {
+    id: 'embossed-platinum-seal',
+    name: 'Embossed Platinum Medallion',
+    category: 'seal',
+    defaultWidth: 120,
+    defaultHeight: 120,
+    svg: `<svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="platGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="50%" stop-color="#cbd5e1" />
+      <stop offset="100%" stop-color="#64748b" />
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="88" fill="url(#platGrad)" stroke="#475569" stroke-width="4" />
+  <circle cx="100" cy="100" r="76" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 2" />
+  <polygon points="100,60 110,85 136,88 116,106 122,132 100,118 78,132 84,106 64,88 90,85" fill="url(#platGrad)" />
+</svg>`,
+  },
 ];

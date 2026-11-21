@@ -369,4 +369,322 @@ export const CERTIFICATE_TEMPLATES: Record<string, CertificateTheme> = {
   </g>
 </svg>`,
   },
+
+  'ivory-gold': {
+    id: 'ivory-gold',
+    name: 'Royal Ivory & Gold',
+    description: 'Warm regal ivory parchment with intricate double gold guilloche borders and filigree crests.',
+    category: 'luxury',
+    textColor: '#1e293b',
+    accentColor: '#b45309',
+    secondaryTextColor: '#475569',
+    badgeColor: '#d97706',
+    titleFont: 'Cinzel',
+    nameFont: 'Great Vibes',
+    bodyFont: 'EB Garamond',
+    svg: `<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ivoryGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b45309" />
+      <stop offset="35%" stop-color="#f59e0b" />
+      <stop offset="70%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#92400e" />
+    </linearGradient>
+    <radialGradient id="ivoryGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="85%" stop-color="#fdfbf7" />
+      <stop offset="100%" stop-color="#fef7ea" />
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="707" fill="url(#ivoryGlow)" />
+  <rect x="24" y="24" width="952" height="659" fill="none" stroke="url(#ivoryGold)" stroke-width="5" />
+  <rect x="34" y="34" width="932" height="639" fill="none" stroke="#b45309" stroke-width="1.5" stroke-dasharray="6 3" />
+  <rect x="42" y="42" width="916" height="623" fill="none" stroke="url(#ivoryGold)" stroke-width="0.75" />
+  <!-- Corner Ornaments -->
+  <g transform="translate(24,24)"><path d="M0,0 L50,0 C30,15 15,30 0,50 Z" fill="url(#ivoryGold)" opacity="0.95"/><circle cx="20" cy="20" r="4" fill="#ffffff"/></g>
+  <g transform="translate(976,24) scale(-1,1)"><path d="M0,0 L50,0 C30,15 15,30 0,50 Z" fill="url(#ivoryGold)" opacity="0.95"/><circle cx="20" cy="20" r="4" fill="#ffffff"/></g>
+  <g transform="translate(24,683) scale(1,-1)"><path d="M0,0 L50,0 C30,15 15,30 0,50 Z" fill="url(#ivoryGold)" opacity="0.95"/><circle cx="20" cy="20" r="4" fill="#ffffff"/></g>
+  <g transform="translate(976,683) scale(-1,-1)"><path d="M0,0 L50,0 C30,15 15,30 0,50 Z" fill="url(#ivoryGold)" opacity="0.95"/><circle cx="20" cy="20" r="4" fill="#ffffff"/></g>
+  <g transform="translate(500,353)" opacity="0.04" stroke="#b45309" fill="none" stroke-width="2">
+    <circle r="160" /><circle r="140" stroke-dasharray="8 6" /><circle r="120" />
+  </g>
+</svg>`,
+  },
+
+  'cyber-neon': {
+    id: 'cyber-neon',
+    name: 'Cyberpunk & Tech Neon',
+    description: 'Futuristic midnight dark layout with glowing neon cyan circuitry and electric violet badges.',
+    category: 'modern',
+    textColor: '#e2e8f0',
+    accentColor: '#06b6d4',
+    secondaryTextColor: '#94a3b8',
+    badgeColor: '#06b6d4',
+    titleFont: 'Montserrat',
+    nameFont: 'Playfair Display',
+    bodyFont: 'Inter',
+    svg: `<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cyberCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <linearGradient id="cyberViolet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="707" fill="#090d16" />
+  <rect x="20" y="20" width="960" height="667" fill="none" stroke="url(#cyberCyan)" stroke-width="2" />
+  <rect x="28" y="28" width="944" height="651" fill="none" stroke="#1e293b" stroke-width="1" />
+  <!-- Circuit Nodes in Corners -->
+  <path d="M20,60 L60,20 L120,20" fill="none" stroke="url(#cyberViolet)" stroke-width="2" />
+  <circle cx="120" cy="20" r="4" fill="#a855f7" />
+  <path d="M980,60 L940,20 L880,20" fill="none" stroke="url(#cyberViolet)" stroke-width="2" />
+  <circle cx="880" cy="20" r="4" fill="#a855f7" />
+  <path d="M20,647 L60,687 L120,687" fill="none" stroke="url(#cyberCyan)" stroke-width="2" />
+  <circle cx="120" cy="687" r="4" fill="#06b6d4" />
+  <path d="M980,647 L940,687 L880,687" fill="none" stroke="url(#cyberCyan)" stroke-width="2" />
+  <circle cx="880" cy="687" r="4" fill="#06b6d4" />
+  <line x1="20" y1="20" x2="35" y2="20" stroke="#06b6d4" stroke-width="6" />
+  <line x1="20" y1="20" x2="20" y2="35" stroke="#06b6d4" stroke-width="6" />
+</svg>`,
+  },
+
+  'botanical-sage': {
+    id: 'botanical-sage',
+    name: 'Botanical Sage Green',
+    description: 'Soft organic sage green with elegant leaf garland borders and bronze metallic accents.',
+    category: 'academic',
+    textColor: '#1f2937',
+    accentColor: '#166534',
+    secondaryTextColor: '#4b5563',
+    badgeColor: '#15803d',
+    titleFont: 'Playfair Display',
+    nameFont: 'Great Vibes',
+    bodyFont: 'EB Garamond',
+    svg: `<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sageGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14532d" />
+      <stop offset="100%" stop-color="#166534" />
+    </linearGradient>
+    <linearGradient id="bronzeLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ca8a04" />
+      <stop offset="100%" stop-color="#a16207" />
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="707" fill="#f4f7f4" />
+  <rect x="22" y="22" width="956" height="663" fill="none" stroke="url(#sageGrad)" stroke-width="4" rx="4" />
+  <rect x="30" y="30" width="940" height="647" fill="none" stroke="url(#bronzeLeaf)" stroke-width="1.5" rx="2" />
+  <rect x="36" y="36" width="928" height="635" fill="none" stroke="#86efac" stroke-width="0.75" stroke-dasharray="6 4" />
+  <!-- Corner Laurel Wreaths -->
+  <g transform="translate(45,45)"><circle cx="0" cy="0" r="8" fill="url(#sageGrad)"/><circle cx="0" cy="0" r="4" fill="#f4f7f4"/></g>
+  <g transform="translate(955,45)"><circle cx="0" cy="0" r="8" fill="url(#sageGrad)"/><circle cx="0" cy="0" r="4" fill="#f4f7f4"/></g>
+  <g transform="translate(45,662)"><circle cx="0" cy="0" r="8" fill="url(#sageGrad)"/><circle cx="0" cy="0" r="4" fill="#f4f7f4"/></g>
+  <g transform="translate(955,662)"><circle cx="0" cy="0" r="8" fill="url(#sageGrad)"/><circle cx="0" cy="0" r="4" fill="#f4f7f4"/></g>
+</svg>`,
+  },
+
+  'burgundy-prestige': {
+    id: 'burgundy-prestige',
+    name: 'Imperial Burgundy & Gold',
+    description: 'Majestic deep wine burgundy with ornamental baroque corner crests and radiant gold foil framing.',
+    category: 'luxury',
+    textColor: '#f8fafc',
+    accentColor: '#fbbf24',
+    secondaryTextColor: '#cbd5e1',
+    badgeColor: '#fbbf24',
+    titleFont: 'Cinzel',
+    nameFont: 'Pinyon Script',
+    bodyFont: 'EB Garamond',
+    svg: `<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="burgundyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a0418" />
+      <stop offset="50%" stop-color="#2a020d" />
+      <stop offset="100%" stop-color="#190108" />
+    </linearGradient>
+    <linearGradient id="radiantGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="50%" stop-color="#eab308" />
+      <stop offset="100%" stop-color="#a16207" />
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="707" fill="url(#burgundyGrad)" />
+  <rect x="22" y="22" width="956" height="663" fill="none" stroke="url(#radiantGold)" stroke-width="5" />
+  <rect x="32" y="32" width="936" height="643" fill="none" stroke="#eab308" stroke-width="1.5" stroke-opacity="0.6" />
+  <rect x="38" y="38" width="924" height="631" fill="none" stroke="url(#radiantGold)" stroke-width="0.75" stroke-dasharray="8 4" />
+  <g transform="translate(22,22)"><polygon points="0,0 45,0 0,45" fill="url(#radiantGold)"/></g>
+  <g transform="translate(978,22)"><polygon points="0,0 -45,0 0,45" fill="url(#radiantGold)"/></g>
+  <g transform="translate(22,685)"><polygon points="0,0 45,0 0,-45" fill="url(#radiantGold)"/></g>
+  <g transform="translate(978,685)"><polygon points="0,0 -45,0 0,-45" fill="url(#radiantGold)"/></g>
+</svg>`,
+  },
+
+  'art-deco': {
+    id: 'art-deco',
+    name: 'Art Deco 1920s Gatsby',
+    description: 'Geometric luxury Art Deco gold lattice patterns, chevron corners, and gilded symmetry.',
+    category: 'luxury',
+    textColor: '#f1f5f9',
+    accentColor: '#eab308',
+    secondaryTextColor: '#94a3b8',
+    badgeColor: '#eab308',
+    titleFont: 'Cinzel',
+    nameFont: 'Great Vibes',
+    bodyFont: 'Montserrat',
+    svg: `<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="decoGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#eab308" />
+      <stop offset="100%" stop-color="#854d0e" />
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="707" fill="#111827" />
+  <rect x="25" y="25" width="950" height="657" fill="none" stroke="url(#decoGold)" stroke-width="3" />
+  <rect x="33" y="33" width="934" height="641" fill="none" stroke="#475569" stroke-width="1" />
+  <g stroke="url(#decoGold)" stroke-width="2" fill="none">
+    <path d="M25,65 L65,25 M25,95 L95,25 M25,125 L125,25" />
+    <path d="M975,65 L935,25 M975,95 L905,25 M975,125 L875,25" />
+    <path d="M25,642 L65,682 M25,612 L95,682 M25,582 L125,682" />
+    <path d="M975,642 L935,682 M975,612 L905,682 M975,582 L875,682" />
+  </g>
+</svg>`,
+  },
+
+  'corporate-slate': {
+    id: 'corporate-slate',
+    name: 'Executive Platinum & Slate',
+    description: 'Crisp modern executive slate with brushed platinum geometric framing and sharp corporate blue pinstripes.',
+    category: 'modern',
+    textColor: '#1e293b',
+    accentColor: '#0284c7',
+    secondaryTextColor: '#64748b',
+    badgeColor: '#0284c7',
+    titleFont: 'Montserrat',
+    nameFont: 'Playfair Display',
+    bodyFont: 'Inter',
+    svg: `<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1000" height="707" fill="#ffffff" />
+  <rect x="20" y="20" width="960" height="667" fill="none" stroke="#0284c7" stroke-width="5" />
+  <rect x="28" y="28" width="944" height="651" fill="none" stroke="#cbd5e1" stroke-width="2" />
+  <rect x="34" y="34" width="932" height="639" fill="none" stroke="#0284c7" stroke-width="1" stroke-dasharray="10 5" />
+  <polygon points="20,20 80,20 20,80" fill="#0284c7" />
+  <polygon points="980,20 920,20 980,80" fill="#0284c7" />
+  <polygon points="20,687 80,687 20,627" fill="#0284c7" />
+  <polygon points="980,687 920,687 980,627" fill="#0284c7" />
+</svg>`,
+  },
+
+  'championship-gold': {
+    id: 'championship-gold',
+    name: 'Athletic Championship Crimson',
+    description: 'Bold crimson and championship gold with dynamic diagonal laurels and athletic starburst rosettes.',
+    category: 'classic',
+    textColor: '#f8fafc',
+    accentColor: '#f59e0b',
+    secondaryTextColor: '#cbd5e1',
+    badgeColor: '#f59e0b',
+    titleFont: 'Montserrat',
+    nameFont: 'Great Vibes',
+    bodyFont: 'Inter',
+    svg: `<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="champGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="707" fill="#1c0d12" />
+  <rect x="24" y="24" width="952" height="659" fill="none" stroke="url(#champGold)" stroke-width="6" />
+  <rect x="34" y="34" width="932" height="639" fill="none" stroke="#ef4444" stroke-width="2" />
+  <rect x="40" y="40" width="920" height="627" fill="none" stroke="url(#champGold)" stroke-width="0.75" stroke-dasharray="5 5" />
+  <polygon points="24,24 90,24 24,90" fill="url(#champGold)" />
+  <polygon points="976,24 910,24 976,90" fill="url(#champGold)" />
+  <polygon points="24,683 90,683 24,617" fill="url(#champGold)" />
+  <polygon points="976,683 910,683 976,617" fill="url(#champGold)" />
+</svg>`,
+  },
+
+  'sapphire-cloud': {
+    id: 'sapphire-cloud',
+    name: 'Midnight Sapphire & Silver',
+    description: 'Deep oceanic sapphire gradient with frosted silver filigree corners and starlight watermarks.',
+    category: 'academic',
+    textColor: '#f1f5f9',
+    accentColor: '#38bdf8',
+    secondaryTextColor: '#cbd5e1',
+    badgeColor: '#38bdf8',
+    titleFont: 'Cinzel',
+    nameFont: 'Alex Brush',
+    bodyFont: 'Inter',
+    svg: `<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sapphireGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b192c" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="707" fill="url(#sapphireGrad)" />
+  <rect x="24" y="24" width="952" height="659" fill="none" stroke="#e2e8f0" stroke-width="4" />
+  <rect x="32" y="32" width="936" height="643" fill="none" stroke="#38bdf8" stroke-width="1.5" />
+  <rect x="38" y="38" width="924" height="631" fill="none" stroke="#64748b" stroke-width="0.75" stroke-dasharray="8 4" />
+  <g transform="translate(24,24)"><circle cx="15" cy="15" r="5" fill="#38bdf8"/></g>
+  <g transform="translate(976,24)"><circle cx="-15" cy="15" r="5" fill="#38bdf8"/></g>
+  <g transform="translate(24,683)"><circle cx="15" cy="-15" r="5" fill="#38bdf8"/></g>
+  <g transform="translate(976,683)"><circle cx="-15" cy="-15" r="5" fill="#38bdf8"/></g>
+</svg>`,
+  },
+
+  'kinder-stars': {
+    id: 'kinder-stars',
+    name: 'Playful Primary & Golden Star',
+    description: 'Joyful sunny pastel background with colorful playful confetti borders, ribbon swags, and golden star crests.',
+    category: 'academic',
+    textColor: '#1e293b',
+    accentColor: '#2563eb',
+    secondaryTextColor: '#475569',
+    badgeColor: '#f59e0b',
+    titleFont: 'Montserrat',
+    nameFont: 'Playfair Display',
+    bodyFont: 'Inter',
+    svg: `<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1000" height="707" fill="#fffbeb" />
+  <rect x="24" y="24" width="952" height="659" fill="none" stroke="#2563eb" stroke-width="6" rx="16" />
+  <rect x="34" y="34" width="932" height="639" fill="none" stroke="#f59e0b" stroke-width="3" rx="12" />
+  <rect x="42" y="42" width="916" height="623" fill="none" stroke="#ec4899" stroke-width="2" stroke-dasharray="8 6" rx="8" />
+  <!-- Stars in Corners -->
+  <polygon points="50,30 55,42 67,42 57,50 61,62 50,54 39,62 43,50 33,42 45,42" fill="#f59e0b" />
+  <polygon points="950,30 955,42 967,42 957,50 961,62 950,54 939,62 943,50 933,42 945,42" fill="#f59e0b" />
+  <polygon points="50,650 55,662 67,662 57,670 61,682 50,674 39,682 43,670 33,662 45,662" fill="#f59e0b" />
+  <polygon points="950,650 955,662 967,662 957,670 961,682 950,674 939,682 943,670 933,662 945,662" fill="#f59e0b" />
+</svg>`,
+  },
+
+  'swiss-bauhaus': {
+    id: 'swiss-bauhaus',
+    name: 'Swiss Bauhaus Modernist',
+    description: 'Iconic Swiss modernist typography, asymmetric primary color accent bars, and pure editorial precision.',
+    category: 'modern',
+    textColor: '#18181b',
+    accentColor: '#dc2626',
+    secondaryTextColor: '#52525b',
+    badgeColor: '#dc2626',
+    titleFont: 'Montserrat',
+    nameFont: 'Playfair Display',
+    bodyFont: 'Inter',
+    svg: `<svg width="1000" height="707" viewBox="0 0 1000 707" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1000" height="707" fill="#fafaf9" />
+  <!-- Asymmetric Bauhaus Color Blocks -->
+  <rect x="0" y="0" width="16" height="707" fill="#dc2626" />
+  <rect x="16" y="0" width="8" height="707" fill="#1d4ed8" />
+  <rect x="24" y="0" width="6" height="707" fill="#f59e0b" />
+  <line x1="60" y1="50" x2="940" y2="50" stroke="#18181b" stroke-width="4" />
+  <line x1="60" y1="58" x2="940" y2="58" stroke="#18181b" stroke-width="1" />
+  <line x1="60" y1="657" x2="940" y2="657" stroke="#18181b" stroke-width="2" />
+  <circle cx="930" cy="54" r="8" fill="#dc2626" />
+</svg>`,
+  },
 };
